@@ -7,7 +7,7 @@
 | `rfrf.net` | `sites/rfrf.net` | 467 | تم النقل |
 | `admin.rfrf.net` | `sites/admin.rfrf.net` | 371 | تم النقل |
 | `supplier.rfrf.net` | `sites/supplier.rfrf.net` | 329 | تم النقل |
-| `api.rfrf.net` | — | — | بانتظار الوصول إلى مدير الملفات |
+| `api.rfrf.net` | `sites/api.rfrf.net` | 59 | تم النقل |
 
 كل نسخة تضم تطبيقها وتبعياته المشتركة. يوضح ملف `MANAGED_HOSTINGER.md` داخل مجلد كل موقع مصدر النسخة وإعدادات بنائها ونشرها على Hostinger.
 
