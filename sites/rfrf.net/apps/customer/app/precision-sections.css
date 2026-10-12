@@ -1,0 +1,248 @@
+/* أقسام صفحة الهبوط (كيف تعمل، الثقة، الأسئلة، الموردون). الهيرو في precision-home.module.css */
+.precision-home {
+  min-height: 100svh;
+  background: var(--rafraf-canvas);
+  color: var(--rafraf-text);
+}
+.precision-container {
+  width: min(100% - 48px, 1280px);
+  margin-inline: auto;
+}
+.precision-section {
+  padding-block: clamp(82px, 10vw, 144px);
+}
+.precision-kicker {
+  margin: 0 0 16px;
+  color: var(--rafraf-primary-hover);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.precision-heading-row {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 48px;
+  align-items: end;
+  margin-block-end: 54px;
+}
+.precision-heading-row h2,
+.precision-trust h2,
+.precision-faq h2,
+.precision-supplier h2 {
+  margin: 0;
+  font-size: clamp(2.3rem, 4.6vw, 4.7rem);
+  line-height: 1.14;
+  letter-spacing: -0.045em;
+}
+.precision-heading-row p,
+.precision-trust p {
+  margin: 0;
+  color: var(--rafraf-muted);
+  line-height: 1.85;
+}
+.precision-steps {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  border-block: 1px solid var(--rafraf-border);
+}
+.precision-steps li {
+  position: relative;
+  min-height: 300px;
+  padding: 40px 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-inline-start: 1px solid var(--rafraf-border);
+}
+.precision-steps li:first-child {
+  border-inline-start: 0;
+}
+.precision-steps svg {
+  width: 28px;
+  height: 28px;
+  margin-block: auto 24px;
+  color: var(--rafraf-signal);
+}
+.precision-step-index {
+  color: var(--rafraf-muted);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+.precision-steps h3 {
+  margin: 0 0 10px;
+  font-size: 1.45rem;
+}
+.precision-steps p {
+  margin: 0;
+  color: var(--rafraf-muted);
+  line-height: 1.75;
+}
+
+.precision-trust {
+  background: var(--rafraf-raised);
+}
+.precision-trust-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(480px, 1.16fr);
+  gap: clamp(64px, 10vw, 138px);
+  align-items: center;
+}
+.precision-trust h2 {
+  max-width: 620px;
+  margin-block-end: 28px;
+}
+.precision-link {
+  margin-block-start: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--rafraf-primary-hover);
+  font-weight: 700;
+  text-decoration: none;
+}
+.precision-trust ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block: 1px solid var(--rafraf-border);
+}
+.precision-trust li {
+  padding-block: 26px;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 20px;
+  align-items: start;
+  border-block-end: 1px solid var(--rafraf-border);
+}
+.precision-trust li:last-child {
+  border-block-end: 0;
+}
+.precision-trust li svg {
+  color: var(--rafraf-verified);
+}
+.precision-trust li span {
+  display: grid;
+  gap: 7px;
+  color: var(--rafraf-muted);
+  line-height: 1.65;
+}
+.precision-trust li strong {
+  color: var(--rafraf-text);
+  font-size: 1.08rem;
+}
+
+.precision-faq-grid {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: clamp(48px, 9vw, 128px);
+}
+.precision-questions {
+  border-block-start: 1px solid var(--rafraf-border);
+}
+.precision-questions details {
+  border-block-end: 1px solid var(--rafraf-border);
+}
+.precision-questions summary {
+  padding-block: 26px;
+  color: var(--rafraf-text);
+  font-family: var(--font-rafraf-display), Alexandria, sans-serif;
+  font-size: 1.24rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.precision-questions details p {
+  margin: 0;
+  padding-block: 0 26px;
+  color: var(--rafraf-muted);
+  line-height: 1.8;
+}
+
+.precision-supplier {
+  padding-block: clamp(62px, 7vw, 96px);
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-violet-600);
+}
+.precision-supplier .precision-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.precision-supplier .precision-kicker {
+  color: rgb(255 255 255 / 70%);
+}
+.precision-supplier h2 {
+  max-width: 800px;
+  font-size: clamp(2rem, 4vw, 4rem);
+}
+.precision-supplier a {
+  min-height: 54px;
+  padding-inline: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  color: var(--rr-color-navy-950);
+  border-radius: var(--rr-radius-pill);
+  background: var(--rr-color-ivory-50);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.precision-footer {
+  padding-block: 28px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-canvas);
+  border-block-start: 1px solid var(--rafraf-border);
+}
+.precision-footer .precision-container,
+.precision-footer nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+}
+.precision-footer p {
+  margin: 0;
+  color: var(--rafraf-muted);
+}
+.precision-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--rafraf-text);
+  text-decoration: none;
+}
+.precision-footer a:hover {
+  color: var(--rafraf-primary-hover);
+}
+
+@media (max-width: 840px) {
+  .precision-container {
+    width: min(100% - 32px, 1280px);
+  }
+  .precision-heading-row,
+  .precision-trust-grid,
+  .precision-faq-grid {
+    grid-template-columns: 1fr;
+  }
+  .precision-steps {
+    grid-template-columns: 1fr;
+  }
+  .precision-steps li {
+    min-height: 250px;
+    border-inline-start: 0;
+    border-block-end: 1px solid var(--rafraf-border);
+  }
+  .precision-steps li:last-child {
+    border-block-end: 0;
+  }
+  .precision-supplier .precision-container {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

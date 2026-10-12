@@ -1,0 +1,50 @@
+{
+  "name": "customer",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack --port 3001",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint app lib proxy.ts --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "storage:provision": "node scripts/provision-rfq-evidence-bucket.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.36",
+    "@ai-sdk/google": "^4.0.39",
+    "@ai-sdk/google-vertex": "^5.0.48",
+    "@ai-sdk/openai-compatible": "^3.0.28",
+    "@ai-sdk/react": "^4.0.61",
+    "@assistant-ui/react": "^0.15.13",
+    "@assistant-ui/react-ai-sdk": "^1.4.5",
+    "@rafraf/brand": "workspace:*",
+    "@rafraf/db": "workspace:*",
+    "@rafraf/orders": "workspace:*",
+    "@rafraf/shared": "workspace:*",
+    "@rafraf/ui": "workspace:*",
+    "@supabase/supabase-js": "^2.112.2",
+    "@vercel/blob": "2.8.0",
+    "ai": "^7.0.58",
+    "cheerio": "1.2.0",
+    "ipaddr.js": "2.2.0",
+    "lucide-react": "^0.468.0",
+    "motion": "^13.1.0",
+    "next": "16.3.8",
+    "nodemailer": "^9.0.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@rafraf/eslint-config": "workspace:*",
+    "@rafraf/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "@types/nodemailer": "^8.0.1",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "eslint": "^9.31.0",
+    "typescript": "5.8.2"
+  }
+}

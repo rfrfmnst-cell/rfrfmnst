@@ -1,0 +1,452 @@
+/* Rafraf Trust Marketplace — selected visual direction */
+body:has(.rf-marketplace-shell) > .rafraf-theme-toggle {
+  display: none;
+}
+
+/* شاشة المساعد لها مؤلّف رسائل مثبّت أسفل الشاشة، وزرّ الثيم العائم
+   كان يغطّي زرّ الإرسال ويعترض النقر في 1440 و1280 و390 بكسل. */
+body:has(.rf-ai-shell) > .rafraf-theme-toggle {
+  display: none;
+}
+
+.rf-marketplace-shell {
+  --rf-navy: #10264b;
+  --rf-navy-deep: #081a38;
+  --rf-violet: #6047e8;
+  --rf-violet-deep: #4730c9;
+  --rf-orange: #ff7b2c;
+  --rf-green: #12a66a;
+  --rf-blue: #2c71dc;
+  --rf-paper: #fbfaf7;
+  --rf-surface: #ffffff;
+  --rf-line: #e5e0d8;
+  --rf-muted: #77746e;
+  --rf-ink: #141c2d;
+  grid-template-columns: 286px minmax(0, 1fr);
+  background: var(--rf-paper);
+  font-family: var(--font-rafraf-sans), Alexandria, Tahoma, sans-serif;
+}
+
+.rf-marketplace-shell .rf-ai-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  padding: 22px 24px 24px;
+  overflow-y: auto;
+  color: #fff;
+  background:
+    radial-gradient(circle at 95% 2%, rgb(101 70 232 / 22%), transparent 24%),
+    linear-gradient(180deg, #122d57 0%, var(--rf-navy-deep) 100%);
+  border: 0;
+}
+
+.rf-marketplace-shell .rf-ai-sidebar::before {
+  display: none;
+}
+
+.rf-marketplace-shell .rf-ai-brand {
+  min-height: 70px;
+  padding: 5px 10px 14px;
+  border-bottom-color: rgb(255 255 255 / 11%);
+}
+
+@media (min-width: 821px) {
+  .rf-marketplace-shell .rf-ai-brand {
+    width: calc(100% + 48px);
+    min-height: 94px;
+    margin: -22px -24px 0;
+    padding: 14px 24px;
+    background: #fff;
+    border-bottom: 1px solid var(--rf-line);
+  }
+}
+
+.rf-marketplace-shell .rf-ai-new {
+  min-height: 52px;
+  margin: 18px 0 14px;
+  color: #fff;
+  background: linear-gradient(135deg, #6750ec, #563edc);
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgb(43 25 143 / 34%);
+}
+
+.rf-marketplace-shell .rf-ai-new:hover {
+  background: linear-gradient(135deg, #755ff3, #6047e8);
+}
+
+.rf-marketplace-shell .rf-ai-nav {
+  gap: 4px;
+}
+
+.rf-marketplace-shell .rf-ai-nav a {
+  min-height: 46px;
+  padding: 0 15px;
+  color: #d9e3f2;
+  border: 0;
+  border-radius: 7px;
+  font-size: 0.83rem;
+}
+
+.rf-marketplace-shell .rf-ai-nav a:hover,
+.rf-marketplace-shell .rf-ai-nav a.is-active {
+  color: #fff;
+  background: rgb(255 255 255 / 7%);
+}
+
+.rf-marketplace-shell .rf-ai-nav a.is-active {
+  box-shadow: inset -3px 0 var(--rf-orange);
+}
+
+.rf-marketplace-shell .rf-ai-nav-secondary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top-color: rgb(255 255 255 / 10%);
+}
+
+.rf-ai-plus-card {
+  margin-top: auto;
+  padding: 18px 16px;
+  display: grid;
+  gap: 5px;
+  color: #fff;
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.rf-ai-plus-card strong {
+  font-size: 0.92rem;
+}
+
+.rf-ai-plus-card span {
+  color: #b9c9df;
+  font-size: 0.68rem;
+}
+
+.rf-ai-plus-card a {
+  min-height: 36px;
+  margin-top: 8px;
+  display: grid;
+  place-items: center;
+  color: #d8d0ff;
+  border: 1px solid #6953e9;
+  border-radius: 7px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.rf-marketplace-shell .rf-ai-page {
+  padding-bottom: 92px;
+  background: var(--rf-paper);
+}
+
+.rf-marketplace-shell .rf-ai-page::before {
+  display: none;
+}
+
+.rf-marketplace-shell .rf-ai-header {
+  min-height: 92px;
+  padding: 13px 28px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto minmax(300px, 1fr);
+  align-items: center;
+  color: var(--rf-ink);
+  background: rgb(255 255 255 / 96%);
+  border-bottom: 1px solid var(--rf-line);
+  backdrop-filter: none;
+}
+
+.rf-ai-agent-title {
+  justify-self: start;
+  text-align: right;
+}
+
+.rf-marketplace-shell .rf-ai-header h1 {
+  font-size: 1.18rem;
+  letter-spacing: -0.025em;
+}
+
+.rf-marketplace-shell .rf-ai-header > .rf-ai-agent-title > span {
+  margin-top: 2px;
+  color: #687285;
+}
+
+.rf-vehicle-chip {
+  min-width: 282px;
+  min-height: 56px;
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--rf-ink);
+  background: #fff;
+  border: 1px solid #ded8cf;
+  border-radius: 13px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.rf-vehicle-chip > svg {
+  color: var(--rf-violet);
+}
+
+.rf-vehicle-chip > span {
+  display: grid;
+  gap: 1px;
+  text-align: right;
+}
+
+.rf-vehicle-chip strong {
+  font-size: 0.83rem;
+}
+
+.rf-vehicle-chip small {
+  color: var(--rf-muted);
+  font-family: var(--font-rafraf-mono), monospace;
+  font-size: 0.6rem;
+}
+
+.rf-marketplace-shell .rf-ai-customer-head {
+  justify-self: end;
+  display: flex;
+  gap: 10px;
+}
+
+.rf-ai-customer-head > svg {
+  margin-left: 3px;
+}
+
+.rf-customer-avatar {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--rf-navy-deep);
+  border-radius: 50%;
+}
+
+.rf-ai-customer-head > div {
+  display: grid;
+  line-height: 1.4;
+}
+
+.rf-ai-customer-head > div strong {
+  font-size: 0.76rem;
+}
+
+.rf-ai-customer-head > div small {
+  color: var(--rf-muted);
+  font-size: 0.59rem;
+}
+
+.rf-marketplace-shell .rf-ai-customer-head button {
+  margin-right: 10px;
+  color: var(--rf-ink);
+  border-color: #d9d3c9;
+  border-radius: 9px;
+}
+
+.rf-marketplace-shell .rf-ai-main {
+  width: min(100% - 38px, 1360px);
+  padding: 20px 0 34px;
+  gap: 15px;
+}
+
+.rf-marketplace-shell .rf-decision-layout {
+  min-height: 420px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(310px, 0.72fr) minmax(620px, 1.42fr);
+  gap: 18px;
+  direction: ltr;
+  border: 0;
+}
+
+.rf-marketplace-shell .rf-decision-layout > * {
+  direction: rtl;
+}
+
+.rf-marketplace-shell .rf-ai-conversation {
+  min-height: clamp(480px, calc(100dvh - 360px), 580px);
+  padding: 0 18px 14px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgb(28 39 58 / 4%);
+}
+
+.rf-marketplace-shell .rf-ai-conversation-title {
+  min-height: 62px;
+  margin: 0 -18px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--rf-line);
+}
+
+.rf-agent-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, var(--rf-orange), var(--rf-violet));
+  border-radius: 11px;
+  font-weight: 900;
+}
+
+.rf-marketplace-shell .rf-ai-conversation-title strong {
+  font-size: 0.9rem;
+}
+
+.rf-marketplace-shell .rf-ai-conversation-title span {
+  font-size: 0.62rem;
+}
+
+.rf-marketplace-shell .rf-ai-feed {
+  height: auto;
+  min-height: 350px;
+  flex: 1;
+  padding: 16px 0 8px;
+  gap: 10px;
+}
+
+.rf-marketplace-shell .rf-message {
+  max-width: 88%;
+  padding: 10px 12px;
+  gap: 5px;
+  color: var(--rf-ink);
+  background: #faf8f4;
+  border-color: #e9e3db;
+  border-radius: 12px;
+  font-size: 0.73rem;
+  line-height: 1.8;
+  box-shadow: none;
+}
+
+.rf-marketplace-shell .rf-message.bot {
+  align-self: flex-end;
+  color: var(--rf-ink);
+  background: #faf8f4;
+  border-bottom-right-radius: 3px;
+}
+
+.rf-marketplace-shell .rf-message.user {
+  align-self: flex-start;
+  color: #4939a0;
+  background: #f1edff;
+  border-color: #e4dcff;
+  border-bottom-left-radius: 3px;
+}
+
+.rf-marketplace-shell .rf-message.bot::before {
+  content: 'رفرف';
+  color: var(--rf-violet);
+  font-size: 0.57rem;
+}
+
+.rf-marketplace-shell .rf-message img {
+  width: 74px;
+  height: 58px;
+  border-radius: 7px;
+}
+
+.rf-marketplace-shell .rf-ai-suggestions {
+  margin-top: 4px;
+}
+
+.rf-marketplace-shell .rf-ai-suggestions button {
+  min-height: 30px;
+  color: #5844c9;
+  background: #f5f2ff;
+  border-color: #e2dbff;
+  font-size: 0.64rem;
+}
+
+.rf-decision-card {
+  min-height: 420px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgb(28 39 58 / 4%);
+}
+
+.rf-decision-card-head {
+  min-height: 50px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rf-line);
+}
+
+.rf-decision-card-head > div,
+.rf-decision-card-head > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rf-decision-card-head strong {
+  font-size: 0.82rem;
+}
+
+.rf-decision-card-head > span {
+  color: var(--rf-muted);
+  font-size: 0.64rem;
+}
+
+.rf-decision-card-head > span.is-verified {
+  color: var(--rf-green);
+}
+
+.rf-decision-content {
+  padding: 16px 20px 12px;
+  display: grid;
+  grid-template-columns: minmax(245px, 0.85fr) minmax(280px, 1.15fr);
+  gap: 20px;
+}
+
+.rf-decision-summary {
+  padding: 4px 0 0;
+}
+
+.rf-decision-kicker {
+  width: fit-content;
+  padding: 3px 8px;
+  display: block;
+  color: #078450;
+  background: #e7f8ef;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.rf-decision-summary h2 {
+  margin: 7px 0 0;
+  color: var(--rf-ink);
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.rf-decision-summary > p {
+  color: #3f4654;
+  font-family: var(--font-rafraf-mono), monospace;
+  font-size: 0.76rem;
+}
+
+.rf-fitment-score {
+  margin-top: 12px;
+  padding-top: 10px;
+  display: grid;
+  border-top: 1px solid #eee9e1;
+}
+
+.rf-fitment-score span {
+  color: var(--rf-muted);
+  font-size: 0.64rem;
+}

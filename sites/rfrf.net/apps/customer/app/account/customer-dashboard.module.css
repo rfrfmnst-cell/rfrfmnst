@@ -1,0 +1,344 @@
+.welcomeRow {
+  display: grid;
+  gap: 20px;
+  margin-block-end: 24px;
+}
+
+.welcomeRow h1 {
+  margin: 2px 0 0;
+  font-size: clamp(30px, 9vw, 44px);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.welcomeRow p:last-child {
+  max-width: 650px;
+  margin: 8px 0 0;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 14px;
+  line-height: 23px;
+}
+
+.newRequest,
+.nextAction > a,
+.offerCard > a,
+.emptyState > a,
+.rfqList article > a,
+.help a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: var(--rafraf-radius-12);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.newRequest {
+  width: 100%;
+  padding-inline: 18px;
+  border: 1px solid var(--rafraf-color-bg-brand);
+  background: var(--rafraf-color-bg-brand);
+  color: #fffaf2;
+}
+
+.nextAction {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-block-end: 16px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  border: 1px solid var(--rafraf-color-border-brand);
+  border-radius: var(--rafraf-radius-16);
+  background:
+    radial-gradient(
+      circle at 12% 0%,
+      color-mix(in srgb, var(--rafraf-color-bg-brand) 17%, transparent),
+      transparent 44%
+    ),
+    var(--rafraf-color-bg-surface);
+  box-shadow: var(--rafraf-shadow);
+}
+
+.nextAction::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 4px;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    var(--rafraf-color-bg-brand),
+    var(--rafraf-color-text-warning)
+  );
+}
+
+.nextActionIcon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-icon-brand);
+}
+
+.nextActionBody {
+  min-width: 0;
+}
+
+.nextActionBody > p {
+  margin: 0 0 2px;
+  color: var(--rafraf-color-text-ai);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.nextActionBody h2 {
+  margin: 0;
+  font-size: clamp(18px, 5vw, 23px);
+  line-height: 1.45;
+}
+
+.nextActionBody > span {
+  margin-block-start: 3px;
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.nextAction > a {
+  grid-column: 1 / -1;
+  padding-inline: 16px;
+  border: 1px solid var(--rafraf-color-bg-brand);
+  background: var(--rafraf-color-bg-brand);
+  color: #fffaf2;
+}
+
+.metrics {
+  margin: 0 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metrics > a {
+  min-width: 0;
+  min-height: 112px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-16);
+  background: var(--rafraf-color-bg-surface);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color var(--rafraf-motion-fast) ease,
+    transform var(--rafraf-motion-fast) var(--rafraf-motion-ease);
+}
+
+.metrics > a:hover {
+  border-color: var(--rafraf-color-border-brand);
+  transform: translateY(-2px);
+}
+
+.metrics dt {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.metrics dt svg {
+  flex: 0 0 auto;
+  color: var(--rafraf-color-icon-brand);
+}
+
+.metrics dd {
+  margin: 0;
+  color: var(--rafraf-color-text-primary);
+  font:
+    800 26px/1 var(--font-rafraf-heading),
+    sans-serif;
+}
+
+.dashboardGrid {
+  display: grid;
+  gap: 18px;
+  align-items: start;
+}
+
+.dashboardContent {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.dashboardContent > section,
+.accountNav,
+.readiness,
+.help,
+.privacy {
+  scroll-margin-block-start: 92px;
+}
+
+.emptyState {
+  min-height: 176px;
+  padding: 28px 20px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  color: var(--rafraf-color-text-secondary);
+  text-align: center;
+}
+
+.emptyState svg {
+  color: var(--rafraf-color-icon-brand);
+}
+
+.emptyState strong {
+  color: var(--rafraf-color-text-primary);
+  font-size: 15px;
+}
+
+.emptyState span {
+  max-width: 430px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.emptyState > a {
+  margin-block-start: 8px;
+  padding-inline: 16px;
+  border: 1px solid var(--rafraf-color-border-default);
+  color: var(--rafraf-color-text-primary);
+}
+
+.offerGrid {
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.offerCard {
+  min-width: 0;
+  padding: 16px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-16);
+  background: var(--rafraf-color-bg-surface-raised);
+}
+
+.offerCard h3 {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.offerCard p {
+  margin: 0;
+  color: var(--rafraf-color-text-secondary);
+  font:
+    500 11px/18px var(--font-rafraf-mono),
+    monospace;
+}
+
+.offerCard > a {
+  margin-block-start: 6px;
+  padding-inline: 12px;
+  border: 1px solid var(--rafraf-color-border-brand);
+  color: var(--rafraf-color-icon-brand);
+}
+
+.statusBadge {
+  width: fit-content;
+  min-height: 26px;
+  padding: 3px 9px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--rafraf-radius-full);
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-text-ai);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+}
+
+.statusBadge[data-tone='success'],
+.orderStateGrid dd[data-tone='success'] {
+  background: var(--rafraf-color-bg-success-soft);
+  color: var(--rafraf-color-text-success);
+}
+
+.statusBadge[data-tone='warning'],
+.orderStateGrid dd[data-tone='warning'] {
+  background: var(--rafraf-color-bg-warning-soft);
+  color: var(--rafraf-color-text-warning);
+}
+
+.statusBadge[data-tone='danger'],
+.orderStateGrid dd[data-tone='danger'] {
+  background: var(--rafraf-color-bg-danger-soft);
+  color: var(--rafraf-color-text-danger);
+}
+
+@media (min-width: 620px) {
+  .welcomeRow {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .newRequest {
+    width: auto;
+  }
+
+  .nextAction {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    padding: 22px 24px;
+  }
+
+  .nextAction > a {
+    grid-column: auto;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .offerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 18px;
+  }
+}
+
+@media (min-width: 920px) {
+  .dashboardGrid {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metrics > a:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "color": {
+    "navy": { "950": { "value": "#07101F" }, "900": { "value": "#0B1426" }, "800": { "value": "#121D32" } },
+    "ivory": { "50": { "value": "#FBF8F2" }, "100": { "value": "#F4EEE4" }, "200": { "value": "#E7DDCF" } },
+    "violet": { "400": { "value": "#8A78FF" }, "500": { "value": "#7160E8" }, "600": { "value": "#5E4ED4" } },
+    "orange": { "400": { "value": "#F6A354" }, "500": { "value": "#F28735" }, "600": { "value": "#DD6F20" } },
+    "green": { "400": { "value": "#39B88E" }, "500": { "value": "#1D8A67" }, "600": { "value": "#12694E" } },
+    "red": { "500": { "value": "#DF5B68" } },
+    "slate": { "300": { "value": "#B5BECC" }, "400": { "value": "#8D99AA" }, "600": { "value": "#566277" } },
+    "white": { "value": "#FFFFFF" },
+    "black": { "value": "#000000" }
+  },
+  "space": {
+    "1": { "value": "4px" }, "2": { "value": "8px" }, "3": { "value": "12px" }, "4": { "value": "16px" },
+    "5": { "value": "20px" }, "6": { "value": "24px" }, "8": { "value": "32px" }, "10": { "value": "40px" },
+    "12": { "value": "48px" }, "16": { "value": "64px" }, "20": { "value": "80px" }, "24": { "value": "96px" }
+  },
+  "radius": {
+    "sm": { "value": "10px" }, "md": { "value": "16px" }, "lg": { "value": "24px" }, "xl": { "value": "32px" }, "pill": { "value": "999px" }
+  },
+  "motion": {
+    "fast": { "value": "120ms" }, "standard": { "value": "200ms" }, "important": { "value": "320ms" },
+    "ease": { "value": "cubic-bezier(0.22, 1, 0.36, 1)" }
+  },
+  "shadow": {
+    "dark": { "value": "0 24px 80px rgb(0 0 0 / 38%)" },
+    "light": { "value": "0 24px 70px rgb(37 31 24 / 14%)" }
+  },
+  "theme": {
+    "dark": {
+      "canvas": { "value": "{color.navy.950}" },
+      "surface": { "value": "{color.navy.900}" },
+      "raised": { "value": "{color.navy.800}" },
+      "text": { "value": "{color.ivory.50}" },
+      "muted": { "value": "{color.slate.300}" },
+      "border": { "value": "#2A3549" }
+    },
+    "light": {
+      "canvas": { "value": "{color.ivory.50}" },
+      "surface": { "value": "{color.white}" },
+      "raised": { "value": "{color.ivory.100}" },
+      "text": { "value": "{color.navy.950}" },
+      "muted": { "value": "{color.slate.600}" },
+      "border": { "value": "{color.ivory.200}" }
+    }
+  }
+}

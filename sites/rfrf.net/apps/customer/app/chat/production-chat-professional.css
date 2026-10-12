@@ -1,0 +1,432 @@
+/* Bounded production workspace; the message feed owns conversation scrolling. */
+body:has(.rf-production-shell) {
+  overflow: hidden;
+}
+.rf-production-shell {
+  container: rf-chat-workspace / size;
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  width: 100%;
+  height: var(--rf-chat-viewport-height, 100dvh);
+  min-height: 0;
+  overflow: hidden;
+  color: var(--rafraf-text);
+  background: var(--rafraf-canvas);
+}
+.rf-production-shell > .rf-assistant-thread-root,
+.rf-production-shell .rf-ai-page {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--rafraf-canvas);
+}
+.rf-production-shell .rf-ai-header {
+  flex-shrink: 0;
+  min-height: 64px;
+  padding: 10px 20px;
+  gap: 16px;
+  justify-content: flex-start;
+  color: var(--rafraf-text);
+  border-bottom: 1px solid var(--rafraf-border);
+  backdrop-filter: none;
+}
+:root[data-theme] .rf-production-shell .rf-ai-header {
+  background: var(--rafraf-canvas);
+  box-shadow: none;
+}
+.rf-production-shell .rf-ai-agent-title {
+  min-width: 0;
+}
+.rf-production-shell .rf-ai-header h1 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+.rf-production-shell .rf-ai-agent-title > span {
+  display: block;
+  margin-top: 2px;
+  color: var(--rafraf-muted);
+  font-size: 0.6875rem;
+}
+.rf-production-shell .rf-ai-main {
+  container: rf-chat-main / size;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+.rf-production-shell .rf-production-intake {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  padding: 0;
+  gap: 0;
+}
+.rf-production-shell .rf-ai-conversation {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+:root[data-theme] .rf-production-shell .rf-ai-conversation {
+  color: var(--rafraf-text);
+  background: transparent;
+  box-shadow: none;
+}
+.rf-production-shell .rf-ai-feed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: auto;
+  min-height: 0;
+  width: 100%;
+  padding: 24px max(16px, calc((100% - 48rem) / 2)) 16px;
+  gap: 24px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rafraf-border) transparent;
+}
+.rf-production-shell .rf-message {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  max-width: 85%;
+  font-size: 0.9375rem;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  box-shadow: none;
+}
+.rf-production-shell .rf-message.user {
+  align-self: flex-start;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border: 0;
+  border-radius: 20px;
+}
+.rf-production-shell .rf-message.bot {
+  align-self: stretch;
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+:root[data-theme] .rf-production-shell .rf-message.bot {
+  background: transparent;
+}
+.rf-production-shell .rf-message.bot::before {
+  display: none;
+}
+:root[data-theme] .rf-production-shell .rf-chat-empty {
+  margin-block: auto;
+  padding: 24px 8px;
+  text-align: center;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.rf-production-shell .rf-chat-empty > strong {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+.rf-production-shell .rf-chat-empty > span {
+  color: var(--rafraf-muted);
+  line-height: 1.9;
+}
+.rf-production-shell .rf-ai-composer {
+  position: static;
+  inset: auto;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: stretch;
+  width: min(48rem, calc(100% - 32px));
+  min-height: 0;
+  margin: 12px auto max(12px, env(safe-area-inset-bottom));
+  padding: 10px 12px;
+  gap: 8px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 24px;
+  box-shadow: none;
+}
+:root[data-theme] .rf-production-shell .rf-ai-composer {
+  box-shadow: none;
+}
+.rf-production-shell .rf-ai-composer:focus-within {
+  border-color: var(--rafraf-primary);
+}
+.rf-production-shell .rf-ai-composer > .rf-assistant-composer-input {
+  flex: none;
+  width: 100%;
+  min-height: 40px;
+  max-height: min(128px, 25cqh);
+  padding: 8px 4px;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: none;
+  overflow-y: auto;
+}
+.rf-production-shell
+  .rf-ai-composer
+  > .rf-assistant-composer-input:focus-visible {
+  outline: 2px solid var(--rafraf-primary);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+.rf-production-shell .rf-assistant-composer-input::placeholder {
+  color: var(--rafraf-muted);
+}
+.rf-production-shell .rf-chat-composer-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+.rf-production-shell .rf-chat-composer-actions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.rf-production-shell .rf-chat-composer-actions > button:hover {
+  background: var(--rafraf-raised);
+}
+.rf-production-shell .rf-chat-composer-actions > button.rf-ai-send {
+  margin-inline-start: auto;
+  color: var(--rafraf-color-text-inverse);
+  background: var(--rafraf-primary);
+  border-color: var(--rafraf-primary);
+}
+.rf-production-shell .rf-chat-composer-actions > button.rf-ai-send:hover {
+  background: var(--rafraf-primary-hover);
+}
+.rf-production-shell .rf-chat-composer-actions > button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.rf-production-shell .rf-chat-composer-hint {
+  color: var(--rafraf-muted);
+  font-size: 0.6875rem;
+}
+.rf-production-shell .rf-ai-composer .rf-input-code-review {
+  flex: none;
+  max-height: min(56px, 10cqh);
+  overflow-y: auto;
+}
+.rf-production-shell .rf-chat-request-details {
+  flex-shrink: 0;
+  width: min(48rem, calc(100% - 32px));
+  margin: 8px auto 0;
+  color: var(--rafraf-text);
+  background: var(--rafraf-canvas);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 12px;
+}
+.rf-production-shell .rf-chat-request-details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  gap: 8px;
+  list-style: none;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.rf-chat-request-details > summary::-webkit-details-marker {
+  display: none;
+}
+.rf-chat-request-details > summary small {
+  margin-inline-start: auto;
+  color: var(--rafraf-muted);
+  font-size: 0.6875rem;
+}
+.rf-chat-request-details[open] > summary > svg:last-child {
+  transform: rotate(180deg);
+}
+.rf-production-shell .rf-chat-request-scroll {
+  max-height: min(320px, 40dvh, max(0px, calc(100cqh - 92px)));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  border-top: 1px solid var(--rafraf-border);
+}
+:root[data-theme] .rf-production-shell .rf-request-context {
+  padding: 16px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.rf-production-shell .rf-request-context :is(small, dt, footer),
+.rf-production-shell .rf-request-progress > div {
+  color: var(--rafraf-muted);
+}
+.rf-production-shell .rf-request-details dd,
+.rf-production-shell .rf-request-progress b,
+.rf-production-shell .rf-request-evidence strong {
+  color: var(--rafraf-text);
+}
+.rf-production-shell .rf-request-details > div,
+.rf-production-shell .rf-request-evidence {
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}
+.rf-production-shell .rf-request-context > footer {
+  border-color: var(--rafraf-border);
+}
+.rf-production-shell .rf-chat-entry-intent,
+.rf-production-shell .rf-chat-error,
+.rf-production-shell .rf-chat-message-history {
+  flex-shrink: 0;
+  width: min(48rem, calc(100% - 32px));
+  margin: 8px auto;
+}
+.rf-production-shell .rf-centered-state {
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+}
+.rf-production-shell .rf-chat-state-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 16px;
+  overflow-y: auto;
+}
+.rf-production-shell .rf-chat-guest-main {
+  overflow-y: auto;
+}
+.rf-production-shell .rf-chat-guest-main .rf-ai-intake {
+  display: flex;
+  flex-direction: column;
+  width: min(40rem, calc(100% - 32px));
+  min-height: 0;
+  margin: auto;
+  padding: 24px 0;
+  gap: 20px;
+}
+.rf-production-shell .rf-chat-welcome {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.rf-production-shell .rf-chat-welcome-logo {
+  width: 128px;
+}
+.rf-production-shell .rf-chat-welcome h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+.rf-production-shell .rf-chat-welcome p {
+  margin: 0;
+  color: var(--rafraf-muted);
+  line-height: 1.9;
+}
+:root[data-theme] .rf-production-shell .rf-auth-trust {
+  padding: 16px;
+  gap: 10px;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.rf-production-shell .rf-auth-trust > svg {
+  display: none;
+}
+.rf-production-shell .rf-auth-trust p {
+  color: var(--rafraf-muted);
+}
+/* Container height follows visualViewport when the on-screen keyboard opens. */
+@container rf-chat-workspace (max-height: 520px) {
+  .rf-production-shell .rf-ai-header {
+    min-height: 52px;
+    padding-block: 4px;
+  }
+  .rf-production-shell .rf-ai-agent-title > span,
+  .rf-production-shell .rf-chat-composer-hint {
+    display: none;
+  }
+  .rf-production-shell .rf-ai-composer {
+    margin-block: 4px max(4px, env(safe-area-inset-bottom));
+    padding: 6px 8px;
+    gap: 4px;
+    border-radius: 16px;
+  }
+  .rf-production-shell .rf-ai-composer > .rf-assistant-composer-input {
+    min-height: 32px;
+    max-height: max(32px, min(80px, 16cqh));
+    padding-block: 4px;
+  }
+  .rf-production-shell .rf-ai-composer .rf-input-code-review {
+    max-height: min(28px, 8cqh);
+  }
+  .rf-production-shell .rf-chat-request-details {
+    margin-block-start: 4px;
+  }
+  .rf-production-shell .rf-ai-feed {
+    padding-block: 6px;
+    gap: 12px;
+  }
+}
+@media (max-width: 1023px) {
+  .rf-production-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rf-production-shell .rf-ai-header {
+    padding-inline: 12px;
+    gap: 12px;
+  }
+}
+@media (max-width: 479px) {
+  .rf-production-shell .rf-chat-composer-hint,
+  .rf-chat-request-details > summary small {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rf-production-shell *,
+  .rf-production-shell *::before,
+  .rf-production-shell *::after {
+    animation: none;
+    transition: none;
+    scroll-behavior: auto;
+  }
+}

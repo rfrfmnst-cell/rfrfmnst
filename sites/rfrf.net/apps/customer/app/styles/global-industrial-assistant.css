@@ -1,0 +1,349 @@
+/* Rafraf Assistant — Industrial Precision
+   Scoped presentation layer: production journey stays intact while the chat gains
+   the approved Rafraf identity. Action = orange, AI/verification = violet. */
+.rf-ai-shell {
+  --rf-ink: #161615;
+  --rf-ink-soft: #272521;
+  --rf-paper: #f6f4ef;
+  --rf-surface: #fffdfa;
+  --rf-line: #dfd9cf;
+  --rf-muted: #706d66;
+  --rf-orange: #ff6a3d;
+  --rf-orange-deep: #dc4c25;
+  --rf-violet: #7154e9;
+  --rf-violet-soft: #f0ecff;
+  --rf-green: #14835d;
+  min-height: 100dvh;
+  background: var(--rf-paper);
+}
+
+.rf-ai-sidebar {
+  position: relative;
+  overflow: hidden;
+  color: #f7f3e9;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 5%), transparent 23%),
+    linear-gradient(155deg, #1b1a18 0%, #10100f 64%, #17120f 100%);
+  border-left: 1px solid rgb(255 255 255 / 8%);
+}
+
+.rf-ai-sidebar::before {
+  content: '';
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  left: -170px;
+  top: -122px;
+  opacity: 0.8;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 39% 42%,
+      rgb(255 106 61 / 50%) 0 1px,
+      transparent 2px
+    ),
+    repeating-radial-gradient(
+      circle at 47% 45%,
+      transparent 0 21px,
+      rgb(255 255 255 / 8%) 22px 23px,
+      transparent 24px 43px
+    );
+  transform: rotate(18deg);
+}
+
+.rf-ai-brand,
+.rf-ai-new,
+.rf-ai-nav,
+.rf-ai-profile {
+  position: relative;
+  z-index: 1;
+}
+
+.rf-ai-brand {
+  border-bottom-color: rgb(255 255 255 / 10%);
+}
+
+.rf-ai-new {
+  color: #1b1512;
+  background: linear-gradient(
+    135deg,
+    #ff805b 0%,
+    var(--rf-orange) 58%,
+    #f4522a 100%
+  );
+  border: 0;
+  box-shadow: 0 10px 24px rgb(255 106 61 / 24%);
+}
+
+.rf-ai-new:hover {
+  background: linear-gradient(135deg, #ff906f, #ff6a3d 62%, #e84d27);
+  transform: translateY(-1px);
+}
+
+.rf-ai-nav a {
+  color: #aaa59c;
+  border: 1px solid transparent;
+}
+
+.rf-ai-nav a:hover,
+.rf-ai-nav a.is-active {
+  color: #fffaf2;
+  background: rgb(255 255 255 / 8%);
+  border-color: rgb(255 255 255 / 9%);
+}
+
+.rf-ai-nav a.is-active {
+  box-shadow: inset -3px 0 var(--rf-orange);
+}
+
+.rf-ai-nav-secondary,
+.rf-ai-profile {
+  border-top-color: rgb(255 255 255 / 10%);
+}
+
+.rf-ai-profile > span {
+  color: #201710;
+  background: linear-gradient(145deg, #fff0e4, #ff8a67);
+}
+
+.rf-ai-profile small {
+  color: #aaa59c;
+}
+
+.rf-ai-page {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 72% -10%,
+      rgb(113 84 233 / 12%),
+      transparent 26rem
+    ),
+    radial-gradient(
+      circle at 4% 100%,
+      rgb(255 106 61 / 10%),
+      transparent 28rem
+    ),
+    var(--rf-paper);
+}
+
+.rf-ai-page::before {
+  content: '';
+  position: absolute;
+  inset: 82px 0 0;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgb(20 20 18 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(20 20 18 / 3%) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, #000, transparent 46%);
+}
+
+.rf-ai-header,
+.rf-ai-main,
+.rf-ai-composer {
+  position: relative;
+  z-index: 1;
+}
+
+.rf-ai-header {
+  min-height: 88px;
+  color: var(--rf-ink);
+  background: rgb(255 253 250 / 82%);
+  border-bottom-color: var(--rf-line);
+  backdrop-filter: blur(16px);
+}
+
+.rf-ai-header h1 {
+  letter-spacing: -0.035em;
+}
+
+.rf-ai-header > div:first-child > span {
+  color: #6f685e;
+}
+
+.rf-ai-header i {
+  background: var(--rf-green);
+  box-shadow: 0 0 0 4px rgb(20 131 93 / 11%);
+}
+
+.rf-ai-header-actions button,
+.rf-ai-header-actions a {
+  color: var(--rf-ink);
+  background: transparent;
+  border-color: #cfc8bd;
+  border-radius: 999px;
+}
+
+.rf-ai-header-actions button:hover,
+.rf-ai-header-actions a:hover {
+  color: #fff;
+  background: var(--rf-ink);
+  border-color: var(--rf-ink);
+}
+
+.rf-ai-main {
+  gap: 28px;
+}
+
+.rf-ai-intake {
+  position: relative;
+  gap: 28px;
+  border-bottom: 0;
+}
+
+.rf-ai-conversation {
+  min-height: 390px;
+  padding: 2px 22px 18px;
+  background: rgb(255 253 250 / 71%);
+  border: 1px solid rgb(223 217 207 / 90%);
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgb(22 22 21 / 6%);
+}
+
+.rf-ai-conversation-title {
+  min-height: 62px;
+  margin: 0 -22px;
+  padding: 0 22px;
+  border-bottom-color: var(--rf-line);
+}
+
+.rf-ai-conversation-title > svg {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  color: #fff;
+  background: linear-gradient(135deg, #8d77f4, var(--rf-violet));
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgb(113 84 233 / 23%);
+}
+
+.rf-ai-conversation-title strong {
+  color: var(--rf-ink);
+  letter-spacing: -0.025em;
+}
+
+.rf-ai-conversation-title span {
+  color: var(--rf-muted);
+}
+
+.rf-ai-feed {
+  height: 278px;
+  padding: 20px 0 10px;
+  gap: 14px;
+}
+
+.rf-message {
+  max-width: min(84%, 620px);
+  padding: 13px 16px;
+  border-radius: 16px;
+  line-height: 1.95;
+  box-shadow: 0 5px 16px rgb(22 22 21 / 4%);
+}
+
+.rf-message.user {
+  color: #fff;
+  background: linear-gradient(135deg, #2c2a27, #171715);
+  border-color: transparent;
+  border-bottom-left-radius: 4px;
+}
+
+.rf-message.bot {
+  color: #292724;
+  background: #fffdfa;
+  border-color: #e4ddd3;
+  border-bottom-right-radius: 4px;
+}
+
+.rf-message.bot::before {
+  content: 'رفرف AI';
+  width: fit-content;
+  color: var(--rf-violet);
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.rf-message.is-typing {
+  color: #6656b3;
+  background: #f4f1ff;
+  border-color: #e6dfff;
+}
+
+.rf-message.is-typing::before {
+  content: 'يحلّل احتياجك';
+}
+
+.rf-ai-suggestions {
+  margin-top: 12px;
+}
+
+.rf-ai-suggestions button {
+  color: #4f493f;
+  background: #fffdf9;
+  border-color: #d9d1c5;
+  border-radius: 999px;
+}
+
+.rf-ai-suggestions button:hover {
+  color: #fff;
+  background: var(--rf-violet);
+  border-color: var(--rf-violet);
+}
+
+.rf-ai-part-photo {
+  min-height: 390px;
+  border-radius: 22px;
+  background: #28231f;
+  box-shadow: 0 20px 48px rgb(22 22 21 / 10%);
+}
+
+.rf-ai-part-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(145deg, rgb(113 84 233 / 28%), transparent 40%),
+    linear-gradient(0deg, rgb(22 22 21 / 52%), transparent 45%);
+}
+
+.rf-ai-part-photo > span {
+  z-index: 1;
+  color: #fff;
+  background: rgb(23 22 21 / 82%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.rf-ai-review,
+.rf-evidence-grid,
+.rf-offer-grid article {
+  background: rgb(255 253 250 / 90%);
+  border-color: var(--rf-line);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgb(22 22 21 / 4%);
+}
+
+.rf-ai-review {
+  padding: 20px 22px;
+}
+
+.rf-ai-review-head strong,
+.rf-evidence-icon,
+.rf-evidence-grid article > svg {
+  color: var(--rf-violet);
+}
+
+.rf-ai-review-head small,
+.rf-evidence-grid small {
+  color: var(--rf-green);
+}
+
+.rf-ai-review-grid,
+.rf-ai-review-grid > div + div {
+  border-color: #e8e1d8;
+}
+

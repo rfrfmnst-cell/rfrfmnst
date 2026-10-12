@@ -1,0 +1,450 @@
+@keyframes hero-breathe {
+  from {
+    transform: scale(1.015);
+  }
+  to {
+    transform: scale(1.055) translateX(10px);
+  }
+}
+
+@keyframes hero-scan {
+  0%,
+  100% {
+    inset-inline-start: -115px;
+  }
+  50% {
+    inset-inline-start: calc(100% + 5px);
+  }
+}
+
+/* ── Rafraf AI workspace inspired by the supplied interactive prototype ── */
+.chat-shell {
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.chat-sidebar {
+  height: 100dvh;
+  padding: 22px 17px 16px;
+  display: flex;
+  flex-direction: column;
+  color: var(--rafraf-color-bg-surface);
+  background: var(--rafraf-color-text-primary);
+  border-inline-start: 1px solid rgb(255 255 255 / 8%);
+}
+
+.chat-side-brand {
+  width: 158px;
+  height: 66px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.chat-new-request {
+  min-height: 50px;
+  border: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: var(--rafraf-color-bg-surface);
+  background: var(--primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chat-side-label {
+  margin: 24px 8px 8px;
+  color: rgb(255 255 255 / 48%);
+  font-size: 0.72rem;
+}
+
+.chat-conversations,
+.chat-side-nav {
+  display: grid;
+  gap: 4px;
+}
+
+.chat-conversations button,
+.chat-side-nav a {
+  width: 100%;
+  min-height: 43px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgb(255 255 255 / 70%);
+  background: transparent;
+  font: inherit;
+  font-size: 0.86rem;
+  text-align: start;
+  cursor: pointer;
+}
+
+.chat-conversations button:hover,
+.chat-conversations button.active,
+.chat-side-nav a:hover {
+  color: var(--rafraf-color-bg-surface);
+  background: rgb(255 255 255 / 9%);
+}
+
+.chat-side-nav {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.chat-side-status {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: rgb(255 255 255 / 54%);
+  font-size: 0.72rem;
+}
+
+.chat-side-status span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rafraf-color-text-success);
+  box-shadow: 0 0 0 4px rgb(37 198 138 / 12%);
+}
+
+.chat-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  box-shadow: none;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.chat-header {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  padding: 0 28px;
+  background: color-mix(
+    in srgb,
+    var(--rafraf-color-bg-surface) 94%,
+    transparent
+  );
+  backdrop-filter: blur(18px);
+}
+
+.chat-header > div,
+.chat-header > div.chat-ai-title {
+  grid-column: 2;
+  order: initial;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 0 8px;
+}
+
+.chat-header > div::before {
+  display: none;
+}
+
+.chat-ai-mark {
+  grid-row: 1 / span 2;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--rafraf-color-bg-surface);
+  background: var(--primary);
+}
+
+.chat-header strong {
+  line-height: 1.25;
+}
+
+.chat-sub {
+  font-size: 0.66rem;
+}
+
+.chat-back {
+  grid-column: 1;
+  justify-self: start;
+  order: initial;
+  margin: 0;
+}
+
+.chat-order-link {
+  grid-column: 3;
+  justify-self: end;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--primary-deep2);
+  background: var(--rafraf-color-bg-surface);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.chat-msgs {
+  width: min(920px, calc(100% - 48px));
+  margin-inline: auto;
+  padding: 28px 0 18px;
+  gap: 16px;
+}
+
+.bubble {
+  max-width: min(72%, 650px);
+  border-radius: 12px;
+  font-size: 0.92rem;
+}
+
+.bubble.bot {
+  align-self: flex-end;
+  border-start-start-radius: 12px;
+  border-start-end-radius: 4px;
+}
+
+.bubble.user {
+  align-self: flex-start;
+  color: var(--ink);
+  border: 1px solid var(--rafraf-color-bg-ai-soft);
+  border-start-end-radius: 12px;
+  border-start-start-radius: 4px;
+  background: var(--rafraf-color-bg-ai-soft);
+  box-shadow: 0 7px 22px rgb(67 45 127 / 4%);
+}
+
+.qcards {
+  width: min(860px, calc(100vw - 340px));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.qrec,
+.qnote {
+  grid-column: 1 / -1;
+}
+
+.qcard {
+  min-width: 0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(26 43 78 / 7%);
+}
+
+.qmeta span,
+.chat-send-rfq {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chips {
+  width: min(860px, calc(100% - 48px));
+  margin-inline: auto;
+  padding: 0 0 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.chip {
+  flex: 0 0 auto;
+  border-radius: 8px;
+}
+
+.chip::before {
+  content: none;
+}
+
+.chat-inputbar {
+  width: min(900px, calc(100% - 48px));
+  min-height: 64px;
+  margin: 0 auto 8px;
+  padding: 7px 9px;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgb(40 58 94 / 12%);
+}
+
+.chat-inputbar input {
+  border: 0;
+  background: transparent;
+}
+
+.chat-inputbar input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+.chat-inputbar > button:last-child {
+  min-width: 86px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 18px;
+  background: var(--primary);
+}
+
+.iconbtn {
+  border-radius: 50%;
+}
+
+.chat-note {
+  padding-bottom: 8px;
+  background: transparent;
+}
+
+.ai-understanding {
+  width: min(760px, 100%);
+  margin-inline: auto;
+  padding: 16px 18px;
+  align-self: center;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: 10px;
+  background: var(--rafraf-color-bg-surface);
+  box-shadow: 0 10px 30px rgb(30 48 82 / 7%);
+}
+
+.ai-understanding.complete {
+  border-color: rgb(35 179 166 / 42%);
+  box-shadow: 0 12px 34px rgb(35 179 166 / 9%);
+}
+
+.ai-understanding-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-understanding-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  border-radius: 8px;
+  background: var(--primary-soft);
+}
+
+.ai-understanding.complete .ai-understanding-icon {
+  color: var(--rafraf-color-bg-brand);
+  background: var(--rafraf-color-bg-success-soft);
+}
+
+.ai-understanding-head > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.ai-understanding-head strong {
+  font-size: 0.9rem;
+}
+
+.ai-understanding-head small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.ai-completion {
+  margin-inline-start: auto;
+  color: var(--primary-deep2);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.ai-progress {
+  height: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--rafraf-color-bg-surface-raised);
+}
+
+.ai-progress span {
+  height: 100%;
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--rafraf-color-bg-brand)
+  );
+  transition: width 260ms ease;
+}
+
+.ai-review-grid {
+  margin: 14px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 18px;
+}
+
+.ai-review-grid > div {
+  min-width: 0;
+  min-height: 56px;
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.ai-review-grid dt {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.ai-review-grid dd {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-review-grid button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ai-review-grid button:hover {
+  background: var(--primary-soft);
+}
+
+.ai-handoff,
+.ai-evidence {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  color: var(--rafraf-color-text-warning);
+  border-top: 1px solid var(--line);
+  font-size: 0.72rem;
+}
+
+.ai-evidence {
+  color: var(--rafraf-color-bg-brand);
+}
+

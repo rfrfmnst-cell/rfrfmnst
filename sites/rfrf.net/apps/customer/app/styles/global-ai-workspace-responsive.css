@@ -1,0 +1,265 @@
+@media (max-width: 900px) {
+  .site-header nav a:not(.cta-link) {
+    display: none;
+  }
+
+  .hero2 {
+    min-height: 760px;
+  }
+
+  .hero2-media {
+    inset-block-start: 0;
+    height: 44%;
+    background-position: 29% 54%;
+    background-size: cover;
+  }
+
+  .hero2::after {
+    top: 44%;
+    width: 100%;
+  }
+
+  .hero2-grid {
+    min-height: 690px;
+    display: block;
+    padding-top: 270px;
+  }
+
+  .hero2-copy {
+    min-height: 420px;
+    padding: 34px 0 120px;
+    background: var(--rafraf-color-bg-surface);
+    backdrop-filter: none;
+  }
+
+  .hero2-visual-space {
+    display: none;
+  }
+
+  .hero-motion-wrap {
+    bottom: 18px;
+  }
+
+  .hero-motion {
+    width: 100%;
+  }
+
+  .chat-shell {
+    display: block;
+  }
+
+  .chat-sidebar {
+    display: none;
+  }
+
+  .qcards {
+    width: min(100%, 620px);
+  }
+}
+
+@media (max-width: 620px) {
+  .header-brand .badge,
+  .site-header nav a:not(.cta-link) {
+    display: none;
+  }
+
+  .site-header {
+    min-height: 64px;
+    padding: 6px 0;
+  }
+
+  .site-header .row {
+    width: calc(100% - 24px);
+  }
+
+  .site-header nav {
+    flex: 0 0 auto;
+  }
+
+  .site-header .cta-link {
+    min-width: 76px;
+    min-height: 40px;
+    padding: 7px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.78rem;
+  }
+
+  .site-header .cta-link span {
+    font-size: 0;
+  }
+
+  .site-header .cta-link span::after {
+    content: 'ابدأ';
+    font-size: 0.78rem;
+  }
+
+  .hero2 {
+    min-height: 740px;
+  }
+
+  .hero2-media {
+    height: 280px;
+    background-position: 17% 45%;
+    background-size: auto 560px;
+  }
+
+  .hero2::after {
+    top: 280px;
+  }
+
+  .hero2-grid {
+    min-height: 690px;
+    padding-top: 280px;
+  }
+
+  .hero2-copy {
+    min-height: 410px;
+    padding: 24px 0 126px;
+  }
+
+  .hero2-copy h1 {
+    max-width: 100%;
+    font-size: 2.15rem;
+    line-height: 1.2;
+  }
+
+  .hero2 .lead {
+    margin: 14px 0 18px;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .hero2 .hero-ctas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .hero2 .btn {
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 0.82rem;
+  }
+
+  .hero2 .trust {
+    gap: 6px 12px;
+    margin-top: 14px;
+    font-size: 0.68rem;
+  }
+
+  .hero-motion-wrap {
+    bottom: 12px;
+  }
+
+  .hero-motion {
+    width: calc(100% - 24px);
+    min-height: 96px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px;
+    padding: 6px;
+  }
+
+  .hero-stage {
+    min-height: 82px;
+    padding: 7px 4px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    border-inline-end: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  .hero-stage:last-child {
+    border-inline-end: 0;
+  }
+
+  .hero-stage > span {
+    width: 100%;
+  }
+
+  .hero-stage small {
+    font-size: 0.6rem;
+  }
+
+  .hero-stage strong {
+    font-size: 0.67rem;
+  }
+
+  .chat-header {
+    grid-template-columns: 1fr auto 1fr;
+    padding: 0 13px;
+  }
+
+  .chat-back {
+    font-size: 0;
+  }
+
+  .chat-back::after {
+    content: 'رجوع';
+    font-size: 0.75rem;
+  }
+
+  .chat-order-link {
+    padding: 7px 8px;
+    font-size: 0.72rem;
+  }
+
+  .chat-msgs,
+  .chips,
+  .chat-inputbar {
+    width: calc(100% - 24px);
+  }
+
+  .bubble {
+    max-width: 88%;
+  }
+
+  .qcards {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-inputbar {
+    min-height: 58px;
+    margin-bottom: 6px;
+  }
+
+  .chat-inputbar > button:last-child {
+    min-width: 44px;
+    width: 44px;
+    padding: 0;
+  }
+
+  .chat-inputbar > button:last-child span {
+    display: none;
+  }
+
+  .ai-understanding {
+    padding: 14px;
+  }
+
+  .ai-review-grid {
+    gap: 0 12px;
+  }
+}
+
+@media (max-width: 620px) {
+  .track-header .cta-link span {
+    font-size: 0.76rem;
+  }
+
+  .track-header .cta-link span::after {
+    content: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero2-media,
+  .hero-scan-line {
+    animation: none;
+  }
+}
+

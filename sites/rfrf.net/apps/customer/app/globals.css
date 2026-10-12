@@ -1,0 +1,443 @@
+/* هوية رفرف الرسمية — مستخرجة من مرجعية التصميم (Rafraf Smart Parts) */
+:root {
+  --bg: var(--rafraf-color-bg-canvas);
+  --surface: var(--rafraf-color-bg-surface);
+  --ink: var(--rafraf-color-text-primary);
+  --muted: var(--rafraf-color-text-secondary);
+  --line: var(--rafraf-color-border-subtle);
+  --primary: var(--rafraf-color-bg-brand); /* Iris */
+  --primary-deep2: var(--rafraf-color-bg-brand);
+  --primary-ink: var(--rafraf-color-bg-surface);
+  --accent: var(--rafraf-color-text-warning); /* CTA مالي حصراً */
+  --accent-ink: var(--rafraf-color-text-warning);
+  --success: var(--rafraf-color-text-success);
+  --success-bg: var(--rafraf-color-bg-success-soft);
+  --success-line: var(--rafraf-color-text-success);
+  --error: var(--rafraf-color-text-danger);
+  --sidebar: var(--rafraf-color-text-primary);
+  --ink-2: var(--rafraf-color-text-primary); /* حبري داكن غني — للثقة والعمق */
+  --primary-soft: var(
+    --rafraf-color-bg-surface-interactive
+  ); /* هالة Iris فاتحة */
+  --primary-glow: rgb(91 91 214 / 14%);
+  --radius: 16px;
+  --font-display: var(--font-display, 'Readex Pro', system-ui, sans-serif);
+  --font-body: var(--font-body, 'Tajawal', system-ui, sans-serif);
+  /* سلّم ظلال متدرّج بدل ظلٍّ واحد مسطّح */
+  --shadow-sm: 0 1px 2px rgb(16 24 40 / 5%), 0 1px 3px rgb(16 24 40 / 5%);
+  --shadow-md: 0 4px 12px rgb(16 24 40 / 6%), 0 2px 4px rgb(16 24 40 / 4%);
+  --shadow-lg: 0 18px 40px rgb(20 22 60 / 10%), 0 6px 14px rgb(16 24 40 / 6%);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+.brand,
+.chat-header strong {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1080px, 92%);
+  margin-inline: auto;
+}
+
+.container.narrow {
+  width: min(680px, 92%);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Header */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 0.9rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  font-weight: 500;
+}
+
+.site-header nav a:hover {
+  color: var(--primary);
+}
+
+.cta-link {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Hero */
+.hero {
+  padding: 4.5rem 0 3.5rem;
+  text-align: center;
+  background:
+    radial-gradient(
+      60% 80% at 50% 0%,
+      var(--rafraf-color-bg-surface-interactive) 0%,
+      transparent 70%
+    ),
+    var(--bg);
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.lead {
+  max-width: 46rem;
+  margin: 1rem auto 1.8rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 700;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.06s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: var(--primary-ink);
+}
+
+.btn.ghost {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+
+.trust {
+  list-style: none;
+  display: flex;
+  gap: 1.4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.trust li::before {
+  content: '✓ ';
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* Sections */
+.section {
+  padding: 3rem 0;
+}
+
+.section.alt {
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.step {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+
+.step .num {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--rafraf-color-bg-surface);
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.step h3 {
+  margin-bottom: 0.3rem;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Cards & forms */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  box-shadow: 0 8px 28px rgb(16 24 40 / 5%);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.9rem;
+}
+
+.form input,
+.form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  background: var(--bg);
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+  border-color: transparent;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.9rem;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 0 0.9rem;
+}
+
+@media (width <= 560px) {
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form button[type='submit'] {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.8rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--rafraf-color-bg-surface);
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.form button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.hint {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error {
+  color: var(--error);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.card.success {
+  background: var(--success-bg);
+  border-color: var(--success-line);
+  text-align: center;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  background: var(--surface);
+}
+
+/* ── V2: هبوط التجارة المحادثية ───────────────────────────────────── */
+:root {
+  --ink-deep: var(--rafraf-color-text-primary);
+  --primary-deep: var(--rafraf-color-bg-brand);
+  --steel: var(--rafraf-color-text-secondary);
+}
+
+.mono {
+  font-family:
+    ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Consolas, monospace;
+  font-size: 0.92em;
+  letter-spacing: 0;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.eyebrow {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.8rem;
+}
+
+.hero2 {
+  background:
+    radial-gradient(
+      70% 90% at 85% -10%,
+      var(--rafraf-color-bg-info-soft) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      50% 60% at 0% 110%,
+      var(--rafraf-color-bg-warning-soft) 0%,
+      transparent 55%
+    ),
+    var(--bg);
+  padding: 3.5rem 0 3rem;
+  overflow: hidden;
+}
+
+.hero2-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (width <= 900px) {
+  .hero2-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero2-copy h1 {
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--ink-deep);
+}
+
+.hero2-copy h1 em {
+  font-style: normal;
+  color: var(--primary);
+}
+
+.hero2 .lead {
+  margin: 1.1rem 0 1.6rem;
+  max-width: 34rem;
+}
+
+.hero2 .trust {
+  justify-content: flex-start;
+  margin-top: 1.6rem;
+}

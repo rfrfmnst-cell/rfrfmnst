@@ -1,0 +1,106 @@
+/* بطاقة القطعة داخل المحادثة */
+.rf-part-card {
+  margin: 0 0 4px;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--rafraf-border, #e2dcee);
+  border-radius: 12px;
+  background: var(--rafraf-surface, white);
+}
+.rf-part-card img,
+.rf-part-card-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--rafraf-raised, #f3effa);
+}
+.rf-part-card-placeholder {
+  display: grid;
+  place-items: center;
+  color: var(--rafraf-muted, #6d6478);
+}
+.rf-part-card figcaption {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.rf-part-card figcaption strong {
+  color: var(--rafraf-text, #2f2250);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.rf-part-card figcaption span,
+.rf-part-card figcaption small {
+  color: var(--rafraf-muted, #6d6478);
+  font-size: 11px;
+  line-height: 1.5;
+}
+/* الحجز أو الدفع بعد اعتماد العرض */
+.rf-reserve {
+  margin-top: 6px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 10px;
+  align-items: start;
+  padding: 11px 12px;
+  border-radius: 11px;
+  border: 1px solid var(--rafraf-border, #e2dcee);
+}
+.rf-reserve.is-deferred {
+  color: var(--rafraf-text, #2f2250);
+  background: color-mix(
+    in srgb,
+    var(--rafraf-verified, #1d8a67) 10%,
+    var(--rafraf-surface, white)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--rafraf-verified, #1d8a67) 35%,
+    transparent
+  );
+}
+.rf-reserve.is-checkout {
+  background: color-mix(
+    in srgb,
+    var(--rafraf-primary, #6f45c3) 10%,
+    var(--rafraf-surface, white)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--rafraf-primary, #6f45c3) 35%,
+    transparent
+  );
+}
+.rf-reserve svg {
+  margin-top: 2px;
+  color: var(--rafraf-verified, #1d8a67);
+}
+.rf-reserve.is-checkout svg {
+  color: var(--rafraf-primary, #6f45c3);
+}
+.rf-reserve span {
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.rf-reserve span b {
+  font-weight: 800;
+}
+.rf-reserve a {
+  grid-column: 2;
+  justify-self: start;
+  padding: 7px 12px;
+  border-radius: 9px;
+  background: var(--rafraf-primary, #6f45c3);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.rf-reserve a:focus-visible {
+  outline: 3px solid var(--rafraf-focus, #b7a6ff);
+  outline-offset: 2px;
+}

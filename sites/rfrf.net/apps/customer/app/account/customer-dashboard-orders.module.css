@@ -1,0 +1,199 @@
+.orderList {
+  display: grid;
+}
+
+.orderCard {
+  min-width: 0;
+  padding: 18px 14px;
+  border-block-end: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.orderCard:last-child {
+  border-block-end: 0;
+}
+
+.orderHeader {
+  display: grid;
+  gap: 10px;
+}
+
+.orderHeader > div {
+  min-width: 0;
+}
+
+.orderEyebrow {
+  color: var(--rafraf-color-text-tertiary);
+  font:
+    500 10px/17px var(--font-rafraf-mono),
+    monospace;
+}
+
+.orderHeader h3 {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.orderStateGrid {
+  margin: 15px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.orderStateGrid > div {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface-raised);
+}
+
+.orderStateGrid dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.orderStateGrid dt svg {
+  color: var(--rafraf-color-icon-brand);
+}
+
+.orderStateGrid dd {
+  width: fit-content;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 3px 7px;
+  overflow-wrap: anywhere;
+  border-radius: var(--rafraf-radius-full);
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-text-ai);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 17px;
+}
+
+.orderStateGrid small {
+  margin-block-start: 6px;
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--rafraf-color-text-tertiary);
+  font:
+    500 10px/16px var(--font-rafraf-mono),
+    monospace;
+}
+
+.orderFooter {
+  margin-block-start: 14px;
+  padding-block-start: 14px;
+  display: grid;
+  gap: 12px;
+  border-block-start: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.orderFooter > strong {
+  align-self: center;
+  font:
+    800 16px/1.4 var(--font-rafraf-heading),
+    sans-serif;
+}
+
+.rfqList {
+  display: grid;
+}
+
+.rfqList article {
+  min-width: 0;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  border-block-end: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.rfqList article:last-child {
+  border-block-end: 0;
+}
+
+.rfqIcon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--rafraf-radius-10);
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-icon-brand);
+}
+
+.rfqList article > div {
+  min-width: 0;
+}
+
+.rfqList h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.rfqList p {
+  margin: 2px 0 0;
+  color: var(--rafraf-color-text-secondary);
+  font:
+    500 10px/17px var(--font-rafraf-mono),
+    monospace;
+}
+
+.rfqList .statusBadge,
+.rfqList article > a {
+  grid-column: 2;
+}
+
+.rfqList article > a {
+  width: 100%;
+  padding-inline: 12px;
+  border: 1px solid var(--rafraf-color-border-default);
+  color: var(--rafraf-color-text-primary);
+}
+
+@media (min-width: 620px) {
+  .orderCard {
+    padding: 20px;
+  }
+
+  .orderHeader {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .orderStateGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .orderFooter {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .orderFooter > div {
+    justify-self: end;
+  }
+
+  .rfqList article {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    padding: 16px 20px;
+  }
+
+  .rfqList .statusBadge,
+  .rfqList article > a {
+    grid-column: auto;
+  }
+
+  .rfqList article > a {
+    width: auto;
+  }
+}

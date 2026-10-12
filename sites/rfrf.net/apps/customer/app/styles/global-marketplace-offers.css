@@ -1,0 +1,483 @@
+.rf-fitment-score strong {
+  color: var(--rf-green);
+  font-family: var(--font-rafraf-mono), monospace;
+  font-size: 2.1rem;
+  line-height: 1.2;
+}
+
+.rf-fitment-score small {
+  width: fit-content;
+  padding: 3px 9px;
+  color: #078450;
+  background: #e7f8ef;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.rf-decision-facts {
+  margin-top: 9px;
+  display: grid;
+  gap: 4px;
+}
+
+.rf-decision-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.62rem;
+}
+
+.rf-decision-facts dt {
+  color: var(--rf-muted);
+}
+
+.rf-decision-facts dd {
+  color: var(--rf-green);
+  font-weight: 800;
+}
+
+.rf-decision-visual {
+  min-width: 0;
+}
+
+.rf-decision-product {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: #fbf8f3;
+  border: 1px solid #e7e0d6;
+  border-radius: 12px;
+}
+
+.rf-decision-product img {
+  object-fit: contain;
+  padding: 0;
+  transform: scale(1.22);
+}
+
+.rf-evidence-thumbs {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.rf-evidence-thumbs button {
+  position: relative;
+  height: 52px;
+  overflow: hidden;
+  background: #f4f1eb;
+  border: 1px solid #ded7ce;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.rf-evidence-thumbs img {
+  object-fit: cover;
+}
+
+.rf-evidence-thumbs button:last-child img {
+  object-position: 37% 48%;
+  transform: scale(1.65);
+}
+
+.rf-evidence-thumbs button > svg {
+  position: absolute;
+  inset: 50% 50% auto auto;
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 55%));
+  transform: translate(50%, -50%);
+  z-index: 1;
+}
+
+.rf-all-evidence {
+  margin-top: 5px;
+  color: var(--rf-violet);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 0.61rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rf-decision-checks {
+  padding: 10px 20px 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.rf-decision-checks article {
+  min-width: 0;
+  min-height: 52px;
+  padding: 8px 9px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #e8e2da;
+  border-radius: 9px;
+}
+
+.rf-decision-checks article > svg:first-child {
+  color: var(--rf-violet);
+}
+
+.rf-decision-checks article > svg:last-child {
+  color: var(--rf-green);
+}
+
+.rf-decision-checks article div {
+  min-width: 0;
+  display: grid;
+}
+
+.rf-decision-checks span {
+  color: var(--rf-muted);
+  font-size: 0.54rem;
+}
+
+.rf-decision-checks strong {
+  overflow: hidden;
+  font-size: 0.61rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-market-offers {
+  gap: 10px;
+}
+
+.rf-offers-heading {
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rf-offers-heading > div {
+  display: grid;
+}
+
+.rf-offers-heading span {
+  color: var(--rf-muted);
+  font-size: 0.61rem;
+}
+
+.rf-offers-heading h2 {
+  color: var(--rf-ink);
+  font-size: 1.05rem;
+}
+
+.rf-compare-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.rf-compare-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rf-compare-toggle i {
+  position: relative;
+  width: 34px;
+  height: 19px;
+  display: block;
+  background: #d8d4cd;
+  border-radius: 999px;
+  transition: background 160ms ease;
+}
+
+.rf-compare-toggle i::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 13px;
+  height: 13px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 16%);
+  transition: transform 160ms ease;
+}
+
+.rf-compare-toggle input:checked + i {
+  background: var(--rf-violet);
+}
+
+.rf-compare-toggle input:checked + i::after {
+  transform: translateX(-15px);
+}
+
+.rf-marketplace-shell .rf-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rf-marketplace-shell .rf-market-offer {
+  padding: 17px 15px 12px;
+  gap: 7px;
+  background: #fff;
+  border: 1px solid #ded9d1;
+  border-radius: 13px;
+  box-shadow: 0 8px 24px rgb(24 34 50 / 4%);
+}
+
+.rf-marketplace-shell .rf-market-offer.is-violet {
+  border-color: #aa9cf4;
+}
+
+.rf-marketplace-shell .rf-market-offer.is-blue {
+  border-color: #9dbcf1;
+}
+
+.rf-marketplace-shell .rf-market-offer.is-green {
+  border-color: #99d9bb;
+}
+
+.rf-offer-ribbon {
+  position: absolute;
+  top: -1px;
+  right: 18px;
+  min-width: 92px;
+  min-height: 25px;
+  padding: 3px 12px;
+  color: #fff;
+  background: var(--rf-violet);
+  border-radius: 0 0 8px 8px;
+  text-align: center;
+  font-size: 0.61rem;
+  font-weight: 800;
+}
+
+.is-blue .rf-offer-ribbon {
+  background: var(--rf-blue);
+}
+
+.is-green .rf-offer-ribbon {
+  background: var(--rf-green);
+}
+
+.rf-marketplace-shell .rf-market-offer > header {
+  min-height: 40px;
+  padding-top: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rf-supplier-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--rf-violet);
+  background: #f1edff;
+  border-radius: 50%;
+}
+
+.rf-market-offer header > div {
+  min-width: 0;
+  display: grid;
+}
+
+.rf-marketplace-shell .rf-market-offer header strong {
+  overflow: hidden;
+  color: var(--rf-ink);
+  font-size: 0.77rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-market-offer header small {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #0f9a63;
+  font-size: 0.55rem;
+}
+
+.rf-market-offer header small span {
+  color: var(--rf-muted);
+}
+
+.rf-market-price {
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-block: 1px solid #eee9e2;
+}
+
+.rf-market-price > div {
+  display: grid;
+}
+
+.rf-market-price span,
+.rf-market-price small {
+  color: var(--rf-muted);
+  font-size: 0.54rem;
+}
+
+.rf-market-price strong {
+  color: var(--rf-ink);
+  font-family: var(--font-rafraf-mono), var(--font-rafraf-sans), sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.35;
+}
+
+.rf-market-price > svg {
+  color: var(--rf-violet);
+}
+
+.rf-marketplace-shell .rf-market-offer dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 0;
+}
+
+.rf-marketplace-shell .rf-market-offer dl > div,
+.rf-marketplace-shell .rf-market-offer dl > div + div {
+  min-height: 38px;
+  padding: 4px 8px;
+  border: 0;
+  border-bottom: 1px solid #f0ebe4;
+}
+
+.rf-marketplace-shell .rf-market-offer dl > div:nth-child(even) {
+  border-right: 1px solid #f0ebe4;
+}
+
+.rf-market-offer dt,
+.rf-market-offer dl small {
+  color: var(--rf-muted);
+  font-size: 0.52rem;
+}
+
+.rf-market-offer dd {
+  color: var(--rf-ink);
+  font-size: 0.62rem;
+}
+
+.rf-market-offer dd.is-accent {
+  color: var(--rf-blue);
+}
+
+.rf-marketplace-shell .rf-market-offer .rf-accept-offer {
+  min-height: 36px;
+  color: #fff;
+  background: linear-gradient(135deg, #6c56ec, #563bd8);
+  border: 0;
+  border-radius: 7px;
+  box-shadow: none;
+}
+
+.rf-marketplace-shell .rf-market-offer .rf-accept-offer:hover {
+  background: linear-gradient(135deg, #7864f1, #6047e8);
+}
+
+.rf-marketplace-shell .rf-market-offer .rf-accept-offer:disabled {
+  color: #087849;
+  background: #e7f8ef;
+}
+
+.rf-market-trust {
+  min-height: 62px;
+  padding: 8px 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 12px;
+}
+
+.rf-market-trust > div {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rf-market-trust > div > svg {
+  color: #445166;
+}
+
+.rf-market-trust span {
+  display: grid;
+}
+
+.rf-market-trust strong {
+  font-size: 0.63rem;
+}
+
+.rf-market-trust small {
+  color: var(--rf-muted);
+  font-size: 0.51rem;
+}
+
+.rf-market-trust button {
+  min-height: 34px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--rf-violet);
+  background: #f7f4ff;
+  border: 1px solid #ded7ff;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 0.58rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.rf-marketplace-shell .rf-ai-composer {
+  right: calc(286px + 28px);
+  left: 28px;
+  bottom: 11px;
+  min-height: 62px;
+  padding: 8px 10px;
+  background: rgb(255 255 255 / 96%);
+  border-color: #dcd6ce;
+  border-radius: 15px;
+  box-shadow: 0 12px 34px rgb(26 37 54 / 12%);
+}
+
+.rf-marketplace-shell .rf-ai-composer > button {
+  width: 42px;
+  height: 42px;
+  color: #344052;
+  border-radius: 50%;
+}
+
+.rf-marketplace-shell .rf-ai-composer > button:first-child {
+  background: #f3f0eb;
+}
+
+.rf-marketplace-shell .rf-ai-composer > button.is-listening {
+  color: #fff;
+  background: var(--rf-violet);
+}
+
+.rf-marketplace-shell .rf-ai-composer > button.rf-ai-send {
+  color: #fff;
+  background: linear-gradient(135deg, #6f59ef, #563bd8);
+}
+
+.rf-marketplace-shell .rf-ai-composer > .rf-assistant-composer-input {
+  min-height: 42px;
+  color: var(--rf-ink);
+  font-size: 0.8rem;
+}
+

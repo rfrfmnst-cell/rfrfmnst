@@ -1,0 +1,72 @@
+.card {
+  margin: 0 clamp(20px, 3vw, 34px) 24px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid var(--rafraf-color-border-ai);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-ai-soft);
+}
+
+.card > svg {
+  flex: 0 0 auto;
+  color: var(--rafraf-color-text-ai);
+}
+
+.card h3 {
+  margin: 0;
+  color: var(--rafraf-color-text-primary);
+  font-size: 18px;
+}
+
+.card p {
+  margin: 6px 0 0;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 13px;
+  line-height: 21px;
+}
+
+.card a {
+  color: var(--rafraf-color-text-ai);
+  font-weight: 800;
+}
+
+.body {
+  min-width: 0;
+  flex: 1;
+}
+
+.body button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: var(--rafraf-radius-12);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.body button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.card .error {
+  color: var(--error);
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .card {
+    margin-inline: 16px;
+    padding: 17px;
+  }
+}

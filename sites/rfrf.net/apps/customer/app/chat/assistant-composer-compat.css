@@ -1,0 +1,56 @@
+/* Preserve the development preview's shared composer after toolbar extraction. */
+.rf-marketplace-shell .rf-ai-composer .rf-chat-composer-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+.rf-marketplace-shell .rf-chat-composer-hint {
+  display: none;
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button:first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+.rf-marketplace-shell
+  .rf-chat-composer-actions
+  > button:not(:first-child):not(.rf-ai-send) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button.rf-ai-send {
+  grid-column: 3;
+  grid-row: 1;
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button:hover {
+  background: var(--rafraf-color-bg-surface-interactive);
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button.rf-ai-send,
+.rf-marketplace-shell .rf-chat-composer-actions > button.is-listening {
+  color: var(--rafraf-color-text-inverse);
+  background: var(--rafraf-primary);
+  border-color: var(--rafraf-primary);
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.rf-marketplace-shell .rf-chat-composer-actions > button:focus-visible {
+  outline: 2px solid var(--rafraf-primary);
+  outline-offset: 2px;
+}

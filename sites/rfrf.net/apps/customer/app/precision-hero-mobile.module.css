@@ -1,0 +1,10 @@
+@media (max-width: 760px) {
+  .heroGrid.heroGrid {
+    padding-block: 32px 80px;
+    gap: 40px;
+  }
+
+  h1.heroTitle.heroTitle {
+    font-size: clamp(2.55rem, 11.5vw, 3rem);
+  }
+}

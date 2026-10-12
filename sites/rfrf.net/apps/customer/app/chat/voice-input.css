@@ -1,0 +1,150 @@
+.rf-input-code-review {
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  max-height: 88px;
+  overflow: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--rafraf-border);
+  font-size: 0.75rem;
+}
+.rf-input-code-review small {
+  color: var(--rafraf-muted);
+}
+.rf-input-code-review bdi {
+  max-width: 100%;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  font-family: ui-monospace, monospace;
+  overflow-wrap: anywhere;
+}
+.voice-input-trigger {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--rafraf-border);
+  background: var(--rafraf-surface);
+  color: var(--rafraf-text);
+  cursor: pointer;
+}
+.voice-input-dialog {
+  width: min(480px, calc(100vw - 28px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  margin: auto;
+  padding: 22px;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 20px;
+  background: var(--rafraf-surface);
+  color: var(--rafraf-text);
+  box-shadow: var(--rafraf-shadow);
+}
+.voice-input-dialog::backdrop {
+  background: rgb(12 18 28 / 65%);
+}
+.voice-input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.voice-input-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.voice-input-dialog p {
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+.voice-input-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+}
+.voice-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block: 14px;
+}
+.voice-input-dialog button {
+  font: inherit;
+  cursor: pointer;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+}
+.voice-input-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 12px;
+}
+.voice-input-dialog button:disabled,
+.voice-input-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.voice-input-dialog button:focus-visible,
+.voice-input-trigger:focus-visible,
+.voice-input-dialog textarea:focus-visible {
+  outline: 2px solid var(--rafraf-primary);
+  outline-offset: 3px;
+}
+.voice-input-transcript {
+  display: block;
+  margin-block: 16px 8px;
+  font-weight: 600;
+}
+.voice-input-dialog textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 12px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+.voice-input-audio {
+  width: 100%;
+}
+.voice-input-status,
+.voice-input-notice,
+.voice-input-hint {
+  color: var(--rafraf-muted);
+}
+.voice-input-error {
+  color: #cf403d;
+}
+.voice-input-footer {
+  justify-content: flex-end;
+}
+.voice-input-actions .voice-input-confirm {
+  background: var(--rafraf-primary);
+  color: white;
+  border-color: var(--rafraf-primary);
+}
+@media (max-width: 480px) {
+  .voice-input-dialog {
+    padding: 18px;
+  }
+  .voice-input-footer button {
+    flex: 1;
+  }
+}

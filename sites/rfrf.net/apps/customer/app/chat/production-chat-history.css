@@ -1,0 +1,110 @@
+.rf-chat-history-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.rf-chat-history-item:hover,
+.rf-chat-history-item.active {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.rf-chat-history .rf-chat-history-open {
+  width: 100%;
+}
+
+.rf-chat-history-copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.rf-chat-history-copy strong,
+.rf-chat-history-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-chat-history-copy strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rf-chat-history .rf-chat-history-date {
+  padding: 0;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.rf-chat-history button:hover,
+.rf-chat-history-item.active button {
+  color: white;
+}
+
+.rf-chat-history .rf-chat-history-delete {
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.rf-chat-history .rf-chat-history-delete:hover {
+  color: #fecaca;
+  background: rgba(220, 38, 38, 0.18);
+}
+
+.rf-chat-history-confirm {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rf-chat-history-confirm > span {
+  flex: 1 0 100%;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 12px;
+}
+
+.rf-chat-history .rf-chat-history-confirm button {
+  min-height: 34px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rf-chat-history .rf-chat-history-confirm .is-danger {
+  color: white;
+  background: #b91c1c;
+}
+
+.rf-production-shell .rf-chat-history-item:hover,
+.rf-production-shell .rf-chat-history-item.active {
+  background: var(--rf-chat-brand-soft);
+}
+
+.rf-production-shell .rf-chat-history button:hover,
+.rf-production-shell .rf-chat-history-item.active button {
+  color: var(--rf-chat-brand-strong);
+}
+
+.rf-production-shell .rf-chat-history .rf-chat-history-delete:hover {
+  color: #dc2626;
+  background: color-mix(in srgb, #dc2626 12%, transparent);
+}
+
+.rf-production-shell .rf-chat-history-confirm {
+  border-color: var(--rf-chat-line);
+}
+
+.rf-production-shell .rf-chat-history-confirm > span {
+  color: var(--rf-chat-ink);
+}

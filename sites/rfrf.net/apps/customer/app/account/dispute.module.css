@@ -1,0 +1,126 @@
+.orderActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.orderNotice {
+  margin: 16px 20px 0;
+  padding: 11px 13px;
+  border-radius: var(--rafraf-radius-12);
+  font-size: 13px;
+  line-height: 21px;
+}
+
+.orderNoticeSuccess {
+  border: 1px solid var(--rafraf-color-border-success);
+  background: var(--rafraf-color-bg-success-soft);
+  color: var(--rafraf-color-text-success);
+}
+
+.orderNoticeError {
+  border: 1px solid var(--rafraf-color-border-danger);
+  background: var(--rafraf-color-bg-danger-soft);
+  color: var(--rafraf-color-text-danger);
+}
+
+.disputeDetails {
+  position: relative;
+}
+
+.disputeDetails > summary {
+  min-height: 40px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rafraf-color-border-danger);
+  border-radius: var(--rafraf-radius-12);
+  color: var(--rafraf-color-text-danger);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.disputeDetails > summary::-webkit-details-marker {
+  display: none;
+}
+
+.disputeDetails[open] > summary {
+  background: var(--rafraf-color-bg-danger-soft);
+}
+
+.disputeForm {
+  width: min(380px, calc(100vw - 48px));
+  margin-block-start: 8px;
+  padding: 14px;
+  position: absolute;
+  inset-inline-end: 0;
+  z-index: 20;
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--rafraf-color-border-danger);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface-raised);
+  box-shadow: var(--rafraf-shadow-overlay);
+}
+
+.disputeForm label {
+  display: grid;
+  gap: 6px;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.disputeForm select,
+.disputeForm textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-8);
+  background: var(--rafraf-color-bg-canvas);
+  color: var(--rafraf-color-text-primary);
+  font: inherit;
+  resize: vertical;
+}
+
+.disputeForm select:focus-visible,
+.disputeForm textarea:focus-visible {
+  outline: 2px solid var(--rafraf-color-border-brand);
+  outline-offset: 2px;
+}
+
+.disputeSubmit {
+  min-height: 42px;
+  border: 0;
+  border-radius: var(--rafraf-radius-10);
+  background: var(--rafraf-color-text-danger);
+  color: var(--rafraf-color-bg-surface);
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.disputeSubmit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+@media (max-width: 620px) {
+  .orderActions,
+  .orderActions > form,
+  .orderActions > form button,
+  .disputeDetails,
+  .disputeDetails > summary {
+    width: 100%;
+  }
+
+  .disputeForm {
+    width: 100%;
+    position: static;
+  }
+}

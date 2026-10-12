@@ -1,0 +1,367 @@
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+  background: color-mix(
+    in srgb,
+    var(--rafraf-color-bg-canvas) 90%,
+    transparent
+  );
+  backdrop-filter: blur(18px);
+}
+
+.headerInner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  color: var(--rafraf-color-text-primary);
+  text-decoration: none;
+}
+
+.headerNav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.headerNav a {
+  min-height: 42px;
+  padding-inline: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--rafraf-radius-10);
+  color: var(--rafraf-color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.headerNav a:hover {
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-text-ai);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.identity > span {
+  color: var(--rafraf-color-text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.logout {
+  min-height: 40px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface);
+  color: var(--rafraf-color-text-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.main {
+  min-height: calc(100dvh - 72px);
+  padding-block: 28px 64px;
+}
+
+.intro {
+  margin-bottom: 28px;
+}
+
+.kicker {
+  margin: 0 0 4px;
+  color: var(--rafraf-color-text-ai);
+  font:
+    700 12px/18px var(--font-rafraf-mono),
+    'IBM Plex Mono',
+    monospace;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 40px);
+  line-height: 1.3;
+}
+
+.intro p:last-child {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.content {
+  display: grid;
+  gap: 24px;
+}
+
+.settings {
+  margin-block-start: 44px;
+  padding-block-start: 28px;
+  scroll-margin-block-start: 76px;
+  border-block-start: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.settingsHeader {
+  margin-block-end: 20px;
+}
+
+.settingsHeader h2 {
+  margin: 2px 0 0;
+  font-size: clamp(24px, 6vw, 32px);
+  line-height: 1.35;
+}
+
+.settingsHeader > p:last-child {
+  max-width: 680px;
+  margin: 7px 0 0;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.panel {
+  overflow: hidden;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-16);
+  background: var(--rafraf-color-bg-surface);
+}
+
+.panelHeader {
+  min-height: 68px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.panelHeader svg {
+  color: var(--rafraf-color-icon-brand);
+}
+
+.panelHeader h2,
+.panelHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.empty {
+  min-height: 120px;
+  padding: 28px 20px;
+  display: grid;
+  place-items: center;
+  color: var(--rafraf-color-text-secondary);
+  text-align: center;
+}
+
+.empty a {
+  color: var(--rafraf-color-icon-brand);
+  font-weight: 700;
+}
+
+.list {
+  padding-inline: 20px;
+}
+
+.row {
+  min-height: 94px;
+  padding-block: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.rowMain {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.titleLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.titleLine strong {
+  color: var(--rafraf-color-text-primary);
+  font-size: 15px;
+}
+
+.status {
+  padding: 3px 8px;
+  border-radius: var(--rafraf-radius-full);
+  background: var(--rafraf-color-bg-ai-soft);
+  color: var(--rafraf-color-text-ai);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.statusReady {
+  background: var(--rafraf-color-bg-success-soft);
+  color: var(--rafraf-color-text-success);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 12px;
+}
+
+.track {
+  min-height: 40px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface-raised);
+  color: var(--rafraf-color-text-primary);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.track:hover {
+  border-color: var(--rafraf-color-border-brand);
+  color: var(--rafraf-color-icon-brand);
+}
+
+/* تأكيد الاستلام يجاور «تتبع الطلب» بالمقاس نفسه ووزن بصري أعلى: هو الفعل
+   الوحيد الذي يقدّم صرف مستحق المورد، فيستحق البروز دون أن يصرخ. */
+.confirm {
+  min-height: 40px;
+  padding: 0 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--rafraf-color-border-brand);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface-raised);
+  color: var(--rafraf-color-icon-brand);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.confirm:hover {
+  background: var(--rafraf-color-icon-brand);
+  color: var(--rafraf-color-bg-surface-raised);
+}
+
+.confirm:focus-visible {
+  outline: 2px solid var(--rafraf-color-border-brand);
+  outline-offset: 2px;
+}
+
+.aside {
+  display: grid;
+  gap: 18px;
+}
+
+.privacy {
+  padding: 22px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid var(--rafraf-color-border-ai);
+  border-radius: var(--rafraf-radius-16);
+  background: var(--rafraf-color-bg-ai-soft);
+}
+
+.privacy svg {
+  color: var(--rafraf-color-text-ai);
+}
+
+.privacy h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.privacy p {
+  margin: 0;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 13px;
+  line-height: 21px;
+}
+
+@media (min-width: 680px) {
+  .headerNav {
+    display: flex;
+    margin-inline-start: auto;
+  }
+
+  .main {
+    padding-block-start: 38px;
+  }
+}
+
+@media (max-width: 520px) {
+  .headerInner {
+    min-height: 64px;
+  }
+
+  .headerInner :global(.rafraf-brand__descriptor) {
+    display: none;
+  }
+
+  .identity > span,
+  .logout > span {
+    display: none;
+  }
+
+  .logout {
+    width: 42px;
+    padding: 0;
+  }
+
+  .settings {
+    margin-block-start: 34px;
+    padding-block-start: 24px;
+  }
+}

@@ -1,0 +1,128 @@
+.dialog {
+  width: min(480px, calc(100vw - 28px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  margin: auto;
+  padding: 24px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 18px;
+  box-shadow: var(--rafraf-shadow);
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, var(--rafraf-text) 55%, transparent);
+}
+
+.dialog h2 {
+  margin: 0 0 10px;
+  padding-inline-end: 32px;
+  font-size: 1.25rem;
+}
+
+.dialog p {
+  color: var(--rafraf-muted);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.close {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-end: 14px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.kinds {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 20px 0;
+  border: 0;
+}
+
+.kinds legend {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.kinds label {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--rafraf-raised);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.kinds label:has(input:checked) {
+  border-color: var(--rafraf-primary);
+}
+
+.kinds input {
+  accent-color: var(--rafraf-primary);
+}
+
+.description {
+  display: grid;
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.description textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 10px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.actions button {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  color: var(--rr-color-white);
+  background: var(--rafraf-primary);
+  border: 1px solid var(--rafraf-primary);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dialog button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.dialog .error {
+  color: var(--rafraf-text);
+}

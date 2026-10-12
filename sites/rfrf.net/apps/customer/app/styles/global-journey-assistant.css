@@ -1,0 +1,452 @@
+/* مسار الرحلة */
+.journey {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.2rem;
+  counter-reset: j;
+}
+
+.journey li {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  position: relative;
+}
+
+.j-state {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--primary);
+  background: var(--rafraf-color-bg-surface-interactive);
+  border-radius: 6px;
+  padding: 0.15rem 0.55rem;
+  margin-bottom: 0.6rem;
+}
+
+.journey h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.journey p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* أقسام مقسومة */
+.split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+@media (width <= 820px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.split h2 {
+  text-align: start;
+  margin-bottom: 0.8rem;
+}
+
+.muted-p {
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.muted-p.center {
+  margin: -1.2rem auto 1.4rem;
+  text-align: center;
+}
+
+.chip-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.chip-tech {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgb(13 27 46 / 5%);
+}
+
+.panel-note {
+  background: var(--rafraf-color-bg-warning-soft);
+  border: 1px solid var(--rafraf-color-bg-warning-soft);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+}
+
+.panel-note h3 {
+  margin-bottom: 0.4rem;
+}
+
+.panel-note p {
+  color: var(--rafraf-color-text-warning);
+  font-size: 0.92rem;
+}
+
+/* شبكة التوريد */
+.supply-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.supply-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+}
+
+.src-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  margin-bottom: 0.6rem;
+}
+
+.src-badge.local {
+  background: var(--rafraf-color-bg-success-soft);
+  color: var(--rafraf-color-text-success);
+}
+
+.src-badge.global {
+  background: var(--rafraf-color-bg-surface-interactive);
+  color: var(--primary);
+}
+
+.supply-card h3 {
+  margin-bottom: 0.3rem;
+}
+
+.supply-card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.compare-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.compare-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.compare-list li span:first-child {
+  color: var(--muted);
+}
+
+/* بطاقة أمر الورشة */
+.wo-card {
+  background: var(--ink-deep);
+  color: var(--rafraf-color-border-subtle);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  box-shadow: 0 20px 50px rgb(13 27 46 / 25%);
+}
+
+.wo-head {
+  color: var(--rafraf-color-border-default);
+  font-size: 0.8rem;
+  border-bottom: 1px dashed var(--rafraf-color-bg-brand);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.wo-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+}
+
+.wo-card li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wo-card li span:last-child {
+  color: var(--rafraf-color-border-default);
+}
+
+.wo-foot {
+  margin-top: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* FAQ */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq summary::after {
+  content: '+';
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.faq details[open] summary::after {
+  content: '−';
+}
+
+.faq details p {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+/* CTA نهائي */
+.final-cta {
+  background: linear-gradient(135deg, var(--primary-deep), var(--primary));
+  color: var(--rafraf-color-bg-surface);
+  text-align: center;
+  padding: 3.2rem 0;
+}
+
+.final-cta h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.final-cta p {
+  opacity: 0.85;
+  margin: 0.4rem 0 1.3rem;
+}
+
+.btn.inverse {
+  background: var(--rafraf-color-bg-surface);
+  color: var(--primary);
+}
+
+/* focus visible للجودة */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── مساعد رفرف الذكي ───────────────────────────────────────────────
+ * ليست فقاعات ChatGPT عامة — حضور خاص بـ رفرف: أفاتار المساعد، حركة دخول
+ * ناعمة، فقاعة عميل بتدرّج Iris، وخلفية بعمق خفيف. */
+.chat-page {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  background:
+    radial-gradient(
+      90% 55% at 50% -10%,
+      var(--primary-soft) 0%,
+      transparent 60%
+    ),
+    var(--bg);
+  max-width: 760px;
+  margin-inline: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.85rem 1.1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+/* أفاتار المساعد: قرص Iris بحرف «ر» */
+.chat-header > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.chat-header > div::before {
+  content: 'ر';
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep2));
+  color: var(--rafraf-color-bg-surface);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px var(--primary-glow);
+  flex-shrink: 0;
+}
+
+.chat-header strong {
+  display: block;
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+
+.chat-sub {
+  font-size: 0.74rem;
+  color: var(--success);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* نقطة الاتصال الحيّة تحلّ محلّ الرمز النصّي ● */
+.chat-sub::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 rgb(22 163 74 / 45%);
+  animation: live 2s ease-in-out infinite;
+}
+
+@keyframes live {
+  50% {
+    box-shadow: 0 0 0 5px rgb(22 163 74 / 0%);
+  }
+}
+
+.chat-back {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-inline-end: auto;
+  order: 2;
+}
+
+.chat-header > div {
+  order: 1;
+}
+
+.chat-header .badge {
+  order: 0;
+}
+
+.chat-msgs {
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bubble {
+  max-width: 86%;
+  padding: 0.75rem 1.05rem;
+  border-radius: 18px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+  animation: bubble-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    animation: none;
+  }
+}
+
+.bubble.bot {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  align-self: flex-start;
+  border-start-start-radius: 5px;
+  position: relative;
+}
+
+/* شريط Iris رفيع يوسم صوت المساعد */
+.bubble.bot::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.55rem;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(var(--primary), var(--primary-deep2));
+}
+
+.bubble.user {
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep2));
+  color: var(--rafraf-color-bg-surface);
+  align-self: flex-end;
+  border-start-end-radius: 5px;
+  box-shadow: 0 6px 16px var(--primary-glow);
+}
+
+.bubble.typing {
+  color: var(--muted);
+  letter-spacing: 3px;
+}
+
+.chat-send-rfq {
+  align-self: center;
+  margin-top: 0.4rem;
+}
+
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 1rem 0.6rem;
+}
+

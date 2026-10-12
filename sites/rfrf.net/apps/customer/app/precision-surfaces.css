@@ -1,0 +1,189 @@
+/* Final Rafraf Precision compatibility layer for the existing customer journeys. */
+.rf-ai-shell,
+.rf-marketplace-shell {
+  --rf-ink: var(--rafraf-text);
+  --rf-ink-soft: var(--rafraf-text);
+  --rf-paper: var(--rafraf-canvas);
+  --rf-surface: var(--rafraf-surface);
+  --rf-line: var(--rafraf-border);
+  --rf-muted: var(--rafraf-muted);
+  --rf-orange: var(--rafraf-signal);
+  --rf-orange-deep: var(--rr-color-orange-600);
+  --rf-violet: var(--rafraf-primary);
+  --rf-violet-soft: color-mix(
+    in srgb,
+    var(--rafraf-surface) 86%,
+    var(--rafraf-primary)
+  );
+  --rf-green: var(--rafraf-verified);
+  --rf-navy-deep: var(--rr-color-navy-950);
+  color: var(--rafraf-text);
+  background: var(--rafraf-canvas);
+}
+
+.rf-ai-sidebar,
+.rf-marketplace-shell .rf-ai-sidebar {
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-navy-950);
+  border-color: rgb(255 255 255 / 10%);
+}
+
+.rf-ai-sidebar::before,
+.rf-ai-page::before {
+  background: none;
+}
+
+.rf-marketplace-shell .rf-ai-brand {
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-navy-950);
+  border-color: rgb(255 255 255 / 10%);
+}
+
+.rf-ai-new,
+.rf-marketplace-shell .rf-ai-new,
+.rf-marketplace-shell .rf-market-offer .rf-accept-offer,
+.rf-marketplace-shell .rf-ai-composer > button.rf-ai-send {
+  color: var(--rr-color-white);
+  background: var(--rafraf-primary);
+}
+
+.rf-ai-new:hover,
+.rf-marketplace-shell .rf-ai-new:hover,
+.rf-marketplace-shell .rf-market-offer .rf-accept-offer:hover,
+.rf-marketplace-shell .rf-ai-composer > button.rf-ai-send:hover {
+  background: var(--rafraf-primary-hover);
+}
+
+.rf-marketplace-shell .rf-ai-page,
+.rf-ai-page {
+  background: var(--rafraf-canvas);
+}
+
+.rf-marketplace-shell .rf-ai-header,
+.rf-marketplace-shell .rf-ai-conversation,
+.rf-decision-card,
+.rf-marketplace-shell .rf-market-offer,
+.rf-market-trust,
+.rf-marketplace-shell .rf-ai-composer,
+.rf-ai-review,
+.rf-ai-plus-card {
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border-color: var(--rafraf-border);
+  box-shadow: var(--rafraf-shadow);
+}
+
+.rf-vehicle-chip,
+.rf-marketplace-shell .rf-message,
+.rf-decision-product,
+.rf-evidence-thumbs button,
+.rf-marketplace-shell .rf-ai-suggestions button,
+.rf-market-trust button,
+.rf-marketplace-shell .rf-ai-composer > button:first-child {
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}
+
+.rf-marketplace-shell .rf-message.user,
+.rf-marketplace-shell .rf-ai-suggestions button,
+.rf-market-trust button {
+  color: var(--rafraf-primary-hover);
+  background: color-mix(
+    in srgb,
+    var(--rafraf-surface) 84%,
+    var(--rafraf-primary)
+  );
+}
+
+.rf-marketplace-shell .rf-message.bot,
+.rf-marketplace-shell .rf-message.user,
+.rf-decision-summary h2,
+.rf-offers-heading h2,
+.rf-marketplace-shell .rf-market-offer header strong,
+.rf-market-price strong,
+.rf-market-offer dd,
+.rf-marketplace-shell .rf-ai-composer > .rf-assistant-composer-input {
+  color: var(--rafraf-text);
+}
+
+.rf-marketplace-shell .rf-message.bot {
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}
+
+.rf-marketplace-shell .rf-message.user {
+  border-color: color-mix(
+    in srgb,
+    var(--rafraf-border) 56%,
+    var(--rafraf-primary)
+  );
+}
+
+.rf-marketplace-shell .rf-market-offer dl > div,
+.rf-marketplace-shell .rf-market-offer dl > div + div,
+.rf-marketplace-shell .rf-market-offer dl > div:nth-child(even),
+.rf-market-price,
+.rf-fitment-score,
+.rf-decision-checks article {
+  border-color: var(--rafraf-border);
+}
+
+:root[data-theme='light'] .rf-ai-sidebar,
+:root[data-theme='light'] .rf-marketplace-shell .rf-ai-sidebar {
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-navy-900);
+}
+
+/* Keep the restored customer request workspace intact while making its
+   existing surfaces follow the global dark theme. */
+:root[data-theme='dark'] .rf-production-shell .rf-ai-header,
+:root[data-theme='dark'] .rf-production-shell .rf-ai-conversation,
+:root[data-theme='dark'] .rf-production-shell .rf-ai-composer,
+:root[data-theme='dark'] .rf-production-shell .rf-auth-trust,
+:root[data-theme='dark'] .rf-production-shell .rf-request-context,
+:root[data-theme='dark'] .rf-production-shell .rf-tool-card,
+:root[data-theme='dark'] .rf-production-shell .rf-live-quotes article,
+:root[data-theme='dark'] .rf-production-shell .rf-otp-dialog,
+:root[data-theme='dark'] .rf-production-shell .rf-chat-empty {
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border-color: var(--rafraf-border);
+  box-shadow: var(--rafraf-shadow);
+}
+
+:root[data-theme='dark'] .rf-production-shell .rf-message.bot,
+:root[data-theme='dark'] .rf-production-shell .rf-message.user,
+:root[data-theme='dark'] .rf-production-shell .rf-auth-steps span,
+:root[data-theme='dark'] .rf-production-shell .rf-chat-entry-intent,
+:root[data-theme='dark'] .rf-production-shell .rf-live-quote-meta span,
+:root[data-theme='dark'] .rf-production-shell .rf-otp-development-code {
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}
+
+:root[data-theme='dark']
+  .rf-production-shell
+  :where(
+    .rf-auth-trust p,
+    .rf-chat-entry-intent small,
+    .rf-tool-card p,
+    .rf-tool-card span,
+    .rf-live-quotes article > header span,
+    .rf-chat-empty > span,
+    .rf-otp-dialog > p,
+    .rf-otp-dialog > small,
+    .rf-centered-state
+  ) {
+  color: var(--rafraf-muted);
+}
+
+:root[data-theme='dark']
+  .rf-production-shell
+  :where(.rf-ai-composer textarea, .rf-otp-dialog input) {
+  color: var(--rafraf-text);
+  caret-color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}

@@ -1,0 +1,8 @@
+# Keep release evidence and database migrations byte-stable across platforms.
+*.sql text eol=lf
+scripts/*.mjs text eol=lf
+.github/workflows/*.yml text eol=lf
+
+# Style Dictionary regenerates these files during every verification run.
+packages/brand/src/generated/*.css text eol=lf
+packages/brand/src/generated/*.ts text eol=lf

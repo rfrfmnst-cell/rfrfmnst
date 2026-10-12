@@ -1,0 +1,489 @@
+/* ─── بطاقات مقارنة العروض داخل الدردشة (Rule 2: بلا مورد/تكلفة/هامش) ─── */
+.qcards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+  min-inline-size: min(72vw, 380px);
+}
+
+.qrec {
+  font-size: 0.85rem;
+  color: var(--primary-deep2);
+  background: var(--rafraf-color-bg-surface-interactive);
+  border-radius: 10px;
+  padding: 0.5rem 0.7rem;
+  margin: 0;
+}
+
+.qcard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.85rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.12s ease;
+}
+
+.qcard:hover {
+  transform: translateY(-2px);
+}
+
+/* البطاقة المرشّحة: توقيع رفرف — إطار Iris + وسام علوي */
+.qcard.best {
+  border-color: var(--primary);
+  box-shadow:
+    0 0 0 1.5px var(--primary),
+    var(--shadow-lg);
+  background: linear-gradient(
+    180deg,
+    var(--primary-soft) 0%,
+    var(--surface) 42%
+  );
+}
+
+.qlabels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.qchip {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-deep2);
+  background: var(--rafraf-color-bg-surface-interactive);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+
+.qcard.best .qchip:first-child {
+  background: var(--primary);
+  color: var(--rafraf-color-bg-surface);
+}
+
+.qchip.src {
+  background: var(--rafraf-color-bg-surface-raised);
+  color: var(--muted);
+}
+
+.qprice {
+  font-size: 1.05rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.qprice strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.qprice small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  width: 100%;
+}
+
+.qmeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.qnote {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ── بطاقات مقارنة العروض + الاعتماد الذاتي (.qc-*) ── */
+.qc {
+  margin-top: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+}
+
+.qc-title {
+  font-weight: 800;
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.qc-why {
+  background: var(--rafraf-color-bg-surface-raised);
+  border: 1px solid var(--rafraf-color-bg-ai-soft);
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+  margin-bottom: 0.9rem;
+}
+
+.qc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.qc-card {
+  position: relative;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  cursor: pointer;
+  display: block;
+  background: var(--bg);
+}
+
+.qc-card input {
+  position: absolute;
+  inset-inline-start: 0.8rem;
+  inset-block-start: 0.9rem;
+  accent-color: var(--primary);
+}
+
+.qc-card.sel {
+  border-color: var(--primary);
+  background: var(--rafraf-color-bg-surface);
+  box-shadow: 0 8px 22px rgb(91 91 214 / 14%);
+}
+
+.qc-badge {
+  position: absolute;
+  inset-block-start: -0.7rem;
+  inset-inline-end: 0.8rem;
+  background: var(--primary);
+  color: var(--rafraf-color-bg-surface);
+  font-size: 0.7rem;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 0.12rem 0.7rem;
+}
+
+.qc-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-deep2);
+  margin-inline-start: 1.4rem;
+}
+
+.qc-price small {
+  font-size: 0.85rem;
+}
+
+.qc-src {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.15rem 0 0.5rem;
+  margin-inline-start: 1.4rem;
+}
+
+.qc-meta {
+  list-style: none;
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qc-fit {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.qc-tags {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.qc-tags span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--rafraf-color-bg-surface-interactive);
+  color: var(--primary-deep2);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+}
+
+.qc-approve {
+  margin-top: 1rem;
+}
+
+.qc-cta {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.qc-cta:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.qc-how {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+}
+
+.qc-how summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.qc-how ol {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.qc-note {
+  margin-top: 0.7rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.qc-done {
+  margin-top: 1.2rem;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header {
+  min-height: 72px;
+  padding: 8px 0;
+  backdrop-filter: blur(16px);
+  background: color-mix(
+    in srgb,
+    var(--rafraf-color-bg-surface) 94%,
+    transparent
+  );
+}
+
+.site-header .row {
+  flex-wrap: nowrap;
+}
+
+.site-header nav {
+  gap: clamp(14px, 2.2vw, 30px);
+  font-size: 0.92rem;
+}
+
+.hero2 {
+  position: relative;
+  min-height: min(720px, calc(100svh - 104px));
+  padding: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.hero2-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-position: center 53%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: hero-breathe 12s ease-in-out infinite alternate;
+}
+
+.hero2::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 53%;
+  background: var(--rafraf-color-bg-surface);
+}
+
+.hero2-grid {
+  min-height: min(625px, calc(100svh - 190px));
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 0;
+  align-items: stretch;
+}
+
+.hero2-copy {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 88px) clamp(28px, 5vw, 72px);
+  background: color-mix(
+    in srgb,
+    var(--rafraf-color-bg-surface) 96%,
+    transparent
+  );
+  backdrop-filter: blur(5px);
+}
+
+.hero2-copy h1 {
+  max-width: 590px;
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.hero2-copy h1 em {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--primary);
+}
+
+.hero2 .lead {
+  max-width: 570px;
+  margin: 22px 0 28px;
+  font-size: clamp(1rem, 1.35vw, 1.18rem);
+}
+
+.hero2 .hero-ctas,
+.hero2 .trust {
+  justify-content: flex-start;
+}
+
+.hero2 .btn {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 26px;
+  border-radius: 10px;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.hero2 .btn.primary {
+  box-shadow: 0 12px 28px rgb(91 91 214 / 24%);
+}
+
+.hero2 .btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero2 .trust {
+  gap: 18px;
+  margin-top: 24px;
+  font-size: 0.82rem;
+}
+
+.hero-motion-wrap {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 24px;
+  z-index: 3;
+}
+
+.hero-motion {
+  position: relative;
+  width: min(920px, 94%);
+  min-height: 86px;
+  margin-inline: auto;
+  padding: 11px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid rgb(205 214 230 / 90%);
+  border-radius: 12px;
+  background: color-mix(
+    in srgb,
+    var(--rafraf-color-bg-surface) 94%,
+    transparent
+  );
+  box-shadow: 0 20px 48px rgb(17 34 68 / 14%);
+  backdrop-filter: blur(18px);
+}
+
+.hero-scan-line {
+  position: absolute;
+  inset-block: 0;
+  width: 110px;
+  background: rgb(35 179 166 / 10%);
+  border-inline-start: 1px solid rgb(35 179 166 / 65%);
+  animation: hero-scan 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-stage {
+  min-width: 0;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  color: var(--rafraf-color-text-tertiary);
+  border-inline-end: 1px solid var(--line);
+  transition:
+    color 280ms ease,
+    background 280ms ease;
+}
+
+.hero-stage:last-child {
+  border-inline-end: 0;
+}
+
+.hero-stage > span {
+  min-width: 0;
+  display: grid;
+}
+
+.hero-stage small {
+  font-size: 0.72rem;
+}
+
+.hero-stage strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hero-stage.active {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.hero-stage.done {
+  color: var(--rafraf-color-bg-brand);
+}
+

@@ -1,0 +1,289 @@
+/* One navigation tree: a persistent desktop column and native mobile drawer. */
+.rf-production-shell > .rf-chat-navigation {
+  inset-block: 0;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  position: fixed;
+  inline-size: min(320px, calc(100vw - 24px));
+  max-inline-size: none;
+  block-size: 100dvh;
+  max-block-size: none;
+  margin: 0;
+  padding: calc(16px + env(safe-area-inset-top)) 14px
+    calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  border: 0;
+  border-inline-end: 1px solid var(--rafraf-border);
+  box-shadow: var(--rafraf-shadow);
+}
+
+.rf-production-shell > .rf-chat-navigation:not([open]) {
+  display: none;
+}
+
+:root[data-theme] .rf-production-shell > .rf-chat-navigation {
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+}
+
+.rf-production-shell > .rf-chat-navigation::before {
+  display: none;
+}
+
+.rf-production-shell > .rf-chat-navigation::backdrop {
+  background: color-mix(in srgb, var(--rafraf-canvas) 72%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.rf-chat-navigation .rf-chat-navigation-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.rf-chat-navigation .rf-ai-brand {
+  min-block-size: 48px;
+  padding: 0 4px;
+  border: 0;
+}
+
+.rf-chat-navigation .rf-ai-logo {
+  max-inline-size: 180px;
+}
+
+.rf-chat-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.rf-production-shell .rf-chat-navigation-toggle,
+.rf-production-shell .rf-chat-navigation-close,
+.rf-production-shell .rf-chat-controls .rafraf-theme-toggle {
+  position: static;
+  inset: auto;
+  inline-size: 44px;
+  min-inline-size: 44px;
+  block-size: 44px;
+  min-block-size: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rafraf-text);
+  background: transparent;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 12px;
+  box-shadow: none;
+  backdrop-filter: none;
+  cursor: pointer;
+}
+
+.rf-production-shell .rf-chat-controls .rafraf-theme-toggle span {
+  display: none;
+}
+
+.rf-production-shell .rf-chat-controls .rafraf-theme-toggle:hover,
+.rf-production-shell .rf-chat-navigation-toggle:hover,
+.rf-production-shell .rf-chat-navigation-close:hover {
+  background: var(--rafraf-raised);
+  transform: none;
+}
+
+.rf-chat-navigation .rf-ai-new {
+  inline-size: 100%;
+  min-block-size: 46px;
+  margin: 0;
+  padding: 10px 12px;
+  flex-shrink: 0;
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 12px;
+  box-shadow: none;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.rf-chat-navigation .rf-ai-new:hover {
+  background: var(--rafraf-color-bg-surface-interactive);
+}
+
+.rf-chat-navigation .rf-ai-new[aria-disabled='true'] {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.rf-chat-navigation .rf-ai-nav {
+  display: grid;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.rf-chat-navigation .rf-ai-nav a {
+  min-block-size: 44px;
+  padding: 10px 12px;
+  color: var(--rafraf-muted);
+  background: transparent;
+  border-radius: 11px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.rf-chat-navigation .rf-ai-nav a.is-active,
+.rf-chat-navigation .rf-ai-nav a:hover {
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+}
+
+.rf-chat-navigation .rf-ai-nav-secondary {
+  margin-block-start: auto;
+  padding-block-start: 12px;
+  border-color: var(--rafraf-border);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history {
+  min-block-size: 0;
+  max-block-size: none;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-block-start: 1px solid var(--rafraf-border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--rafraf-border) transparent;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history > strong {
+  padding: 0 10px 6px;
+  display: block;
+  flex-shrink: 0;
+  color: var(--rafraf-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.rf-chat-navigation .rf-chat-history-item {
+  min-inline-size: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  flex-shrink: 0;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history button {
+  min-inline-size: 0;
+  max-inline-size: none;
+  min-block-size: 44px;
+  color: var(--rafraf-text);
+  background: transparent;
+  font: inherit;
+  text-align: start;
+}
+
+.rf-chat-navigation .rf-chat-history-copy {
+  min-inline-size: 0;
+}
+
+.rf-chat-navigation .rf-chat-history-copy strong {
+  font-size: 0.8125rem;
+  font-weight: 550;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history small {
+  color: var(--rafraf-muted);
+  font-size: 0.6875rem;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-date {
+  padding: 0;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-delete {
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  color: var(--rafraf-muted);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-delete:hover {
+  color: var(--rafraf-danger);
+  background: var(--rafraf-surface);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-item:hover,
+.rf-production-shell .rf-chat-navigation .rf-chat-history-item.active {
+  background: var(--rafraf-surface);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-confirm {
+  padding: 8px;
+  border-color: var(--rafraf-border);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-confirm > span {
+  color: var(--rafraf-text);
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-confirm button {
+  padding: 10px 12px;
+  background: var(--rafraf-raised);
+  border: 1px solid var(--rafraf-border);
+  font-size: 0.8125rem;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-confirm .is-danger {
+  color: var(--rafraf-text);
+  border-color: var(--rafraf-danger);
+}
+
+.rf-chat-navigation button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.rf-production-shell .rf-chat-navigation .rf-chat-history-more {
+  margin-block-start: 4px;
+  flex-shrink: 0;
+  border-color: var(--rafraf-border);
+  font-size: 0.8125rem;
+}
+
+.rf-chat-navigation .rf-chat-navigation-status {
+  margin: 0;
+  padding: 10px 12px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border: 1px solid var(--rafraf-border);
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+  .rf-production-shell > .rf-chat-navigation {
+    position: relative;
+    inset: auto;
+    inline-size: 100%;
+    padding: 20px 14px;
+    box-shadow: none;
+  }
+
+  .rf-production-shell .rf-chat-navigation-toggle,
+  .rf-production-shell .rf-chat-navigation-close {
+    display: none;
+  }
+}
