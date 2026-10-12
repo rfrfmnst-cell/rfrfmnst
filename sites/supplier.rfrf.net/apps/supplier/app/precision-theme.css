@@ -1,0 +1,27 @@
+/* Supplier portal: semantic Rafraf Precision surfaces with full dark/light parity. */
+.supplier-shell { color: var(--rafraf-text); background: var(--rafraf-canvas); }
+.sp-sidebar { color: var(--rr-color-ivory-50); background: var(--rr-color-navy-950); }
+.sp-side-brand { color: var(--rr-color-ivory-50); background: transparent; border: 1px solid rgb(255 255 255 / 12%); }
+.sp-main { color: var(--rafraf-text); }
+.card-block,
+.sp-kpis article,
+.sp-list a,
+.sp-quote-details,
+.sp-priority-rail a,
+.login-card,
+.qform input,
+.qform select,
+.table-wrap {
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border-color: var(--rafraf-border);
+  box-shadow: var(--rafraf-shadow);
+}
+.sp-priority-rail { background: var(--rr-color-navy-900); border-color: var(--rafraf-border); }
+.sp-priority-rail a:hover,
+.sp-list a:hover,
+tr:hover td { background: var(--rafraf-raised); }
+.sp-quote-summary { color: var(--rafraf-primary-hover); background: var(--rafraf-raised); }
+.qform button[type='submit'] { color: white; background: var(--rafraf-primary); }
+.qform button[type='submit']:hover { background: var(--rafraf-primary-hover); }
+:root[data-theme='light'] .sp-sidebar { background: var(--rr-color-navy-900); }

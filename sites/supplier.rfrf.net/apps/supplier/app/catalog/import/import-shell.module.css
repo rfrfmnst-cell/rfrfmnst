@@ -1,0 +1,122 @@
+.page {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+
+.pageHeader {
+  width: min(1120px, 100%);
+  min-height: 104px;
+  margin-inline: auto;
+  padding: 10px 0 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.pageHeader > div {
+  display: grid;
+  gap: 4px;
+}
+
+.pageHeader p,
+.pageHeader a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--rafraf-color-icon-brand);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pageHeader h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  line-height: 1.3;
+}
+
+.pageHeader span {
+  color: var(--rafraf-color-text-secondary);
+}
+
+.pageHeader a {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface);
+  text-decoration: none;
+}
+
+.skeleton {
+  min-height: 680px;
+  display: grid;
+  place-items: center;
+}
+
+.skeleton > div {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  color: var(--rafraf-color-text-secondary);
+}
+
+.spinner {
+  animation: spin 900ms linear infinite;
+}
+
+.errorBoundary {
+  width: min(680px, 100%);
+  min-height: 340px;
+  margin: 80px auto;
+  padding: 36px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  text-align: center;
+  border: 1px solid var(--rafraf-color-border-danger);
+  border-radius: var(--rafraf-radius-20);
+  background: var(--rafraf-color-bg-danger-soft);
+}
+
+.errorBoundary > svg {
+  color: var(--rafraf-color-text-danger);
+}
+
+.errorBoundary p {
+  max-width: 500px;
+  color: var(--rafraf-color-text-secondary);
+}
+
+.errorBoundary button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-brand);
+  color: var(--rafraf-color-text-on-brand);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 800px) {
+  .pageHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.8s;
+  }
+}

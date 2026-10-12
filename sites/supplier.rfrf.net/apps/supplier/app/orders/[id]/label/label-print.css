@@ -1,0 +1,4 @@
+@media print {
+  .sp-sidebar { display: none !important; }
+  .sp-main { padding: 0 !important; max-width: none !important; }
+}

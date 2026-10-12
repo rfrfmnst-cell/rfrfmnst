@@ -1,0 +1,131 @@
+/*
+ * شريط التنقّل: ثلاثة أبناء كانوا يتنافسون على عرض واحد.
+ *
+ * الشعار و`.sp-side-bottom` لا ينكمشان، والقائمة وحدها تحمل `min-width: 0`،
+ * فتبتلع كل النقص. القياس على الشجرة الحيّة: القائمة تحتاج 1048px بينما يتاح
+ * لها 914px على 1440px و**124px على 390px** — أي أن «المستحقات» كان مخفياً
+ * على سطح المكتب، وستة من ثمانية روابط خارج الإطار على الجوال، بلا زر قائمة
+ * ولا ما يدلّ على أن الشريط يُمرَّر.
+ *
+ * جُرّبت نقاط قياس تحرّر مساحة للقائمة فبقي القصّ عند 1440 و900: ما دام
+ * الثلاثة في سطر واحد يظل العرض المتاح دالّةً في عرض الشاشة ناقص طرفين
+ * ثابتين. فالعلاج إزالة المنافسة لا معايرتها: القائمة تنزل إلى سطر كامل خاص
+ * بها دائماً (`سطر الشعار والخروج` فوقها)، فتصير مساحتها عرض الصفحة كله.
+ *
+ * وتحت 1080px لا تتّسع النصوص حتى في سطر كامل، فتُختصر الروابط إلى أيقوناتها.
+ */
+
+@media (max-width: 1500px) {
+  .sp-side-brand .rafraf-brand__descriptor,
+  .sp-side-bottom > a > span,
+  .sp-side-bottom > p > span {
+    display: none;
+  }
+
+  .sp-side-bottom > a,
+  .sp-side-bottom > p {
+    padding-inline: 10px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .sp-sidebar {
+    gap: 10px;
+    padding-inline: 16px;
+  }
+
+  .sp-side-brand {
+    width: 132px;
+  }
+
+  .sp-side-bottom > a,
+  .sp-side-bottom > p {
+    display: none;
+  }
+
+  .sp-main {
+    padding-inline: 18px;
+  }
+}
+
+@media (max-width: 680px) {
+  .rafraf-theme-toggle {
+    inset-block-end: 12px;
+    inset-inline-end: 12px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .rafraf-theme-toggle span {
+    display: none;
+  }
+
+  body:has(.sp-register) .sp-main {
+    padding: 28px 16px 64px;
+    align-content: start;
+  }
+
+  body:has(.sp-register) .sp-page-head {
+    margin-bottom: 16px;
+  }
+
+  .sp-register {
+    padding: 22px 18px;
+    border-radius: var(--rafraf-radius-16);
+  }
+
+  .sp-register .qgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-register .qgrid > label:first-child {
+    grid-column: auto;
+  }
+}
+
+@keyframes rafraf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rafraf-spinner {
+  animation: rafraf-spin 800ms linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/*
+ * أيقونات بلا نصّ حين لا تتّسع النصوص. الحدّ مقيس لا مقدَّر: الروابط الثمانية
+ * بنصوصها تشغل 1048px، والسطر المستقل يتيح عرض الصفحة ناقص 32px حشوة — أي أن
+ * النصوص تتّسع فوق 1080px وتضيق دونها. وبالأيقونات: 8×40 + 7×4 = 348px، وسطر
+ * الجوال على 390px يتيح 358px، فتظهر الثمانية كلها بلا تمرير.
+ *
+ * و`title` على كل رابط لأن الأيقونة وحدها لا تُفهم بصرياً؛ النص الداخلي يبقى
+ * كما هو فيظل الاسم المتاح لقارئ الشاشة سليماً.
+ */
+@media (max-width: 1080px) {
+  .sp-sidebar nav {
+    gap: 4px;
+  }
+
+  .sp-sidebar nav a {
+    width: 40px;
+    min-width: 40px;
+    padding: 8px 0;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0;
+  }
+}

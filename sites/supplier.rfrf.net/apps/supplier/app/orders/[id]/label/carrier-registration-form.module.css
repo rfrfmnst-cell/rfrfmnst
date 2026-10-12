@@ -1,0 +1,47 @@
+.form {
+  padding-top: 14px;
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--rafraf-color-border-subtle);
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.form input,
+.form select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 11px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: 9px;
+  background: var(--rafraf-color-bg-surface-raised);
+  color: var(--rafraf-color-text-primary);
+}
+
+.form input {
+  color: #111827;
+}
+.form small {
+  color: var(--rafraf-color-text-secondary);
+  line-height: 1.6;
+}
+
+.submit {
+  min-height: 44px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: 9px;
+  background: var(--rafraf-color-bg-surface-raised);
+  color: var(--rafraf-color-text-primary);
+  font-weight: 800;
+  cursor: pointer;
+}

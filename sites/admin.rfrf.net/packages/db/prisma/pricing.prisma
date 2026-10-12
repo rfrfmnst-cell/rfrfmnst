@@ -1,0 +1,61 @@
+// Pricing support models are separated from the canonical domain schema to
+// preserve the repository's ratcheted file-size architecture boundary.
+
+// Landed Cost formula components — verbatim from BUSINESS_RULES
+model LandedCost {
+  id                       String   @id @default(cuid())
+  quoteId                  String   @unique
+  quote                    Quote    @relation(fields: [quoteId], references: [id])
+  supplierPrice            Decimal  @db.Decimal(12, 2)
+  localShipping            Decimal  @default(0) @db.Decimal(12, 2)
+  intlShipping             Decimal  @default(0) @db.Decimal(12, 2)
+  customsEstimate          Decimal  @default(0) @db.Decimal(12, 2)
+  complianceCost           Decimal  @default(0) @db.Decimal(12, 2)
+  inspectionFee            Decimal  @default(0) @db.Decimal(12, 2)
+  paymentFee               Decimal  @default(0) @db.Decimal(12, 2)
+  packagingFee             Decimal  @default(0) @db.Decimal(12, 2)
+  riskBuffer               Decimal  @default(0) @db.Decimal(12, 2)
+  platformMargin           Decimal  @default(0) @db.Decimal(12, 2)
+  taxAmount                Decimal  @default(0) @db.Decimal(12, 2)
+  totalLandedCost          Decimal  @db.Decimal(12, 2)
+  currency                 String   @default("SAR")
+  // Rule 2 split — customer JSON is NEVER derived by exposing internal fields
+  customerVisibleBreakdown Json // part price, shipping, warranty, tax ONLY
+  internalCostBreakdown    Json // supplier cost, fees, risk buffer, margin, net profit — ADMIN ONLY
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  @@map("landed_costs")
+}
+
+model RecommendationResult {
+  id                     String   @id @default(cuid())
+  rfqItemId              String
+  rfqItem                RFQItem  @relation(fields: [rfqItemId], references: [id])
+  bestOverallQuoteId     String?
+  cheapestQuoteId        String?
+  fastestQuoteId         String?
+  highestWarrantyQuoteId String?
+  lowestRiskQuoteId      String?
+  explanationAr          String?
+  // Persist decision_score + full sub-score vector per quote (BUSINESS_RULES: auditable)
+  scoreVector            Json
+  createdAt              DateTime @default(now())
+
+  @@map("recommendation_results")
+}
+
+model RiskAssessment {
+  id              String    @id @default(cuid())
+  entityType      String // e.g. "quote" | "supplier" | "rfq_item"
+  entityId        String
+  riskLevel       RiskLevel
+  counterfeitRisk Float? // 0..1
+  complianceRisk  Float? // 0..1
+  reasons         Json?
+  assessedBy      ActorType @default(AI)
+  createdAt       DateTime  @default(now())
+
+  @@index([entityType, entityId])
+  @@map("risk_assessments")
+}

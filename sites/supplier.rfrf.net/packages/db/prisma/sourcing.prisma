@@ -1,0 +1,66 @@
+// External sourcing is kept in a separate Prisma schema file so the canonical
+// domain schema remains below the repository's ratcheted architecture ceiling.
+
+enum SourcingRunStatus {
+  RUNNING
+  DONE
+  FAILED
+}
+
+// Registry of external/global sources used for GLOBAL sourcing leads (derived)
+model SourceRegistry {
+  id         String              @id @default(cuid())
+  name       String
+  type       QuoteSourceType     @default(GLOBAL)
+  country    String?
+  url        String?
+  notes      String?
+  isActive   Boolean             @default(true)
+  candidates SourcingCandidate[]
+  quotes     Quote[]
+
+  @@map("source_registry")
+}
+
+model SourcingRun {
+  id         String              @id @default(cuid())
+  rfqItemId  String
+  rfqItem    RFQItem             @relation(fields: [rfqItemId], references: [id])
+  status     SourcingRunStatus   @default(RUNNING)
+  startedBy  String? // admin user id or SYSTEM
+  startedAt  DateTime            @default(now())
+  finishedAt DateTime?
+  notes      String?
+  candidates SourcingCandidate[]
+
+  @@index([rfqItemId, startedAt(sort: Desc), id(sort: Desc)])
+  @@map("sourcing_runs")
+}
+
+// Verbatim role: RAW sourcing result, NOT fully priced, NOT customer-selectable.
+// Fields (verbatim list): sourcing_run_id, source_type, supplier_ref, part_ref,
+// raw_price, availability, fitment_confidence, notes, status
+model SourcingCandidate {
+  id                String             @id @default(cuid())
+  sourcingRunId     String
+  sourcingRun       SourcingRun        @relation(fields: [sourcingRunId], references: [id])
+  sourceType        QuoteSourceType
+  supplierId        String? // supplier_ref (local)
+  supplier          Supplier?          @relation(fields: [supplierId], references: [id])
+  sourceRegistryId  String? // global lead source
+  sourceRegistry    SourceRegistry?    @relation(fields: [sourceRegistryId], references: [id])
+  inventoryId       String?
+  inventory         SupplierInventory? @relation(fields: [inventoryId], references: [id])
+  partRef           String? // free-form part reference as found at the source
+  rawPrice          Decimal?           @db.Decimal(12, 2)
+  currency          String?
+  availability      String?
+  fitmentConfidence Float?
+  notes             String?
+  status            CandidateStatus    @default(NEW)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  quote             Quote? // set when converted; never duplicate landed-cost fields here
+
+  @@map("sourcing_candidates")
+}

@@ -1,0 +1,87 @@
+.loadingHero,
+.loadingCards span,
+.loadingRows span {
+  border-radius: 14px;
+  background: linear-gradient(100deg, #eee9e1 20%, #faf8f3 40%, #eee9e1 60%);
+  background-size: 220% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.loadingHero {
+  height: 110px;
+}
+
+.loadingCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.loadingCards span {
+  height: 126px;
+}
+
+.loadingRows {
+  display: grid;
+  gap: 9px;
+}
+
+.loadingRows span {
+  height: 88px;
+}
+
+.fatal {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.fatal svg {
+  color: var(--rafraf-color-text-danger, #a6382c);
+}
+
+.fatal div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fatal a {
+  color: var(--rafraf-color-icon-brand, #126653);
+  font-weight: 800;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes shimmer {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadingHero,
+  .loadingCards span,
+  .loadingRows span {
+    animation: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .loadingCards {
+    grid-template-columns: 1fr;
+  }
+}

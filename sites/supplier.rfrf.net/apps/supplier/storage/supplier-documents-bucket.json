@@ -1,0 +1,6 @@
+{
+  "id": "supplier-documents",
+  "public": false,
+  "fileSizeLimit": 5242880,
+  "allowedMimeTypes": ["application/pdf", "image/jpeg", "image/png"]
+}

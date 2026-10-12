@@ -1,0 +1,408 @@
+/* بوابة موردي رفرف — نفس هوية لوحة العمليات (Iris + كحلي داكن) */
+:root {
+  --bg: #f5f6fb;
+  --surface: #ffffff;
+  --ink: #14163c;
+  --muted: #5b6178;
+  --line: #e4e6f1;
+  --primary: #5b5bd6;
+  --primary-deep: #4644b8;
+  --accent: #f5a623;
+  --success: #16a34a;
+  --success-bg: #e8f7ee;
+  --danger: #dc2626;
+  --danger-bg: #fdecec;
+  --sidebar: #101331;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mono {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+/* الهيكل: هيدر علوي بلا sidebar */
+.sp-header {
+  background: linear-gradient(180deg, #131740, var(--sidebar));
+  color: #dfe3fa;
+  padding: 1.1rem 1.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sp-brand {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.sp-brand span {
+  color: #9aa3ff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-inline-start: 0.3rem;
+}
+
+.sp-tag {
+  font-size: 0.8rem;
+  color: #8b93c8;
+}
+
+.sp-main {
+  padding: 1.4rem 1.6rem 3rem;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* الرأس */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.sub2 {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.back {
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* التنبيهات */
+.sp-alert {
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.sp-alert.ok {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.sp-alert.err {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* الكتل */
+.card-block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-block h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+
+.block-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.empty {
+  color: var(--muted);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+/* قائمة المنشآت */
+.sp-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.sp-list a {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 700;
+}
+
+.sp-list a:hover {
+  border-color: var(--primary);
+  color: var(--primary-deep);
+}
+
+.sp-list a span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* الجدول */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+th {
+  text-align: start;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+td {
+  padding: 0.65rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tr:hover td {
+  background: #fafbff;
+}
+
+.part {
+  max-width: 260px;
+  white-space: normal;
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  background: #eef0fb;
+  color: var(--primary-deep);
+}
+
+.status.s-DRAFT {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.status.s-QUOTES_READY {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.row-cta {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.sp-quoted {
+  color: var(--success);
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+/* النموذج */
+.sp-rfq-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.qgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.7rem 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.qform label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qform input,
+.qform select {
+  width: 100%;
+  font: inherit;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+}
+
+.qform button[type='submit'] {
+  font: inherit;
+  font-weight: 700;
+  border: 0;
+  border-radius: 9px;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+.qhint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.sp-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: #f4f3ff;
+  border: 1px solid #ddd9ff;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  margin-top: 0.7rem;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* صفحة الدخول */
+.login-wrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #131740, #101331);
+  padding: 1rem;
+}
+
+.login-card {
+  background: var(--surface, #fff);
+  border-radius: 16px;
+  padding: 2rem;
+  width: min(360px, 92vw);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 30%);
+}
+
+.login-brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary, #5b5bd6);
+}
+
+.login-brand span {
+  color: #9aa3ff;
+  font-size: 0.85rem;
+}
+
+.login-sub {
+  color: var(--muted, #5b6178);
+  font-size: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.login-card label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.login-card input {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--line, #e4e6f1);
+  border-radius: 10px;
+  font: inherit;
+  background: var(--bg, #f5f6fb);
+}
+
+.login-err {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.login-card button {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: var(--primary, #5b5bd6);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/*
+ * نص لقارئ الشاشة وحده. كان الصنف مستعملاً في الكتالوج بلا تعريف في أي ملف
+ * يحمّله التطبيق، فكان يُصيَّر مرئياً: عنوان البحث يطفو فوق حقله، و`legend`
+ * الحقول يبدو عنوان قسم. الإخفاء بالقصّ لا بـ`display:none` لأن الأخير يُخرج
+ * العنصر من شجرة الوصول فيضيع الاسم الذي وُضع أصلاً لأجله.
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

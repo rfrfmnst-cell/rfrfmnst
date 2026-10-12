@@ -1,0 +1,386 @@
+/* ── Supplier operations workspace ───────────────────────────────── */
+.supplier-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 246px minmax(0, 1fr);
+  background: #f6f8fb;
+}
+
+.sp-sidebar {
+  min-height: 100dvh;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background: #0b1e43;
+  border-inline-start: 1px solid rgb(255 255 255 / 8%);
+}
+
+.sp-side-brand {
+  min-height: 76px;
+  padding: 8px 10px;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  border-radius: 8px;
+  color: #cdd7ec;
+  background: #fff;
+}
+
+.sp-side-brand .rafraf-brand__descriptor {
+  color: #62708b;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.sp-sidebar nav {
+  margin-top: 24px;
+  display: grid;
+  gap: 4px;
+}
+
+.sp-sidebar nav a,
+.sp-side-bottom a {
+  min-height: 44px;
+  padding: 9px 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 7px;
+  color: rgb(255 255 255 / 68%);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.sp-sidebar nav a:hover,
+.sp-sidebar nav a.active,
+.sp-side-bottom a:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 9%);
+}
+
+.sp-sidebar nav a.active {
+  background: var(--primary);
+}
+
+.sp-side-bottom {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.sp-side-bottom p {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgb(255 255 255 / 48%);
+  font-size: 0.7rem;
+}
+
+.sp-main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 28px clamp(22px, 3vw, 44px) 64px;
+}
+
+.sp-page-head {
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e5ee;
+}
+
+.sp-page-head h1 {
+  margin-top: 3px;
+  font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+  letter-spacing: 0;
+}
+
+.sp-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.back {
+  min-height: 38px;
+  padding: 7px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #d9deea;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.sp-kpis {
+  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #dfe4ed;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.sp-kpis article {
+  min-width: 0;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px 9px;
+  color: var(--primary);
+  border-inline-end: 1px solid #e4e8f0;
+}
+
+.sp-kpis article:last-child {
+  border-inline-end: 0;
+}
+
+.sp-kpis article > span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.sp-kpis strong {
+  color: var(--ink);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.sp-kpis small {
+  grid-column: 2 / -1;
+  color: #8a91a5;
+  font-size: 0.68rem;
+}
+
+.card-block {
+  padding: 20px 22px;
+  border-color: #dfe4ed;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(25 42 74 / 4%);
+}
+
+.block-head {
+  align-items: center;
+}
+
+.block-head h2 {
+  margin-bottom: 0;
+}
+
+.sp-alert {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 7px;
+}
+
+.sp-offers-list {
+  margin-top: 14px;
+  display: grid;
+}
+
+.sp-offers-list article {
+  min-width: 0;
+  padding: 13px 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(260px, auto) auto;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sp-offers-list article:last-child {
+  border-bottom: 0;
+}
+
+.sp-offers-list article > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.sp-offers-list article strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sp-offers-list article .mono {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.sp-offer-metrics {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.sp-offer-metrics span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status.q-APPROVED,
+.status.q-SELECTED {
+  color: #087866;
+  background: #e7f8f3;
+}
+
+.status.q-REJECTED,
+.status.q-EXPIRED {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.sp-quoted,
+.qform button[type='submit'] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qform input,
+.qform select {
+  min-height: 44px;
+  border-radius: 7px;
+  background: #fbfcfe;
+}
+
+.qform input:focus,
+.qform select:focus {
+  border-color: var(--primary);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgb(91 91 214 / 9%);
+}
+
+.qform button[type='submit'] {
+  min-height: 42px;
+  justify-content: center;
+  border-radius: 7px;
+}
+
+.sp-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+
+.sp-list a {
+  border-radius: 7px;
+}
+
+.sp-pending-state {
+  max-width: 680px;
+  margin: 80px auto;
+  padding: 36px;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+body:has(.login-wrap) .sp-sidebar {
+  display: none;
+}
+
+body:has(.login-wrap) .supplier-shell {
+  display: block;
+}
+
+body:has(.login-wrap) .sp-main {
+  padding: 0;
+}
+
+.login-wrap {
+  min-height: 100dvh;
+  padding: 24px;
+  background: #f5f7fb;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  padding: 34px;
+  border: 1px solid #dce2ec;
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgb(16 35 68 / 13%);
+}
+
+.login-logo {
+  margin: 0 auto 12px;
+}
+
+.login-kicker {
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-top: 4px;
+  font-size: 1.55rem;
+  text-align: center;
+}
+
+.login-sub {
+  max-width: 310px;
+  margin: 8px auto 24px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.login-card label {
+  display: grid;
+  gap: 7px;
+}
+
+.login-card label > div {
+  min-height: 50px;
+  padding-inline: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8a93a6;
+  border: 1px solid #cfd7e5;
+  border-radius: 7px;
+  background: #fbfcff;
+}
+
+.login-card input {
+  height: 46px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+.login-card button {
+  min-height: 48px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.login-security {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}

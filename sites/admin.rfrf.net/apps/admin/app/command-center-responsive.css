@@ -1,0 +1,289 @@
+@media (max-width: 1180px) {
+  .ops-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .span-4,
+  .span-5,
+  .span-7 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 900px) {
+  .ops-shell {
+    display: block;
+  }
+
+  .ops-sidebar {
+    position: static;
+    min-height: 0;
+    padding: 10px 14px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ops-brand {
+    width: 132px;
+    min-height: 54px;
+  }
+
+  /*
+   * `.ops-brand span` محدِّد سلالة يطابق كل span داخل الشعار — بما فيها
+   * `span.rafraf-brand` نفسه وعلامته — لا وصف «مركز العمليات» وحده. قياس على
+   * الشجرة الحيّة عند 390px: `.ops-brand` صندوق 94×54 نصّه المرئي فارغ تماماً.
+   * فكان المشغّل يرى مربّعاً خالياً مكان الشعار، ويبتلع الصندوق 94px من عرض
+   * الشريط فوق ذلك.
+   */
+  .ops-brand-label,
+  .ops-side-card {
+    display: none;
+  }
+
+  /*
+   * الشريط كان ثلاثة أبناء يتنافسون على عرض واحد: الشعار وزر الخروج لا
+   * ينكمشان، والقائمة وحدها تحمل `min-width: 0` فتبتلع النقص. القياس قبل
+   * الإصلاح: عند 768px تقع «الاستثناءات» عند x=-18 و«التكاملات» عند x=-124،
+   * وعند 390px لا يتاح للقائمة إلا 203px — فبندان من سبعة خارج الإطار، ومنهما
+   * طابور الاستثناءات حيث تنتظر الحالات المحجوبة قراراً بشرياً.
+   *
+   * العلاج إزالة المنافسة لا معايرتها: سطر كامل خاص بالقائمة تحت الشعار.
+   */
+  .ops-sidebar {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .ops-sidebar nav {
+    order: 3;
+    flex: 1 0 100%;
+    min-width: 0;
+    margin: 0;
+    display: flex;
+    overflow-x: auto;
+    -webkit-mask-image: linear-gradient(
+      to left,
+      transparent 0,
+      #000 16px,
+      #000 calc(100% - 16px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to left,
+      transparent 0,
+      #000 16px,
+      #000 calc(100% - 16px),
+      transparent 100%
+    );
+  }
+
+  .ops-sidebar nav a {
+    flex: 0 0 auto;
+  }
+
+  .ops-mobile-logout {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .ops-mobile-logout button {
+    min-height: 42px;
+    padding: 8px 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: rgb(255 255 255 / 78%);
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 6px;
+    background: rgb(255 255 255 / 7%);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .ops-main {
+    padding: 28px 18px 52px;
+  }
+
+  .ops-topbar,
+  .ops-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-inline-start: 0;
+    border-top: 1px solid rgb(255 255 255 / 12%);
+  }
+
+  .ops-flow article {
+    border-top: 1px solid rgb(255 255 255 / 10%);
+  }
+}
+
+@media (max-width: 680px) {
+  .ops-sidebar nav a {
+    width: 42px;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .ops-mobile-logout button {
+    width: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .ops-mobile-logout span {
+    display: none;
+  }
+
+  .ops-kpi-grid,
+  .ops-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .span-4,
+  .span-5,
+  .span-7,
+  .span-12 {
+    grid-column: 1 / -1;
+  }
+
+  .ops-search {
+    min-width: 0;
+  }
+
+  .ops-request {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-request-meta {
+    justify-items: start;
+    text-align: start;
+  }
+
+  .ops-card,
+  .card,
+  .panel,
+  .detail-card,
+  .card-block,
+  .login-card {
+    padding: 20px;
+  }
+}
+
+.ops-priority-rail {
+  margin: 18px 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) repeat(3, minmax(180px, 0.7fr));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.ops-priority-heading {
+  padding: 22px 25px;
+  color: #fff;
+  background: var(--primary-deep);
+}
+.ops-priority-rail p {
+  margin: 0 0 5px;
+  color: #e9b27d;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+.ops-priority-rail h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+.ops-priority-rail a,
+.ops-priority-rail .ops-priority-disabled {
+  min-height: 104px;
+  padding: 17px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  border-inline-start: 1px solid var(--line);
+  background: var(--surface);
+  transition: background 0.18s ease;
+}
+.ops-priority-rail a:hover {
+  background: #f5f1e9;
+}
+.ops-priority-rail a > svg:first-child,
+.ops-priority-disabled > svg:first-child {
+  color: var(--accent);
+}
+.ops-priority-rail a > span,
+.ops-priority-disabled > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+.ops-priority-rail a strong,
+.ops-priority-disabled strong {
+  font-size: 0.88rem;
+}
+.ops-priority-rail a small,
+.ops-priority-disabled small {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+.ops-priority-rail a > svg:last-child {
+  margin-inline-start: auto;
+  color: var(--primary);
+}
+@media (max-width: 1120px) {
+  .ops-priority-rail {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ops-priority-heading {
+    grid-column: 1 / -1;
+  }
+  .ops-priority-rail > :nth-child(2) {
+    border-inline-start: 0;
+  }
+  .ops-priority-rail > :nth-child(4) {
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+@media (max-width: 680px) {
+  .ops-priority-rail {
+    grid-template-columns: 1fr;
+  }
+  .ops-priority-rail a,
+  .ops-priority-rail .ops-priority-disabled {
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+/*
+ * أيقونات بلا نصّ حين لا تتّسع النصوص. الحدّ مقيس لا مقدَّر: البنود السبعة
+ * بنصوصها تشغل ~765px، والسطر المستقل يتيح عرض الصفحة ناقص 28px حشوة — أي أن
+ * النصوص تتّسع فوق 800px وتضيق دونها. وبالأيقونات: 7×40 + 6×4 = 304px، وسطر
+ * الجوال على 390px يتيح 362px، فتظهر السبعة كلها بلا تمرير.
+ *
+ * و`title` على كل بند لأن الأيقونة وحدها لا تُفهم بصرياً؛ النص الداخلي يبقى
+ * كما هو فيظل الاسم المتاح لقارئ الشاشة سليماً.
+ */
+@media (max-width: 800px) {
+  .ops-sidebar nav {
+    gap: 4px;
+  }
+
+  .ops-sidebar nav a {
+    width: 40px;
+    min-width: 40px;
+    padding: 8px 0;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0;
+  }
+}

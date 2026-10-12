@@ -1,0 +1,166 @@
+/* Bridge remaining legacy portal selectors onto the V1.1 semantic palette. */
+.sp-page-head,
+.sp-kpis,
+.sp-kpis article,
+.card-block,
+.back,
+.sp-quote-details,
+.login-card,
+.login-card label > div,
+.qform input,
+.qform select,
+.qform textarea {
+  border-color: var(--rafraf-color-border-subtle);
+}
+
+.sp-kpis,
+.sp-kpis article,
+.card-block,
+.back,
+.sp-quote-details,
+.login-card {
+  color: var(--rafraf-color-text-primary);
+  background: var(--rafraf-color-bg-surface);
+}
+
+.login-wrap {
+  background:
+    radial-gradient(
+      70% 70% at 50% -10%,
+      color-mix(in srgb, var(--rafraf-color-bg-brand) 18%, transparent),
+      transparent 68%
+    ),
+    var(--rafraf-color-bg-canvas);
+}
+
+.login-card label > div,
+.qform input,
+.qform select,
+.qform textarea,
+.sp-quote-summary {
+  color: var(--rafraf-color-text-primary);
+  background: var(--rafraf-color-bg-surface-raised);
+}
+
+.login-card label > div > svg {
+  flex: 0 0 auto;
+  color: var(--rafraf-color-text-tertiary);
+}
+
+.login-card label > div > input {
+  flex: 1;
+  min-width: 0;
+}
+
+.login-code-input {
+  letter-spacing: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.login-back {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Public supplier registration uses the same focused shell as sign-in. */
+body:has(.sp-register) .sp-sidebar {
+  display: none;
+}
+
+body:has(.sp-register) .supplier-shell {
+  min-height: 100dvh;
+  display: block;
+}
+
+body:has(.sp-register) .sp-main {
+  min-height: 100dvh;
+  max-width: none;
+  padding: clamp(32px, 6vw, 80px) clamp(18px, 5vw, 72px);
+  display: grid;
+  align-content: center;
+}
+
+body:has(.sp-register) .sp-page-head,
+body:has(.sp-register) .sp-alert,
+.sp-register {
+  width: min(760px, 100%);
+  margin-inline: auto;
+}
+
+body:has(.sp-register) .sp-page-head {
+  margin-bottom: 20px;
+}
+
+body:has(.sp-register) .sp-page-head h1 {
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+}
+
+.sp-register {
+  padding: clamp(24px, 4vw, 40px);
+  border-color: var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-20);
+  background: var(--rafraf-color-bg-surface);
+  box-shadow: var(--rafraf-shadow-overlay);
+}
+
+.sp-register h2 {
+  margin-bottom: 22px;
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+}
+
+.sp-register .qgrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sp-register .qgrid > label:first-child {
+  grid-column: 1 / -1;
+}
+
+.sp-register .qform button[type='submit'] {
+  width: 100%;
+  min-height: 48px;
+  color: var(--rafraf-color-text-on-brand);
+}
+
+.sp-register .qform button[type='submit']:disabled {
+  color: var(--rafraf-color-text-tertiary);
+  background: var(--rafraf-color-bg-surface-interactive);
+  border: 1px solid var(--rafraf-color-border-default);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.sp-register .qform button[type='submit']:disabled:hover {
+  background: var(--rafraf-color-bg-surface-interactive);
+}
+
+.sp-register .qhint {
+  line-height: 1.8;
+}
+
+.sp-quote-summary:hover,
+.sp-priority-rail a:hover,
+tr:hover td {
+  background: var(--rafraf-color-bg-surface-interactive);
+}
+
+.status {
+  color: var(--rafraf-color-text-secondary);
+  background: var(--rafraf-color-bg-surface-interactive);
+}
+
+.status.q-APPROVED,
+.status.q-SELECTED {
+  color: var(--rafraf-color-text-success);
+  background: var(--rafraf-color-bg-success-soft);
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@rafraf/brand",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./styles.css": "./src/styles.css",
+    "./tokens": "./src/generated/tokens.ts",
+    "./assets/*": "./assets/*"
+  },
+  "files": [
+    "assets",
+    "src/generated",
+    "src/app-state.css",
+    "src/button.css",
+    "src/styles.css"
+  ],
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.mjs",
+    "check": "style-dictionary build --config style-dictionary.config.mjs && git diff --exit-code -- src/generated"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.1"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@rafraf/db",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "generate": "prisma generate",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "neon:verify": "node scripts/verify-neon-branch.mjs",
+    "runtime:provision": "node scripts/provision-runtime-role.mjs",
+    "session:mint": "node scripts/mint-ai-readiness-session.mjs",
+    "runtime:verify": "node scripts/verify-runtime-connection.mjs",
+    "schema:collect": "node scripts/collect-schema-manifest.mjs",
+    "schema:compare": "node scripts/compare-schema-manifests.mjs",
+    "reference:create": "node scripts/create-reference-database.mjs",
+    "partnumbers:import": "node scripts/import-part-numbers.mjs",
+    "evidence:collect": "node scripts/collect-database-evidence.mjs",
+    "rehearsal:behavior": "node --experimental-strip-types scripts/verify-rehearsal-behavior.mjs",
+    "studio": "prisma studio",
+    "format": "prisma format",
+    "validate": "prisma validate",
+    "seed": "ts-node --transpile-only prisma/seed.ts"
+  },
+  "prisma": {
+    "schema": "prisma",
+    "seed": "ts-node --transpile-only prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.0"
+  },
+  "devDependencies": {
+    "@rafraf/typescript-config": "workspace:*",
+    "prisma": "^6.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.2",
+    "@types/node": "^22.15.3"
+  }
+}

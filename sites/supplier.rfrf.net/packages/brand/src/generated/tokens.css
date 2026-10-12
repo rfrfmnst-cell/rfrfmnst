@@ -1,0 +1,62 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --rr-color-navy-800: #121D32;
+  --rr-color-navy-900: #0B1426;
+  --rr-color-navy-950: #07101F;
+  --rr-color-ivory-50: #FBF8F2;
+  --rr-color-ivory-100: #F4EEE4;
+  --rr-color-ivory-200: #E7DDCF;
+  --rr-color-violet-400: #8A78FF;
+  --rr-color-violet-500: #7160E8;
+  --rr-color-violet-600: #5E4ED4;
+  --rr-color-orange-400: #F6A354;
+  --rr-color-orange-500: #F28735;
+  --rr-color-orange-600: #DD6F20;
+  --rr-color-green-400: #39B88E;
+  --rr-color-green-500: #1D8A67;
+  --rr-color-green-600: #12694E;
+  --rr-color-red-500: #DF5B68;
+  --rr-color-slate-300: #B5BECC;
+  --rr-color-slate-400: #8D99AA;
+  --rr-color-slate-600: #566277;
+  --rr-color-white: #FFFFFF;
+  --rr-color-black: #000000;
+  --rr-space-1: 4px;
+  --rr-space-2: 8px;
+  --rr-space-3: 12px;
+  --rr-space-4: 16px;
+  --rr-space-5: 20px;
+  --rr-space-6: 24px;
+  --rr-space-8: 32px;
+  --rr-space-10: 40px;
+  --rr-space-12: 48px;
+  --rr-space-16: 64px;
+  --rr-space-20: 80px;
+  --rr-space-24: 96px;
+  --rr-radius-sm: 10px;
+  --rr-radius-md: 16px;
+  --rr-radius-lg: 24px;
+  --rr-radius-xl: 32px;
+  --rr-radius-pill: 999px;
+  --rr-motion-fast: 120ms;
+  --rr-motion-standard: 200ms;
+  --rr-motion-important: 320ms;
+  --rr-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --rr-shadow-dark: 0 24px 80px rgb(0 0 0 / 38%);
+  --rr-shadow-light: 0 24px 70px rgb(37 31 24 / 14%);
+  --rr-theme-dark-canvas: #07101F;
+  --rr-theme-dark-surface: #0B1426;
+  --rr-theme-dark-raised: #121D32;
+  --rr-theme-dark-text: #FBF8F2;
+  --rr-theme-dark-muted: #B5BECC;
+  --rr-theme-dark-border: #2A3549;
+  --rr-theme-light-canvas: #FBF8F2;
+  --rr-theme-light-surface: #FFFFFF;
+  --rr-theme-light-raised: #F4EEE4;
+  --rr-theme-light-text: #07101F;
+  --rr-theme-light-muted: #566277;
+  --rr-theme-light-border: #E7DDCF;
+}

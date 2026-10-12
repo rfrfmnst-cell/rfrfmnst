@@ -1,0 +1,42 @@
+{
+  "name": "rafraf",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Rafraf: Saudi B2B auto-parts sourcing and procurement platform",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prepare": "node scripts/setup-git-automation.mjs",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:e2e:chat": "playwright test tests/e2e/chat-launch.spec.ts",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "validate:architecture": "node scripts/validate-architecture.mjs",
+    "verify": "pnpm test:repository && pnpm test:deployment && pnpm validate:architecture && node scripts/validate-product-os-v1-1.mjs && pnpm check-types && pnpm lint && pnpm test && pnpm test:product-os && pnpm build",
+    "verify:push": "pnpm test:repository && pnpm test:deployment && pnpm validate:architecture && node scripts/validate-product-os-v1-1.mjs && pnpm check-types && pnpm lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test:product-os": "pnpm --filter @rafraf/shared build && node --test --experimental-strip-types tests/product-os/*.test.mjs",
+    "test:e2e:production-chat": "playwright test tests/e2e/production-chat.spec.ts",
+    "test:deployment": "node --test tests/deployment/*.test.mjs",
+    "test:repository": "node --test tests/repository/*.test.mjs",
+    "storage:migrate:filesystem": "node scripts/migrate-private-storage-to-filesystem.mjs",
+    "git:setup": "node scripts/setup-git-automation.mjs",
+    "build:hostinger": "node scripts/build-hostinger.mjs",
+    "start": "node hostinger-runtime/bootstrap.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@rafraf/eslint-config": "workspace:*",
+    "@rafraf/typescript-config": "workspace:*",
+    "prettier": "^3.2.5",
+    "turbo": "^2.10.4",
+    "vercel": "58.1.0"
+  },
+  "packageManager": "pnpm@11.6.0",
+  "engines": {
+    "node": "24.x"
+  }
+}

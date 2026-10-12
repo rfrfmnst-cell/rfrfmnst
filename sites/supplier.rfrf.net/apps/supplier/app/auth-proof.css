@@ -1,0 +1,44 @@
+.login-turnstile,
+.registration-turnstile {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.login-turnstile > span,
+.registration-turnstile > span {
+  display: block;
+  margin-top: 6px;
+  color: var(--danger);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.auth-mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 18px 0;
+  padding: 5px;
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 86%, var(--ink) 4%);
+}
+
+.auth-mode-switch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-mode-switch a[aria-current='page'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--ink) 10%, transparent);
+}

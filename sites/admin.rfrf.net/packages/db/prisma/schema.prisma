@@ -1,0 +1,1043 @@
+// Rafraf MVP — Prisma schema
+// Source of truth: docs/DATA_MODEL.md (34 entities, enums, indexes are copied VERBATIM).
+// Field lists beyond what DATA_MODEL specifies are the minimal viable design;
+// anything marked "derived" was not literally specified in the docs.
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"] // native = dev; rhel = Vercel serverless
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────── Enums (verbatim from DATA_MODEL) ───────────────────────────
+
+enum RFQStatus {
+  DRAFT
+  NEED_MORE_INFO
+  FITMENT_REVIEW
+  SOURCING_LOCAL
+  SOURCING_GLOBAL
+  QUOTES_READY
+  CUSTOMER_SELECTED
+  CONVERTED_TO_ORDER
+  CANCELLED
+}
+
+enum OrderStatus {
+  CREATED
+  AWAITING_CUSTOMER_CONFIRMATION
+  AWAITING_PAYMENT
+  PAID
+  ESCROW_HELD
+  AWAITING_SUPPLIER_CONFIRMATION
+  SUPPLIER_ACCEPTED
+  FITMENT_VERIFIED
+  READY_TO_SHIP
+  SHIPPED
+  IN_TRANSIT
+  CUSTOMS_REVIEW
+  OUT_FOR_DELIVERY
+  DELIVERED
+  COMPLAINT_WINDOW
+  CLOSED
+  PAYOUT_RELEASED
+  CANCELLED
+  REFUNDED
+  DISPUTED
+}
+
+enum QuoteSourceType {
+  LOCAL
+  GLOBAL
+}
+
+enum PartSensitivity {
+  LOW
+  MEDIUM
+  HIGH
+  RESTRICTED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  BLOCKED
+}
+
+enum SupplierStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  LIMITED
+  SUSPENDED
+  REJECTED
+}
+
+// SourcingCandidate.status — verbatim from DATA_MODEL "Entity role clarifications"
+enum CandidateStatus {
+  NEW
+  REVIEW
+  CONVERTED
+  REJECTED
+}
+
+// SASO certification scheme — verbatim from DATA_MODEL compliance-ready fields
+enum SasoScheme {
+  SCHEME_1A // genuine/OEM, no factory audit
+  SCHEME_3 // aftermarket, factory audit required
+}
+
+// Fitment source — verbatim options from FITMENT_STRATEGY / DATA_MODEL
+enum FitmentSource {
+  CATALOG
+  INTERNAL
+}
+
+// ─────────────────────────── Enums (derived, minimal) ───────────────────────────
+
+enum RoleName {
+  CUSTOMER
+  SUPPLIER
+  ADMIN
+}
+
+enum PartNumberType {
+  OEM
+  AFTERMARKET
+  CROSS_REFERENCE
+}
+
+enum PartCondition {
+  NEW
+  USED
+  REFURBISHED
+}
+
+enum InventoryRowStatus {
+  VALID
+  FLAGGED
+  REJECTED
+}
+
+enum RfqChannel {
+  WEB
+  WHATSAPP
+  ADMIN
+}
+
+enum EvidenceType {
+  IMAGE
+  DOCUMENT
+  AUDIO
+  FORM_SCAN
+}
+
+enum QuoteStatus {
+  DRAFT
+  ACTIVE
+  APPROVED
+  SELECTED
+  EXPIRED
+  REJECTED
+}
+
+enum RecommendationLabel {
+  BEST_OVERALL
+  CHEAPEST
+  FASTEST
+  HIGHEST_WARRANTY
+  LOWEST_RISK
+}
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  CAPTURED
+  HELD
+  RELEASED
+  REFUNDED
+  FAILED
+  CANCELLED
+}
+
+enum PaymentRefundStatus {
+  REQUESTED
+  PROCESSING
+  PROVIDER_PENDING
+  COMPLETED
+  FAILED_RETRYABLE
+  FAILED_FINAL
+}
+
+enum EscrowEntryType {
+  HOLD
+  RELEASE
+  REFUND
+  FEE
+  PAYOUT
+  ADJUSTMENT
+}
+
+enum PayoutStatus {
+  PENDING
+  SCHEDULED
+  APPROVED
+  SUBMITTING
+  SUBMITTED
+  PAID
+  FAILED_RETRYABLE
+  FAILED_FINAL
+  ON_HOLD
+  CANCELLED
+}
+
+enum EInvoiceStatus {
+  CREATED
+  PENDING
+  ACCEPTED
+  REPORTED
+  REJECTED
+  FAILED_RETRYABLE
+  FAILED_FINAL
+}
+
+enum ShipmentStatus {
+  PENDING
+  LABEL_CREATED
+  PICKED_UP
+  IN_TRANSIT
+  CUSTOMS
+  OUT_FOR_DELIVERY
+  DELIVERED
+  RETURNED
+  LOST
+}
+
+enum CertificateStatus {
+  NOT_REQUIRED
+  PENDING
+  SUBMITTED
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum ComplianceReviewStatus {
+  NOT_REQUIRED
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum DisputeStatus {
+  OPEN
+  UNDER_REVIEW
+  RESOLVED_REFUND
+  RESOLVED_REJECTED
+  CLOSED
+}
+
+enum ActorType {
+  SYSTEM
+  CUSTOMER
+  SUPPLIER
+  ADMIN
+  AI
+}
+
+enum AIDecisionKind {
+  UNDERSTAND_REQUEST
+  EXTRACT_VIN
+  EXTRACT_OEM
+  MATCH_FITMENT
+  SCORE_VENDOR
+  SCORE_RISK
+  RECOMMEND_QUOTES
+}
+
+enum ChatThreadStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum ChatMessageRole {
+  SYSTEM
+  USER
+  ASSISTANT
+}
+
+enum AIChatRunStatus {
+  ACTIVE
+  COMPLETED
+  FAILED
+  ABORTED
+  EXPIRED
+}
+
+enum AdminMfaVerificationStatus {
+  IN_FLIGHT
+  INVALID
+  EXPIRED
+  UNAVAILABLE
+  VERIFIED
+  NOT_ALLOWED
+  SUPERSEDED
+}
+
+// ─────────────────────────── Identity & access ───────────────────────────
+
+model User {
+  id                           String        @id @default(cuid())
+  phone                        String?       @unique // verified E.164 identity; optional for email/Google customers
+  phoneVerifiedAt              DateTime?
+  email                        String?       @unique
+  emailNormalized              String?       @unique
+  emailVerifiedAt              DateTime?
+  emailVerificationTokenHash   String?       @unique
+  emailVerificationBrowserHash String?
+  emailVerificationExpiresAt   DateTime?
+  googleSubject                String?       @unique
+  passwordHash                 String? // customer scrypt or controlled back-office PBKDF2
+  adminPermissions             String[]      @default([])
+  fullName                     String?
+  roleId                       String
+  role                         Role          @relation(fields: [roleId], references: [id])
+  isActive                     Boolean       @default(true)
+  lastLoginAt                  DateTime?
+  createdAt                    DateTime      @default(now())
+  updatedAt                    DateTime      @updatedAt
+  customer                     Customer?
+  supplierUser                 SupplierUser?
+
+  @@map("users")
+}
+
+model CustomerRegistrationIntent {
+  id                           String   @id @default(cuid())
+  email                        String
+  emailNormalized              String
+  fullName                     String
+  passwordHash                 String
+  phone                        String?
+  emailVerificationTokenHash   String   @unique
+  emailVerificationBrowserHash String
+  emailVerificationExpiresAt   DateTime
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime @updatedAt
+
+  @@index([emailNormalized])
+  @@index([phone])
+  @@index([emailVerificationExpiresAt])
+  @@map("customer_registration_intents")
+}
+
+// Durable reservation prevents concurrent MFA attempts bypassing the ceiling.
+model AdminMfaVerificationAttempt {
+  id           String                     @id @default(cuid())
+  challengeKey String
+  userId       String
+  sequence     Int
+  status       AdminMfaVerificationStatus @default(IN_FLIGHT)
+  completedAt  DateTime?
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @updatedAt
+
+  @@unique([challengeKey, sequence])
+  @@index([status, createdAt])
+  @@map("admin_mfa_verification_attempts")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        RoleName @unique
+  description String?
+  users       User[]
+
+  @@map("roles")
+}
+
+// ─────────────────────────── Customer domain ───────────────────────────
+
+model Customer {
+  id          String            @id @default(cuid())
+  userId      String            @unique
+  user        User              @relation(fields: [userId], references: [id])
+  fullName    String
+  city        String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  vehicles    CustomerVehicle[]
+  addresses   CustomerAddress[]
+  rfqs        RFQ[]
+  orders      Order[]
+  disputes    Dispute[]
+  chatThreads ChatThread[]
+  aiChatRuns  AIChatRun[]
+
+  @@map("customers")
+}
+
+model CustomerVehicle {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+  make       String
+  model      String
+  year       Int
+  engine     String?
+  marketSpec String? // e.g. GCC
+  vin        String?
+  plate      String?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  rfqs       RFQ[]
+
+  @@index([vin]) // verbatim: customer_vehicles(vin)
+  @@map("customer_vehicles")
+}
+
+model CustomerAddress {
+  id               String   @id @default(cuid())
+  customerId       String
+  customer         Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  label            String
+  city             String
+  district         String
+  street           String
+  buildingNumber   String
+  postalCode       String
+  additionalNumber String?
+  unitNumber       String?
+  isDefault        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([customerId, isDefault, createdAt])
+  @@map("customer_addresses")
+}
+
+model ChatThread {
+  id         String           @id @default(cuid())
+  customerId String
+  customer   Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  rfqId      String?
+  rfq        RFQ?             @relation(fields: [rfqId], references: [id], onDelete: SetNull)
+  title      String           @default("محادثة جديدة")
+  draft      Json             @default("{}")
+  status     ChatThreadStatus @default(ACTIVE)
+  archivedAt DateTime?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  messages   ChatMessage[]
+
+  @@index([customerId, updatedAt])
+  @@index([rfqId])
+  @@map("chat_threads")
+}
+
+model ChatMessage {
+  id         String          @id @default(cuid())
+  threadId   String
+  thread     ChatThread      @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  externalId String
+  role       ChatMessageRole
+  parts      Json
+  metadata   Json?
+  createdAt  DateTime        @default(now())
+
+  @@unique([threadId, externalId])
+  @@index([threadId, createdAt])
+  @@map("chat_messages")
+}
+
+model AIChatRun {
+  id                 String          @id @default(cuid())
+  customerId         String
+  customer           Customer        @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  threadId           String
+  requestKey         String          @unique
+  ipHash             String
+  status             AIChatRunStatus @default(ACTIVE)
+  blockReason        String?
+  provider           String
+  model              String
+  inputTokens        Int?
+  outputTokens       Int?
+  totalTokens        Int?
+  expiresAt          DateTime
+  finishedAt         DateTime?
+  providerAcceptedAt DateTime?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  @@index([customerId, createdAt])
+  @@index([ipHash, createdAt])
+  @@index([status, expiresAt])
+  @@index([createdAt])
+  @@index([providerAcceptedAt])
+  @@map("ai_chat_runs")
+}
+
+// ─────────────────────────── Parts catalog & fitment ───────────────────────────
+
+model PartCategory {
+  id           String          @id @default(cuid())
+  slug         String          @unique
+  nameAr       String
+  nameEn       String?
+  parentId     String?
+  parent       PartCategory?   @relation("CategoryTree", fields: [parentId], references: [id])
+  children     PartCategory[]  @relation("CategoryTree")
+  sensitivity  PartSensitivity @default(LOW)
+  isRestricted Boolean         @default(false) // BUSINESS_RULES restricted MVP categories
+  parts        Part[]
+
+  @@map("part_categories")
+}
+
+model Part {
+  id              String              @id @default(cuid())
+  categoryId      String
+  category        PartCategory        @relation(fields: [categoryId], references: [id])
+  nameAr          String
+  nameEn          String?
+  description     String?
+  sensitivity     PartSensitivity     @default(LOW)
+  isRestricted    Boolean             @default(false)
+  requiresOem     Boolean             @default(false)
+  imageUrl        String?
+  // Compliance-ready fields (design now, integrate later) — verbatim from DATA_MODEL
+  hsCode          String?
+  saberRequired   Boolean             @default(false)
+  sasoScheme      SasoScheme?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  numbers         PartNumber[]
+  compatibilities PartCompatibility[]
+  inventory       SupplierInventory[]
+  rfqItems        RFQItem[]
+  quotes          Quote[]
+  complianceCases ComplianceCase[]
+
+  @@map("parts")
+}
+
+model PartNumber {
+  id     String         @id @default(cuid())
+  partId String
+  part   Part           @relation(fields: [partId], references: [id])
+  number String
+  type   PartNumberType @default(OEM)
+  brand  String?
+
+  @@index([number]) // verbatim: part_numbers(number)
+  @@map("part_numbers")
+}
+
+// Verbatim shape from DATA_MODEL:
+// PartCompatibility(part_id, make, model, year_from, year_to, engine, market_spec, confidence, source, verified_by)
+model PartCompatibility {
+  id         String        @id @default(cuid())
+  partId     String
+  part       Part          @relation(fields: [partId], references: [id])
+  make       String
+  model      String
+  yearFrom   Int
+  yearTo     Int
+  engine     String?
+  marketSpec String?
+  confidence Float // fitment_confidence < 0.85 MUST trigger human review (Rule 5)
+  source     FitmentSource @default(INTERNAL) // D2 resolved: incremental INTERNAL build
+  verifiedBy String?
+  verifiedAt DateTime?
+  notes      String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([make, model])
+  @@map("part_compatibilities")
+}
+
+// ─────────────────────────── Supplier domain ───────────────────────────
+
+model Supplier {
+  id                         String              @id @default(cuid())
+  businessName               String
+  crNumber                   String? // commercial registration
+  status                     SupplierStatus      @default(PENDING)
+  city                       String?
+  countryCode                String              @default("SA") @db.Char(2)
+  contactPhone               String              @unique
+  contactEmail               String?
+  payoutBeneficiaryReference String?
+  score                      Int                 @default(70) // supplier_score 0..100 (vendor_score = score/100)
+  returnRate                 Float               @default(0) // returns / orders, 0..1
+  slaOnTimeRate              Float?
+  notes                      String?
+  createdAt                  DateTime            @default(now())
+  updatedAt                  DateTime            @updatedAt
+  users                      SupplierUser[]
+  documents                  SupplierDocument[]
+  warehouses                 SupplierWarehouse[]
+  inventory                  SupplierInventory[]
+  candidates                 SourcingCandidate[]
+  quotes                     Quote[]
+  orders                     Order[]
+  payouts                    SupplierPayout[]
+  escrow                     EscrowLedgerEntry[]
+  @@unique([countryCode, crNumber])
+  @@map("suppliers")
+}
+model SupplierUser {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id])
+  position   String?
+  isOwner    Boolean  @default(false)
+
+  @@map("supplier_users")
+}
+
+model SupplierDocument {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  type       String // CR, VAT certificate, bank letter... (derived)
+  fileUrl    String
+  status     String   @default("PENDING")
+  createdAt  DateTime @default(now())
+
+  @@map("supplier_documents")
+}
+
+model SupplierWarehouse {
+  id             String              @id @default(cuid())
+  supplierId     String
+  supplier       Supplier            @relation(fields: [supplierId], references: [id])
+  name           String
+  city           String
+  district       String?
+  street         String?
+  buildingNumber String?
+  postalCode     String?
+  addressLine    String?
+  isDefault      Boolean             @default(false)
+  inventory      SupplierInventory[]
+
+  @@map("supplier_warehouses")
+}
+
+model SupplierInventory {
+  id             String              @id @default(cuid())
+  supplierId     String
+  supplier       Supplier            @relation(fields: [supplierId], references: [id])
+  warehouseId    String?
+  warehouse      SupplierWarehouse?  @relation(fields: [warehouseId], references: [id])
+  partId         String?
+  part           Part?               @relation(fields: [partId], references: [id])
+  partNumber     String // as uploaded; may not match a known Part yet
+  brand          String?
+  condition      PartCondition       @default(NEW)
+  quantity       Int                 @default(0)
+  price          Decimal             @db.Decimal(12, 2)
+  currency       String              @default("SAR")
+  warrantyMonths Int                 @default(0)
+  leadTimeDays   Int                 @default(0)
+  rowStatus      InventoryRowStatus  @default(VALID) // invalid upload rows are rejected or flagged
+  uploadBatchId  String?
+  isActive       Boolean             @default(true)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  candidates     SourcingCandidate[]
+
+  @@index([partNumber]) // verbatim: supplier_inventory(part_number)
+  @@index([supplierId, partId]) // verbatim: supplier_inventory(supplier_id, part_id)
+  @@map("supplier_inventory")
+}
+
+// ─────────────────────────── RFQ & sourcing ───────────────────────────
+
+model RFQ {
+  id          String           @id @default(cuid())
+  code        String           @unique // e.g. RFQ-2506178 (API_SPEC response shape)
+  customerId  String
+  customer    Customer         @relation(fields: [customerId], references: [id])
+  vehicleId   String?
+  vehicle     CustomerVehicle? @relation(fields: [vehicleId], references: [id])
+  status      RFQStatus        @default(DRAFT)
+  channel     RfqChannel       @default(WEB)
+  notes       String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  items       RFQItem[]
+  evidence    RFQEvidence[]
+  orders      Order[]
+  chatThreads ChatThread[]
+
+  @@map("rfqs")
+}
+
+model RFQItem {
+  id                  String                 @id @default(cuid())
+  rfqId               String
+  rfq                 RFQ                    @relation(fields: [rfqId], references: [id])
+  partId              String?
+  part                Part?                  @relation(fields: [partId], references: [id])
+  freeTextAr          String? // customer wording before AI/human normalization
+  oemNumber           String?
+  quantity            Int                    @default(1)
+  fitmentConfidence   Float?
+  humanReviewRequired Boolean                @default(false)
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  evidence            RFQEvidence[]
+  sourcingRuns        SourcingRun[]
+  quotes              Quote[]
+  recommendations     RecommendationResult[]
+
+  @@map("rfq_items")
+}
+
+model RFQEvidence {
+  id         String       @id @default(cuid())
+  rfqId      String
+  rfq        RFQ          @relation(fields: [rfqId], references: [id])
+  rfqItemId  String?
+  rfqItem    RFQItem?     @relation(fields: [rfqItemId], references: [id])
+  type       EvidenceType @default(IMAGE)
+  fileUrl    String?
+  storageKey String?
+  uploadedBy String?
+  createdAt  DateTime     @default(now())
+
+  @@index([storageKey])
+  @@map("rfq_evidence")
+}
+
+// ─────────────────────────── Quotes, pricing, recommendation ───────────────────────────
+
+// Verbatim role: FULLY PRICED, customer-selectable offer, created by converting
+// a candidate through the landed-cost calculator.
+model Quote {
+  id                String                @id @default(cuid())
+  code              String                @unique // e.g. Q-1001
+  rfqItemId         String
+  rfqItem           RFQItem               @relation(fields: [rfqItemId], references: [id])
+  candidateId       String?               @unique
+  candidate         SourcingCandidate?    @relation(fields: [candidateId], references: [id])
+  sourceType        QuoteSourceType
+  supplierId        String?
+  supplier          Supplier?             @relation(fields: [supplierId], references: [id])
+  sourceRegistryId  String?
+  sourceRegistry    SourceRegistry?       @relation(fields: [sourceRegistryId], references: [id])
+  partId            String?
+  part              Part?                 @relation(fields: [partId], references: [id])
+  finalPrice        Decimal               @db.Decimal(12, 2) // customer-facing final price (Rule 2)
+  currency          String                @default("SAR")
+  deliveryDaysMin   Int?
+  deliveryDaysMax   Int?
+  warrantyMonths    Int                   @default(0)
+  fitmentConfidence Float?
+  riskLevel         RiskLevel             @default(LOW)
+  decisionScore     Float? // normalized engine output; ceiling is 0.88 (BUSINESS_RULES)
+  labels            RecommendationLabel[]
+  status            QuoteStatus           @default(DRAFT)
+  expiresAt         DateTime?
+  approvedBy        String?
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  landedCost        LandedCost?
+  order             Order?
+
+  @@index([rfqItemId, sourceType]) // verbatim: quotes(rfq_item_id, source_type)
+  @@index([rfqItemId, decisionScore]) // review memo recommendation
+  @@map("quotes")
+}
+
+// ─────────────────────────── Orders & fulfillment ───────────────────────────
+
+model Order {
+  id                    String                 @id @default(cuid())
+  code                  String                 @unique
+  customerId            String
+  customer              Customer               @relation(fields: [customerId], references: [id])
+  rfqId                 String?                @unique
+  rfq                   RFQ?                   @relation(fields: [rfqId], references: [id])
+  quoteId               String                 @unique
+  quote                 Quote                  @relation(fields: [quoteId], references: [id])
+  supplierId            String?
+  supplier              Supplier?              @relation(fields: [supplierId], references: [id])
+  status                OrderStatus            @default(CREATED)
+  totalAmount           Decimal                @db.Decimal(12, 2)
+  currency              String                 @default("SAR")
+  shippingAddress       Json?
+  // تسليم موثّق من المورد، وتأكيد استلام صريح من العميل. الأول يفتح نافذة
+  // الشكوى، والثاني يختصرها. يبقيان منفصلين لأن من يشحن ليس من يستلم.
+  deliveredAt           DateTime?
+  customerConfirmedAt   DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  events                OrderEvent[]
+  payments              Payment[]
+  paymentRefunds        PaymentRefund[]
+  shipments             Shipment[]
+  escrow                EscrowLedgerEntry[]
+  payouts               SupplierPayout[]
+  invoice               Invoice?
+  disputes              Dispute[]
+  complianceCases       ComplianceCase[]
+  providerWebhookEvents ProviderWebhookEvent[]
+
+  @@index([customerId, status]) // verbatim: orders(customer_id, status)
+  @@index([status, deliveredAt]) // كنس التسوية يقرأ النوافذ المنتهية وحدها
+  @@map("orders")
+}
+
+model OrderEvent {
+  id         String       @id @default(cuid())
+  orderId    String
+  order      Order        @relation(fields: [orderId], references: [id])
+  fromStatus OrderStatus?
+  toStatus   OrderStatus
+  actorType  ActorType    @default(SYSTEM)
+  actorId    String?
+  note       String?
+  createdAt  DateTime     @default(now())
+
+  @@index([orderId])
+  @@map("order_events")
+}
+
+model Payment {
+  id                String              @id @default(cuid())
+  orderId           String
+  order             Order               @relation(fields: [orderId], references: [id])
+  provider          String              @default("MOCK") // PaymentProvider abstraction; EdfaPay hosted checkout = D6
+  status            PaymentStatus       @default(PENDING)
+  amount            Decimal             @db.Decimal(12, 2)
+  currency          String              @default("SAR")
+  externalRef       String?
+  providerOrderCode String?             @unique
+  failureCode       String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  escrowEntries     EscrowLedgerEntry[]
+  refunds           PaymentRefund[]
+
+  @@unique([provider, externalRef]) // providers retry webhooks; a replay must not create a second row
+  @@index([orderId, status]) // verbatim: payments(order_id, status)
+  @@map("payments")
+}
+
+model PaymentRefund {
+  id          String              @id @default(cuid())
+  paymentId   String
+  payment     Payment             @relation(fields: [paymentId], references: [id])
+  orderId     String
+  order       Order               @relation(fields: [orderId], references: [id])
+  status      PaymentRefundStatus @default(REQUESTED)
+  amount      Decimal             @db.Decimal(12, 2)
+  currency    String              @default("SAR")
+  requestedBy String
+  reasonCode  String?
+  externalRef String?             @unique
+  failureCode String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  // الإصدار الأول: استرداد كامل واحد دائم غير قابل للتكرار لكل دفعة.
+  @@unique([paymentId])
+  @@index([status, updatedAt])
+  @@map("payment_refunds")
+}
+
+model EscrowLedgerEntry {
+  id         String          @id @default(cuid())
+  orderId    String?
+  order      Order?          @relation(fields: [orderId], references: [id])
+  paymentId  String?
+  payment    Payment?        @relation(fields: [paymentId], references: [id])
+  supplierId String?
+  supplier   Supplier?       @relation(fields: [supplierId], references: [id])
+  entryType  EscrowEntryType
+  amount     Decimal         @db.Decimal(12, 2) // signed by convention: HOLD +, RELEASE/REFUND −
+  currency   String          @default("SAR")
+  note       String?
+  createdBy  String?
+  createdAt  DateTime        @default(now())
+
+  @@index([orderId])
+  @@map("escrow_ledger_entries")
+}
+
+model SupplierPayout {
+  id                   String       @id @default(cuid())
+  supplierId           String
+  supplier             Supplier     @relation(fields: [supplierId], references: [id])
+  orderId              String?
+  order                Order?       @relation(fields: [orderId], references: [id])
+  amount               Decimal      @db.Decimal(12, 2)
+  currency             String       @default("SAR")
+  status               PayoutStatus @default(PENDING)
+  scheduledAt          DateTime?
+  provider             String?
+  idempotencyKey       String?      @unique
+  beneficiaryReference String?
+  makerId              String?
+  checkerId            String?
+  approvedAt           DateTime?
+  submittedAt          DateTime?
+  paidAt               DateTime?
+  reference            String?
+  externalRef          String?      @unique
+  failureCode          String?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  @@map("supplier_payouts")
+}
+
+model Shipment {
+  id                  String         @id @default(cuid())
+  orderId             String
+  order               Order          @relation(fields: [orderId], references: [id])
+  provider            String         @default("MOCK") // ShippingProvider abstraction
+  idempotencyKey      String?        @unique
+  externalOrderId     String?
+  trackingNumber      String?
+  labelUrl            String?
+  status              ShipmentStatus @default(PENDING)
+  isInternational     Boolean        @default(false)
+  shippedAt           DateTime?
+  deliveredAt         DateTime?
+  lastProviderEventAt DateTime?
+  eventsLog           Json?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  @@index([trackingNumber]) // verbatim: shipments(tracking_number)
+  @@map("shipments")
+}
+
+model ProviderWebhookEvent {
+  id                String    @id @default(cuid())
+  provider          String
+  eventId           String    @unique
+  externalOrderCode String
+  kind              String
+  occurredAt        DateTime?
+  payload           Json
+  orderId           String?
+  order             Order?    @relation(fields: [orderId], references: [id])
+  receivedAt        DateTime  @default(now())
+
+  @@index([provider, externalOrderCode, receivedAt])
+  @@map("provider_webhook_events")
+}
+
+// ─────────────────────────── Compliance, billing, disputes ───────────────────────────
+
+// Compliance-ready fields — verbatim from DATA_MODEL (SABER mandatory since Jan 2025)
+model ComplianceCase {
+  id            String                 @id @default(cuid())
+  orderId       String?
+  order         Order?                 @relation(fields: [orderId], references: [id])
+  partId        String?
+  part          Part?                  @relation(fields: [partId], references: [id])
+  hsCode        String?
+  saberRequired Boolean                @default(false)
+  sasoScheme    SasoScheme?
+  pcocStatus    CertificateStatus      @default(NOT_REQUIRED)
+  scocStatus    CertificateStatus      @default(NOT_REQUIRED)
+  reviewStatus  ComplianceReviewStatus @default(PENDING)
+  assignedTo    String?
+  notes         String?
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+
+  @@map("compliance_cases")
+}
+
+model Invoice {
+  id               String         @id @default(cuid())
+  orderId          String         @unique
+  order            Order          @relation(fields: [orderId], references: [id])
+  number           String         @unique
+  amount           Decimal        @db.Decimal(12, 2)
+  taxAmount        Decimal        @default(0) @db.Decimal(12, 2)
+  currency         String         @default("SAR")
+  pdfUrl           String?
+  provider         String?
+  invoiceUuid      String?        @unique
+  invoiceHash      String?
+  idempotencyKey   String?        @unique
+  externalRef      String?        @unique
+  submissionStatus EInvoiceStatus @default(CREATED)
+  submittedAt      DateTime?
+  failureCode      String?
+  issuedAt         DateTime       @default(now())
+
+  @@map("invoices")
+}
+
+model Dispute {
+  id             String        @id @default(cuid())
+  orderId        String
+  order          Order         @relation(fields: [orderId], references: [id])
+  customerId     String
+  customer       Customer      @relation(fields: [customerId], references: [id])
+  reason         String
+  description    String?
+  status         DisputeStatus @default(OPEN)
+  resolutionNote String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@map("disputes")
+}
+
+// ─────────────────────────── Audit & AI ───────────────────────────
+
+model AuditLog {
+  id         String    @id @default(cuid())
+  actorId    String?
+  actorType  ActorType @default(SYSTEM)
+  action     String // e.g. "quote.approve", "supplier.status.change"
+  entityType String
+  entityId   String
+  before     Json?
+  after      Json?
+  ip         String?
+  createdAt  DateTime  @default(now())
+
+  @@index([entityType, entityId]) // verbatim: audit_logs(entity_type, entity_id)
+  @@index([action, entityType, entityId, createdAt])
+  @@map("audit_logs")
+}
+
+// AI output MUST be structured JSON (DATA_MODEL) — never natural language only
+model AIDecision {
+  id                  String         @id @default(cuid())
+  kind                AIDecisionKind
+  entityType          String // e.g. "rfq" | "rfq_item" | "quote" | "supplier"
+  entityId            String
+  input               Json?
+  output              Json // structured shape per DATA_MODEL example
+  model               String? // e.g. claude model id
+  confidence          Float?
+  humanReviewRequired Boolean        @default(false)
+  createdAt           DateTime       @default(now())
+
+  @@index([entityType, entityId]) // review memo recommendation: AIDecision(entity)
+  @@map("ai_decisions")
+}

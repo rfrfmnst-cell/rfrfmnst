@@ -1,0 +1,36 @@
+{
+  "name": "supplier",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack --port 3002",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint app lib proxy.ts --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "storage:provision": "node scripts/provision-supplier-documents-bucket.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1117.0",
+    "@rafraf/brand": "workspace:*",
+    "@rafraf/db": "workspace:*",
+    "@rafraf/shared": "workspace:*",
+    "@rafraf/ui": "workspace:*",
+    "@supabase/supabase-js": "^2.112.2",
+    "@vercel/blob": "2.8.0",
+    "lucide-react": "^0.468.0",
+    "next": "16.3.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@rafraf/eslint-config": "workspace:*",
+    "@rafraf/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "eslint": "^9.31.0",
+    "typescript": "5.8.2"
+  }
+}

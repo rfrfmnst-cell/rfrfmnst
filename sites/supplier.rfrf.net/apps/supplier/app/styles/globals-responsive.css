@@ -1,0 +1,79 @@
+@media (max-width: 900px) {
+  .supplier-shell {
+    display: block;
+  }
+
+  .sp-sidebar {
+    min-height: 0;
+    height: auto;
+    padding: 10px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sp-side-brand {
+    min-height: 52px;
+    width: 130px;
+  }
+
+  .sp-side-brand .rafraf-brand__descriptor,
+  .sp-side-bottom {
+    display: none;
+  }
+
+  .sp-sidebar nav {
+    min-width: 0;
+    margin: 0;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .sp-sidebar nav a {
+    flex: 0 0 auto;
+  }
+
+  .sp-main {
+    padding: 24px 18px 48px;
+  }
+}
+
+@media (max-width: 620px) {
+  .sp-sidebar nav a {
+    width: 42px;
+    padding: 8px;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .sp-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-kpis article {
+    border-inline-end: 0;
+    border-bottom: 1px solid #e4e8f0;
+  }
+
+  .sp-kpis article:last-child {
+    border-bottom: 0;
+  }
+
+  .sp-offers-list article {
+    grid-template-columns: 1fr auto;
+  }
+
+  .sp-offer-metrics {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+  }
+
+  .login-card {
+    padding: 28px 22px;
+  }
+}

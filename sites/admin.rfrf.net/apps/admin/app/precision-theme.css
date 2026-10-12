@@ -1,0 +1,68 @@
+/* Operations portal: semantic Rafraf Precision surfaces with full dark/light parity. */
+.ops-shell,
+.ops-main,
+.login-wrap {
+  color: var(--rafraf-text);
+  background: var(--rafraf-canvas);
+}
+.ops-sidebar {
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-navy-950);
+}
+.ops-brand {
+  color: var(--rr-color-ivory-50);
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 12%);
+}
+.ops-brand-label {
+  color: var(--rr-color-slate-300);
+}
+.ops-sidebar nav a:hover,
+.ops-sidebar nav a.active {
+  color: var(--rr-color-ivory-50);
+  background: rgb(255 255 255 / 9%);
+}
+.ops-card,
+.ops-kpi,
+.ops-request,
+.ops-table-wrap,
+.panel,
+.card,
+.card-block,
+.detail-card,
+.login-card,
+.ops-search,
+.form input,
+.form select,
+.form textarea,
+.qform input,
+.qform select,
+.table-wrap {
+  color: var(--rafraf-text);
+  background: var(--rafraf-surface);
+  border-color: var(--rafraf-border);
+  box-shadow: var(--rafraf-shadow);
+}
+.ops-hero,
+.ops-priority-rail {
+  color: var(--rr-color-ivory-50);
+  background: var(--rr-color-navy-900);
+  border-color: var(--rafraf-border);
+}
+.ops-topbar p:last-child,
+.sub,
+.sub2,
+.hint {
+  color: var(--rafraf-muted);
+}
+kbd {
+  color: var(--rafraf-muted);
+  background: var(--rafraf-raised);
+  border-color: var(--rafraf-border);
+}
+tr:hover td {
+  background: var(--rafraf-raised);
+}
+:root[data-theme='light'] .ops-sidebar {
+  background: var(--rr-color-navy-900);
+}

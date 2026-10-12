@@ -1,0 +1,237 @@
+.processing,
+.guardrail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.processing {
+  margin: 10px 30px 22px;
+  padding: 14px;
+  border: 1px solid var(--rafraf-color-border-ai);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-ai-soft);
+}
+
+.processing > svg {
+  color: var(--rafraf-color-text-ai);
+}
+
+.processing span,
+.guardrail span {
+  display: grid;
+  gap: 2px;
+}
+
+.processing small,
+.guardrail small {
+  color: var(--rafraf-color-text-secondary);
+  font-size: 0.7rem;
+}
+
+.spinner {
+  animation: spin 900ms linear infinite;
+}
+
+.result {
+  margin: 15px 30px 28px;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: var(--rafraf-radius-16);
+}
+
+.resultSuccess {
+  border-color: var(--rafraf-color-text-success);
+  background: var(--rafraf-color-bg-success-soft);
+}
+
+.resultError {
+  border-color: var(--rafraf-color-border-danger);
+  background: var(--rafraf-color-bg-danger-soft);
+}
+
+.resultHead {
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.resultHead > svg {
+  flex: 0 0 auto;
+}
+
+.resultSuccess .resultHead > svg {
+  color: var(--rafraf-color-text-success);
+}
+
+.resultError .resultHead > svg {
+  color: var(--rafraf-color-text-danger);
+}
+
+.resultHead > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.resultHead small {
+  overflow-wrap: anywhere;
+  color: var(--rafraf-color-text-secondary);
+  font:
+    500 0.68rem/1.6 var(--font-rafraf-mono),
+    monospace;
+}
+
+.successGrid {
+  padding: 0 15px 15px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  gap: 9px;
+}
+
+.successGrid article {
+  padding: 11px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid var(--rafraf-color-border-subtle);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface);
+}
+
+.successGrid span {
+  color: var(--rafraf-color-text-secondary);
+  font-size: 0.68rem;
+}
+
+.successGrid strong {
+  font:
+    700 1.35rem/1 var(--font-rafraf-mono),
+    monospace;
+}
+
+.successGrid button {
+  min-height: 38px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface);
+  color: var(--rafraf-color-text-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.issueTable {
+  max-height: 270px;
+  overflow: auto;
+  border-top: 1px solid var(--rafraf-color-border-danger);
+  background: var(--rafraf-color-bg-surface);
+}
+
+.issueHeader,
+.issueRow {
+  min-width: 590px;
+  padding: 9px 12px;
+  display: grid;
+  grid-template-columns: 62px 130px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.issueHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  color: var(--rafraf-color-text-secondary);
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+  background: var(--rafraf-color-bg-surface-raised);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.issueRow {
+  border-bottom: 1px solid var(--rafraf-color-border-subtle);
+  font-size: 0.72rem;
+}
+
+.issueRow code {
+  color: var(--rafraf-color-text-danger);
+  font-family: var(--font-rafraf-mono), monospace;
+}
+
+.issueTable > p {
+  padding: 11px;
+  color: var(--rafraf-color-text-danger);
+  font-size: 0.72rem;
+}
+
+.warnings {
+  border-top: 1px solid var(--rafraf-color-text-warning);
+  background: var(--rafraf-color-bg-warning-soft);
+}
+
+.warnings summary {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--rafraf-color-text-warning);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.warnings ul {
+  max-height: 180px;
+  margin: 0;
+  padding: 0 34px 14px 15px;
+  overflow: auto;
+  color: var(--rafraf-color-text-secondary);
+  font-size: 0.7rem;
+}
+
+.guardrail {
+  padding: 14px 16px;
+  border: 1px solid var(--rafraf-color-border-default);
+  border-radius: var(--rafraf-radius-12);
+  background: var(--rafraf-color-bg-surface-raised);
+}
+
+.guardrail > svg {
+  flex: 0 0 auto;
+  color: var(--rafraf-color-icon-brand);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 800px) {
+  .processing,
+  .result {
+    margin-inline: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .successGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .successGrid button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.8s;
+  }
+}
