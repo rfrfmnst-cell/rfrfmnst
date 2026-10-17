@@ -315,7 +315,7 @@ export function CatalogImportWorkspace({
               </button>
             </div>
 
-            {preview ? (
+            {preview && visibleState.status !== "success" ? (
               <section
                 className={styles.preview}
                 aria-label="معاينة البيانات قبل الاستيراد"
