@@ -11,6 +11,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SUPPLIER_REGISTRATION_URL } from '../lib/public-app-urls';
 import { PrecisionHero } from './precision-hero';
+import { SiteFooter } from './site-footer';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -151,6 +152,10 @@ export default function Home() {
             <div>
               <p className="precision-kicker">للموردين المعتمدين</p>
               <h2>فرص واضحة، وبيانات عميل محمية</h2>
+              <p>
+                للمورد والبائع والتاجر: جرّب رفرف لمدة 3 أشهر، وبعدها لك حرية
+                الانتقال إلى الخطط المدفوعة أو المغادرة.
+              </p>
             </div>
             <a href={SUPPLIER_REGISTRATION_URL}>
               ابدأ التأهيل <ArrowLeft size={18} aria-hidden />
@@ -158,16 +163,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="precision-footer">
-        <div className="precision-container">
-          <p>رفرف — قطع غيار بقرار موثّق</p>
-          <nav aria-label="روابط التذييل">
-            <Link href="/privacy">سياسة الخصوصية</Link>
-            <Link href="/track">تتبع طلبك</Link>
-            <a href={SUPPLIER_REGISTRATION_URL}>بوابة الموردين</a>
-          </nav>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

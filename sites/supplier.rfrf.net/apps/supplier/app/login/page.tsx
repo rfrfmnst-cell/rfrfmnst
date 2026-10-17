@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PhoneLoginPage from './phone-login';
+import { SupplierTrialNotice } from './supplier-trial-notice';
 import { turnstileSiteKey } from '@rafraf/shared/security/turnstile';
 import { Building2, LogIn, Mail, ShieldCheck, UserPlus } from 'lucide-react';
 import Link from 'next/link';
@@ -99,6 +100,8 @@ export default async function LoginPage({
             <UserPlus size={17} aria-hidden /> تسجيل جديد
           </Link>
         </nav>
+
+        {registering ? <SupplierTrialNotice /> : null}
 
         {err && (
           <p id="supplier-login-error" className="login-err" role="alert">
