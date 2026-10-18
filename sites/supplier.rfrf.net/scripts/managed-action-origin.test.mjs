@@ -27,3 +27,7 @@ test('untrusted origins cannot redirect authenticated internal requests',()=>{
 test('additional listeners are untouched after initial startup',async()=>{
  const f=fixture('/tmp/test');installManagedActionOrigin('https://rfrf.net',f);const first=new f.http.Server();first.listen();await new Promise(queueMicrotask);f.environment.__NEXT_PRIVATE_ORIGIN='unchanged';new f.http.Server().listen();await new Promise(queueMicrotask);assert.equal(f.environment.__NEXT_PRIVATE_ORIGIN,'unchanged');
 });
+
+test('repeated platform listening events cannot overwrite the fixed self-fetch origin',async()=>{
+ const f=fixture('/tmp/fixture-passenger.sock');installManagedActionOrigin('https://supplier.rfrf.net',f);const server=new f.http.Server();server.on('listening',()=>{f.environment.__NEXT_PRIVATE_ORIGIN='http://0.0.0.0:3000';});server.listen();await new Promise(queueMicrotask);server.emit('listening');assert.equal(f.environment.__NEXT_PRIVATE_ORIGIN,'https://supplier.rfrf.net');
+});

@@ -14,7 +14,7 @@ function installManagedActionOrigin(origin, dependencies = {}) {
     // This bootstrap owns only the initial Next listener. Preserve any platform
     // listen wrapper and leave all later servers untouched.
     if (http.Server.prototype.listen === listen) http.Server.prototype.listen = originalListen;
-    this.once('listening', () => {
+    this.on('listening', () => {
       if (typeof this.address() === 'string') {
         environment.__NEXT_PRIVATE_ORIGIN = origin;
         try { (dependencies.output || console.info)(JSON.stringify({event:'rafraf.managed_action_origin',transport:'unix',origin})); } catch { /* Logging cannot prevent startup. */ }
