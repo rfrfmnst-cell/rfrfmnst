@@ -1,0 +1,151 @@
+{
+  "source": "fa04215a3b4df569b66589d6ce3129d0472cc859",
+  "checkedAtUtc": "2026-10-18T13:52:39.935Z",
+  "passed": true,
+  "paths": [
+    {
+      "path": "/companies",
+      "status": 200,
+      "ok": true,
+      "addedMakesExpected": 50,
+      "addedMakesFound": 50,
+      "totalCards": 74
+    },
+    {
+      "path": "/companies?category=cars",
+      "status": 200,
+      "ok": true,
+      "addedMakesExpected": 40,
+      "addedMakesFound": 40,
+      "totalCards": 58
+    },
+    {
+      "path": "/companies?category=trucks",
+      "status": 200,
+      "ok": true,
+      "addedMakesExpected": 9,
+      "addedMakesFound": 9,
+      "totalCards": 17
+    },
+    {
+      "path": "/companies?category=equipment",
+      "status": 200,
+      "ok": true,
+      "addedMakesExpected": 6,
+      "addedMakesFound": 6,
+      "totalCards": 10
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/chat",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/api/liveness",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/account",
+      "status": 307,
+      "ok": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "/_next/static/css/8ea1621fe9a126a2.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/css/f0e067a7287f48ea.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/css/d8d8771d0a13a39f.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/css/d0c98a282350f9d6.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/css/ca5a049a5e135a0d.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/webpack-eca8c31e89550e83.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/91e638e9-d492345875eccd1b.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/1962-c2e2d209f3bc502f.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/main-app-7aabec9de553ade1.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/app/layout-e95ec0d2567391f6.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/7157-716147be332155a8.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/app/error-1e4cf9d3d0e42f9e.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/app/companies/page-ad9c21bd623e1355.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/app/global-error-fca5cc8f66d9543b.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "limits": [
+    "Anonymous public content and authentication redirects only",
+    "No login, OTP, user data writes, inventory search, photo analysis or payment tested",
+    "Interactive filter, alias search and vehicle flow verified separately in isolated CI browser preview"
+  ],
+  "logo": {
+    "path": "/vehicle-brands/mg.svg",
+    "status": 200,
+    "ok": true
+  }
+}
