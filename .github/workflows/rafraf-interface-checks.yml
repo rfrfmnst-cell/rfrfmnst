@@ -1,0 +1,73 @@
+name: Rafraf interface checks
+
+on:
+  push:
+    branches: [codex/rafraf-professional]
+    paths:
+      - sites/rfrf.net/**
+      - sites/supplier.rfrf.net/**
+      - .github/workflows/rafraf-interface-checks.yml
+  pull_request:
+    paths:
+      - sites/rfrf.net/**
+      - sites/supplier.rfrf.net/**
+      - .github/workflows/rafraf-interface-checks.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rafraf-interfaces-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:24-bullseye
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: customer
+            site: sites/rfrf.net
+          - app: supplier
+            site: sites/supplier.rfrf.net
+    defaults:
+      run:
+        working-directory: ${{ matrix.site }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install the pinned package manager
+        run: npm install --global pnpm@11.6.0 --ignore-scripts
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run focused behavior tests
+        shell: bash
+        run: |
+          if [ '${{ matrix.app }}' = customer ]; then
+            node --experimental-strip-types --test apps/customer/lib/parts-companies.test.mjs
+          else
+            node --experimental-strip-types --test apps/supplier/app/catalog/import/catalog-import-parser.test.mjs
+          fi
+      - name: Build and verify Hostinger runtime without production credentials
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+          TURBO_TELEMETRY_DISABLED: '1'
+        run: pnpm run build:hostinger
+      - name: Install browser for isolated customer preview
+        if: matrix.app == 'customer'
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Review desktop and mobile production pages
+        if: matrix.app == 'customer'
+        run: node scripts/visual-qa-customer.mjs
+      - name: Save visual review evidence
+        if: always() && matrix.app == 'customer'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: rafraf-customer-visual-${{ github.run_id }}
+          path: sites/rfrf.net/outputs/visual-review/
+          if-no-files-found: warn
+          retention-days: 7

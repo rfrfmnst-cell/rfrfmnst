@@ -75,6 +75,7 @@ export default async function LoginPage({
   return (
     <main className="login-wrap">
       <section className="login-card" aria-labelledby="supplier-login-title">
+        <a className="login-home-link" href="https://rfrf.net">العودة إلى رفرف</a>
         <BrandLogo className="login-logo" />
         <p className="login-kicker">بوابة الموردين</p>
         <h1 id="supplier-login-title">

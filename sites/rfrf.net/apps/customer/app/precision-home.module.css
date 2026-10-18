@@ -42,6 +42,10 @@
   font-weight: 600;
 }
 .nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
   color: rgb(251 248 242 / 82%);
   text-decoration: none;
 }
@@ -81,10 +85,10 @@
 .copy h1 {
   max-width: 710px;
   margin: 22px 0 18px;
-  font-size: clamp(3.9rem, 6.3vw, 6.75rem);
+  font-size: clamp(2.6rem, 4.7vw, 4.5rem);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.055em;
+  line-height: 1.42;
+  letter-spacing: 0;
 }
 .copy > p {
   max-width: 650px;
@@ -251,7 +255,7 @@
   object-position: 44% 52%;
 }
 .vehiclePanel .panelBody::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgb(7 16 31 / 38%);
@@ -276,7 +280,7 @@
   object-position: center 46%;
 }
 .partPanel .panelBody::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgb(7 16 31 / 14%);
@@ -327,60 +331,60 @@
   font-size: 0.78rem;
 }
 
-:global(:root[data-theme='light']) .hero {
+:global(:root[data-theme="light"]) .hero {
   color: var(--rr-color-navy-950);
   background: var(--rr-color-ivory-50);
 }
-:global(:root[data-theme='light']) .heroImage {
+:global(:root[data-theme="light"]) .heroImage {
   opacity: 0.3;
   filter: saturate(0.78) contrast(0.92);
 }
-:global(:root[data-theme='light']) .heroShade {
+:global(:root[data-theme="light"]) .heroShade {
   background: rgb(251 248 242 / 70%);
 }
-:global(:root[data-theme='light']) .header {
+:global(:root[data-theme="light"]) .header {
   border-color: rgb(7 16 31 / 12%);
 }
-:global(:root[data-theme='light']) .brand,
-:global(:root[data-theme='light']) .nav a {
+:global(:root[data-theme="light"]) .brand,
+:global(:root[data-theme="light"]) .nav a {
   color: var(--rr-color-navy-950);
 }
-:global(:root[data-theme='light']) .nav .login {
+:global(:root[data-theme="light"]) .nav .login {
   border-color: rgb(7 16 31 / 20%);
 }
-:global(:root[data-theme='light']) .copy > p {
+:global(:root[data-theme="light"]) .copy > p {
   color: var(--rr-color-slate-600);
 }
-:global(:root[data-theme='light']) .composer {
+:global(:root[data-theme="light"]) .composer {
   border-color: var(--rr-color-ivory-200);
   background: rgb(255 255 255 / 86%);
   box-shadow: var(--rr-shadow-light);
 }
-:global(:root[data-theme='light']) .composer input {
+:global(:root[data-theme="light"]) .composer input {
   color: var(--rr-color-navy-950);
 }
-:global(:root[data-theme='light']) .composer input::placeholder {
+:global(:root[data-theme="light"]) .composer input::placeholder {
   color: var(--rr-color-slate-600);
 }
-:global(:root[data-theme='light']) .composer input:focus-visible {
+:global(:root[data-theme="light"]) .composer input:focus-visible {
   outline-color: var(--rr-color-violet-600);
 }
-:global(:root[data-theme='light']) .characterCount {
+:global(:root[data-theme="light"]) .characterCount {
   color: var(--rr-color-slate-600);
 }
-:global(:root[data-theme='light']) .composerTools button {
+:global(:root[data-theme="light"]) .composerTools button {
   color: var(--rr-color-slate-600);
 }
-:global(:root[data-theme='light']) .composerTools button:disabled:hover {
+:global(:root[data-theme="light"]) .composerTools button:disabled:hover {
   color: var(--rr-color-slate-600);
 }
-:global(:root[data-theme='light']) .unavailableTool small {
+:global(:root[data-theme="light"]) .unavailableTool small {
   color: var(--rr-color-ivory-50);
 }
-:global(:root[data-theme='light']) .composerError {
+:global(:root[data-theme="light"]) .composerError {
   color: #9f3324;
 }
-:global(:root[data-theme='light']) .storyPanel {
+:global(:root[data-theme="light"]) .storyPanel {
   border-color: rgb(7 16 31 / 13%);
   box-shadow: var(--rr-shadow-light);
 }
@@ -426,7 +430,7 @@
     gap: 46px;
   }
   .copy h1 {
-    font-size: clamp(3rem, 14vw, 4.6rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
   .composer {
     min-height: 190px;

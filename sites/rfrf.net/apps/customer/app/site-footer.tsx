@@ -6,6 +6,7 @@ import { SUPPLIER_REGISTRATION_URL } from "../lib/public-app-urls";
 import styles from "./site-footer.module.css";
 
 const NAVIGATION = [
+  { href: "/companies", label: "شركات قطع الغيار" },
   { href: "/chat", label: "ابدأ طلب قطعة" },
   { href: "/track", label: "تتبّع طلبك" },
   { href: "/account", label: "حسابك وطلباتك" },
