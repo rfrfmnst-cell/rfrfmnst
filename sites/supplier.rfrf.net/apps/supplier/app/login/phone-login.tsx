@@ -171,7 +171,7 @@ export default async function PhoneLoginPage({
         </label>
         {err === 'invalid_phone' && (
           <p className="login-err">
-            أدخل رقم جوال دوليًا صحيحًا يبدأ بعلامة + ورمز الدولة.
+            أدخل رقم جوال سعودي يبدأ بـ 05، أو رقمًا دوليًا يبدأ بعلامة + ورمز الدولة.
           </p>
         )}
         {err === 'rate_limited' && (
@@ -187,7 +187,15 @@ export default async function PhoneLoginPage({
             تعذّر إكمال التحقق البشري. حدّث الصفحة وحاول مرة أخرى.
           </p>
         )}
-        {['unavailable', 'expired', 'locked', 'used', 'not_allowed'].includes(
+        {err === 'not_allowed' && (
+          <p className="login-err" role="alert">
+            تعذر الدخول بهذا الرقم. استخدم رقم حساب المورد المعتمد، أو{' '}
+            <a href="https://wa.me/966500894003" target="_blank" rel="noopener noreferrer">
+              تواصل مع دعم رفرف
+            </a>.
+          </p>
+        )}
+        {['unavailable', 'expired', 'locked', 'used'].includes(
           err ?? '',
         ) && (
           <p className="login-err" role="alert">
@@ -205,7 +213,7 @@ export default async function PhoneLoginPage({
           <span>تشفير وحماية البيانات</span>
         </div>
         <p className="sp-note login-back">
-          للتسجيل كمنشأة جديدة، <Link href="/?register=1">انقر هنا</Link>.
+          منشأة جديدة؟ <Link href="/login?mode=register">إنشاء حساب مورد</Link>.
         </p>
       </form>
     </div>

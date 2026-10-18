@@ -22,7 +22,7 @@ try {
     const context = await browser.newContext({ viewport, locale: 'ar-SA', reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.on('pageerror', (error) => report.errors.push({ device, message: error.message }));
-    for (const [name, path] of [['login', '/login'], ['registration', '/login?mode=register'], ['phone', '/login?mode=phone'], ['email-sent', '/login?step=check_email']]) {
+    for (const [name, path] of [['login', '/login'], ['registration', '/login?mode=register'], ['phone', '/login?mode=phone'], ['phone-not-allowed', '/login?mode=phone&err=not_allowed'], ['email-sent', '/login?step=check_email']]) {
       const r = await page.goto(report.origin + path, { waitUntil: 'networkidle', timeout: 30000 });
       await page.evaluate(() => document.fonts.ready);
       check(`${device} ${name} HTTP200`, r?.status() === 200);
@@ -30,6 +30,11 @@ try {
       check(`${device} ${name} width`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       check(`${device} ${name} heading`, await page.locator('h1').count() === 1);
       if (name === 'registration') check(`${device} trial visible`, await page.getByRole('heading', { name: 'جرّب رفرف لمدة 3 أشهر' }).isVisible());
+      if (name === 'phone-not-allowed') {
+        check(`${device} account rejection has accurate recovery`, await page.getByRole('alert').getByRole('link', { name: 'تواصل مع دعم رفرف' }).isVisible());
+        check(`${device} account rejection is not described as session expiry`, !(await page.getByRole('alert').innerText()).includes('انتهت جلسة'));
+        check(`${device} new supplier registration is reachable`, await page.getByRole('link', { name: 'إنشاء حساب مورد' }).getAttribute('href') === '/login?mode=register');
+      }
       const filename = `${device}-${name}.png`;
       await page.screenshot({ path: resolve(output, filename), fullPage: true, animations: 'disabled' });
       report.screenshots.push(filename);
