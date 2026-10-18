@@ -6,6 +6,7 @@ on:
     paths:
       - sites/rfrf.net/**
       - sites/supplier.rfrf.net/**
+      - scripts/visual-qa-supplier.mjs
       - .github/workflows/rafraf-interface-checks.yml
   workflow_dispatch:
 

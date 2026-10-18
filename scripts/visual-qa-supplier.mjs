@@ -32,7 +32,7 @@ try {
       if (name === 'registration') check(`${device} trial visible`, await page.getByRole('heading', { name: 'جرّب رفرف لمدة 3 أشهر' }).isVisible());
       if (name === 'phone-not-allowed') {
         check(`${device} account rejection has accurate recovery`, await page.getByRole('alert').getByRole('link', { name: 'تواصل مع دعم رفرف' }).isVisible());
-        check(`${device} account rejection is not described as session expiry`, !(await page.getByRole('alert').innerText()).includes('انتهت جلسة'));
+        check(`${device} account rejection is not described as session expiry`, !(await page.locator('.login-err[role="alert"]').innerText()).includes('انتهت جلسة'));
         check(`${device} new supplier registration is reachable`, await page.getByRole('link', { name: 'إنشاء حساب مورد' }).getAttribute('href') === '/login?mode=register');
       }
       const filename = `${device}-${name}.png`;
