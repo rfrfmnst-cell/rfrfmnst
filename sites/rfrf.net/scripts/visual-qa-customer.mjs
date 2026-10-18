@@ -12,6 +12,7 @@ const server = spawn(process.execPath, ['hostinger-runtime/bootstrap.cjs'], {
 });
 const report = { startedAtUtc: new Date().toISOString(), origin: 'http://127.0.0.1:3108', productionBuild: true, checks: [], screenshots: [], errors: [], passed: false };
 let browser;
+let activePage;
 
 function check(name, ok) {
   report.checks.push({ name, ok: Boolean(ok) });
@@ -34,6 +35,7 @@ try {
   for (const [device, viewport] of [['desktop', { width: 1440, height: 1000 }], ['mobile', { width: 390, height: 844 }]]) {
     const context = await browser.newContext({ viewport, reducedMotion: 'reduce', locale: 'ar-SA' });
     const page = await context.newPage();
+    activePage = page;
     page.on('pageerror', (error) => report.errors.push({ device, message: error.message }));
     for (const [name, path] of [['home', '/'], ['companies', '/companies'], ['login', '/login']]) {
       const response = await page.goto(report.origin + path, { waitUntil: 'networkidle', timeout: 30000 });
@@ -117,6 +119,7 @@ try {
   check('no uncaught browser errors', report.errors.length === 0);
   report.passed = true;
 } catch (error) {
+  try { await activePage?.screenshot({path:resolve(directory,'failure.png'),fullPage:true,animations:'disabled'}); } catch {}
   report.failure = error.message;
   process.exitCode = 1;
 } finally {
