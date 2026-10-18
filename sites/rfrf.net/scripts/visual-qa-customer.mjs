@@ -45,9 +45,11 @@ try {
       if (name === 'home') {
         check(`${device} companies entry visible`, await page.getByRole('link', { name: 'علامات المركبات', exact: true }).first().count() > 0);
         await page.getByRole('button', {name:'البحث برقم الهيكل VIN',exact:true}).click();
+        await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).waitFor({state:'visible'});
         check(`${device} homepage VIN control opens intake`, await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).isVisible());
         await page.getByRole('button',{name:'إغلاق طريقة البحث',exact:true}).click();
         await page.getByRole('button', {name:'البحث برقم الهيكل VIN',exact:true}).click();
+        await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).waitFor({state:'visible'});
         check(`${device} homepage VIN control reopens intake`, await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).isVisible());
         await page.getByRole('button',{name:'إغلاق طريقة البحث',exact:true}).click();
         check(`${device} contact visible in source`, await page.locator('a[href="tel:+966500894003"]').count() > 0);
@@ -89,6 +91,7 @@ try {
         await page.route('**/api/vehicle/vin',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{make:'TOYOTA',model:'Camry',year:'2021',trim:'',engine:''}})}));
         await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).fill('JTNB11HK5M3087962');
         await page.getByRole('button',{name:'التحقق من المركبة عبر NHTSA'}).click();
+        await page.getByRole('status').filter({hasText:'TOYOTA'}).waitFor({state:'visible'});
         check(`${device} decoded VIN data requires review`,await page.getByRole('status').filter({hasText:'TOYOTA'}).isVisible());
         await page.getByRole('button',{name:'استخدم في المحادثة'}).click();
         check(`${device} VIN goes to composer without URL disclosure`, (await composer.inputValue()).includes('JTNB11HK5M3087962') && !page.url().includes('JTNB'));
