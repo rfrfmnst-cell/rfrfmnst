@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { authenticationCoreConfigured } from '../../lib/auth-configuration';
+import { supplierOtpSecurityConfigured } from '../../lib/supplier-otp-delivery';
 import { turnstileSiteKey } from '@rafraf/shared/security/turnstile';
 import { cookies } from 'next/headers';
 import { LogIn, Phone, ShieldCheck, KeyRound, ArrowRight } from 'lucide-react';
@@ -33,6 +35,9 @@ export default async function PhoneLoginPage({
   }>;
 }) {
   const { err, step, registered, registration } = await searchParams;
+  const phoneAvailable =
+    authenticationCoreConfigured() && supplierOtpSecurityConfigured();
+  const effectiveError = err ?? (!phoneAvailable ? 'unavailable' : undefined);
   const cookieStore = await cookies();
   const challenge = parseSupplierOtpChallenge(
     cookieStore.get(SUPPLIER_OTP_COOKIE)?.value,
@@ -78,13 +83,14 @@ export default async function PhoneLoginPage({
                 name="code"
                 type="text"
                 inputMode="numeric"
-                pattern="[0-9]{6}"
+                pattern="[0-9٠-٩۰-۹]{6}"
                 minLength={6}
                 maxLength={6}
                 autoComplete="one-time-code"
-                aria-invalid={err === 'invalid_otp'}
+                aria-invalid={effectiveError === 'invalid_otp'}
                 aria-describedby={
-                  err === 'invalid_otp' || err === 'unavailable'
+                  effectiveError === 'invalid_otp' ||
+                  effectiveError === 'unavailable'
                     ? 'supplier-otp-error'
                     : undefined
                 }
@@ -96,19 +102,19 @@ export default async function PhoneLoginPage({
             </div>
           </label>
 
-          {err === 'invalid_otp' && (
+          {effectiveError === 'invalid_otp' && (
             <p id="supplier-otp-error" className="login-err" role="alert">
               الرمز غير صحيح أو منتهي الصلاحية.
             </p>
           )}
-          {err === 'unavailable' && (
+          {effectiveError === 'unavailable' && (
             <p id="supplier-otp-error" className="login-err" role="alert">
               تعذر التحقق من الرمز الآن. حاول مرة أخرى، أو ارجع واطلب رمزًا
               جديدًا.
             </p>
           )}
 
-          <SubmitButton pendingLabel="جارٍ التحقق…">
+          <SubmitButton disabled={!phoneAvailable} pendingLabel="جارٍ التحقق…">
             تأكيد الدخول <LogIn size={18} aria-hidden />
           </SubmitButton>
 
@@ -162,47 +168,59 @@ export default async function PhoneLoginPage({
               defaultValue={registrationDraft?.phone}
               readOnly={Boolean(registrationDraft)}
               placeholder="+966512345678"
-              pattern="(?:\+[1-9][0-9]{7,14}|05[0-9]{8})"
+              autoComplete="tel"
+              inputMode="tel"
+              maxLength={40}
               required
               autoFocus
               dir="ltr"
             />
           </div>
         </label>
-        {err === 'invalid_phone' && (
+        {effectiveError === 'invalid_phone' && (
           <p className="login-err">
-            أدخل رقم جوال سعودي يبدأ بـ 05، أو رقمًا دوليًا يبدأ بعلامة + ورمز الدولة.
+            أدخل رقم جوال سعودي يبدأ بـ 05، أو رقمًا دوليًا يبدأ بعلامة + ورمز
+            الدولة.
           </p>
         )}
-        {err === 'rate_limited' && (
+        {effectiveError === 'rate_limited' && (
           <p className="login-err">
             محاولات كثيرة. انتظر قليلًا ثم أعد المحاولة.
           </p>
         )}
-        {err === 'delivery' && (
+        {effectiveError === 'delivery' && (
           <p className="login-err">تعذر إرسال رمز التحقق. حاول لاحقًا.</p>
         )}
-        {err === 'verification_failed' && (
+        {effectiveError === 'verification_failed' && (
           <p className="login-err">
             تعذّر إكمال التحقق البشري. حدّث الصفحة وحاول مرة أخرى.
           </p>
         )}
-        {err === 'not_allowed' && (
+        {effectiveError === 'not_allowed' && (
           <p className="login-err" role="alert">
             تعذر الدخول بهذا الرقم. استخدم رقم حساب المورد المعتمد، أو{' '}
-            <a href="https://wa.me/966500894003" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.me/966500894003"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               تواصل مع دعم رفرف
-            </a>.
+            </a>
+            .
           </p>
         )}
-        {['unavailable', 'expired', 'locked', 'used'].includes(
-          err ?? '',
-        ) && (
+        {effectiveError === 'unavailable' && (
+          <p className="login-err" role="alert">
+            خدمة الدخول غير متاحة مؤقتًا. حاول لاحقًا أو تواصل مع دعم رفرف.
+          </p>
+        )}
+        {['expired', 'locked', 'used'].includes(effectiveError ?? '') && (
           <p className="login-err" role="alert">
             انتهت جلسة التحقق أو تعذر بدءها. اطلب رمزًا جديدًا.
           </p>
         )}
         <HumanVerificationSubmit
+          disabled={!phoneAvailable}
           siteKey={turnstileSiteKey() ?? ''}
           action="supplier_otp"
           label={registrationDraft ? 'إرسال رمز جديد' : 'دخول'}

@@ -29,6 +29,19 @@ try {
       check(`${device} ${name} RTL`, await page.locator('html').getAttribute('dir') === 'rtl');
       check(`${device} ${name} width`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       check(`${device} ${name} heading`, await page.locator('h1').count() === 1);
+      if (name === 'login') {
+        check(`${device} missing email configuration has an explanation`, await page.getByRole('alert').filter({hasText:'خدمة الدخول بالبريد غير متاحة مؤقتًا.'}).isVisible());
+        check(`${device} unavailable email login cannot be submitted`, await page.getByRole('button',{name:'إرسال رابط الدخول'}).isDisabled());
+      }
+      if (name === 'phone') {
+        const phone=page.locator('input[name="phone"]');
+        for(const value of ['٠٥١٢٣٤٥٦٧٨','۰۰۹۶۶۵۱۲۳۴۵۶۷۸','05 123 456 78']) {
+          await phone.fill(value);
+          check(`${device} phone browser accepts ${value}`, await phone.evaluate(input=>input.checkValidity()));
+        }
+        check(`${device} missing phone configuration cannot be submitted`, await page.getByRole('button',{name:'دخول',exact:true}).isDisabled());
+        await phone.fill('');
+      }
       if (name === 'registration') check(`${device} trial visible`, await page.getByRole('heading', { name: 'جرّب رفرف لمدة 3 أشهر' }).isVisible());
       if (name === 'phone-not-allowed') {
         check(`${device} account rejection has accurate recovery`, await page.getByRole('alert').getByRole('link', { name: 'تواصل مع دعم رفرف' }).isVisible());

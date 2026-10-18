@@ -11,6 +11,7 @@ import { TurnstileWidget } from './turnstile-widget';
 export function HumanVerificationSubmit({
   siteKey,
   action,
+  disabled = false,
   label,
   pendingLabel = 'جارٍ إرسال الرمز…',
   turnstileClassName,
@@ -20,6 +21,7 @@ export function HumanVerificationSubmit({
 }: {
   siteKey: string;
   action: string;
+  disabled?: boolean;
   label: ReactNode;
   pendingLabel?: string;
   turnstileClassName?: string;
@@ -31,16 +33,18 @@ export function HumanVerificationSubmit({
 
   return (
     <>
-      <TurnstileWidget
-        siteKey={siteKey}
-        action={action}
-        className={turnstileClassName}
-        onTokenChange={setToken}
-      />
+      {!disabled && (
+        <TurnstileWidget
+          siteKey={siteKey}
+          action={action}
+          className={turnstileClassName}
+          onTokenChange={setToken}
+        />
+      )}
       <SubmitButton
         className={buttonClassName}
         pendingLabel={pendingLabel}
-        disabled={!token}
+        disabled={disabled || !token}
       >
         {iconPosition === 'start' ? (
           <>

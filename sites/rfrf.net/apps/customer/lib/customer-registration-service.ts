@@ -1,3 +1,4 @@
+import { authenticationCoreConfigured } from './auth-configuration';
 import { prisma } from '@rafraf/db';
 import { verifyCustomerHumanProof } from './customer-auth-abuse';
 import {
@@ -53,6 +54,7 @@ export async function registerCustomerAccount(input: {
     if (human !== 'verified') return { status: human };
   }
 
+  if (!authenticationCoreConfigured()) return { status: 'unavailable' };
   const passwordHash = await hashCustomerPassword(password);
   const emailSubject = customerCredentialSubjectKey(email);
 

@@ -1,3 +1,6 @@
+import { normalizeOtpCode } from './auth-input';
+import { normalizeSaudiPhone } from './customer-phone';
+export { normalizeSaudiPhone } from './customer-phone';
 import { prisma } from '@rafraf/db';
 import { PLACEHOLDER_CUSTOMER_NAME } from './customer-profile';
 import {
@@ -48,18 +51,6 @@ export type OtpVerifyResult =
   | { status: 'registration_required'; registrationProof: string }
   | { status: 'invalid'; challengeCookie: string; remainingSeconds: number }
   | { status: 'expired' | 'locked' | 'used' | 'not_allowed' | 'unavailable' };
-
-export function normalizeSaudiPhone(
-  value: FormDataEntryValue | string | null,
-): string | null {
-  const raw = String(value ?? '').replace(/[\s()-]/g, '');
-  const normalized = raw.startsWith('05')
-    ? `+9665${raw.slice(2)}`
-    : raw.startsWith('9665')
-      ? `+${raw}`
-      : raw;
-  return /^\+9665\d{8}$/.test(normalized) ? normalized : null;
-}
 
 export function otpSecurityConfigured(): boolean {
   if (localOtpEnabled()) return true;
@@ -175,20 +166,27 @@ export async function requestCustomerOtpFlow(
   const challenge = createCustomerOtpChallenge(phone);
   const localDelivery = localOtpEnabled();
   const delivered = localDelivery || (await sendTwilioVerification(phone));
-  await prisma.auditLog.create({
-    data: {
-      actorType: 'SYSTEM',
-      action: delivered
-        ? 'customer.otp.delivered'
-        : 'customer.otp.delivery_failed',
-      entityType: 'customer_otp',
-      entityId: phoneKey,
-      after: {
-        provider: localDelivery ? 'LOCAL' : 'TWILIO_VERIFY',
-        channel: otpAuditChannel(),
+  try {
+    await prisma.auditLog.create({
+      data: {
+        actorType: 'SYSTEM',
+        action: delivered
+          ? 'customer.otp.delivered'
+          : 'customer.otp.delivery_failed',
+        entityType: 'customer_otp',
+        entityId: phoneKey,
+        after: {
+          provider: localDelivery ? 'LOCAL' : 'TWILIO_VERIFY',
+          channel: otpAuditChannel(),
+        },
       },
-    },
-  });
+    });
+  } catch {
+    console.error('[auth:customer] OTP delivery audit failed', {
+      code: 'OTP_DELIVERY_AUDIT_ERROR',
+    });
+    return { status: 'unavailable' };
+  }
   if (!delivered) return { status: 'delivery_failed' };
   return {
     status: 'sent',
@@ -266,6 +264,7 @@ export async function verifyCustomerOtpFlow(
   }
   if (reservation.status !== 'reserved') return reservation;
 
+  code = normalizeOtpCode(code);
   const verification = localOtpEnabled()
     ? verifyCustomerOtpCode(challenge, code.trim())
       ? 'approved'
@@ -274,118 +273,128 @@ export async function verifyCustomerOtpFlow(
   if (verification === 'unavailable') return { status: 'unavailable' };
   if (verification === 'expired') return { status: 'expired' };
   const valid = verification === 'approved';
-  const result = await prisma.$transaction(async (tx) => {
-    for (const key of [challengeKey, phoneKey].sort())
-      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))`;
-    const [failed, consumed, reserved] = await Promise.all([
-      tx.auditLog.count({
-        where: {
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          action: 'customer.otp.failed',
-        },
-      }),
-      tx.auditLog.count({
-        where: {
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          action: 'customer.otp.challenge_consumed',
-        },
-      }),
-      tx.auditLog.count({
-        where: {
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          action: 'customer.otp.verification_attempt_reserved',
-        },
-      }),
-    ]);
-    if (consumed > 0) return { status: 'used' } as const;
-    if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
-    if (!valid) {
-      const attempts = Math.max(reserved, failed + 1, reservation.attempt);
-      await tx.auditLog.create({
-        data: {
-          actorType: 'SYSTEM',
-          action: 'customer.otp.failed',
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          after: { attempt: attempts, phoneSubject: phoneKey },
-        },
-      });
-      if (attempts >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
-      return { status: 'invalid', attempts } as const;
-    }
-
-    const existing = await tx.user.findUnique({
-      where: { phone: challenge.phone },
-      include: { customer: true, role: true },
-    });
-    if (existing && (!existing.isActive || existing.role.name !== 'CUSTOMER')) {
-      await tx.auditLog.create({
-        data: {
-          actorType: 'SYSTEM',
-          action: 'customer.otp.challenge_consumed',
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          after: { outcome: 'NOT_ALLOWED', phoneSubject: phoneKey },
-        },
-      });
-      return { status: 'not_allowed' } as const;
-    }
-    const now = new Date();
-    if (!existing) {
-      await tx.auditLog.create({
-        data: {
-          actorType: 'SYSTEM',
-          action: 'customer.otp.challenge_consumed',
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          after: { outcome: 'REGISTRATION_REQUIRED', phoneSubject: phoneKey },
-        },
-      });
-      return { status: 'registration_required' } as const;
-    }
-    const user = existing
-      ? await tx.user.update({
-          where: { id: existing.id },
-          data: { lastLoginAt: now, phoneVerifiedAt: now },
-          include: { customer: true },
-        })
-      : await tx.user.create({
-          data: {
-            phone: challenge.phone,
-            lastLoginAt: now,
-            role: { connect: { name: 'CUSTOMER' } },
+  const result = await prisma
+    .$transaction(async (tx) => {
+      for (const key of [challengeKey, phoneKey].sort())
+        await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))`;
+      const [failed, consumed, reserved] = await Promise.all([
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.failed',
           },
-          include: { customer: true },
+        }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.challenge_consumed',
+          },
+        }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.verification_attempt_reserved',
+          },
+        }),
+      ]);
+      if (consumed > 0) return { status: 'used' } as const;
+      if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
+      if (!valid) {
+        const attempts = Math.max(reserved, failed + 1, reservation.attempt);
+        await tx.auditLog.create({
+          data: {
+            actorType: 'SYSTEM',
+            action: 'customer.otp.failed',
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            after: { attempt: attempts, phoneSubject: phoneKey },
+          },
         });
-    const customer =
-      user.customer ??
-      (await tx.customer.create({
-        data: { userId: user.id, fullName: PLACEHOLDER_CUSTOMER_NAME },
-      }));
-    await tx.auditLog.createMany({
-      data: [
-        {
-          actorType: 'SYSTEM',
-          action: 'customer.otp.challenge_consumed',
-          entityType: 'customer_otp_challenge',
-          entityId: challengeKey,
-          after: { outcome: 'VERIFIED', phoneSubject: phoneKey },
-        },
-        {
-          actorId: customer.id,
-          actorType: 'CUSTOMER',
-          action: 'customer.otp.verified',
-          entityType: 'customer',
-          entityId: customer.id,
-          after: { sessionVersion: 3 },
-        },
-      ],
+        if (attempts >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
+        return { status: 'invalid', attempts } as const;
+      }
+
+      const existing = await tx.user.findUnique({
+        where: { phone: challenge.phone },
+        include: { customer: true, role: true },
+      });
+      if (
+        existing &&
+        (!existing.isActive || existing.role.name !== 'CUSTOMER')
+      ) {
+        await tx.auditLog.create({
+          data: {
+            actorType: 'SYSTEM',
+            action: 'customer.otp.challenge_consumed',
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            after: { outcome: 'NOT_ALLOWED', phoneSubject: phoneKey },
+          },
+        });
+        return { status: 'not_allowed' } as const;
+      }
+      const now = new Date();
+      if (!existing) {
+        await tx.auditLog.create({
+          data: {
+            actorType: 'SYSTEM',
+            action: 'customer.otp.challenge_consumed',
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            after: { outcome: 'REGISTRATION_REQUIRED', phoneSubject: phoneKey },
+          },
+        });
+        return { status: 'registration_required' } as const;
+      }
+      const user = existing
+        ? await tx.user.update({
+            where: { id: existing.id },
+            data: { lastLoginAt: now, phoneVerifiedAt: now },
+            include: { customer: true },
+          })
+        : await tx.user.create({
+            data: {
+              phone: challenge.phone,
+              lastLoginAt: now,
+              role: { connect: { name: 'CUSTOMER' } },
+            },
+            include: { customer: true },
+          });
+      const customer =
+        user.customer ??
+        (await tx.customer.create({
+          data: { userId: user.id, fullName: PLACEHOLDER_CUSTOMER_NAME },
+        }));
+      await tx.auditLog.createMany({
+        data: [
+          {
+            actorType: 'SYSTEM',
+            action: 'customer.otp.challenge_consumed',
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            after: { outcome: 'VERIFIED', phoneSubject: phoneKey },
+          },
+          {
+            actorId: customer.id,
+            actorType: 'CUSTOMER',
+            action: 'customer.otp.verified',
+            entityType: 'customer',
+            entityId: customer.id,
+            after: { sessionVersion: 3 },
+          },
+        ],
+      });
+      return { status: 'verified', customerId: customer.id } as const;
+    })
+    .catch(() => {
+      console.error('[auth:customer] OTP completion unavailable', {
+        code: 'OTP_VERIFICATION_COMPLETION_ERROR',
+      });
+      return { status: 'unavailable' } as const;
     });
-    return { status: 'verified', customerId: customer.id } as const;
-  });
 
   if (result.status === 'invalid') {
     const remainingSeconds = Math.max(

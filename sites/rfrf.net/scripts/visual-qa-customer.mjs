@@ -44,6 +44,17 @@ try {
       check(`${device} ${name} RTL`, await page.locator('html').getAttribute('dir') === 'rtl');
       check(`${device} ${name} width`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       check(`${device} ${name} heading`, await page.locator('h1').count() === 1);
+      if (name === 'login') {
+        check(`${device} missing authentication configuration is explained`, await page.getByRole('alert').filter({hasText:'خدمة تسجيل الدخول غير متاحة مؤقتًا.'}).isVisible());
+        check(`${device} unavailable login cannot be submitted`, await page.getByRole('button',{name:'تسجيل الدخول بالبريد'}).isDisabled());
+        const password=page.locator('input[name="password"]');
+        await password.fill('fixture-password-not-submitted');
+        await page.getByRole('button',{name:'إظهار كلمة المرور'}).click();
+        check(`${device} password visibility preserves input`, await password.getAttribute('type')==='text' && await password.inputValue()==='fixture-password-not-submitted');
+        await page.getByRole('button',{name:'إخفاء كلمة المرور'}).click();
+        check(`${device} password can be hidden again`, await password.getAttribute('type')==='password');
+        await password.fill('');
+      }
       if (name === 'home') {
         check(`${device} companies entry visible`, await page.getByRole('link', { name: 'علامات المركبات', exact: true }).first().count() > 0);
         await page.getByRole('button', {name:'البحث برقم الهيكل VIN',exact:true}).click();

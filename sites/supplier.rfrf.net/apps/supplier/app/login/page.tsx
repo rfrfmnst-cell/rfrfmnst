@@ -1,4 +1,8 @@
 import type { Metadata } from 'next';
+import { authenticationCoreConfigured } from '../../lib/auth-configuration';
+import { supplierEmailConfigured } from '../../lib/supplier-email-auth';
+import { getSessionSupplierId } from '../../lib/session';
+import { redirect } from 'next/navigation';
 import PhoneLoginPage from './phone-login';
 import { SupplierTrialNotice } from './supplier-trial-notice';
 import { turnstileSiteKey } from '@rafraf/shared/security/turnstile';
@@ -39,10 +43,14 @@ export default async function LoginPage({
   }>;
 }) {
   const requested = await searchParams;
+  if (await getSessionSupplierId()) redirect('/');
   if (requested.mode === 'phone' || requested.step === 'verify')
     return PhoneLoginPage({ searchParams });
   const { err, mode, step, registration } = await searchParams;
   const registering = mode === 'register';
+  const emailAvailable =
+    authenticationCoreConfigured() && supplierEmailConfigured();
+  const effectiveError = err ?? (!emailAvailable ? 'unavailable' : undefined);
 
   if (step === 'check_email') {
     return (
@@ -75,7 +83,9 @@ export default async function LoginPage({
   return (
     <div className="login-wrap">
       <section className="login-card" aria-labelledby="supplier-login-title">
-        <a className="login-home-link" href="https://rfrf.net">العودة إلى رفرف</a>
+        <a className="login-home-link" href="https://rfrf.net">
+          العودة إلى رفرف
+        </a>
         <BrandLogo className="login-logo" />
         <p className="login-kicker">بوابة الموردين</p>
         <h1 id="supplier-login-title">
@@ -104,9 +114,9 @@ export default async function LoginPage({
 
         {registering ? <SupplierTrialNotice /> : null}
 
-        {err && (
+        {effectiveError && (
           <p id="supplier-login-error" className="login-err" role="alert">
-            {ERROR_TEXT[err] ?? ERROR_TEXT.unavailable}
+            {ERROR_TEXT[effectiveError] ?? ERROR_TEXT.unavailable}
           </p>
         )}
 
@@ -183,7 +193,6 @@ export default async function LoginPage({
                   autoComplete="tel"
                   inputMode="tel"
                   placeholder="+966512345678"
-                  pattern="(?:[+][1-9][0-9]{7,14}|05[0-9]{8})"
                   maxLength={32}
                   required
                   dir="ltr"
@@ -192,9 +201,11 @@ export default async function LoginPage({
               </label>
             </div>
             <p id="supplier-phone-hint" className="sp-note">
-              للجوال السعودي استخدم 05 أو +966. للأرقام الدولية أضف رمز الدولة.
+              للجوال السعودي استخدم 05 أو +966 أو 00966. تقبل الأرقام العربية
+              والإنجليزية؛ للأرقام الدولية أضف رمز الدولة.
             </p>
             <HumanVerificationSubmit
+              disabled={!emailAvailable}
               siteKey={turnstileSiteKey() ?? ''}
               action="supplier_email_register"
               label="إرسال رابط التسجيل"
@@ -221,6 +232,7 @@ export default async function LoginPage({
               </div>
             </label>
             <HumanVerificationSubmit
+              disabled={!emailAvailable}
               siteKey={turnstileSiteKey() ?? ''}
               action="supplier_email_login"
               label="إرسال رابط الدخول"
