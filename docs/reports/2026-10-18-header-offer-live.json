@@ -473,5 +473,17 @@
       "rfrf.net/mobile-home.png"
     ],
     "artifact": 12144019343
+  },
+  "cloudAfterPublication": {
+    "id": 39150782958,
+    "job": 117743812926,
+    "createdAtUtc": "2026-10-18T17:41:58Z",
+    "checkedAtUtc": "2026-10-18T17:42:05.306Z",
+    "completedAtUtc": "2026-10-18T17:42:07Z",
+    "conclusion": "success",
+    "passed": true,
+    "checksPassed": 11,
+    "postPublication": true,
+    "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/39150782958"
   }
 }
