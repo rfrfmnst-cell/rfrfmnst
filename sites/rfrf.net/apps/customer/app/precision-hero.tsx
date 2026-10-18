@@ -274,6 +274,13 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
           </StoryPanel>
 
           <StoryPanel className={styles.offerPanel} title="عرض موثّق">
+            <Image
+              src="/hero/verified-offer-illustration.webp"
+              alt="صورة توضيحية لعرض قطع غيار مع علامة مراجعة"
+              fill
+              sizes="(max-width: 760px) 30vw, 220px"
+              className={styles.offerImage}
+            />
             <motion.div
               className={styles.verifiedMark}
               initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
@@ -289,6 +296,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               </span>
               <span>
                 رحلة الطلب
+                <small className={styles.illustrationLabel}>صورة توضيحية</small>
                 <strong>
                   <Check size={15} aria-hidden /> القرار لك
                 </strong>

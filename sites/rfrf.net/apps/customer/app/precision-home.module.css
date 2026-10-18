@@ -27,35 +27,56 @@
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  border-block-end: 1px solid rgb(255 255 255 / 12%);
+  border-block-end: 1px solid rgb(180 163 255 / 26%);
+  background: linear-gradient(90deg, rgb(12 20 37 / 30%), rgb(50 36 86 / 24%));
+  font-family: var(--font-display);
 }
 
 .brand {
-  color: var(--rr-color-ivory-50);
+  color: #f5f1ff;
 }
 
 .nav {
   display: flex;
   align-items: center;
   gap: 30px;
+  font-family: var(--font-display);
   font-size: 0.91rem;
   font-weight: 600;
+  line-height: 1.65;
+  letter-spacing: 0;
 }
 .nav a {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   min-height: 44px;
-  color: rgb(251 248 242 / 82%);
+  color: #e9e5ff;
   text-decoration: none;
+  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 .nav a:hover {
-  color: var(--rr-color-white);
+  color: #cbbfff;
+}
+.header a:focus-visible {
+  outline: 3px solid #edc779;
+  outline-offset: 5px;
+  border-radius: 8px;
 }
 .nav .login {
   padding: 11px 18px;
-  border: 1px solid rgb(255 255 255 / 28%);
+  border: 1px solid #8e79e8;
   border-radius: var(--rr-radius-pill);
+  color: #ffffff;
+  background: linear-gradient(135deg, #674ad7, #5235b8);
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgb(83 55 176 / 18%);
+}
+
+.nav .login:hover {
+  color: #ffffff;
+  background: #5135b5;
+  box-shadow: 0 8px 22px rgb(83 55 176 / 26%);
 }
 
 .heroGrid {
@@ -304,7 +325,25 @@
     var(--rr-color-violet-600)
   );
 }
+.offerImage {
+  object-fit: cover;
+  object-position: 50% 32%;
+}
+.offerPanel .panelBody::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(7 16 31 / 4%) 25%, rgb(7 16 31 / 78%));
+  pointer-events: none;
+}
+.illustrationLabel {
+  color: #d9def0;
+  font-size: .68rem;
+  line-height: 1.5;
+}
 .verifiedMark {
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 16px 12px;
   display: grid;
@@ -343,14 +382,27 @@
   background: rgb(251 248 242 / 70%);
 }
 :global(:root[data-theme="light"]) .header {
-  border-color: rgb(7 16 31 / 12%);
+  border-color: #ded6f0;
+  background: linear-gradient(90deg, rgb(255 255 255 / 40%), rgb(243 239 251 / 64%));
 }
-:global(:root[data-theme="light"]) .brand,
+:global(:root[data-theme="light"]) .brand {
+  color: #1a1630;
+}
 :global(:root[data-theme="light"]) .nav a {
-  color: var(--rr-color-navy-950);
+  color: #40394f;
+}
+:global(:root[data-theme="light"]) .nav a:hover {
+  color: #5d40c2;
+}
+:global(:root[data-theme="light"]) .header a:focus-visible {
+  outline-color: #6850ca;
 }
 :global(:root[data-theme="light"]) .nav .login {
-  border-color: rgb(7 16 31 / 20%);
+  border-color: #684ad1;
+  color: #ffffff;
+}
+:global(:root[data-theme="light"]) .nav .login:hover {
+  color: #ffffff;
 }
 :global(:root[data-theme="light"]) .copy > p {
   color: var(--rr-color-slate-600);
