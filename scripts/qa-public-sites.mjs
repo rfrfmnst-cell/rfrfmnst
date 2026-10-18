@@ -11,7 +11,8 @@ export const PUBLIC_CHECKS = [
   { name: 'حماية استيراد المورد', url: 'https://supplier.rfrf.net/catalog/import', kind: 'guest-guard' },
   { name: 'هوية بوابة المورد', url: 'https://supplier.rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-supplier' },
   { name: 'دخول الإدارة', url: 'https://admin.rfrf.net/login', kind: 'html', markers: ['دخول'] },
-  { name: 'واجهة API', url: 'https://api.rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-api' },
+  { name: 'حماية لوحة العميل', url: 'https://rfrf.net/account', kind: 'guest-guard' },
+  { name: 'رسالة تعذر دخول المورد', url: 'https://supplier.rfrf.net/login?mode=phone&err=not_allowed', kind: 'html', markers: ['تواصل مع دعم رفرف', 'إنشاء حساب مورد'] },
 ];
 
 export function assessResponse(check, response) {
