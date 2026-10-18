@@ -12,6 +12,7 @@ export const PUBLIC_CHECKS = [
   { name: 'هوية بوابة المورد', url: 'https://supplier.rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-supplier' },
   { name: 'دخول الإدارة', url: 'https://admin.rfrf.net/login', kind: 'html', markers: ['دخول'] },
   { name: 'حماية لوحة العميل', url: 'https://rfrf.net/account', kind: 'guest-guard' },
+  { name: 'تحقق بيانات المركبة برقم الهيكل', url: 'https://rfrf.net/api/vehicle/vin', kind: 'vin-lookup', method: 'POST', body: { vin: '1HGCM82633A004352' } },
   { name: 'رسالة تعذر دخول المورد', url: 'https://supplier.rfrf.net/login?mode=phone&err=not_allowed', kind: 'html', markers: ['تواصل مع دعم رفرف', 'إنشاء حساب مورد'] },
 ];
 
@@ -22,6 +23,9 @@ export function assessResponse(check, response) {
     return target.origin === new URL(check.url).origin && target.pathname === '/login' ? null : 'وجهة تحويل الدخول غير متوقعة';
   }
   if (response.status !== 200) return `HTTP ${response.status}`;
+  if (check.kind === 'vin-lookup') {
+    try { const result = JSON.parse(response.body); return ['decoded', 'partial'].includes(result.status) && result.source === 'NHTSA vPIC' && result.vehicle?.make && result.vehicle?.model ? null : 'لم يُرجع تحقق VIN بيانات مركبة موثقة'; } catch { return 'استجابة تحقق VIN غير صالحة'; }
+  }
   if (check.kind === 'identity') {
     try {
       const data = JSON.parse(response.body);
@@ -35,7 +39,7 @@ export function assessResponse(check, response) {
 async function checkPublicPage(check) {
   const started = Date.now();
   try {
-    const response = await fetch(check.url, { redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { Accept: 'text/html,application/json', 'Cache-Control': 'no-cache' } });
+    const response = await fetch(check.url, { method: check.method || 'GET', body: check.method === 'POST' ? JSON.stringify(check.body) : undefined, redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { ...(check.method === 'POST' ? { 'Content-Type': 'application/json' } : {}), Accept: 'text/html,application/json', 'Cache-Control': 'no-cache' } });
     const body = await response.text();
     const error = assessResponse(check, { status: response.status, body, contentType: response.headers.get('content-type') ?? '', location: response.headers.get('location') });
     return { name: check.name, url: check.url, ok: !error, status: response.status, durationMs: Date.now() - started, error };
@@ -47,7 +51,7 @@ async function checkPublicPage(check) {
 export async function runPublicReview() {
   const checks = [];
   for (let offset = 0; offset < PUBLIC_CHECKS.length; offset += 3) checks.push(...await Promise.all(PUBLIC_CHECKS.slice(offset, offset + 3).map(checkPublicPage)));
-  const report = { checkedAtUtc: new Date().toISOString(), passed: checks.every((check) => check.ok), checks, limits: ['فحوص GET بلا تسجيل دخول أو كتابة بيانات', 'لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون', 'لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT'] };
+  const report = { checkedAtUtc: new Date().toISOString(), passed: checks.every((check) => check.ok), checks, limits: ['فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين', 'لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون', 'لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT'] };
   const directory = resolve(process.env.QA_REPORT_DIRECTORY || 'outputs/hourly-review');
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'report.json'), JSON.stringify(report, null, 2) + '\n');
