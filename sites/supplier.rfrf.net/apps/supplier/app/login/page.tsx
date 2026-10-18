@@ -153,11 +153,12 @@ export default async function LoginPage({
                 />
               </label>
               <label>
-                الدولة
+                رمز الدولة (حرفان)
                 <input
                   name="countryCode"
                   autoComplete="country"
                   defaultValue="SA"
+                  title="رمز الدولة من حرفين، مثل SA للسعودية"
                   pattern="[A-Za-z]{2}"
                   minLength={2}
                   maxLength={2}

@@ -6,6 +6,11 @@
 .login-card h1 { font-size: clamp(1.65rem, 4vw, 2rem); line-height: 1.55; letter-spacing: 0; }
 .login-card .login-sub { font-size: 1rem; line-height: 1.9; color: var(--rafraf-muted); }
 .login-card .qform { gap: 18px; }
+.login-card .qgrid { gap: 16px; }
+.login-card .qgrid label { display: grid; gap: 8px; align-content: start; }
+.login-card .qgrid input { width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid var(--rafraf-border); border-radius: 12px; color: var(--rafraf-text); background: var(--rafraf-surface); }
+.login-card .qform > label > div:focus-within { outline: 3px solid var(--rafraf-focus); outline-offset: 3px; }
+.login-card .qform > label > div > input:focus-visible { outline: none; }
 .login-card .qform :is(input, select) { font: inherit; min-height: 50px; border-radius: 12px; box-shadow: none; }
 .login-card .qform button[type='submit'] { min-height: 50px; border-radius: 12px; font: inherit; font-weight: 600; }
 .login-card :is(a, button, input, select):focus-visible { outline: 3px solid var(--rafraf-focus); outline-offset: 3px; }
