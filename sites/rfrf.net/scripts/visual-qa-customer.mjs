@@ -84,7 +84,12 @@ try {
         await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).fill('123');
         await page.getByRole('button',{name:'استخدم في المحادثة'}).click();
         check(`${device} invalid VIN is rejected`, await page.locator('[role=alert]').filter({hasText:'17'}).isVisible());
+        const invalidVinResponse = await page.request.post(report.origin+'/api/vehicle/vin',{data:{vin:'123'}});
+        check(`${device} VIN API rejects invalid input before provider`,invalidVinResponse.status()===400);
+        await page.route('**/api/vehicle/vin',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{make:'TOYOTA',model:'Camry',year:'2021',trim:'',engine:''}})}));
         await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).fill('JTNB11HK5M3087962');
+        await page.getByRole('button',{name:'التحقق من المركبة عبر NHTSA'}).click();
+        check(`${device} decoded VIN data requires review`,await page.getByRole('status').filter({hasText:'TOYOTA'}).isVisible());
         await page.getByRole('button',{name:'استخدم في المحادثة'}).click();
         check(`${device} VIN goes to composer without URL disclosure`, (await composer.inputValue()).includes('JTNB11HK5M3087962') && !page.url().includes('JTNB'));
         await page.getByRole('button',{name:'رقم القطعة',exact:true}).click();

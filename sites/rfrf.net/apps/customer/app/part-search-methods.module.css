@@ -13,3 +13,5 @@
 .panel .error { color:var(--rafraf-danger,#b91c1c); }
 .methods :is(input,button):focus-visible { outline:3px solid var(--rafraf-focus);outline-offset:3px; }
 @media(max-width:680px) { .buttons { display:grid;grid-template-columns:repeat(2,minmax(0,1fr)); }.buttons button { padding-inline:8px; }.inputRow { flex-direction:column; }.panel { padding:15px; } }
+
+.lookup {display:grid;gap:10px;margin-top:14px;}.lookup>button {justify-self:start;min-height:44px;padding:10px 14px;border:1px solid var(--rafraf-primary);border-radius:9px;background:var(--rafraf-raised);color:var(--rafraf-primary-hover);font:inherit;font-size:.82rem;cursor:pointer;}.lookup small {color:var(--rafraf-muted);font-size:.73rem;line-height:1.9;}.lookup p {padding:12px;border:1px solid var(--rafraf-border);border-radius:9px;background:var(--rafraf-raised);color:var(--rafraf-text);}
