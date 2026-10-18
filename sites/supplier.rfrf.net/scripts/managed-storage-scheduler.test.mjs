@@ -36,11 +36,11 @@ test('entry requires original supplier synchronously even when loaded by another
   runInNewContext(source, {
     require: (path) => {
       order.push(path);
-      return { scheduleStorageProbe: () => order.push('scheduled') };
+      return { installManagedActionOrigin: () => order.push('origin-installed'), scheduleStorageProbe: () => order.push('scheduled') };
     },
     module: { parent: {} },
   });
-  assert.deepEqual(order, ['./apps/supplier/server.js', './managed-storage-scheduler.cjs', 'scheduled']);
+  assert.deepEqual(order, ['./managed-action-origin.cjs', 'origin-installed', './apps/supplier/server.js', './managed-storage-scheduler.cjs', 'scheduled']);
 });
 
 test('probe remains deferred and begins only after an HTTP Server is listening', async () => {

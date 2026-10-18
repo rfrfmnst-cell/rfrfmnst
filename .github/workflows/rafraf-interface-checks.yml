@@ -49,6 +49,8 @@ jobs:
           else
             node --experimental-strip-types --test apps/supplier/app/catalog/import/catalog-import-parser.test.mjs apps/supplier/lib/auth-input.test.mjs apps/supplier/lib/auth-flow.test.mjs
           fi
+      - name: Verify managed socket redirects and startup
+        run: node --test scripts/managed-action-origin.test.mjs scripts/managed-storage-scheduler.test.mjs
       - name: Build and verify Hostinger runtime without production credentials
         env:
           NEXT_TELEMETRY_DISABLED: '1'
