@@ -7,10 +7,11 @@ import { storeChatEntryDraft } from '../../lib/chat-entry-draft';
 import styles from './vehicle-finder.module.css';
 
 const FILTERS = [{id:'all',label:'كل العلامات',icon:CarFront},{id:'cars',label:'سيارات',icon:CarFront},{id:'trucks',label:'شاحنات',icon:Truck},{id:'equipment',label:'معدات',icon:Tractor}] as const;
-const LOGOS = new Set(['toyota','honda','hyundai','nissan','kia','ford','chevrolet','mazda','mitsubishi','suzuki','bmw','audi','volkswagen','volvo','scania','man','caterpillar']);
+const LOGOS = new Set(['toyota','honda','hyundai','nissan','kia','ford','chevrolet','mazda','mitsubishi','suzuki','bmw','audi','volkswagen','volvo','scania','man','caterpillar','mg']);
 
 export function VehicleFinder({ initialCategory, latestYear }: {initialCategory: VehicleCategory; latestYear: number}) {
   const [category,setCategory] = useState(initialCategory);
+  const [chineseOnly,setChineseOnly] = useState(false);
   const [query,setQuery] = useState('');
   const [brandId,setBrandId] = useState('');
   const [model,setModel] = useState('');
@@ -24,7 +25,7 @@ export function VehicleFinder({ initialCategory, latestYear }: {initialCategory:
   const heading = useRef<HTMLHeadingElement>(null);
   const brand = VEHICLE_BRANDS.find(b=>b.id===brandId);
   const selectedModel = model === 'other' ? manualModel.trim() : model;
-  const brands = findVehicleBrands(category,query);
+  const brands = findVehicleBrands(category,query,chineseOnly);
   const grades = vehicleTrimSuggestions(brandId,selectedModel,year);
   const ready = Boolean(brand && selectedModel && year && (trim.trim() || unknownTrim));
 
@@ -48,14 +49,14 @@ export function VehicleFinder({ initialCategory, latestYear }: {initialCategory:
     </ol>
     {!brand ? <>
       <div className={styles.filters}>
-        <div className={styles.categories} role="group" aria-label="مجال المركبة">{FILTERS.map(({id,label,icon:Icon})=><button key={id} type="button" aria-pressed={category===id} onClick={()=>setCategory(id)}><Icon size={18} aria-hidden/>{label}</button>)}</div>
-        <label className={styles.search}><Search size={20} aria-hidden/><span className="sr-only">ابحث عن علامة المركبة</span><input type="search" value={query} maxLength={80} onChange={e=>setQuery(e.target.value)} placeholder="تويوتا، هوندا، هيونداي…"/>{query&&<button type="button" aria-label="مسح البحث" onClick={()=>setQuery('')}><X size={18} aria-hidden/></button>}</label>
+        <div className={styles.categories} role="group" aria-label="مجال المركبة">{FILTERS.map(({id,label,icon:Icon})=><button key={id} type="button" aria-pressed={category===id} onClick={()=>setCategory(id)}><Icon size={18} aria-hidden/>{label}</button>)}<button type="button" aria-pressed={chineseOnly} onClick={()=>setChineseOnly(!chineseOnly)}>العلامات الصينية</button></div>
+        <label className={styles.search}><Search size={20} aria-hidden/><span className="sr-only">ابحث عن علامة المركبة</span><input type="search" value={query} maxLength={80} onChange={e=>setQuery(e.target.value)} placeholder="تويوتا، شانجان، جيلي، BYD…"/>{query&&<button type="button" aria-label="مسح البحث" onClick={()=>setQuery('')}><X size={18} aria-hidden/></button>}</label>
       </div>
       <p className={styles.count} role="status">{brands.length} علامة متاحة للاختيار</p>
       {brands.length ? <ul className={styles.brandGrid}>{brands.map(b=><li key={b.id}><button type="button" className={styles.brandCard} aria-label={`اختيار ${b.name}`} onClick={()=>resetAfterBrand(b.id)}>
         {LOGOS.has(b.id)?<img src={`/vehicle-brands/${b.id}.svg`} width="88" height="58" alt="" loading="lazy"/>:<span className={styles.wordmark} aria-hidden dir="ltr">{b.latin}</span>}
         <strong>{b.name}</strong><span dir="ltr">{b.latin}</span><ArrowLeft size={17} aria-hidden/>
-      </button></li>)}</ul> : <div className={styles.empty}><Search size={32} aria-hidden/><h2>لم نجد علامة بهذا البحث</h2><p>جرّب الاسم بالعربية أو الإنجليزية.</p><button type="button" onClick={()=>{setQuery('');setCategory('all');}}>عرض كل العلامات</button></div>}
+      </button></li>)}</ul> : <div className={styles.empty}><Search size={32} aria-hidden/><h2>لم نجد علامة بهذا البحث</h2><p>جرّب الاسم بالعربية أو الإنجليزية.</p><button type="button" onClick={()=>{setQuery('');setCategory('all');setChineseOnly(false);}}>عرض كل العلامات</button></div>}
     </> : <div className={styles.selection}>
       <div className={styles.selectedBrand}><div><span className={styles.check}><Check size={20} aria-hidden/></span><strong>{brand.name}</strong><span dir="ltr">{brand.latin}</span></div><button type="button" onClick={()=>resetAfterBrand('')}><ArrowRight size={17} aria-hidden/>تغيير العلامة</button></div>
       <h2 ref={heading} tabIndex={-1}>حدد مركبتك بدقة</h2><p className={styles.hint}>اختر التفاصيل كما هي في وثائق المركبة. يمكنك كتابة الطراز أو الفئة إذا لم يظهر في القائمة.</p>

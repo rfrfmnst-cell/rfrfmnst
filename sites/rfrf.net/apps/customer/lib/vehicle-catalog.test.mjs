@@ -28,3 +28,21 @@ test('incomplete or impossible vehicle selections cannot be handed off', () => {
     assert.equal(vehicleRequestText({brand:'toyota',model:'كامري',year:'2026',trim:'LE',...patch}), null);
   }
 });
+
+test('Chinese filter combines vehicle categories and common Arabic spelling aliases', () => {
+  for (const [query, id] of [['شانغان','changan'],['امجي','mg'],['بيوايدي','byd'],['لينك اند كو','lynkco'],['سكاي ويل','skyworth'],['ليشيانغ','li-auto']]) {
+    assert.ok(findVehicleBrands('cars', query, true).some(brand => brand.id === id), query);
+  }
+  assert.deepEqual(findVehicleBrands('cars', 'Toyota', true), []);
+  assert.ok(findVehicleBrands('equipment', 'ساني', true).some(brand => brand.id === 'sany'));
+  assert.deepEqual(findVehicleBrands('equipment', 'جيلي', true), []);
+  assert.equal(findVehicleBrands('cars', 'GMC', true).length, 0);
+  assert.ok(findVehicleBrands('cars', 'JMC', true).some(brand => brand.id === 'jmc'));
+});
+test('new Chinese make details preserve exact model and part numbers during handoff', () => {
+  const text = vehicleRequestText({brand:'zeekr',model:'001',year:'2026',trim:'غير معروفة',part:'00071-AB'});
+  assert.ok(text.includes('زيكر'));
+  assert.ok(text.includes('001'));
+  assert.ok(text.includes('00071-AB'));
+  assert.deepEqual(vehicleTrimSuggestions('byd', 'SEAL', '2026'), []);
+});

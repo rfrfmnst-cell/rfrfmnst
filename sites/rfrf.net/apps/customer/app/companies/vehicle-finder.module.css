@@ -16,10 +16,10 @@
 .brandCard { position:relative;width:100%;min-height:166px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px;border:1px solid var(--rafraf-border);background:var(--rafraf-surface);border-radius:18px;padding:22px 12px;cursor:pointer;color:var(--rafraf-text);font:inherit;transition:border-color .15s,box-shadow .15s; }
 .brandCard:hover { border-color:var(--rafraf-primary);box-shadow:0 6px 22px #5844df12; }
 .brandCard img { object-fit:contain;max-height:58px;max-width:96px;margin-bottom:7px;background:#fff;border-radius:8px;padding:6px; }
-.brandCard strong { font-size:1rem;font-weight:600; }
+.brandCard strong { overflow-wrap:anywhere; font-size:1rem;font-weight:600; }
 .brandCard>span:not(.wordmark) { color:var(--rafraf-muted);font-size:.75rem; }
 .brandCard>svg { position:absolute;bottom:12px;left:12px;color:var(--rafraf-muted); }
-.wordmark { display:grid;place-items:center;min-height:59px;font-family:Arial,sans-serif;font-weight:800;font-size:1.1rem; }
+.wordmark { max-width:100%;overflow-wrap:anywhere;text-align:center;display:grid;place-items:center;min-height:59px;font-family:Arial,sans-serif;font-weight:800;font-size:1.1rem; }
 .selection { border:1px solid var(--rafraf-border);border-radius:22px;background:var(--rafraf-surface);padding:32px;max-width:920px;margin-inline:auto; }
 .selectedBrand { display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:24px;margin-bottom:26px;border-bottom:1px solid var(--rafraf-border); }
 .selectedBrand>div { display:flex;align-items:center;gap:12px;flex-wrap:wrap; }
