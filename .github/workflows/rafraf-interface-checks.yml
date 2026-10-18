@@ -7,11 +7,7 @@ on:
       - sites/rfrf.net/**
       - sites/supplier.rfrf.net/**
       - .github/workflows/rafraf-interface-checks.yml
-  pull_request:
-    paths:
-      - sites/rfrf.net/**
-      - sites/supplier.rfrf.net/**
-      - .github/workflows/rafraf-interface-checks.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -57,17 +53,56 @@ jobs:
           NEXT_TELEMETRY_DISABLED: '1'
           TURBO_TELEMETRY_DISABLED: '1'
         run: pnpm run build:hostinger
-      - name: Install browser for isolated customer preview
-        if: matrix.app == 'customer'
-        run: pnpm exec playwright install --with-deps chromium
-      - name: Review desktop and mobile production pages
-        if: matrix.app == 'customer'
-        run: node scripts/visual-qa-customer.mjs
-      - name: Save visual review evidence
-        if: always() && matrix.app == 'customer'
+      - name: Archive the tested runtime with symlinks intact
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/outputs"
+          tar -czf "$GITHUB_WORKSPACE/outputs/${{ matrix.app }}-runtime.tgz" hostinger-runtime
+      - name: Save tested runtime for isolated browser review
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: rafraf-customer-visual-${{ github.run_id }}
-          path: sites/rfrf.net/outputs/visual-review/
+          name: rafraf-${{ matrix.app }}-runtime-${{ github.run_id }}
+          path: outputs/${{ matrix.app }}-runtime.tgz
+          retention-days: 1
+
+  visual-review:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: rafraf-*-runtime-${{ github.run_id }}
+          merge-multiple: true
+          path: outputs/runtimes
+      - name: Restore the tested application runtimes
+        run: |
+          tar -xzf outputs/runtimes/customer-runtime.tgz -C sites/rfrf.net
+          tar -xzf outputs/runtimes/supplier-runtime.tgz -C sites/supplier.rfrf.net
+      - name: Prepare a browser on a supported host
+        run: |
+          npm install --prefix /tmp/rafraf-browser @playwright/test@1.61.1 --ignore-scripts
+          /tmp/rafraf-browser/node_modules/.bin/playwright install --with-deps chromium
+          cp sites/rfrf.net/scripts/visual-qa-customer.mjs /tmp/rafraf-browser/customer.mjs
+          cp scripts/visual-qa-supplier.mjs /tmp/rafraf-browser/supplier.mjs
+      - name: Review customer desktop and mobile pages
+        working-directory: sites/rfrf.net
+        run: node /tmp/rafraf-browser/customer.mjs
+      - name: Review supplier desktop and mobile login
+        working-directory: sites/supplier.rfrf.net
+        run: node /tmp/rafraf-browser/supplier.mjs
+      - name: Save screenshots and behavior results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: rafraf-interface-visual-${{ github.run_id }}
+          path: |
+            sites/rfrf.net/outputs/visual-review/
+            sites/supplier.rfrf.net/outputs/visual-review/
           if-no-files-found: warn
           retention-days: 7

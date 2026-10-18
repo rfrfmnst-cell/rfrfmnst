@@ -46,7 +46,7 @@ export default async function LoginPage({
 
   if (step === 'check_email') {
     return (
-      <main className="login-wrap">
+      <div className="login-wrap">
         <section className="login-card" aria-live="polite">
           <BrandLogo className="login-logo" />
           <p className="login-kicker">تحقق البريد</p>
@@ -68,12 +68,12 @@ export default async function LoginPage({
             .
           </p>
         </section>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="login-wrap">
+    <div className="login-wrap">
       <section className="login-card" aria-labelledby="supplier-login-title">
         <a className="login-home-link" href="https://rfrf.net">العودة إلى رفرف</a>
         <BrandLogo className="login-logo" />
@@ -239,6 +239,6 @@ export default async function LoginPage({
           </span>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

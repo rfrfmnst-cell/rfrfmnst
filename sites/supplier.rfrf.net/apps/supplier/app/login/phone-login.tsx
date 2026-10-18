@@ -48,7 +48,7 @@ export default async function PhoneLoginPage({
 
   if (step === 'verify' && challenge) {
     return (
-      <main className="login-wrap">
+      <div className="login-wrap">
         <form action={verifyOtp} className="login-card">
           {isRegistrationVerification && (
             <input type="hidden" name="registration" value="1" />
@@ -124,12 +124,12 @@ export default async function PhoneLoginPage({
             </Link>
           </p>
         </form>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="login-wrap">
+    <div className="login-wrap">
       <form action={requestOtp} className="login-card">
         {(registrationDraft || registration === '1') && (
           <input type="hidden" name="registration" value="1" />
@@ -208,6 +208,6 @@ export default async function PhoneLoginPage({
           للتسجيل كمنشأة جديدة، <Link href="/?register=1">انقر هنا</Link>.
         </p>
       </form>
-    </main>
+    </div>
   );
 }

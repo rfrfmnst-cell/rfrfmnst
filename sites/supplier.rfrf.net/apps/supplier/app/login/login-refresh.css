@@ -1,4 +1,7 @@
 /* Limited to authentication surfaces; keep existing dashboard and form actions intact. */
+.supplier-shell:has(.login-wrap) { display: block; }
+.supplier-shell:has(.login-wrap) .sp-sidebar { display: none; }
+.supplier-shell:has(.login-wrap) .sp-main { margin: 0; padding: 0; min-width: 0; }
 .login-card { width: min(100%, 540px); padding: clamp(22px, 4vw, 38px); border-radius: 22px; }
 .login-card h1 { font-size: clamp(1.65rem, 4vw, 2rem); line-height: 1.55; letter-spacing: 0; }
 .login-card .login-sub { font-size: 1rem; line-height: 1.9; color: var(--rafraf-muted); }
