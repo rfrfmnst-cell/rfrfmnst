@@ -7,7 +7,7 @@ import { storeChatEntryDraft } from '../../lib/chat-entry-draft';
 import styles from './vehicle-finder.module.css';
 
 const FILTERS = [{id:'all',label:'كل العلامات',icon:CarFront},{id:'cars',label:'سيارات',icon:CarFront},{id:'trucks',label:'شاحنات',icon:Truck},{id:'equipment',label:'معدات',icon:Tractor}] as const;
-const LOGOS = new Set(['toyota','honda','hyundai','nissan','kia','ford','chevrolet','mazda','mitsubishi','suzuki','bmw','audi','volkswagen','volvo','scania','man','caterpillar','jcb']);
+const LOGOS = new Set(['toyota','honda','hyundai','nissan','kia','ford','chevrolet','mazda','mitsubishi','suzuki','bmw','audi','volkswagen','volvo','scania','man','caterpillar']);
 
 export function VehicleFinder({ initialCategory, latestYear }: {initialCategory: VehicleCategory; latestYear: number}) {
   const [category,setCategory] = useState(initialCategory);
