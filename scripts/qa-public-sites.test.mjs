@@ -19,3 +19,10 @@ test('external or absent login redirects fail the authentication guard', () => {
   assert.ok(assessResponse(check, { status: 307, location: 'https://example.org/login' }));
   assert.ok(assessResponse(check, { status: 200, location: null }));
 });
+
+test('VIN check requires actual vehicle fields and the expected source', () => {
+  const check = { kind: 'vin-lookup' };
+  assert.equal(assessResponse(check, { status: 200, body: JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{make:'HONDA',model:'Accord'}}) }), null);
+  assert.ok(assessResponse(check, {status:200,body:JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{}})}));
+  assert.ok(assessResponse(check, {status:200,body:JSON.stringify({status:'available'})}));
+});
