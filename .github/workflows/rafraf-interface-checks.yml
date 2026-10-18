@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           if [ '${{ matrix.app }}' = customer ]; then
-            node --experimental-strip-types --test apps/customer/lib/parts-companies.test.mjs
+            node --experimental-strip-types --test apps/customer/lib/vehicle-catalog.test.mjs apps/customer/lib/part-search-intake.test.mjs
           else
             node --experimental-strip-types --test apps/supplier/app/catalog/import/catalog-import-parser.test.mjs
           fi

@@ -43,7 +43,7 @@ export function HomeDiscovery() {
           </Link>
           <Link href="/companies">
             <Building2 size={22} aria-hidden />
-            <span>شركات قطع الغيار</span>
+            <span>علامات المركبات</span>
             <ArrowUpLeft size={18} aria-hidden />
           </Link>
           <Link href="/track">
@@ -58,7 +58,7 @@ export function HomeDiscovery() {
             <h2 id="discover-title">اعرف وجهتك، وابدأ باحتياجك.</h2>
           </div>
           <Link href="/companies">
-            كل الشركات <ArrowUpLeft size={18} aria-hidden />
+            كل العلامات <ArrowUpLeft size={18} aria-hidden />
           </Link>
         </div>
         <div className={styles.categories}>
@@ -70,7 +70,7 @@ export function HomeDiscovery() {
               <h3>{title}</h3>
               <p>{text}</p>
               <span className={styles.explore}>
-                استكشف الشركات <ArrowUpLeft size={17} aria-hidden />
+                اختر العلامة <ArrowUpLeft size={17} aria-hidden />
               </span>
             </Link>
           ))}

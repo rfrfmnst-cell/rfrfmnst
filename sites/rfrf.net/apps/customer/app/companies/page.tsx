@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BrandLogo } from "@rafraf/ui/brand-logo";
-import { companyCategory } from "../../lib/parts-companies";
+import { vehicleCategory } from "../../lib/vehicle-catalog";
 import { SiteFooter } from "../site-footer";
-import { CompanyDirectory } from "./company-directory";
+import { VehicleFinder } from "./vehicle-finder";
 import styles from "./companies.module.css";
 
 export const metadata: Metadata = {
-  title: "شركات قطع الغيار في السعودية — رفرف",
+  title: "علامات المركبات وقطع الغيار — رفرف",
   description:
-    "استكشف شركات قطع غيار السيارات والشاحنات والمعدات في السعودية وروابط مواقعها الرسمية.",
+    "اختر علامة مركبتك ثم نوعها وسنة الصنع والفئة لتحديد طلب قطعة الغيار بدقة.",
   alternates: { canonical: "/companies" },
 };
 
@@ -19,7 +19,7 @@ export default async function CompaniesPage({
 }: {
   searchParams: Promise<{ category?: string | string[] }>;
 }) {
-  const category = companyCategory((await searchParams).category);
+  const category = vehicleCategory((await searchParams).category);
   return (
     <>
       <main className={styles.page} id="main-content">
@@ -32,18 +32,18 @@ export default async function CompaniesPage({
           </Link>
         </header>
         <section className={styles.intro} aria-labelledby="companies-title">
-          <p className={styles.eyebrow}>دليلك في السوق السعودي</p>
+          <p className={styles.eyebrow}>قطعتك تبدأ من مركبتك</p>
           <h1 id="companies-title">
-            شركات قطع الغيار،
+            اختر علامة مركبتك،
             <br />
-            في مكان واحد.
+            وحدد قطعتك بدقة.
           </h1>
           <p>
-            سيارات، شاحنات، ومعدات. اختر المجال أو ابحث باسم الشركة أو علامة
-            المركبة، ثم انتقل إلى موقعها الرسمي.
+            تويوتا، هوندا، هيونداي وغيرها. ابدأ بالعلامة، ثم نوع المركبة والموديل
+            والفئة، وأكمل طلبك مع مساعد رفرف.
           </p>
         </section>
-        <CompanyDirectory key={category} initialCategory={category} />
+        <VehicleFinder key={category} initialCategory={category} latestYear={new Date().getUTCFullYear() + 1} />
         <aside className={styles.help}>
           <div>
             <h2>عندك رقم قطعة أو صورة؟</h2>
@@ -54,8 +54,8 @@ export default async function CompaniesPage({
           </Link>
         </aside>
         <p className={styles.note}>
-          دليل استكشافي لمواقع الشركات الرسمية؛ لا يمثل مخزونًا متاحًا أو شراكة
-          مع رفرف. آخر مراجعة للروابط: 18 أكتوبر 2026.
+          العلامات للتعريف بالمركبة. الاختيار لا يثبت توفر القطعة أو توافقها؛ نراجع
+          تفاصيل المركبة ورقم القطعة قبل اعتماد الطلب.
         </p>
       </main>
       <SiteFooter />

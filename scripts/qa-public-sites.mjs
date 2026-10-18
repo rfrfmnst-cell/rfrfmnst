@@ -3,9 +3,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const PUBLIC_CHECKS = [
-  { name: 'واجهة العميل', url: 'https://rfrf.net/', kind: 'html', markers: ['شركات قطع الغيار', '0500894003'] },
+  { name: 'واجهة العميل', url: 'https://rfrf.net/', kind: 'html', markers: ['علامات المركبات', '0500894003'] },
   { name: 'هوية تطبيق العميل', url: 'https://rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-customer' },
-  { name: 'دليل الشركات', url: 'https://rfrf.net/companies', kind: 'html', markers: ['شركات قطع الغيار', 'الموقع الرسمي'] },
+  { name: 'اختيار علامة المركبة', url: 'https://rfrf.net/companies', kind: 'html', markers: ['اختر علامة مركبتك', 'نوع المركبة', 'الفئة'] },
   { name: 'دخول العميل', url: 'https://rfrf.net/login', kind: 'html', markers: ['تسجيل الدخول'] },
   { name: 'تسجيل المورد', url: 'https://supplier.rfrf.net/login?mode=register', kind: 'html', markers: ['جرّب رفرف لمدة 3 أشهر', 'الخطط المدفوعة أو المغادرة'] },
   { name: 'حماية استيراد المورد', url: 'https://supplier.rfrf.net/catalog/import', kind: 'guest-guard' },

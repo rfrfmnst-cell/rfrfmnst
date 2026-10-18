@@ -22,6 +22,8 @@ import {
   storeChatEntryDraft,
 } from "../lib/chat-entry-draft";
 import { SUPPLIER_REGISTRATION_URL } from "../lib/public-app-urls";
+import { PartSearchMethods } from './part-search-methods';
+import type { PartSearchMethod } from '../lib/part-search-intake';
 import motionStyles from "./precision-hero-motion.module.css";
 import mobileStyles from "./precision-hero-mobile.module.css";
 import styles from "./precision-home.module.css";
@@ -53,6 +55,7 @@ export interface PrecisionHeroProps {
 export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
   const [request, setRequest] = useState("");
   const [handoffError, setHandoffError] = useState("");
+  const [searchMethod, setSearchMethod] = useState<PartSearchMethod | null>(null);
   const reduceMotion = useReducedMotion();
 
   function goToChat(input: { text?: string; attachmentRequested?: boolean }) {
@@ -121,7 +124,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
         </Link>
         <nav className={styles.nav} aria-label="التنقل الرئيسي">
           <Link href="/companies">
-            <Building2 size={18} aria-hidden /> شركات قطع الغيار
+            <Building2 size={18} aria-hidden /> علامات المركبات
           </Link>
           <a href="#how">كيف تعمل</a>
           <Link className={styles.tracking} href="/track">
@@ -147,7 +150,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
           </h1>
           <p>
             من سيارتك إلى شاحنتك ومعداتك، اجمع تفاصيل القطعة في طلب واضح. ابدأ
-            بالمحادثة أو استكشف شركات قطع الغيار في السعودية.
+            بالمحادثة أو اختر علامة مركبتك وحدد تفاصيلها.
           </p>
 
           <form className={styles.composer} onSubmit={startChat}>
@@ -188,12 +191,12 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               <span className={styles.unavailableTool}>
                 <button
                   type="button"
-                  aria-label="مسح رقم VIN أو OEM — قريباً"
-                  disabled
+                  aria-label="البحث برقم الهيكل VIN"
+                  onClick={() => setSearchMethod("vin")}
                 >
                   <ScanLine size={21} aria-hidden />
                 </button>
-                <small aria-hidden="true">قريباً</small>
+                <small aria-hidden="true">VIN</small>
               </span>
               <span className={styles.unavailableTool}>
                 <button
@@ -221,6 +224,11 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               </p>
             ) : null}
           </form>
+          <PartSearchMethods activeMethod={searchMethod} onApply={(input) => {
+            const text = [request, input.text].filter(Boolean).join('\n');
+            if (text.length > CHAT_ENTRY_DRAFT_MAX_LENGTH) { setHandoffError('اختصر الوصف قليلًا حتى نحتفظ به مع بيانات البحث.'); return; }
+            goToChat({text, attachmentRequested:input.attachmentRequested});
+          }} />
         </div>
 
         <motion.div
