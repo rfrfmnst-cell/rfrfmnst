@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {stripTypeScriptTypes} from 'node:module';
+const source=stripTypeScriptTypes(await readFile(new URL('./vin-lookup.ts',import.meta.url),'utf8'),{mode:'strip'}).replace("'./vin'",JSON.stringify(new URL('./vin.ts',import.meta.url).href));
+const {lookupVehicleVin}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const vin='1HGCM82633A004352';
+test('invalid VINs never reach the upstream service',async()=>{let called=false;assert.deepEqual(await lookupVehicleVin('123',async()=>{called=true;}),{status:'invalid'});assert.equal(called,false);});
+test('decoding returns only bounded vehicle fields from the fixed official source',async()=>{const result=await lookupVehicleVin(vin,async url=>{assert.ok(url.startsWith('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/'));return Response.json({Results:[{Make:'HONDA',Model:'Accord',ModelYear:'2003',Trim:'EX',ErrorCode:'0',Secret:'ignored'}]});});assert.equal(result.status,'decoded');assert.equal(result.vehicle.year,'2003');assert.equal('Secret'in result.vehicle,false);});
+test('partial or unavailable decoding never claims successful compatibility',async()=>{assert.equal((await lookupVehicleVin(vin,async()=>Response.json({Results:[{Make:'HONDA',Model:'Accord',ModelYear:'2003',ErrorCode:'5'}]}))).status,'partial');assert.equal((await lookupVehicleVin(vin,async()=>new Response('',{status:503}))).status,'unavailable');assert.equal((await lookupVehicleVin(vin,async()=>Response.json({Results:[{}]}))).status,'not_found');});
+test('oversized and malformed provider responses are rejected',async()=>{assert.equal((await lookupVehicleVin(vin,async()=>new Response('x'.repeat(262145)))).status,'unavailable');assert.equal((await lookupVehicleVin(vin,async()=>new Response('not json'))).status,'unavailable');});

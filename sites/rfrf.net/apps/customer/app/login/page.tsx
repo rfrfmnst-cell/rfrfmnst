@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { authenticationCoreConfigured } from '../../lib/auth-configuration';
 import { turnstileSiteKey } from '@rafraf/shared/security/turnstile';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -94,12 +95,14 @@ export default async function LoginPage({
           cookieStore.get(CUSTOMER_REGISTRATION_COOKIE)?.value,
         )
       : null;
-  const effectiveError =
-    step === 'verify' && !challenge
+  const authAvailable = authenticationCoreConfigured() && !sessionUnavailable;
+  const effectiveError = !authAvailable
+    ? 'unavailable'
+    : step === 'verify' && !challenge
       ? 'expired'
-      : (err ?? (sessionUnavailable ? 'unavailable' : undefined));
+      : err;
   const siteKey = turnstileSiteKey() ?? '';
-  const googleAvailable = googleOAuthConfiguration() !== null;
+  const googleAvailable = authAvailable && googleOAuthConfiguration() !== null;
   const loginMethod =
     method === 'phone' || step === 'verify' ? 'phone' : 'email';
   const registerMethod = method === 'phone' ? 'phone' : 'email';
@@ -137,7 +140,7 @@ export default async function LoginPage({
                 type="text"
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                pattern="[0-9]{6}"
+                pattern="[0-9٠-٩۰-۹]{6}"
                 maxLength={6}
                 required
                 autoFocus
@@ -147,7 +150,11 @@ export default async function LoginPage({
               />
             </span>
           </label>
-          <SubmitButton className={styles.primary} pendingLabel="جارٍ التحقق…">
+          <SubmitButton
+            disabled={!authAvailable}
+            className={styles.primary}
+            pendingLabel="جارٍ التحقق…"
+          >
             تأكيد الدخول <LogIn size={18} aria-hidden />
           </SubmitButton>
           <AuthBackLink href="/login?method=phone" next={next}>
@@ -262,6 +269,7 @@ export default async function LoginPage({
                     </span>
                   </label>
                   <HumanVerificationSubmit
+                    disabled={!authAvailable}
                     siteKey={siteKey}
                     action="customer_otp"
                     label="إرسال رمز التحقق"
@@ -352,6 +360,7 @@ export default async function LoginPage({
               </p>
               {registrationProof ? (
                 <SubmitButton
+                  disabled={!authAvailable}
                   className={styles.primary}
                   pendingLabel="جارٍ إنشاء الحساب…"
                 >
@@ -359,6 +368,7 @@ export default async function LoginPage({
                 </SubmitButton>
               ) : (
                 <HumanVerificationSubmit
+                  disabled={!authAvailable}
                   siteKey={siteKey}
                   action="customer_register"
                   label="إنشاء الحساب بالبريد"
@@ -448,6 +458,7 @@ export default async function LoginPage({
               </span>
             </div>
             <HumanVerificationSubmit
+              disabled={!authAvailable}
               siteKey={siteKey}
               action="customer_password"
               label="تسجيل الدخول بالبريد"
@@ -479,6 +490,7 @@ export default async function LoginPage({
               </span>
             </label>
             <HumanVerificationSubmit
+              disabled={!authAvailable}
               siteKey={siteKey}
               action="customer_otp"
               label="إرسال رمز الدخول"

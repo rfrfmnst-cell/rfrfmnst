@@ -1,34 +1,44 @@
-'use client';
+"use client";
 
-import heroImage from '@rafraf/brand/assets/hero/rafraf-cinematic-dark.webp';
-import alternatorImage from '@rafraf/brand/assets/parts/alternator-precision.webp';
-import { BrandLogo } from '@rafraf/ui/brand-logo';
-import { Camera, Check, ScanLine, Send, Sparkles, Waves } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { type FormEvent, type ReactNode, useEffect, useState } from 'react';
+import heroImage from "@rafraf/brand/assets/hero/rafraf-cinematic-dark.webp";
+import alternatorImage from "@rafraf/brand/assets/parts/alternator-precision.webp";
+import { BrandLogo } from "@rafraf/ui/brand-logo";
+import {
+  Building2,
+  Camera,
+  Check,
+  ScanLine,
+  Send,
+  Sparkles,
+  Waves,
+} from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { type FormEvent, type ReactNode, useEffect, useState } from "react";
 import {
   CHAT_ENTRY_DRAFT_MAX_LENGTH,
   hasChatEntryDraftContent,
   storeChatEntryDraft,
-} from '../lib/chat-entry-draft';
-import { SUPPLIER_REGISTRATION_URL } from '../lib/public-app-urls';
-import motionStyles from './precision-hero-motion.module.css';
-import mobileStyles from './precision-hero-mobile.module.css';
-import styles from './precision-home.module.css';
+} from "../lib/chat-entry-draft";
+import { SUPPLIER_REGISTRATION_URL } from "../lib/public-app-urls";
+import { PartSearchMethods } from './part-search-methods';
+import type { PartSearchMethod } from '../lib/part-search-intake';
+import motionStyles from "./precision-hero-motion.module.css";
+import mobileStyles from "./precision-hero-mobile.module.css";
+import styles from "./precision-home.module.css";
 
 /**
  * مركبات شائعة في السوق السعودي تدور في لوحة «تحديد المركبة».
  * أسماء طرازات عامة ومدن فقط؛ لا أرقام هيكل حقيقية ولا بيانات عملاء.
  */
 const SAUDI_MARKET_VEHICLES = [
-  { name: 'تويوتا كامري 2019', city: 'الرياض' },
-  { name: 'تويوتا هايلكس 2021', city: 'الدمام' },
-  { name: 'نيسان باترول 2020', city: 'جدة' },
-  { name: 'هيونداي سوناتا 2022', city: 'الخبر' },
-  { name: 'تويوتا لاندكروزر 2018', city: 'مكة المكرمة' },
-  { name: 'جي إم سي يوكن 2023', city: 'المدينة المنورة' },
+  { name: "تويوتا كامري 2019", city: "الرياض" },
+  { name: "تويوتا هايلكس 2021", city: "الدمام" },
+  { name: "نيسان باترول 2020", city: "جدة" },
+  { name: "هيونداي سوناتا 2022", city: "الخبر" },
+  { name: "تويوتا لاندكروزر 2018", city: "مكة المكرمة" },
+  { name: "جي إم سي يوكن 2023", city: "المدينة المنورة" },
 ] as const;
 
 const VEHICLE_BEAT_MS = 2600;
@@ -43,14 +53,16 @@ export interface PrecisionHeroProps {
 }
 
 export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
-  const [request, setRequest] = useState('');
-  const [handoffError, setHandoffError] = useState('');
+  const [request, setRequest] = useState("");
+  const [handoffError, setHandoffError] = useState("");
+  const [searchMethod, setSearchMethod] = useState<PartSearchMethod | null>(null);
+  const [searchActivation, setSearchActivation] = useState(0);
   const reduceMotion = useReducedMotion();
 
   function goToChat(input: { text?: string; attachmentRequested?: boolean }) {
-    setHandoffError('');
+    setHandoffError("");
     if (!hasChatEntryDraftContent(input)) {
-      window.location.assign('/login');
+      window.location.assign("/login");
       return;
     }
     let stored = false;
@@ -61,11 +73,11 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
     }
     if (!stored) {
       setHandoffError(
-        'تعذّر حفظ طلبك مؤقتاً في هذا المتصفح. فعّل تخزين الجلسة ثم حاول مرة أخرى.',
+        "تعذّر حفظ طلبك مؤقتاً في هذا المتصفح. فعّل تخزين الجلسة ثم حاول مرة أخرى.",
       );
       return;
     }
-    window.location.assign('/login');
+    window.location.assign("/login");
   }
 
   function startChat(event: FormEvent<HTMLFormElement>) {
@@ -112,6 +124,9 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
           <BrandLogo />
         </Link>
         <nav className={styles.nav} aria-label="التنقل الرئيسي">
+          <Link href="/companies">
+            <Building2 size={18} aria-hidden /> علامات المركبات
+          </Link>
           <a href="#how">كيف تعمل</a>
           <Link className={styles.tracking} href="/track">
             تتبع طلبك
@@ -130,11 +145,13 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
             مساعد قطع ذكي للسوق السعودي
           </div>
           <h1 id="rafraf-hero-title" className={mobileStyles.heroTitle}>
-            من وصفك إلى القطعة المطابقة
+            قطعتك تبدأ بوصفك.
+            <br />
+            والباقي مع رفرف.
           </h1>
           <p>
-            صف احتياجك بطريقتك. رفرف يحدد المركبة، يطابق رقم القطعة، ثم يجمع لك
-            عروضاً من موردين موثوقين.
+            من سيارتك إلى شاحنتك ومعداتك، اجمع تفاصيل القطعة في طلب واضح. ابدأ
+            بالمحادثة أو اختر علامة مركبتك وحدد تفاصيلها.
           </p>
 
           <form className={styles.composer} onSubmit={startChat}>
@@ -145,7 +162,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               id="rafraf-part-request"
               value={request}
               onChange={(event) => setRequest(event.target.value)}
-              placeholder="وش القطعة اللي تحتاجها؟"
+              placeholder="اسم القطعة، رقمها، أو وصف احتياجك…"
               autoComplete="off"
               maxLength={CHAT_ENTRY_DRAFT_MAX_LENGTH}
               aria-describedby="rafraf-part-request-limit"
@@ -156,7 +173,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
             >
               <bdi dir="ltr">
                 {request.length}/{CHAT_ENTRY_DRAFT_MAX_LENGTH}
-              </bdi>{' '}
+              </bdi>{" "}
               حرفاً كحد أقصى
             </small>
             <div
@@ -175,12 +192,12 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               <span className={styles.unavailableTool}>
                 <button
                   type="button"
-                  aria-label="مسح رقم VIN أو OEM — قريباً"
-                  disabled
+                  aria-label="البحث برقم الهيكل VIN"
+                  onClick={() => { setSearchMethod("vin"); setSearchActivation(value => value + 1); }}
                 >
                   <ScanLine size={21} aria-hidden />
                 </button>
-                <small aria-hidden="true">قريباً</small>
+                <small aria-hidden="true">VIN</small>
               </span>
               <span className={styles.unavailableTool}>
                 <button
@@ -208,11 +225,16 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               </p>
             ) : null}
           </form>
+          <PartSearchMethods activationKey={searchActivation} activeMethod={searchMethod} onApply={(input) => {
+            const text = [request, input.text].filter(Boolean).join('\n');
+            if (text.length > CHAT_ENTRY_DRAFT_MAX_LENGTH) { setHandoffError('اختصر الوصف قليلًا حتى نحتفظ به مع بيانات البحث.'); return; }
+            goToChat({text, attachmentRequested:input.attachmentRequested});
+          }} />
         </div>
 
         <motion.div
           className={styles.story}
-          initial={reduceMotion ? false : 'hidden'}
+          initial={reduceMotion ? false : "hidden"}
           animate="visible"
           variants={{
             hidden: {},
@@ -243,15 +265,22 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
             <span
               className={[
                 styles.partLine,
-                reduceMotion ? '' : motionStyles.partScan,
+                reduceMotion ? "" : motionStyles.partScan,
               ]
                 .filter(Boolean)
-                .join(' ')}
+                .join(" ")}
               aria-hidden
             />
           </StoryPanel>
 
           <StoryPanel className={styles.offerPanel} title="عرض موثّق">
+            <Image
+              src="/hero/verified-offer-illustration.webp"
+              alt="صورة توضيحية لعرض قطع غيار مع علامة مراجعة"
+              fill
+              sizes="(max-width: 760px) 30vw, 220px"
+              className={styles.offerImage}
+            />
             <motion.div
               className={styles.verifiedMark}
               initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
@@ -266,9 +295,10 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
                 <BrandLogo compact />
               </span>
               <span>
-                مورد معتمد
+                رحلة الطلب
+                <small className={styles.illustrationLabel}>صورة توضيحية</small>
                 <strong>
-                  <Check size={15} aria-hidden /> توافق موثّق
+                  <Check size={15} aria-hidden /> القرار لك
                 </strong>
               </span>
             </motion.div>
@@ -312,9 +342,7 @@ function VehicleTicker({ reduceMotion }: { reduceMotion: boolean }) {
           }
         >
           <strong>{vehicle.name}</strong>
-          <small>
-            {vehicle.city} · <bdi dir="ltr">VIN</bdi> موثّق
-          </small>
+          <small>مثال توضيحي · {vehicle.city}</small>
         </motion.span>
       </AnimatePresence>
     </div>
@@ -332,7 +360,7 @@ function StoryPanel({
 }) {
   return (
     <motion.article
-      className={[styles.storyPanel, className].filter(Boolean).join(' ')}
+      className={[styles.storyPanel, className].filter(Boolean).join(" ")}
       variants={{
         hidden: { opacity: 0, x: -28 },
         visible: { opacity: 1, x: 0 },

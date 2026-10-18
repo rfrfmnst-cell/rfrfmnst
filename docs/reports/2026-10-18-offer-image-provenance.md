@@ -1,0 +1,9 @@
+# صورة عرض موثّق — سجل الإنشاء
+
+أُنشئت الصورة بأداة image_gen المدمجة، وليست عبر CLI أو مفتاح API. استُخدمت كصورة توضيحية داخل بطاقة العرض الحالية فقط. لم يُنشر البنر الرئيسي الملغى أو نص دعم الرؤية.
+
+المصدر الأصلي: outputs/rafraf-verified-offer-original.png، 1024×1536 بكسل. ملف الموقع: sites/rfrf.net/apps/customer/public/hero/verified-offer-illustration.webp، 70624 بايت، SHA256 4e9eb9cff6d5d5e7c7e429f7f7d93d0831f5a82c6eddb498ca244f16e589a176. التحويل إلى WebP ترميز فقط مع الحفاظ على الأبعاد والتكوين.
+
+## وصف الإنشاء المستخدم
+
+Use case: ads-marketing. Asset type: a narrow portrait photographic illustration for a Saudi automotive spare-parts website card titled in HTML 'عرض موثّق' (reviewed offer). Create a premium realistic studio still life: an upright elegant digital quotation document in a clear glass tablet, restrained neutral gray rows without any readable words or numbers, and a simple emerald green check icon near the upper third. A small pristine automotive oil filter and a plain compact shipping carton sit beside the base, linking the document to a spare-parts offer. Composition portrait 2:3, main objects centered and kept inside the middle 65% of the image width so they remain identifiable in a narrow card; detailed document and check in the upper two thirds, lower third mostly dark negative space reserved for the website's own HTML overlay. No fake UI text. Style realistic premium commercial product photography, soft rim light, brushed metal, clean paper/glass, uncluttered dark navy #0b1424 studio background with subtle violet #6851df lighting and warm amber highlights. Calm and trustworthy. No human subjects, no logos, no stamps or official seals, no prices, no personal data, no legible text, no watermark, no extra badges. This is a service illustration, not a real quotation or proof of a completed transaction.

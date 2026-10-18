@@ -11,6 +11,7 @@ import './editorial.css';
 import './product-os.css';
 import '@rafraf/brand/styles.css';
 import './precision-theme.css';
+import './login/login-refresh.css';
 
 const themeBootstrap = [
   '(function(){try{',
@@ -47,7 +48,7 @@ export default function RootLayout({
             </Link>
             <SupplierNav />
             <div className="sp-side-bottom">
-              <a href="mailto:suppliers@rafraf.sa" title="دعم الموردين">
+              <a href="https://wa.me/966500894003" target="_blank" rel="noopener noreferrer" title="دعم الموردين عبر واتساب">
                 <LifeBuoy size={18} aria-hidden /> <span>دعم الموردين</span>
               </a>
               <form action="/login/logout" method="POST">

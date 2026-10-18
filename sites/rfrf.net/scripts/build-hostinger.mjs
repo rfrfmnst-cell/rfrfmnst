@@ -89,6 +89,7 @@ await verifyNativeRuntime(root, 'customer');
 // Start the original server synchronously; run fixed storage diagnostics only after listen.
 for (const name of ['managed-storage-diagnostic.mjs', 'managed-storage-startup-probe.mjs', 'managed-storage-scheduler.cjs'])
   await cp(join(root, 'scripts', name), join(runtime, name));
+await cp(join(root, 'scripts/managed-action-origin.cjs'), join(runtime, 'managed-action-origin.cjs'));
 await cp(join(root, 'scripts/managed-web-bootstrap.cjs'), join(runtime, 'bootstrap.cjs'));
 await stat(join(runtime, 'bootstrap.cjs'));
 process.stdout.write('Hostinger standalone customer runtime is ready.\n');

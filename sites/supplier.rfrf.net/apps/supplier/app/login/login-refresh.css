@@ -1,0 +1,19 @@
+/* Limited to authentication surfaces; keep existing dashboard and form actions intact. */
+.supplier-shell:has(.login-wrap) { display: block; }
+.supplier-shell:has(.login-wrap) .sp-sidebar { display: none; }
+.supplier-shell:has(.login-wrap) .sp-main { margin: 0; padding: 0; min-width: 0; }
+.login-card { width: min(100%, 540px); padding: clamp(22px, 4vw, 38px); border-radius: 22px; }
+.login-card h1 { font-size: clamp(1.65rem, 4vw, 2rem); line-height: 1.55; letter-spacing: 0; }
+.login-card .login-sub { font-size: 1rem; line-height: 1.9; color: var(--rafraf-muted); }
+.login-card .qform { gap: 18px; }
+.login-card .qgrid { gap: 16px; }
+.login-card .qgrid label { display: grid; gap: 8px; align-content: start; }
+.login-card .qgrid input { width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid var(--rafraf-border); border-radius: 12px; color: var(--rafraf-text); background: var(--rafraf-surface); }
+.login-card .qform > label > div:focus-within { outline: 3px solid var(--rafraf-focus); outline-offset: 3px; }
+.login-card .qform > label > div > input:focus-visible { outline: none; }
+.login-card .qform :is(input, select) { font: inherit; min-height: 50px; border-radius: 12px; box-shadow: none; }
+.login-card .qform button[type='submit'] { min-height: 50px; border-radius: 12px; font: inherit; font-weight: 600; }
+.login-card :is(a, button, input, select):focus-visible { outline: 3px solid var(--rafraf-focus); outline-offset: 3px; }
+.login-home-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 16px; color: var(--rafraf-primary-hover); font-size: .9rem; }
+.login-card .login-err { line-height: 1.8; border-radius: 12px; }
+@media (max-width: 560px) { .login-wrap { padding-inline: 14px; } .login-card { padding: 24px 18px; } .login-card .auth-mode-switch a { padding-inline: 6px; font-size: .9rem; } }

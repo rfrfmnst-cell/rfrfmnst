@@ -1,16 +1,22 @@
-import { PartCondition } from '@rafraf/db';
+import type { PartCondition } from "@rafraf/db";
 import type {
   CatalogCsvRecord,
   CatalogHeader,
   CatalogImportIssue,
   ParsedInventoryRow,
-} from './catalog-import.ts';
+} from "./catalog-import.ts";
 
-const SUPPORTED_CURRENCIES = new Set(['SAR', 'USD', 'AED', 'EUR']);
+const SUPPORTED_CURRENCIES = new Set(["SAR", "USD", "AED", "EUR"]);
 const CONDITION_BY_VALUE: Record<string, PartCondition> = {
-  NEW: PartCondition.NEW,
-  USED: PartCondition.USED,
-  REFURBISHED: PartCondition.REFURBISHED,
+  NEW: "NEW",
+  USED: "USED",
+  REFURBISHED: "REFURBISHED",
+  جديد: "NEW",
+  جديدة: "NEW",
+  مستعمل: "USED",
+  مستعملة: "USED",
+  مجدد: "REFURBISHED",
+  مجددة: "REFURBISHED",
 };
 
 function cellFor(
@@ -19,7 +25,7 @@ function cellFor(
   header: CatalogHeader,
 ): string {
   const index = indexByHeader.get(header);
-  return index == null ? '' : (record.cells[index] ?? '').trim();
+  return index == null ? "" : (record.cells[index] ?? "").trim();
 }
 
 function hasUnsafeText(value: string): boolean {
@@ -43,34 +49,34 @@ export function parseCatalogRows(
   const errors: CatalogImportIssue[] = [];
 
   for (const record of records) {
-    if (record.cells.every((value) => value.trim() === '')) continue;
+    if (record.cells.every((value) => value.trim() === "")) continue;
     if (record.cells.length !== headers.length) {
       errors.push({
         row: record.row,
-        field: 'row',
+        field: "row",
         message: `عدد الأعمدة ${record.cells.length} ولا يطابق عدد العناوين ${headers.length}.`,
       });
       continue;
     }
 
     const rowErrors: CatalogImportIssue[] = [];
-    const partNumber = cellFor(record, indexByHeader, 'part_number')
-      .replace(/\s+/g, ' ')
+    const partNumber = cellFor(record, indexByHeader, "part_number")
+      .replace(/\s+/g, " ")
       .toUpperCase();
-    const brandValue = cellFor(record, indexByHeader, 'brand');
+    const brandValue = cellFor(record, indexByHeader, "brand");
     const conditionValue = (
-      cellFor(record, indexByHeader, 'condition') || 'NEW'
+      cellFor(record, indexByHeader, "condition") || "NEW"
     ).toUpperCase();
-    const quantityValue = cellFor(record, indexByHeader, 'quantity');
-    const priceValue = cellFor(record, indexByHeader, 'price');
+    const quantityValue = cellFor(record, indexByHeader, "quantity");
+    const priceValue = cellFor(record, indexByHeader, "price");
     const currency = (
-      cellFor(record, indexByHeader, 'currency') || 'SAR'
+      cellFor(record, indexByHeader, "currency") || "SAR"
     ).toUpperCase();
     const warrantyValue =
-      cellFor(record, indexByHeader, 'warranty_months') || '0';
+      cellFor(record, indexByHeader, "warranty_months") || "0";
     const leadTimeValue =
-      cellFor(record, indexByHeader, 'lead_time_days') || '0';
-    const warehouseValue = cellFor(record, indexByHeader, 'warehouse');
+      cellFor(record, indexByHeader, "lead_time_days") || "0";
+    const warehouseValue = cellFor(record, indexByHeader, "warehouse");
 
     if (
       partNumber.length < 2 ||
@@ -79,9 +85,9 @@ export function parseCatalogRows(
     ) {
       rowErrors.push({
         row: record.row,
-        field: 'part_number',
+        field: "part_number",
         message:
-          'رقم القطعة مطلوب (2–80) ويقبل الأحرف الإنجليزية والأرقام و . _ / - فقط.',
+          "رقم القطعة مطلوب (2–80) ويقبل الأحرف الإنجليزية والأرقام و . _ / - فقط.",
       });
     }
     if (
@@ -90,8 +96,8 @@ export function parseCatalogRows(
     ) {
       rowErrors.push({
         row: record.row,
-        field: 'brand',
-        message: 'العلامة التجارية غير صالحة أو تتجاوز 80 حرفًا.',
+        field: "brand",
+        message: "العلامة التجارية غير صالحة أو تتجاوز 80 حرفًا.",
       });
     }
 
@@ -99,16 +105,16 @@ export function parseCatalogRows(
     if (!condition) {
       rowErrors.push({
         row: record.row,
-        field: 'condition',
-        message: 'القيمة يجب أن تكون NEW أو USED أو REFURBISHED.',
+        field: "condition",
+        message: "القيمة يجب أن تكون NEW أو USED أو REFURBISHED.",
       });
     }
     const quantity = parseInteger(quantityValue, 0, 1_000_000);
     if (quantity == null) {
       rowErrors.push({
         row: record.row,
-        field: 'quantity',
-        message: 'الكمية يجب أن تكون عددًا صحيحًا بين 0 و1,000,000.',
+        field: "quantity",
+        message: "الكمية يجب أن تكون عددًا صحيحًا بين 0 و1,000,000.",
       });
     }
     if (
@@ -117,15 +123,15 @@ export function parseCatalogRows(
     ) {
       rowErrors.push({
         row: record.row,
-        field: 'price',
-        message: 'السعر يجب أن يكون أكبر من صفر وبدقتين عشريتين كحد أقصى.',
+        field: "price",
+        message: "السعر يجب أن يكون أكبر من صفر وبدقتين عشريتين كحد أقصى.",
       });
     }
     if (!SUPPORTED_CURRENCIES.has(currency)) {
       rowErrors.push({
         row: record.row,
-        field: 'currency',
-        message: 'العملة المدعومة: SAR أو USD أو AED أو EUR.',
+        field: "currency",
+        message: "العملة المدعومة: SAR أو USD أو AED أو EUR.",
       });
     }
 
@@ -133,16 +139,16 @@ export function parseCatalogRows(
     if (warrantyMonths == null) {
       rowErrors.push({
         row: record.row,
-        field: 'warranty_months',
-        message: 'الضمان يجب أن يكون عددًا صحيحًا بين 0 و120 شهرًا.',
+        field: "warranty_months",
+        message: "الضمان يجب أن يكون عددًا صحيحًا بين 0 و120 شهرًا.",
       });
     }
     const leadTimeDays = parseInteger(leadTimeValue, 0, 365);
     if (leadTimeDays == null) {
       rowErrors.push({
         row: record.row,
-        field: 'lead_time_days',
-        message: 'مدة التوريد يجب أن تكون عددًا صحيحًا بين 0 و365 يومًا.',
+        field: "lead_time_days",
+        message: "مدة التوريد يجب أن تكون عددًا صحيحًا بين 0 و365 يومًا.",
       });
     }
     if (
@@ -151,8 +157,8 @@ export function parseCatalogRows(
     ) {
       rowErrors.push({
         row: record.row,
-        field: 'warehouse',
-        message: 'مرجع المستودع غير صالح أو يتجاوز 100 حرف.',
+        field: "warehouse",
+        message: "مرجع المستودع غير صالح أو يتجاوز 100 حرف.",
       });
     }
     if (rowErrors.length > 0) {

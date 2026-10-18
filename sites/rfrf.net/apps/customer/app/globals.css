@@ -21,8 +21,9 @@
   ); /* هالة Iris فاتحة */
   --primary-glow: rgb(91 91 214 / 14%);
   --radius: 16px;
-  --font-display: var(--font-display, 'Readex Pro', system-ui, sans-serif);
-  --font-body: var(--font-body, 'Tajawal', system-ui, sans-serif);
+  --font-display: var(--font-rafraf-display, "Alexandria"), Tahoma, sans-serif;
+  --font-body:
+    var(--font-rafraf-body, "IBM Plex Sans Arabic"), Tahoma, sans-serif;
   /* سلّم ظلال متدرّج بدل ظلٍّ واحد مسطّح */
   --shadow-sm: 0 1px 2px rgb(16 24 40 / 5%), 0 1px 3px rgb(16 24 40 / 5%);
   --shadow-md: 0 4px 12px rgb(16 24 40 / 6%), 0 2px 4px rgb(16 24 40 / 4%);
@@ -196,7 +197,7 @@ a {
 }
 
 .trust li::before {
-  content: '✓ ';
+  content: "✓ ";
   color: var(--primary);
   font-weight: 800;
 }
@@ -313,7 +314,7 @@ a {
   }
 }
 
-.form button[type='submit'] {
+.form button[type="submit"] {
   width: 100%;
   margin-top: 0.4rem;
   padding: 0.8rem;
@@ -327,7 +328,7 @@ a {
   cursor: pointer;
 }
 
-.form button[type='submit']:disabled {
+.form button[type="submit"]:disabled {
   opacity: 0.6;
   cursor: wait;
 }
@@ -373,7 +374,7 @@ a {
 
 .mono {
   font-family:
-    ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Consolas, monospace;
+    ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;
   font-size: 0.92em;
   letter-spacing: 0;
 }

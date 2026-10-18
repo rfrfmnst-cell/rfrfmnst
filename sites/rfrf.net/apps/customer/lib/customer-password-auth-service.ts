@@ -1,3 +1,4 @@
+import { authenticationCoreConfigured } from './auth-configuration';
 import { prisma } from '@rafraf/db';
 import { verifyCustomerHumanProof } from './customer-auth-abuse';
 import {
@@ -52,6 +53,7 @@ export async function signInCustomerWithPassword(input: {
   const email = normalizeCustomerEmail(input.email);
   const password = typeof input.password === 'string' ? input.password : '';
   if (!email || password.length > 128) return { status: 'invalid' };
+  if (!authenticationCoreConfigured()) return { status: 'unavailable' };
   const human = await verifyCustomerHumanProof(
     input.turnstileToken,
     'customer_password',

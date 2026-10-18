@@ -1,0 +1,51 @@
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-block: 24px;
+  padding: 20px;
+  border: 1px solid var(--rafraf-border);
+  border-radius: 18px;
+  color: var(--rafraf-text);
+  background: var(--rafraf-raised);
+  text-align: start;
+}
+
+.notice > svg {
+  flex: 0 0 auto;
+  color: var(--rafraf-primary);
+}
+
+.notice h2 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.notice p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: var(--rafraf-muted);
+}
+
+.notice .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-block-start: 12px;
+  color: var(--rafraf-text);
+}
+
+.choice svg {
+  flex: 0 0 auto;
+  margin-block-start: 4px;
+  color: var(--rafraf-verified);
+}
+
+@media (max-width: 420px) {
+  .notice {
+    padding: 16px;
+    gap: 10px;
+  }
+}
