@@ -44,6 +44,12 @@ try {
       check(`${device} ${name} heading`, await page.locator('h1').count() === 1);
       if (name === 'home') {
         check(`${device} companies entry visible`, await page.getByRole('link', { name: 'علامات المركبات', exact: true }).first().count() > 0);
+        await page.getByRole('button', {name:'البحث برقم الهيكل VIN',exact:true}).click();
+        check(`${device} homepage VIN control opens intake`, await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).isVisible());
+        await page.getByRole('button',{name:'إغلاق طريقة البحث',exact:true}).click();
+        await page.getByRole('button', {name:'البحث برقم الهيكل VIN',exact:true}).click();
+        check(`${device} homepage VIN control reopens intake`, await page.getByLabel('رقم الهيكل (VIN)',{exact:true}).isVisible());
+        await page.getByRole('button',{name:'إغلاق طريقة البحث',exact:true}).click();
         check(`${device} contact visible in source`, await page.locator('a[href="tel:+966500894003"]').count() > 0);
       }
       if (name === 'companies') {

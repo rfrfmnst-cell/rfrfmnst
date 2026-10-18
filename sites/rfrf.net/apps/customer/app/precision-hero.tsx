@@ -56,6 +56,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
   const [request, setRequest] = useState("");
   const [handoffError, setHandoffError] = useState("");
   const [searchMethod, setSearchMethod] = useState<PartSearchMethod | null>(null);
+  const [searchActivation, setSearchActivation] = useState(0);
   const reduceMotion = useReducedMotion();
 
   function goToChat(input: { text?: string; attachmentRequested?: boolean }) {
@@ -192,7 +193,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
                 <button
                   type="button"
                   aria-label="البحث برقم الهيكل VIN"
-                  onClick={() => setSearchMethod("vin")}
+                  onClick={() => { setSearchMethod("vin"); setSearchActivation(value => value + 1); }}
                 >
                   <ScanLine size={21} aria-hidden />
                 </button>
@@ -224,7 +225,7 @@ export function PrecisionHero({ videoSrc }: PrecisionHeroProps = {}) {
               </p>
             ) : null}
           </form>
-          <PartSearchMethods activeMethod={searchMethod} onApply={(input) => {
+          <PartSearchMethods activationKey={searchActivation} activeMethod={searchMethod} onApply={(input) => {
             const text = [request, input.text].filter(Boolean).join('\n');
             if (text.length > CHAT_ENTRY_DRAFT_MAX_LENGTH) { setHandoffError('اختصر الوصف قليلًا حتى نحتفظ به مع بيانات البحث.'); return; }
             goToChat({text, attachmentRequested:input.attachmentRequested});
