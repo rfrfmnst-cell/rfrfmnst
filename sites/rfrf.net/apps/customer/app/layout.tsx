@@ -53,6 +53,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(CUSTOMER_SITE_ORIGIN),
   title: CUSTOMER_SITE_TITLE,
   description: CUSTOMER_SITE_DESCRIPTION,
+  // Domain ownership verification uses the public token supplied for Search Console.
+  verification: {
+    google: 'X2Zf1O1eBEnkUuNB-dXx4y47HmRVDzJDyq_rNLfihjs',
+  },
   openGraph: {
     type: 'website',
     locale: 'ar_SA',
