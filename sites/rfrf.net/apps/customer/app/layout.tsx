@@ -36,6 +36,7 @@ import './chat/production-chat-history.css';
 import './chat/assistant-composer-compat.css';
 import './chat/production-chat-professional.css';
 import './chat/chat-navigation.css';
+import './typography.css';
 
 const themeBootstrap = [
   '(function(){try{',

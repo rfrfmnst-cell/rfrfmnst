@@ -1,0 +1,25 @@
+/* One locally hosted Arabic family across customer surfaces and form controls. */
+:root {
+  --font-rafraf-body: "Alexandria";
+  --font-rafraf-display: "Alexandria";
+  --font-body: "Alexandria", system-ui, sans-serif;
+  --font-display: "Alexandria", system-ui, sans-serif;
+}
+body {
+  font-family: var(--font-body);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}

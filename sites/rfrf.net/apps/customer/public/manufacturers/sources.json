@@ -1,0 +1,707 @@
+[
+  {
+    "id": "toyota",
+    "file": "toyota.png",
+    "source": "https://www.carlogos.org/car-logos/toyota-logo-2020-europe-640.png"
+  },
+  {
+    "id": "hyundai",
+    "file": "hyundai.png",
+    "source": "https://www.carlogos.org/car-logos/hyundai-logo-2011-640.png"
+  },
+  {
+    "id": "nissan",
+    "file": "nissan.png",
+    "source": "https://www.carlogos.org/car-logos/nissan-logo-2020-black-show.png"
+  },
+  {
+    "id": "kia",
+    "file": "kia.png",
+    "source": "https://www.carlogos.org/logo/Kia-logo-2560x1440.png"
+  },
+  {
+    "id": "ford",
+    "file": "ford.png",
+    "source": "https://www.carlogos.org/car-logos/ford-logo-2017-640.png"
+  },
+  {
+    "id": "chevrolet",
+    "file": "chevrolet.png",
+    "source": "https://www.carlogos.org/logo/Chevrolet-logo-2013-2560x1440.png"
+  },
+  {
+    "id": "lexus",
+    "file": "lexus.png",
+    "source": "https://www.carlogos.org/logo/Lexus-logo-1988-1920x1080.png"
+  },
+  {
+    "id": "gmc",
+    "file": "gmc.png",
+    "source": "https://www.carlogos.org/logo/GMC-logo-2200x600.png"
+  },
+  {
+    "id": "honda",
+    "file": "honda.png",
+    "source": "https://www.carlogos.org/car-logos/honda-logo-2000-full-640.png"
+  },
+  {
+    "id": "mazda",
+    "file": "mazda.png",
+    "source": "https://www.carlogos.org/car-logos/mazda-logo-2018-vertical-640.png"
+  },
+  {
+    "id": "mitsubishi",
+    "file": "mitsubishi.png",
+    "source": "https://www.carlogos.org/logo/Mitsubishi-logo-2000x2500.png"
+  },
+  {
+    "id": "suzuki",
+    "file": "suzuki.png",
+    "source": "https://www.carlogos.org/logo/Suzuki-logo-5000x2500.png"
+  },
+  {
+    "id": "isuzu",
+    "file": "isuzu.png",
+    "source": "https://www.carlogos.org/logo/Isuzu-logo-1991-3840x2160.png"
+  },
+  {
+    "id": "mercedes-benz",
+    "file": "mercedes-benz.png",
+    "source": "https://www.carlogos.org/logo/Mercedes-Benz-logo-2011-1920x1080.png"
+  },
+  {
+    "id": "bmw",
+    "file": "bmw.png",
+    "source": "https://www.carlogos.org/car-logos/bmw-logo-2020-gray.png"
+  },
+  {
+    "id": "audi",
+    "file": "audi.png",
+    "source": "https://www.carlogos.org/car-logos/audi-logo-2016-640.png"
+  },
+  {
+    "id": "volkswagen",
+    "file": "volkswagen.png",
+    "source": "https://www.carlogos.org/logo/Volkswagen-logo-2019-1500x1500.png"
+  },
+  {
+    "id": "porsche",
+    "file": "porsche.png",
+    "source": "https://www.carlogos.org/car-logos/porsche-logo-2014-full-640.png"
+  },
+  {
+    "id": "land-rover",
+    "file": "land-rover.png",
+    "source": "https://www.carlogos.org/logo/Land-Rover-logo-2011-1920x1080.png"
+  },
+  {
+    "id": "jaguar",
+    "file": "jaguar.png",
+    "source": "https://www.carlogos.org/car-logos/jaguar-logo-2021-640.png"
+  },
+  {
+    "id": "volvo",
+    "file": "volvo.png",
+    "source": "https://www.carlogos.org/logo/Volvo-logo-2014-1920x1080.png"
+  },
+  {
+    "id": "peugeot",
+    "file": "peugeot.png",
+    "source": "https://www.carlogos.org/logo/Peugeot-logo-2010-1920x1080.png"
+  },
+  {
+    "id": "citroen",
+    "file": "citroen.png",
+    "source": "https://www.carlogos.org/logo/Citroen-logo-2009-2048x2048.png"
+  },
+  {
+    "id": "renault",
+    "file": "renault.png",
+    "source": "https://www.carlogos.org/logo/Renault-logo-2015-2048x2048.png"
+  },
+  {
+    "id": "mg",
+    "file": "mg.png",
+    "source": "https://www.carlogos.org/logo/MG-logo-red-2010-1920x1080.png"
+  },
+  {
+    "id": "changan",
+    "file": "changan.png",
+    "source": "https://www.carlogos.org/logo/Changan-logo-2010-2560x1440.png"
+  },
+  {
+    "id": "geely",
+    "file": "geely.png",
+    "source": "https://www.carlogos.org/logo/Geely-logo-2014-2560x1440.png"
+  },
+  {
+    "id": "haval",
+    "file": "haval.png",
+    "source": "https://www.carlogos.org/logo/Haval-logo-1366x768.png"
+  },
+  {
+    "id": "great-wall",
+    "file": "great-wall.png",
+    "source": "https://www.carlogos.org/logo/Great-Wall-logo-2007-2048x2048.png"
+  },
+  {
+    "id": "gac-group",
+    "file": "gac-group.png",
+    "source": "https://www.carlogos.org/logo/GAC-Group-logo-2560x1440.png"
+  },
+  {
+    "id": "chery",
+    "file": "chery.png",
+    "source": "https://www.carlogos.org/logo/Chery-logo-2013-3840x2160.png"
+  },
+  {
+    "id": "jetour",
+    "file": "jetour.png",
+    "source": "/Users/filip.popranec/Develop/car-logos-dataset/local-logos/jetour.png"
+  },
+  {
+    "id": "exeed",
+    "file": "exeed.png",
+    "source": "https://www.carlogos.org/car-logos/exeed-logo-1200x200-show.png"
+  },
+  {
+    "id": "hongqi",
+    "file": "hongqi.png",
+    "source": "https://www.carlogos.org/car-logos/hongqi-logo-2018-800x600-show.png"
+  },
+  {
+    "id": "byd",
+    "file": "byd.png",
+    "source": "https://www.carlogos.org/logo/BYD-logo-2007-2560x1440.png"
+  },
+  {
+    "id": "baic-motor",
+    "file": "baic-motor.png",
+    "source": "https://www.carlogos.org/logo/BAIC-Motor-logo-2560x1440.png"
+  },
+  {
+    "id": "bestune",
+    "file": "bestune.png",
+    "source": "https://www.carlogos.org/car-logos/bestune-logo-2400x1200-show.png"
+  },
+  {
+    "id": "jac",
+    "file": "jac.png",
+    "source": "https://www.carlogos.org/logo/JAC-Motors-logo-2016-1920x1080.png"
+  },
+  {
+    "id": "jmc",
+    "file": "jmc.png",
+    "source": "https://www.carlogos.org/logo/Jiangling-logo-1280x1024.png"
+  },
+  {
+    "id": "maxus",
+    "file": "maxus.png",
+    "source": "https://www.carlogos.org/logo/Maxus-logo-2014-1920x1080.png"
+  },
+  {
+    "id": "dongfeng",
+    "file": "dongfeng.png",
+    "source": "https://www.carlogos.org/logo/Dongfeng-logo-2560x1440.png"
+  },
+  {
+    "id": "omoda",
+    "file": "omoda.png",
+    "source": "/Users/filip.popranec/Develop/car-logos-dataset/local-logos/omoda.png"
+  },
+  {
+    "id": "lynk-and-co",
+    "file": "lynk-and-co.png",
+    "source": "https://www.carlogos.org/car-logos/lynkco-logo-2150x400-show.png"
+  },
+  {
+    "id": "zeekr",
+    "file": "zeekr.png",
+    "source": "https://www.carlogos.org/car-logos/zeekr-logo-2300x700-show.png"
+  },
+  {
+    "id": "soueast",
+    "file": "soueast.png",
+    "source": "https://www.carlogos.org/logo/Soueast-logo-1995-800x600.png"
+  },
+  {
+    "id": "faw",
+    "file": "faw.png",
+    "source": "https://www.carlogos.org/logo/FAW-logo-1920x1080.png"
+  },
+  {
+    "id": "foton",
+    "file": "foton.png",
+    "source": "https://www.carlogos.org/logo/Foton-logo-1920x1080.png"
+  },
+  {
+    "id": "jeep",
+    "file": "jeep.png",
+    "source": "https://www.carlogos.org/car-logos/jeep-logo-1993-640.png"
+  },
+  {
+    "id": "dodge",
+    "file": "dodge.png",
+    "source": "https://www.carlogos.org/car-logos/dodge-logo-2010-640.png"
+  },
+  {
+    "id": "ram",
+    "file": "ram.png",
+    "source": "https://www.carlogos.org/logo/RAM-logo-2009-1920x1080.png"
+  },
+  {
+    "id": "chrysler",
+    "file": "chrysler.png",
+    "source": "https://www.carlogos.org/car-logos/chrysler-logo-2009-640.png"
+  },
+  {
+    "id": "cadillac",
+    "file": "cadillac.png",
+    "source": "https://www.carlogos.org/car-logos/cadillac-logo-2021-full-640.png"
+  },
+  {
+    "id": "lincoln",
+    "file": "lincoln.png",
+    "source": "https://www.carlogos.org/logo/Lincoln-logo-2019-1920x1080.png"
+  },
+  {
+    "id": "infiniti",
+    "file": "infiniti.png",
+    "source": "https://www.carlogos.org/logo/Infiniti-logo-1989-2560x1440.png"
+  },
+  {
+    "id": "genesis",
+    "file": "genesis.png",
+    "source": "https://www.carlogos.org/logo/Genesis-logo-640x248.jpg"
+  },
+  {
+    "id": "subaru",
+    "file": "subaru.png",
+    "source": "https://www.carlogos.org/car-logos/subaru-logo-2019-640.png"
+  },
+  {
+    "id": "mini",
+    "file": "mini.png",
+    "source": "https://www.carlogos.org/logo/Mini-logo-2001-1920x1080.png"
+  },
+  {
+    "id": "fiat",
+    "file": "fiat.png",
+    "source": "https://www.carlogos.org/logo/Fiat-logo-2006-1920x1080.png"
+  },
+  {
+    "id": "alfa-romeo",
+    "file": "alfa-romeo.png",
+    "source": "https://www.carlogos.org/logo/Alfa-Romeo-logo-2015-1920x1080.png"
+  },
+  {
+    "id": "abarth",
+    "file": "abarth.png",
+    "source": "https://www.carlogos.org/logo/Abarth-logo-1920x1080.png"
+  },
+  {
+    "id": "maserati",
+    "file": "maserati.png",
+    "source": "https://www.carlogos.org/car-logos/maserati-logo-2020-640.png"
+  },
+  {
+    "id": "ferrari",
+    "file": "ferrari.png",
+    "source": "https://www.carlogos.org/car-logos/ferrari-logo-2002-640.png"
+  },
+  {
+    "id": "lamborghini",
+    "file": "lamborghini.png",
+    "source": "https://www.carlogos.org/car-logos/lamborghini-logo-1998-640.png"
+  },
+  {
+    "id": "bentley",
+    "file": "bentley.png",
+    "source": "https://www.carlogos.org/car-logos/bentley-logo-2002-640.png"
+  },
+  {
+    "id": "rolls-royce",
+    "file": "rolls-royce.png",
+    "source": "https://www.carlogos.org/logo/Rolls-Royce-logo-2048x2048.png"
+  },
+  {
+    "id": "aston-martin",
+    "file": "aston-martin.png",
+    "source": "https://www.carlogos.org/logo/Aston-Martin-logo-2003-6000x3000.png"
+  },
+  {
+    "id": "mclaren",
+    "file": "mclaren.png",
+    "source": "https://www.carlogos.org/logo/McLaren-logo-2002-2560x1440.png"
+  },
+  {
+    "id": "lotus",
+    "file": "lotus.png",
+    "source": "https://www.carlogos.org/logo/Lotus-logo-2019-1800x1800.png"
+  },
+  {
+    "id": "bugatti",
+    "file": "bugatti.png",
+    "source": "https://www.carlogos.org/logo/Bugatti-logo-1024x768.png"
+  },
+  {
+    "id": "tesla",
+    "file": "tesla.png",
+    "source": "https://www.carlogos.org/car-logos/tesla-logo-2007-full-640.png"
+  },
+  {
+    "id": "lucid",
+    "file": "lucid.png",
+    "source": "https://www.carlogos.org/logo/Lucid-Motors-logo-1500x200.png"
+  },
+  {
+    "id": "ssangyong",
+    "file": "ssangyong.png",
+    "source": "https://www.carlogos.org/logo/SsangYong-logo-2560x1440.png"
+  },
+  {
+    "id": "daihatsu",
+    "file": "daihatsu.png",
+    "source": "https://www.carlogos.org/logo/Daihatsu-logo-1997-1280x233.png"
+  },
+  {
+    "id": "daewoo",
+    "file": "daewoo.png",
+    "source": "https://www.carlogos.org/logo/Daewoo-logo-1920x1080.png"
+  },
+  {
+    "id": "hummer",
+    "file": "hummer.png",
+    "source": "https://www.carlogos.org/logo/Hummer-logo-2000x205.png"
+  },
+  {
+    "id": "opel",
+    "file": "opel.png",
+    "source": "https://www.carlogos.org/logo/Opel-logo-2009-1920x1080.png"
+  },
+  {
+    "id": "skoda",
+    "file": "skoda.png",
+    "source": "https://www.carlogos.org/logo/Skoda-logo-2016-1920x1080.png"
+  },
+  {
+    "id": "renault-trucks",
+    "file": "renault.png",
+    "source": "https://www.carlogos.org/logo/Renault-logo-2015-2048x2048.png"
+  },
+  {
+    "id": "scania",
+    "file": "scania.png",
+    "source": "https://www.carlogos.org/logo/Scania-logo-6200x1800.png"
+  },
+  {
+    "id": "man",
+    "file": "man.png",
+    "source": "https://www.carlogos.org/logo/MAN-logo-1920x1080.png"
+  },
+  {
+    "id": "hino",
+    "file": "hino.png",
+    "source": "https://www.carlogos.org/logo/Hino-logo-2048x2048.png"
+  },
+  {
+    "id": "ud",
+    "file": "ud.png",
+    "source": "https://www.carlogos.org/logo/UD-Trucks-logo-3000x2500.png"
+  },
+  {
+    "id": "iveco",
+    "file": "iveco.png",
+    "source": "https://www.carlogos.org/logo/Iveco-logo-silver-3840x2160.png"
+  },
+  {
+    "id": "faw-jiefang",
+    "file": "faw-jiefang.png",
+    "source": "https://www.carlogos.org/car-logos/faw-jiefang-950x700-show.png"
+  },
+  {
+    "id": "sinotruk",
+    "file": "sinotruk.png",
+    "source": "https://www.carlogos.org/car-logos/sinotruk-logo-1100x1100-show.png"
+  },
+  {
+    "id": "shacman",
+    "file": "shacman.png",
+    "source": "https://www.carlogos.org/car-logos/shacman-logo-1400x1400-show.png"
+  },
+  {
+    "id": "camc",
+    "file": "camc.png",
+    "source": "https://www.carlogos.org/car-logos/camc-logo-1600x450-show.png"
+  },
+  {
+    "id": "tata",
+    "file": "tata.png",
+    "source": "https://www.carlogos.org/logo/Tata-logo-2000-2560x1440.png"
+  },
+  {
+    "id": "higer",
+    "file": "higer.png",
+    "source": "https://www.carlogos.org/car-logos/higer-logo-800x600-show.png"
+  },
+  {
+    "id": "yutong",
+    "file": "yutong.png",
+    "source": "https://www.carlogos.org/car-logos/yutong-logo-2100x1300-show.png"
+  },
+  {
+    "id": "king-long",
+    "file": "king-long.png",
+    "source": "https://www.carlogos.org/car-logos/king-long-logo-3900x800-show.png"
+  },
+  {
+    "id": "volvo-ce",
+    "file": "volvo.png",
+    "source": "https://www.carlogos.org/logo/Volvo-logo-2014-1920x1080.png"
+  },
+  {
+    "id": "toyota-material",
+    "file": "toyota.png",
+    "source": "https://www.carlogos.org/car-logos/toyota-logo-2020-europe-640.png"
+  },
+  {
+    "id": "sany",
+    "file": "sany.svg",
+    "source": "https://www.sanyglobal.com/static/new/img/logo.svg"
+  },
+  {
+    "id": "xcmg",
+    "file": "xcmg.svg",
+    "source": "https://www.xcmgglobal.com/resources/web/img/logo.svg"
+  },
+  {
+    "id": "hitachi",
+    "file": "hitachi.png",
+    "source": "https://hitachikenki.scene7.com/is/image/hitachikenki/hcm_logo?fmt=png-alpha"
+  },
+  {
+    "id": "hyundai-equipment",
+    "file": "hyundai-equipment.png",
+    "source": "https://www.hyundai-ce.com/common_en/images/hdce-logo.png"
+  },
+  {
+    "id": "komatsu",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 40,
+      "y": 30,
+      "width": 490,
+      "height": 110,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "caterpillar",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 710,
+      "y": 28,
+      "width": 180,
+      "height": 116,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "doosan",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 1180,
+      "y": 25,
+      "width": 335,
+      "height": 130,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "jcb",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 625,
+      "y": 178,
+      "width": 355,
+      "height": 134,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "kubota",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 40,
+      "y": 333,
+      "width": 478,
+      "height": 100,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "case",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 602,
+      "y": 474,
+      "width": 400,
+      "height": 110,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "john-deere",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 1090,
+      "y": 468,
+      "width": 470,
+      "height": 113,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "zoomlion",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 590,
+      "y": 620,
+      "width": 430,
+      "height": 97,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "liebherr",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 1090,
+      "y": 624,
+      "width": 450,
+      "height": 100,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "liugong",
+    "file": "equipment-sheet.jpg",
+    "source": "https://www.bestpartscn.com/uploads/brand.jpg",
+    "sprite": {
+      "x": 42,
+      "y": 762,
+      "width": 480,
+      "height": 110,
+      "sheetWidth": 1600,
+      "sheetHeight": 900
+    }
+  },
+  {
+    "id": "terex",
+    "file": "equipment-secondary.png",
+    "source": "https://www.agrisalesltd.co.uk/images/WEBSITE%202023.png",
+    "sprite": {
+      "x": 614,
+      "y": 45,
+      "width": 294,
+      "height": 117,
+      "sheetWidth": 1832,
+      "sheetHeight": 768
+    }
+  },
+  {
+    "id": "manitou",
+    "file": "equipment-secondary.png",
+    "source": "https://www.agrisalesltd.co.uk/images/WEBSITE%202023.png",
+    "sprite": {
+      "x": 913,
+      "y": 65,
+      "width": 282,
+      "height": 65,
+      "sheetWidth": 1832,
+      "sheetHeight": 768
+    }
+  },
+  {
+    "id": "bobcat",
+    "file": "equipment-secondary.png",
+    "source": "https://www.agrisalesltd.co.uk/images/WEBSITE%202023.png",
+    "sprite": {
+      "x": 1505,
+      "y": 22,
+      "width": 300,
+      "height": 140,
+      "sheetWidth": 1832,
+      "sheetHeight": 768
+    }
+  },
+  {
+    "id": "new-holland",
+    "file": "equipment-secondary.png",
+    "source": "https://www.agrisalesltd.co.uk/images/WEBSITE%202023.png",
+    "sprite": {
+      "x": 26,
+      "y": 621,
+      "width": 305,
+      "height": 95,
+      "sheetWidth": 1832,
+      "sheetHeight": 768
+    }
+  },
+  {
+    "id": "genie",
+    "file": "equipment-secondary.png",
+    "source": "https://www.agrisalesltd.co.uk/images/WEBSITE%202023.png",
+    "sprite": {
+      "x": 1562,
+      "y": 535,
+      "width": 248,
+      "height": 100,
+      "sheetWidth": 1832,
+      "sheetHeight": 768
+    }
+  },
+  {
+    "id": "linde",
+    "file": "linde.png",
+    "source": "https://seekcdn.com/pacman/company-profiles/logos/436873/1c7768c8cbb97a6bee154d1680448f51_6b5e0e4745c610ddcac8aaf50fd4ee6f66db27476d5e886fcb3791f13e6d3ead"
+  },
+  {
+    "id": "sitrak",
+    "file": "sitrak.jpg",
+    "source": "https://ets-servise.ru/images/uploads/30/98/4356/sitrak-logo-jpgs/w600/sitrak-logo-jpg_1730794395_jrlzmjnl.jpeg"
+  },
+  {
+    "id": "jaecoo",
+    "file": "jaecoo.jpg",
+    "source": "https://images.netdirector.co.uk/gforces-auto/image/upload/w_392%2Ch_392%2Cq_auto%2Cc_fill%2Cf_auto%2Cfl_lossy/auto-client/eec7864b02042fa0afa7585d1f3a800f/jaecoo_logo_1080x1080.jpg"
+  },
+  {
+    "id": "develon",
+    "file": "develon.jpg",
+    "source": "https://eu.develon-ce.com/media/download/25215"
+  },
+  {
+    "id": "tadano",
+    "file": "tadano.png",
+    "source": "https://jobs.onetadano.com/tpl/bilder/tadanodemag/symbole/brand_tadano_TDN_LOGO_2025_RGB_Blue-Black_2_.png"
+  }
+]
