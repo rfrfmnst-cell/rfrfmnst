@@ -165,6 +165,18 @@ export default function Home() {
             <Link href="/privacy">سياسة الخصوصية</Link>
             <Link href="/track">تتبع طلبك</Link>
             <a href={SUPPLIER_REGISTRATION_URL}>بوابة الموردين</a>
+            <a
+              className="precision-social-link"
+              href="https://www.tiktok.com/@manastrafeaf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="حساب رفرف الرسمي على تيك توك (يفتح في نافذة جديدة)"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M15.5 2h-3.2v13a3.4 3.4 0 1 1-3.4-3.4V8.4a6.6 6.6 0 1 0 6.6 6.6V8.8c1.3 1.1 3 1.7 4.8 1.7V7.3c-2.8 0-4.8-2.1-4.8-5.3Z" />
+              </svg>
+              <span>تيك توك</span>
+            </a>
           </nav>
         </div>
       </footer>
