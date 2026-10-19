@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { ThemeToggle } from '@rafraf/ui/theme-toggle';
 import brandMark from '@rafraf/brand/assets/logo/rafraf-mark.png';
+import { GoogleTrackingConsent } from './google-tracking-consent';
 import {
   CUSTOMER_SITE_DESCRIPTION,
   CUSTOMER_SITE_ORIGIN,
@@ -49,6 +50,36 @@ const themeBootstrap = [
 
 const enableDesignCapture = process.env.NODE_ENV === 'development';
 
+// GTM remains fully disabled until an actual container ID is supplied
+// during the Hostinger build. Consent must precede any tag loading.
+const configuredContainerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID?.trim() ?? '';
+const googleTagManagerId = /^GTM-[A-Z0-9]{5,}$/.test(configuredContainerId)
+  ? configuredContainerId
+  : null;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${CUSTOMER_SITE_ORIGIN}/#organization`,
+      name: 'رفرف',
+      url: CUSTOMER_SITE_ORIGIN,
+      logo: new URL(brandMark.src, CUSTOMER_SITE_ORIGIN).href,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${CUSTOMER_SITE_ORIGIN}/#website`,
+      name: 'رفرف',
+      url: CUSTOMER_SITE_ORIGIN,
+      description: CUSTOMER_SITE_DESCRIPTION,
+      inLanguage: 'ar-SA',
+      publisher: { '@id': `${CUSTOMER_SITE_ORIGIN}/#organization` },
+    },
+  ],
+};
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c');
+
 export const metadata: Metadata = {
   metadataBase: new URL(CUSTOMER_SITE_ORIGIN),
   title: CUSTOMER_SITE_TITLE,
@@ -89,6 +120,10 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#FBF8F2" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: structuredDataJson }}
+        />
         <Script id="rafraf-theme-bootstrap" strategy="beforeInteractive">
           {themeBootstrap}
         </Script>
@@ -110,6 +145,7 @@ export default function RootLayout({
       <body>
         {children}
         <ThemeToggle />
+        {googleTagManagerId ? <GoogleTrackingConsent containerId={googleTagManagerId} /> : null}
       </body>
     </html>
   );
