@@ -86,7 +86,10 @@ export const metadata: Metadata = {
   description: CUSTOMER_SITE_DESCRIPTION,
   // Domain ownership verification uses the public token supplied for Search Console.
   verification: {
-    google: 'X2Zf1O1eBEnkUuNB-dXx4y47HmRVDzJDyq_rNLfihjs',
+    google: [
+      'X2Zf1O1eBEnkUuNB-dXx4y47HmRVDzJDyq_rNLfihjs',
+      'LDmeM6wT0wCPfZv_DLQO8pgB8OUzp9F430u6XsRszeQ',
+    ],
   },
   openGraph: {
     type: 'website',
