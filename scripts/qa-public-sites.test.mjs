@@ -57,3 +57,7 @@ test('partial 403s and ordinary failures preserve distinct diagnoses', () => {
   assert.equal(diagnoseReview(checks.map((check) => ({ ...check, status: 502 }))).code, 'public_check_failures');
   assert.equal(diagnoseReview(checks.map((check) => ({ ...check, ok: true, status: 200 }))).code, 'healthy');
 });
+
+test('no checks cannot produce a healthy monitoring diagnosis', () => {
+  assert.equal(diagnoseReview([]).code, 'no_checks');
+});
