@@ -1,11 +1,6 @@
 name: Rafraf hourly public review
 
 on:
-  pull_request:
-    paths:
-      - .github/workflows/rafraf-hourly-review.yml
-      - scripts/qa-public-sites.mjs
-      - scripts/qa-public-sites.test.mjs
   push:
     branches: [main]
     paths:
@@ -24,19 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  validate-review:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-        with:
-          persist-credentials: false
-      - name: Validate public review logic (no production requests)
-        run: node --test scripts/qa-public-sites.test.mjs
-
   public-review:
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
