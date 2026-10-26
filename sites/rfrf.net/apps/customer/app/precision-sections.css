@@ -9,7 +9,7 @@
   margin-inline: auto;
 }
 .precision-section {
-  padding-block: clamp(82px, 10vw, 144px);
+  padding-block: clamp(64px, 7vw, 104px);
 }
 .precision-kicker {
   margin: 0 0 16px;
@@ -30,9 +30,9 @@
 .precision-faq h2,
 .precision-supplier h2 {
   margin: 0;
-  font-size: clamp(2.3rem, 4.6vw, 4.7rem);
-  line-height: 1.14;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.9rem, 3.1vw, 3rem);
+  line-height: 1.4;
+  letter-spacing: 0;
 }
 .precision-heading-row p,
 .precision-trust p {
@@ -50,8 +50,8 @@
 }
 .precision-steps li {
   position: relative;
-  min-height: 300px;
-  padding: 40px 34px;
+  min-height: 235px;
+  padding: 30px 26px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -86,8 +86,8 @@
 }
 .precision-trust-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(480px, 1.16fr);
-  gap: clamp(64px, 10vw, 138px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 72px);
   align-items: center;
 }
 .precision-trust h2 {
@@ -176,7 +176,7 @@
 }
 .precision-supplier h2 {
   max-width: 800px;
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
 }
 .precision-supplier a {
   min-height: 54px;
@@ -250,7 +250,7 @@
     grid-template-columns: 1fr;
   }
   .precision-steps li {
-    min-height: 250px;
+    min-height: 205px;
     border-inline-start: 0;
     border-block-end: 1px solid var(--rafraf-border);
   }
