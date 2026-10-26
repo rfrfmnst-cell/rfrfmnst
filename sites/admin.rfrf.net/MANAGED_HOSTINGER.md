@@ -14,7 +14,7 @@
 | Node.js | `24` |
 | Package manager | `pnpm`؛ مثبت المصدر `pnpm@11.6.0` |
 | Root directory | `.` |
-| Build script | `build:hostinger` |
+| Build script | `build` (أو `build:hostinger`) |
 | Output directory | `.` |
 | Entry file | `hostinger-runtime/bootstrap.cjs` |
 
@@ -24,7 +24,8 @@
 عدم توافق GLIBC على المضيف. يعوض ESM الخاص بـSWC وعميل Prisma المولد
 كاملاً مع محركه، وينسخ standalone والأصول إلى
 `hostinger-runtime` مع حفظ روابط pnpm النسبية. `pnpm start` يشغل ملف
-الدخول نفسه. لا يجمع سكربت `build` العام مخرجات Hostinger. يعيد البناء
+الدخول نفسه. يجمع سكربت `build` العام مخرجات Hostinger نفسها حتى إذا كان
+أمر البناء في اللوحة ثابتاً على `pnpm run build`. يعيد البناء
 استخدام CLI الموروث بعد إثبات `pnpm@11.6.0`، أو يشغله صراحة بواسطة npm؛
 وتستخدم مهام Turbo التابعة مشغلاً مثبتاً مؤقتاً لتجنب انجراف Corepack.
 يختبر البناء تحميل محرك Prisma الملائم للمضيف وتحويل صورة مولدة في الذاكرة

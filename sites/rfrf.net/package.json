@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "node scripts/setup-git-automation.mjs",
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "node scripts/build-hostinger.mjs",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
     "test:e2e:chat": "playwright test tests/e2e/chat-launch.spec.ts",

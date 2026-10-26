@@ -16,7 +16,7 @@
 | Node.js | `24` |
 | Package manager | `pnpm`؛ مثبت المصدر `pnpm@11.6.0` |
 | Root directory | `.` |
-| Build script | `build:hostinger` |
+| Build script | `build` (أو `build:hostinger`) |
 | Output directory | `.` |
 | Entry file | `hostinger-runtime/bootstrap.cjs` |
 
@@ -26,7 +26,8 @@
 المتتبعة ويجمع الخادم وstatic وpublic في
 `hostinger-runtime` بروابط pnpm نسبية. يشغل `pnpm start` bootstrap بصيغة CommonJS؛ يبدأ خادم المورد الأصلي
 بواسطة require متزامن، ثم يجدول التشخيص بعد بدء الاستماع.
-السكريبت العام `build` لا يجمع مخرجات Hostinger. يتحقق `pinned-pnpm.mjs` من
+السكريبت العام `build` يجمع مخرجات Hostinger نفسها، ولا يحتاج تعديل الأمر
+الثابت `pnpm run build` في اللوحة. يتحقق `pinned-pnpm.mjs` من
 CLI الذي ورثه البناء عند وجوده، ويستخدم إصدار pnpm 11.6.0 نفسه؛ وإلا
 يشغّل `npm exec --package=pnpm@11.6.0` ويتحقق من النسخة قبل البناء.
 ينشئ أيضاً shim مؤقتاً داخل `.hostinger-tools` كي تبقى عمليات pnpm

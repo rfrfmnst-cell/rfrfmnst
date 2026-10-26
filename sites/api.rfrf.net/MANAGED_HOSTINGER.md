@@ -9,7 +9,7 @@ owner-authorized deployment at `api.rfrf.net`. Canonical Git is untouched.
 - App type: `express` (Nest uses the Express adapter).
 - Node: `24`; package manager: `pnpm`, pinned to `11.6.0` by package.json.
 - Root and output directory: `.`.
-- Build script: `build:hostinger`.
+- Build script: `build` (or the equivalent `build:hostinger`).
 - Entry file: `hostinger-runtime/bootstrap.cjs`.
 - Start command: `node hostinger-runtime/bootstrap.cjs`.
 
@@ -23,6 +23,8 @@ The staged CORS fallback also uses those three client origins.
 After a frozen pnpm install, `build:hostinger` compiles the API and builds a
 production-only runtime with `pnpm deploy --legacy --prod`. The runtime is
 independent from the source node_modules and contains no database package.
+The default `pnpm run build` now invokes the same runtime packager, including
+when the build command in hPanel cannot be edited.
 
 ## Scope and limits
 

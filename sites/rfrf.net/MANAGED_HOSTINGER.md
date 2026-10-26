@@ -14,7 +14,7 @@
 | Node.js | `24` |
 | Package manager | `pnpm`؛ مثبت المصدر `pnpm@11.6.0` |
 | Root directory | `.` |
-| Build script | `build:hostinger` |
+| Build script | `build` (أو `build:hostinger`) |
 | Output directory | `.` |
 | Entry file | `hostinger-runtime/bootstrap.cjs` |
 
@@ -23,7 +23,8 @@
 `pnpm run build:hostinger`. يبني السكربت `customer...`، يعوّض ملفات SWC
 الناقصة من التتبع، ويجمع الخادم والأصول في `hostinger-runtime` مع روابط
 pnpm نسبية. أمر `pnpm start` يشغّل نفس ملف الدخول مباشرة.
-السكريبت العام `build` لا يجمع مخرجات Hostinger. يعيد البناء استخدام CLI
+أصبح `pnpm run build` يجمع مخرجات Hostinger نفسها، حتى عند تثبيت أمر البناء
+في اللوحة وعدم إمكانية تعديله. يعيد البناء استخدام CLI
 الموروث بعد إثبات `pnpm@11.6.0`، أو يشغله صراحة بواسطة npm؛ وتستخدم مهام
 Turbo التابعة مشغلاً مثبتاً مؤقتاً أيضاً، لتجنب انجراف Corepack.
 يستخدم تطبيق العميل `next build --webpack` حتى يعمل عند انتقال SWC إلى

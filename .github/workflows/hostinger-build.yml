@@ -1,0 +1,42 @@
+name: Hostinger build and runtime
+
+on:
+  pull_request:
+    paths:
+      - 'sites/**'
+      - 'scripts/qa-hostinger-runtime.mjs'
+      - '.github/workflows/hostinger-build.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'sites/**'
+      - 'scripts/qa-hostinger-runtime.mjs'
+      - '.github/workflows/hostinger-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [rfrf.net, supplier.rfrf.net, admin.rfrf.net, api.rfrf.net]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned dependencies
+        working-directory: sites/${{ matrix.site }}
+        run: npm exec --yes --package=pnpm@11.6.0 -- pnpm install --frozen-lockfile
+      - name: Build with the command fixed in hPanel
+        working-directory: sites/${{ matrix.site }}
+        run: npm exec --yes --package=pnpm@11.6.0 -- pnpm run build
+      - name: Verify isolated runtime and application identity
+        run: node scripts/qa-hostinger-runtime.mjs '${{ matrix.site }}'
