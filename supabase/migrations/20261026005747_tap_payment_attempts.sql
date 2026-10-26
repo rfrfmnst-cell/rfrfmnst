@@ -24,4 +24,3 @@ revoke all on public.tap_payment_attempts from public, anon, authenticated;
 grant select, insert, update on public.tap_payment_attempts to service_role;
 comment on table public.tap_payment_attempts is
   'Server-only Tap attempt journal; order authority stays in the Rafraf application. No card data or customer profiles.';
-

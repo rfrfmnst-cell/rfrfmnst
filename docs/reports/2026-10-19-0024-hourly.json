@@ -1,0 +1,338 @@
+{
+  "checkedAtUtc": "2026-10-18T21:26:10.678Z",
+  "deployedSource": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+  "branchBefore": "5d1c569aa97d76d37a9d471cedc0ccaa29ca5dc8",
+  "sites": [
+    {
+      "domain": "rfrf.net",
+      "build": {
+        "uuid": "01a150da-c1bd-7300-8739-278ba57a49c5",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-customer-login-final-5fcb45cf-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T21:11:16Z",
+        "updated_at": "2026-10-18T21:16:28Z"
+      },
+      "logs": {
+        "totalLines": 49,
+        "lastDeployedAt": "2026-10-18T21:16:28Z",
+        "errorsSinceCompleted": [],
+        "historicalShutdownErrorsBeforeCompleted": [
+          {
+            "timestamp": "2026-10-18T21:15:57.016Z",
+            "code": "pre_completion_server_close"
+          }
+        ]
+      }
+    },
+    {
+      "domain": "supplier.rfrf.net",
+      "build": {
+        "uuid": "01a150da-c33c-7170-a11f-c977259cda94",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-supplier-login-final-5fcb45cf-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T21:11:16Z",
+        "updated_at": "2026-10-18T21:15:40Z"
+      },
+      "logs": {
+        "totalLines": 49,
+        "lastDeployedAt": "2026-10-18T21:15:40Z",
+        "errorsSinceCompleted": [],
+        "historicalShutdownErrorsBeforeCompleted": [
+          {
+            "timestamp": "2026-10-18T21:14:57.013Z",
+            "code": "pre_completion_server_close"
+          }
+        ]
+      }
+    },
+    {
+      "domain": "admin.rfrf.net",
+      "build": {
+        "uuid": "01a14c60-0ca5-7376-82f4-c5e9a6e59e80",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "managed-node-admin-795d4d51.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T00:18:45Z",
+        "updated_at": "2026-10-18T00:23:00Z"
+      },
+      "logs": {
+        "totalLines": 42,
+        "lastDeployedAt": "2026-10-18T00:23:00Z",
+        "errorsSinceCompleted": [],
+        "historicalShutdownErrorsBeforeCompleted": [
+          {
+            "timestamp": "2026-10-18T00:22:26.041Z",
+            "code": "pre_completion_server_close"
+          }
+        ]
+      }
+    }
+  ],
+  "customerConfigurationKeys": [
+    "API_ALLOWED_ORIGINS",
+    "API_DOCS_ENABLED",
+    "NODE_ENV",
+    "RAFRAF_RELEASE_SHA"
+  ],
+  "cloud": {
+    "id": 39164624294,
+    "status": "completed",
+    "conclusion": "success",
+    "createdAt": "2026-10-18T20:43:40Z",
+    "updatedAt": "2026-10-18T20:43:52Z",
+    "precedesCurrentDeployment": true
+  },
+  "codeChanged": false,
+  "newDeployment": false,
+  "persistentConfigurationChanged": false,
+  "databaseChanged": false,
+  "productionCustomerLoginComplete": false,
+  "productionSupplierLoginAndDeliveryTested": false,
+  "visualSamplesReviewed": [
+    "desktop-supplier-phone-dark.png"
+  ],
+  "limits": [
+    "Fresh desktop supplier form smoke only; previous full mobile/desktop audit is historical",
+    "No authenticated account, SMS/email delivery or production data writes",
+    "Masked environment values were not read or copied",
+    "Runtime log scope bounded and deployment shutdown messages separated by timestamp",
+    "No new cloud run after latest deployment at time of review"
+  ],
+  "public": {
+    "checkedAtUtc": "2026-10-18T21:25:51.739Z",
+    "passed": true,
+    "checks": [
+      {
+        "name": "واجهة العميل",
+        "url": "https://rfrf.net/",
+        "ok": true,
+        "status": 200,
+        "durationMs": 791,
+        "error": null
+      },
+      {
+        "name": "هوية تطبيق العميل",
+        "url": "https://rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 604,
+        "error": null
+      },
+      {
+        "name": "اختيار علامة المركبة",
+        "url": "https://rfrf.net/companies",
+        "ok": true,
+        "status": 200,
+        "durationMs": 676,
+        "error": null
+      },
+      {
+        "name": "دخول العميل",
+        "url": "https://rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 153,
+        "error": null
+      },
+      {
+        "name": "تسجيل المورد",
+        "url": "https://supplier.rfrf.net/login?mode=register",
+        "ok": true,
+        "status": 200,
+        "durationMs": 423,
+        "error": null
+      },
+      {
+        "name": "حماية استيراد المورد",
+        "url": "https://supplier.rfrf.net/catalog/import",
+        "ok": true,
+        "status": 307,
+        "durationMs": 422,
+        "error": null
+      },
+      {
+        "name": "هوية بوابة المورد",
+        "url": "https://supplier.rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 144,
+        "error": null
+      },
+      {
+        "name": "دخول الإدارة",
+        "url": "https://admin.rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 460,
+        "error": null
+      },
+      {
+        "name": "حماية لوحة العميل",
+        "url": "https://rfrf.net/account",
+        "ok": true,
+        "status": 307,
+        "durationMs": 138,
+        "error": null
+      },
+      {
+        "name": "تحقق بيانات المركبة برقم الهيكل",
+        "url": "https://rfrf.net/api/vehicle/vin",
+        "ok": true,
+        "status": 200,
+        "durationMs": 434,
+        "error": null
+      },
+      {
+        "name": "رسالة تعذر دخول المورد",
+        "url": "https://supplier.rfrf.net/login?mode=phone&err=not_allowed",
+        "ok": true,
+        "status": 200,
+        "durationMs": 170,
+        "error": null
+      }
+    ],
+    "limits": [
+      "فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين",
+      "لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون",
+      "لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT"
+    ]
+  },
+  "supplierSmoke": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "checkedAtUtc": "2026-10-18T21:25:29.447Z",
+    "authenticated": false,
+    "realMessagesSent": false,
+    "checks": [
+      {
+        "name": "desktop supplier-phone page available",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop no authentication cookie granted",
+        "ok": true
+      },
+      {
+        "name": "desktop action redirect streams RSC",
+        "ok": true
+      },
+      {
+        "name": "desktop invalid supplier phone has controlled error",
+        "ok": true
+      },
+      {
+        "name": "no unhandled JavaScript errors",
+        "ok": true
+      }
+    ],
+    "views": [
+      {
+        "device": "desktop",
+        "name": "supplier-phone",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-phone-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-phone",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-phone-dark.png"
+      }
+    ],
+    "redirects": [
+      {
+        "device": "desktop",
+        "status": 200,
+        "contentType": "text/x-component",
+        "redirect": "/login?mode=phone&err=invalid_phone;push",
+        "bytes": 12366
+      }
+    ],
+    "errors": [],
+    "passed": true,
+    "finishedAtUtc": "2026-10-18T21:25:41.406Z"
+  }
+}

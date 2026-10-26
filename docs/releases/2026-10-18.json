@@ -1,0 +1,50 @@
+{
+  "startedAtUtc": "2026-10-17T22:13:11Z",
+  "updatedAtUtc": "2026-10-18T03:16:24.920Z",
+  "sourceCommit": "76d4791e7fed356bac5bdb76ed70bd31f199c32c",
+  "environmentChanged": false,
+  "databaseChanged": false,
+  "sites": [
+    {
+      "domain": "rfrf.net",
+      "archiveSha256": "dfbf605562bb038930218a1cdbf12d92dd99dd9ea7daabdfe95bb97c5f0ba4da",
+      "sourceArchive": "rfrf.net-release-20261017.zip",
+      "uploadedArchive": "rafraf-customer-76d4791e-20261018.zip",
+      "status": "previous-publication-verified-current-domain-now-api",
+      "buildUuid": "01a14bed-1731-728d-aa3a-b0c443b9e470",
+      "historicalPublicationVerifiedAtUtc": "2026-10-17T22:18:17.152Z",
+      "currentService": "rafraf-api",
+      "currentPage": "Hello World!",
+      "currentCustomerBuildLookup": "404",
+      "historicalBuildCompletedAtUtc": "2026-10-17T22:18:41Z"
+    },
+    {
+      "domain": "supplier.rfrf.net",
+      "archiveSha256": "69ef70a53f5f56e800795382f8edd8fa601074221594ef63f6d635950f7353cf",
+      "sourceArchive": "supplier.rfrf.net-release-20261017.zip",
+      "uploadedArchive": "rafraf-supplier-76d4791e-20261018.zip",
+      "status": "published-verified",
+      "buildUuid": "01a14bf2-ef90-730d-956b-3c750f4b2c15",
+      "completedAtUtc": "2026-10-17T22:24:28Z",
+      "liveEvidence": "rafraf-supplier-live-verification-20261018.json"
+    },
+    {
+      "domain": "admin.rfrf.net",
+      "archiveSha256": "388b5776c9b8ae6d8eafed145cb019ed6d187664d3d731a935b0b0c97469f9a3",
+      "sourceArchive": "admin.rfrf.net-release-20261017.zip",
+      "uploadedArchive": "rafraf-admin-76d4791e-20261018.zip",
+      "status": "release-uploaded-not-deployed-new-external-build-detected",
+      "buildUuid": null,
+      "latestObservedBuildUuid": "01a14c60-0ca5-7376-82f4-c5e9a6e59e80",
+      "latestObservedBuildSource": "managed-node-admin-795d4d51.zip",
+      "latestObservedBuildCompletedAtUtc": "2026-10-18T00:23:00Z"
+    }
+  ],
+  "api": {
+    "domain": "api.rfrf.net",
+    "status": "missing-from-current-hosting-list",
+    "currentlyServedAt": "rfrf.net",
+    "noApiSourceChangesByThisTask": true
+  },
+  "pendingDecision": "Confirm intended domain-to-application mapping before more deployment writes"
+}

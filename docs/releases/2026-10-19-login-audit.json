@@ -1,0 +1,270 @@
+{
+  "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+  "ci": 39166366106,
+  "state": "published_verified_with_auth_configuration_blocker",
+  "published": true,
+  "environmentChanged": false,
+  "databaseChanged": false,
+  "customerBefore": {
+    "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+    "build": "01a15013-f553-73d4-bfb6-8f74ce34c206",
+    "archive": "rfrf.net-header-offer-f1bdeebb-20261018.zip",
+    "sha256": "096a242a904f5cc4c91474b50381f85e5a8ce309c25d107e8283faad36009982"
+  },
+  "supplierBefore": {
+    "source": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+    "build": "01a14efb-02d9-7284-b4cd-644be319cc51",
+    "archive": "supplier.rfrf.net-interface-0ac1f6d9-20261018.zip",
+    "sha256": "ae253ac5630bba935f690540d3a2491272c7723ca5402a98408b29de576d250f"
+  },
+  "builds": {
+    "rfrf.net": {
+      "uuid": "01a150da-c1bd-7300-8739-278ba57a49c5",
+      "state": "completed",
+      "options": {
+        "node_version": 24,
+        "app_type": "express",
+        "root_directory": null,
+        "output_directory": ".",
+        "build_script": "build:hostinger",
+        "entry_file": "hostinger-runtime/bootstrap.cjs",
+        "package_manager": "pnpm",
+        "source_type": "archive",
+        "source_options": {
+          "archive_path": "rafraf-customer-login-final-5fcb45cf-20261018.zip",
+          "owner": null,
+          "repository": null,
+          "branch": null,
+          "installation_uuid": null,
+          "commit": null
+        }
+      },
+      "created_at": "2026-10-18T21:11:16Z",
+      "updated_at": "2026-10-18T21:16:28Z"
+    },
+    "supplier.rfrf.net": {
+      "uuid": "01a150da-c33c-7170-a11f-c977259cda94",
+      "state": "completed",
+      "options": {
+        "node_version": 24,
+        "app_type": "express",
+        "root_directory": null,
+        "output_directory": ".",
+        "build_script": "build:hostinger",
+        "entry_file": "hostinger-runtime/bootstrap.cjs",
+        "package_manager": "pnpm",
+        "source_type": "archive",
+        "source_options": {
+          "archive_path": "rafraf-supplier-login-final-5fcb45cf-20261018.zip",
+          "owner": null,
+          "repository": null,
+          "branch": null,
+          "installation_uuid": null,
+          "commit": null
+        }
+      },
+      "created_at": "2026-10-18T21:11:16Z",
+      "updated_at": "2026-10-18T21:15:40Z"
+    }
+  },
+  "ciConclusion": "success",
+  "runtimeErrorObserved": "failed to get redirect response TypeError: fetch failed",
+  "initialRelease": {
+    "source": "8f1c2df4ef0367a0e67c7d2c0e1164528c6e466a",
+    "ci": 39164161124,
+    "state": "published_ui_verified_internal_redirect_fix_required",
+    "published": true,
+    "environmentChanged": false,
+    "databaseChanged": false,
+    "customerBefore": {
+      "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+      "build": "01a15013-f553-73d4-bfb6-8f74ce34c206",
+      "archive": "rfrf.net-header-offer-f1bdeebb-20261018.zip",
+      "sha256": "096a242a904f5cc4c91474b50381f85e5a8ce309c25d107e8283faad36009982"
+    },
+    "supplierBefore": {
+      "source": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+      "build": "01a14efb-02d9-7284-b4cd-644be319cc51",
+      "archive": "supplier.rfrf.net-interface-0ac1f6d9-20261018.zip",
+      "sha256": "ae253ac5630bba935f690540d3a2491272c7723ca5402a98408b29de576d250f"
+    },
+    "builds": {
+      "rfrf.net": {
+        "uuid": "01a150bf-f734-7255-91d3-7374797c0682",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-customer-login-audit-8f1c2df4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:42:00Z",
+        "updated_at": "2026-10-18T20:47:51Z"
+      },
+      "supplier.rfrf.net": {
+        "uuid": "01a150bf-f8ef-7050-9f25-02db4452165d",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-supplier-login-audit-8f1c2df4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:42:00Z",
+        "updated_at": "2026-10-18T20:47:01Z"
+      }
+    },
+    "ciConclusion": "success",
+    "runtimeErrorObserved": "failed to get redirect response TypeError: fetch failed"
+  },
+  "rollback": {
+    "source": "8f1c2df4ef0367a0e67c7d2c0e1164528c6e466a",
+    "builds": {
+      "rfrf.net": {
+        "uuid": "01a150bf-f734-7255-91d3-7374797c0682",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-customer-login-audit-8f1c2df4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:42:00Z",
+        "updated_at": "2026-10-18T20:47:51Z"
+      },
+      "supplier.rfrf.net": {
+        "uuid": "01a150bf-f8ef-7050-9f25-02db4452165d",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-supplier-login-audit-8f1c2df4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:42:00Z",
+        "updated_at": "2026-10-18T20:47:01Z"
+      }
+    },
+    "packages": [
+      {
+        "domain": "rfrf.net",
+        "file": "rfrf.net-login-audit-8f1c2df4-20261018.zip",
+        "sha256": "f8cb3794860426d5a3219a2027d34c4c942216c4ac6e7e3c4b32f203139318e6",
+        "bytes": 2163630
+      },
+      {
+        "domain": "supplier.rfrf.net",
+        "file": "supplier.rfrf.net-login-audit-8f1c2df4-20261018.zip",
+        "sha256": "e9111921a9e9bb3305d953ff1d3cd71ba0fba1d870c15d843d29dd5050c13cf7",
+        "bytes": 1569377
+      }
+    ]
+  },
+  "hostingerEnvironmentChanged": false,
+  "runtimeOriginDerived": true,
+  "previousRuntimeAttempt": {
+    "source": "eaa20cd42e6fca5e6e71618fe317a507f28a5e8d",
+    "builds": {
+      "rfrf.net": {
+        "uuid": "01a150ce-4295-7015-b13c-283368f22101",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-customer-login-runtime-eaa20cd4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:57:37Z",
+        "updated_at": "2026-10-18T21:03:51Z"
+      },
+      "supplier.rfrf.net": {
+        "uuid": "01a150ce-43ff-72d6-bf12-705cf37ceb93",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-supplier-login-runtime-eaa20cd4-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T20:57:37Z",
+        "updated_at": "2026-10-18T21:02:57Z"
+      }
+    },
+    "issue": "origin overwritten on repeated listening event; browser capture also lost redirect body"
+  },
+  "verifiedAtUtc": "2026-10-18T21:21:10.847593+00:00",
+  "customerProductionLoginComplete": false,
+  "supplierRealDeliveryAndAccountLoginTested": false
+}

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { assessResponse } from './qa-public-sites.mjs';
+import { assessResponse, checkPublicPage } from './qa-public-sites.mjs';
 
 test('HTTP200 from the API on the customer domain is a failure', () => {
   assert.ok(assessResponse({ url: 'https://rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-customer' }, { status: 200, body: '{"service":"rafraf-api","status":"alive"}' }));
@@ -25,4 +25,21 @@ test('VIN check requires actual vehicle fields and the expected source', () => {
   assert.equal(assessResponse(check, { status: 200, body: JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{make:'HONDA',model:'Accord'}}) }), null);
   assert.ok(assessResponse(check, {status:200,body:JSON.stringify({status:'decoded',source:'NHTSA vPIC',vehicle:{}})}));
   assert.ok(assessResponse(check, {status:200,body:JSON.stringify({status:'available'})}));
+});
+
+test('response validation errors are surfaced instead of reported as connection failures', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response('Hello', {
+    status: 200,
+    headers: { 'content-type': 'text/html' },
+  });
+
+  try {
+    await assert.rejects(
+      checkPublicPage({ name: 'invalid check', url: 'https://rfrf.net/', kind: 'html', markers: null }),
+      TypeError,
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

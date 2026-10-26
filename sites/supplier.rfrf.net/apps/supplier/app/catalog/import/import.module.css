@@ -136,7 +136,7 @@
 }
 
 .steps li:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   inset-inline: calc(100% - 1px) -8px;
   top: 17px;
@@ -334,6 +334,7 @@
   margin-top: 12px;
   padding: 13px 14px;
   justify-content: space-between;
+  flex-wrap: wrap;
   border: 1px solid var(--rafraf-color-border-ai);
   border-radius: var(--rafraf-radius-12);
   background: var(--rafraf-color-bg-ai-soft);
@@ -341,6 +342,7 @@
 
 .contract > div {
   min-width: 0;
+  flex: 1 1 280px;
   display: flex;
   align-items: center;
   gap: 9px;
@@ -362,6 +364,7 @@
 }
 
 .contract button {
+  flex-shrink: 0;
   min-height: 38px;
   padding: 0 12px;
   display: inline-flex;
@@ -414,6 +417,56 @@
 
 .spinner {
   animation: spin 900ms linear infinite;
+}
+
+.fileInstructions,
+.preview p {
+  color: var(--rafraf-color-text-secondary);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.validationIssues {
+  max-height: 260px;
+  overflow: auto;
+  padding-inline-start: 24px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--rafraf-color-text-primary);
+}
+
+.preview {
+  min-width: 0;
+  margin-block: 20px;
+}
+
+.preview h2 {
+  font-size: 16px;
+}
+
+.previewTable {
+  overflow-x: auto;
+  border: 1px solid var(--rafraf-color-bg-surface-interactive);
+  border-radius: 12px;
+}
+
+.previewTable table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: start;
+  font-size: 13px;
+}
+
+.previewTable th,
+.previewTable td {
+  padding: 12px;
+  text-align: start;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rafraf-color-bg-surface-interactive);
+}
+
+.previewTable th {
+  background: var(--rafraf-color-bg-surface-interactive);
 }
 
 .srOnly {

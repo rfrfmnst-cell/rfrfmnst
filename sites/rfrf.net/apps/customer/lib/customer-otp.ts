@@ -1,3 +1,4 @@
+import { normalizeOtpCode } from './auth-input.ts';
 import {
   createHmac,
   randomBytes,
@@ -127,6 +128,7 @@ export function verifyCustomerOtpCode(
   code: string,
 ): boolean {
   const secret = securitySecret();
+  code = normalizeOtpCode(code);
   if (!secret || !/^\d{6}$/.test(code)) return false;
 
   const expected = hmac(

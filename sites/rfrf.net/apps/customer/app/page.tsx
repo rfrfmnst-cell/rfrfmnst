@@ -6,46 +6,48 @@ import {
   SearchCheck,
   ShieldCheck,
   Truck,
-} from 'lucide-react';
-import Link from 'next/link';
-import type { Metadata } from 'next';
-import { SUPPLIER_REGISTRATION_URL } from '../lib/public-app-urls';
-import { PrecisionHero } from './precision-hero';
+} from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { SUPPLIER_REGISTRATION_URL } from "../lib/public-app-urls";
+import { PrecisionHero } from "./precision-hero";
+import { SiteFooter } from "./site-footer";
+import { HomeDiscovery } from "./home-discovery";
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/' },
+  alternates: { canonical: "/" },
 };
 
 const STEPS = [
   {
     icon: SearchCheck,
-    title: 'صف احتياجك',
-    text: 'اكتب اسم القطعة، صوّرها، أو أدخل VIN / OEM داخل المحادثة.',
+    title: "صف احتياجك",
+    text: "اكتب اسم القطعة، صوّرها، أو أدخل VIN / OEM داخل المحادثة.",
   },
   {
     icon: ShieldCheck,
-    title: 'تحقق من المطابقة',
-    text: 'نربط المركبة بالقطعة ونوقف أي نتيجة لا تصل إلى مستوى الثقة المطلوب.',
+    title: "تحقق من المطابقة",
+    text: "نربط المركبة بالقطعة ونوقف أي نتيجة لا تصل إلى مستوى الثقة المطلوب.",
   },
   {
     icon: PackageCheck,
-    title: 'اختر العرض المناسب',
-    text: 'قارن السعر النهائي ومدة التجهيز والضمان ثم وافق بنفسك.',
+    title: "اختر العرض المناسب",
+    text: "قارن السعر النهائي ومدة التجهيز والضمان ثم وافق بنفسك.",
   },
 ] as const;
 
 const FAQ = [
   [
-    'كيف أعرف أن القطعة تناسب سيارتي؟',
-    'نعتمد على هوية المركبة ورقم OEM ومصدر التوافق. النتيجة غير المؤكدة تنتقل إلى مراجعة بشرية ولا تظهر كعرض جاهز.',
+    "كيف أعرف أن القطعة تناسب سيارتي؟",
+    "نعتمد على هوية المركبة ورقم OEM ومصدر التوافق. النتيجة غير المؤكدة تنتقل إلى مراجعة بشرية ولا تظهر كعرض جاهز.",
   ],
   [
-    'هل ينشئ المساعد طلباً دون موافقتي؟',
-    'لا. إنشاء طلب التوريد واعتماد العرض عمليتان تحتاجان موافقة صريحة داخل المحادثة.',
+    "هل ينشئ المساعد طلباً دون موافقتي؟",
+    "لا. إنشاء طلب التوريد واعتماد العرض عمليتان تحتاجان موافقة صريحة داخل المحادثة.",
   ],
   [
-    'هل السعر المعروض نهائي؟',
-    'توضح المقارنة سعر القطعة والشحن والضريبة قبل اعتماد العرض، ولا نضيف أرقاماً أو وعوداً غير موثقة.',
+    "هل السعر المعروض نهائي؟",
+    "توضح المقارنة سعر القطعة والشحن والضريبة قبل اعتماد العرض، ولا نضيف أرقاماً أو وعوداً غير موثقة.",
   ],
 ] as const;
 
@@ -56,9 +58,9 @@ const FAQ = [
 function heroVideoSource(): string | undefined {
   const raw = process.env.RAFRAF_HERO_VIDEO_SRC?.trim();
   if (!raw) return undefined;
-  if (raw.startsWith('/') && !raw.startsWith('//')) return raw;
+  if (raw.startsWith("/") && !raw.startsWith("//")) return raw;
   try {
-    return new URL(raw).protocol === 'https:' ? raw : undefined;
+    return new URL(raw).protocol === "https:" ? raw : undefined;
   } catch {
     return undefined;
   }
@@ -69,6 +71,7 @@ export default function Home() {
     <>
       <main className="precision-home">
         <PrecisionHero videoSrc={heroVideoSource()} />
+        <HomeDiscovery />
 
         <section id="how" className="precision-section precision-how">
           <div className="precision-container">
@@ -151,6 +154,10 @@ export default function Home() {
             <div>
               <p className="precision-kicker">للموردين المعتمدين</p>
               <h2>فرص واضحة، وبيانات عميل محمية</h2>
+              <p>
+                للمورد والبائع والتاجر: جرّب رفرف لمدة 3 أشهر، وبعدها لك حرية
+                الانتقال إلى الخطط المدفوعة أو المغادرة.
+              </p>
             </div>
             <a href={SUPPLIER_REGISTRATION_URL}>
               ابدأ التأهيل <ArrowLeft size={18} aria-hidden />
@@ -158,28 +165,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="precision-footer">
-        <div className="precision-container">
-          <p>رفرف — قطع غيار بقرار موثّق</p>
-          <nav aria-label="روابط التذييل">
-            <Link href="/privacy">سياسة الخصوصية</Link>
-            <Link href="/track">تتبع طلبك</Link>
-            <a href={SUPPLIER_REGISTRATION_URL}>بوابة الموردين</a>
-            <a
-              className="precision-social-link"
-              href="https://www.tiktok.com/@manastrafeaf"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="حساب رفرف الرسمي على تيك توك (يفتح في نافذة جديدة)"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-                <path d="M15.5 2h-3.2v13a3.4 3.4 0 1 1-3.4-3.4V8.4a6.6 6.6 0 1 0 6.6 6.6V8.8c1.3 1.1 3 1.7 4.8 1.7V7.3c-2.8 0-4.8-2.1-4.8-5.3Z" />
-              </svg>
-              <span>تيك توك</span>
-            </a>
-          </nav>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

@@ -9,7 +9,7 @@
   margin-inline: auto;
 }
 .precision-section {
-  padding-block: clamp(82px, 10vw, 144px);
+  padding-block: clamp(56px, 7vw, 88px);
 }
 .precision-kicker {
   margin: 0 0 16px;
@@ -30,9 +30,9 @@
 .precision-faq h2,
 .precision-supplier h2 {
   margin: 0;
-  font-size: clamp(2.3rem, 4.6vw, 4.7rem);
-  line-height: 1.14;
-  letter-spacing: -0.045em;
+  font-size: clamp(1.9rem, 3.7vw, 3.3rem);
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 .precision-heading-row p,
 .precision-trust p {
