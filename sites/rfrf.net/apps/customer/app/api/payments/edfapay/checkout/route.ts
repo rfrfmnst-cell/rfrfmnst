@@ -13,6 +13,11 @@ import {
 } from '@rafraf/shared/payments/payment-intake';
 import { isOrderPayable } from '@rafraf/shared/payments/payment-state';
 import { NextResponse, type NextRequest } from 'next/server';
+import {
+  TapSupabaseProvider,
+  tapSupabaseProviderFromEnv,
+  isTapBridgeRedirect,
+} from '../../../../../lib/payments/tap-supabase-provider';
 import { edfaPayProviderFromEnv } from '../../../../../lib/payments/edfapay-provider';
 import { paymentLaunchStatus } from '../../../../../lib/payments/payment-launch';
 import { customerEdfaPayRuntimeReadiness } from '../../../../../lib/payments/edfapay-runtime-readiness';
@@ -33,7 +38,7 @@ export const runtime = 'nodejs';
 /**
  * بدء دفعة على Checkout المستضاف لطلب يملكه العميل.
  *
- * يعيد رابط صفحة EdfaPay فقط؛ لا تلمس المنصة بيانات البطاقة إطلاقاً.
+ * يعيد رابط صفحة مزوّد الدفع المحدد فقط؛ لا تلمس المنصة بيانات البطاقة إطلاقاً.
  * البيانات المعادة للعميل هي مبلغ طلبه النهائي وحده — لا تكلفة مورد ولا
  * هامش ولا أي اقتصاديات داخلية (BUSINESS_RULES القاعدة 2).
  */
@@ -83,8 +88,20 @@ export async function POST(request: NextRequest) {
       { status: 503 },
     );
 
-  const paymentReadiness = await customerEdfaPayRuntimeReadiness(process.env);
-  if (!paymentReadiness.ready)
+  const provider =
+    process.env.PAYMENT_PROVIDER?.trim().toLowerCase() === 'tap'
+      ? tapSupabaseProviderFromEnv()
+      : edfaPayProviderFromEnv();
+  let paymentReady = false;
+  try {
+    paymentReady =
+      provider instanceof TapSupabaseProvider
+        ? await provider.ready()
+        : (await customerEdfaPayRuntimeReadiness(process.env)).ready;
+  } catch {
+    /* Readiness failure must keep intake closed. */
+  }
+  if (!paymentReady)
     return NextResponse.json(
       { error: 'payment_unavailable', retryable: true },
       { status: 503 },
@@ -101,7 +118,6 @@ export async function POST(request: NextRequest) {
   if (origin && origin !== baseUrl)
     return NextResponse.json({ error: 'origin' }, { status: 403 });
 
-  const provider = edfaPayProviderFromEnv();
   if (!provider)
     return NextResponse.json(
       { error: 'payment_unavailable', retryable: true },
@@ -337,7 +353,7 @@ export async function POST(request: NextRequest) {
   const amount = order.totalAmount.toFixed(2);
 
   try {
-    const authorized = await provider.authorize({
+    const authorizationRequest = {
       orderCode: payment.providerOrderCode,
       money: { amount, currency: order.currency },
       description: `Rafraf order ${order.code}`,
@@ -356,8 +372,15 @@ export async function POST(request: NextRequest) {
       // browser redirect never decides money state; the page renders only the
       // persisted result of signed callback + authenticated status handling.
       returnUrl: `${baseUrl}/track?code=${encodeURIComponent(order.code)}&paymentReturn=1`,
-      notificationUrl: `${baseUrl}/api/payments/edfapay/webhook`,
-    });
+      notificationUrl: `${baseUrl}/api/payments/${provider.name === 'TAP' ? 'tap' : 'edfapay'}/webhook`,
+    };
+    const authorized =
+      provider instanceof TapSupabaseProvider
+        ? await provider.authorize(authorizationRequest, {
+            id: order.id,
+            code: order.code,
+          })
+        : await provider.authorize(authorizationRequest);
 
     if (authorized.externalRef) {
       await prisma.payment.updateMany({
@@ -368,7 +391,9 @@ export async function POST(request: NextRequest) {
 
     if (
       !authorized.redirectUrl ||
-      !isAllowedCheckoutRedirect(authorized.redirectUrl, process.env)
+      !(provider.name === 'TAP'
+        ? isTapBridgeRedirect(authorized.redirectUrl)
+        : isAllowedCheckoutRedirect(authorized.redirectUrl, process.env))
     ) {
       throw new PaymentProviderError(
         provider.name,

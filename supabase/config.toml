@@ -1,0 +1,6 @@
+project_id = "gfxnwfjjpxmzvnylushd"
+
+[functions.rafraf-tap]
+# Service calls require an exact service-role credential in the handler.
+# Tap webhooks instead require hashstring plus authenticated charge retrieval.
+verify_jwt = false
