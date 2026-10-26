@@ -52,7 +52,7 @@ export function PaymentButton({
     setError(null);
     setLoginRequired(false);
     try {
-      const response = await fetch('/api/payments/edfapay/checkout', {
+      const response = await fetch('/api/payments/checkout', {
         method: 'POST',
         credentials: 'same-origin',
         cache: 'no-store',
@@ -108,7 +108,8 @@ export function PaymentButton({
       <div className={styles.body}>
         <h3>أكمل الدفع الآمن</h3>
         <p>
-          ستنتقل إلى صفحة EdfaPay المستضافة؛ رفرف لا يطّلع على بيانات بطاقتك.
+          ستنتقل إلى صفحة الدفع المستضافة لدى المزوّد؛ رفرف لا يطّلع على بيانات
+          بطاقتك.
         </p>
         {error ? (
           <p className={styles.error} role="alert">

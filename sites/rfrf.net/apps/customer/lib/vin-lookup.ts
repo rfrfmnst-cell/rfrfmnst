@@ -16,7 +16,7 @@ export async function lookupVehicleVin(raw:string, fetcher:typeof fetch=fetch):P
     const joined=new Uint8Array(size);let offset=0;for(const chunk of chunks){joined.set(chunk,offset);offset+=chunk.byteLength;}
     const json=JSON.parse(new TextDecoder().decode(joined));
     const row=json?.Results?.[0];if(!row||typeof row!=='object')return {status:'not_found'};
-    const clean=(value:unknown)=>typeof value==='string'?value.replace(/[\u0000-\u001F]/g,' ').trim().slice(0,80):'';
+    const clean=(value:unknown)=>typeof value==='string'?Array.from(value,(character)=>{const codePoint=character.codePointAt(0);return codePoint!==undefined&&codePoint<=0x1f?' ':character;}).join('').trim().slice(0,80):'';
     const year=clean(row.ModelYear);
     const vehicle={make:clean(row.Make),model:clean(row.Model),year:/^\d{4}$/.test(year)?year:'',trim:clean(row.Trim),engine:[clean(row.DisplacementL),clean(row.FuelTypePrimary),clean(row.EngineModel)].filter(Boolean).join(' · ').slice(0,120)};
     if (!vehicle.make || !vehicle.model) return {status:'not_found'};

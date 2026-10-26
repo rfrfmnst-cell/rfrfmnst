@@ -1,3 +1,4 @@
+import { tapPaymentLaunchStatus } from './tap-launch';
 import { edfaPayApiEnvironment } from '@rafraf/shared/payments/edfapay-endpoint';
 import {
   customerPaymentOrigin,
@@ -66,6 +67,9 @@ export function paymentLaunchStatus(
       reason: localDevelopment ? null : 'payment_disabled',
     };
   }
+
+  if (env.PAYMENT_PROVIDER?.trim().toLowerCase() === 'tap')
+    return tapPaymentLaunchStatus(env);
 
   if (raw === 'sandbox') {
     const vercelEnvironment = env.VERCEL_ENV?.trim().toLowerCase();

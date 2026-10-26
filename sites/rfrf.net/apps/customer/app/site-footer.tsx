@@ -40,15 +40,17 @@ function PendingSocialProfiles() {
           </span>
         </li>
         <li>
-          <span
-            role="img"
-            aria-label="TikTok — الرابط غير مضاف"
-            title="TikTok — بانتظار إضافة الرابط"
+          <a
+            href="https://www.tiktok.com/@manastrafeaf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="حساب رفرف الرسمي على تيك توك (يفتح في نافذة جديدة)"
+            title="حساب رفرف الرسمي على تيك توك"
           >
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12.5 0h3.9c.1 1.5.6 3.1 1.8 4.2 1.1 1.1 2.7 1.6 4.2 1.8v4c-1.4 0-2.9-.3-4.2-.9-.6-.3-1.1-.6-1.6-1v8.8c-.1 1.4-.6 2.8-1.4 3.9-1.3 1.9-3.6 3.2-6 3.2-1.4.1-2.9-.3-4.1-1-2.1-1.2-3.5-3.5-3.7-5.9v-1.5c.2-1.9 1.1-3.8 2.6-5 1.7-1.5 4-2.2 6.3-1.8v4.4c-1-.3-2.2-.2-3.1.4-.6.4-1.1 1.1-1.4 1.8-.2.5-.1 1.1-.1 1.6.2 1.7 1.8 3.1 3.5 2.9 1.2 0 2.3-.6 2.8-1.6.2-.4.4-.7.4-1.1.1-1.8.1-3.6.1-5.4V0Z" />
             </svg>
-          </span>
+          </a>
         </li>
         <li>
           <span
@@ -70,7 +72,7 @@ function PendingSocialProfiles() {
           </span>
         </li>
       </ul>
-      <p className={styles.pendingNote}>بانتظار إضافة روابط الحسابات</p>
+      <p className={styles.pendingNote}>بعض روابط الحسابات بانتظار الإضافة</p>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, type FormEvent } from 'react';
+import Image from 'next/image';
 import { ArrowLeft, ArrowRight, CarFront, Check, Search, Tractor, Truck, X } from 'lucide-react';
 import { findVehicleBrands, VEHICLE_BRANDS, vehicleRequestText, vehicleTrimSuggestions, type VehicleCategory } from '../../lib/vehicle-catalog';
 import { storeChatEntryDraft } from '../../lib/chat-entry-draft';
@@ -54,7 +55,7 @@ export function VehicleFinder({ initialCategory, latestYear }: {initialCategory:
       </div>
       <p className={styles.count} role="status">{brands.length} علامة متاحة للاختيار</p>
       {brands.length ? <ul className={styles.brandGrid}>{brands.map(b=><li key={b.id}><button type="button" className={styles.brandCard} aria-label={`اختيار ${b.name}`} onClick={()=>resetAfterBrand(b.id)}>
-        {LOGOS.has(b.id)?<img src={`/vehicle-brands/${b.id}.svg`} width="88" height="58" alt="" loading="lazy"/>:<span className={styles.wordmark} aria-hidden dir="ltr">{b.latin}</span>}
+        {LOGOS.has(b.id)?<Image src={`/vehicle-brands/${b.id}.svg`} width={88} height={58} alt="" loading="lazy"/>:<span className={styles.wordmark} aria-hidden dir="ltr">{b.latin}</span>}
         <strong>{b.name}</strong><span dir="ltr">{b.latin}</span><ArrowLeft size={17} aria-hidden/>
       </button></li>)}</ul> : <div className={styles.empty}><Search size={32} aria-hidden/><h2>لم نجد علامة بهذا البحث</h2><p>جرّب الاسم بالعربية أو الإنجليزية.</p><button type="button" onClick={()=>{setQuery('');setCategory('all');setChineseOnly(false);}}>عرض كل العلامات</button></div>}
     </> : <div className={styles.selection}>

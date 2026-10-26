@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { Buffer } from 'node:buffer';
 import { readFile } from 'node:fs/promises';
 import { stripTypeScriptTypes } from 'node:module';
 const source = stripTypeScriptTypes(await readFile(new URL('./part-search-intake.ts', import.meta.url), 'utf8'), {mode:'strip'}).replace("'./vin'", JSON.stringify(new URL('./vin.ts', import.meta.url).href));

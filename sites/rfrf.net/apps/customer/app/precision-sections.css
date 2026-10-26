@@ -220,6 +220,22 @@
 .precision-footer a:hover {
   color: var(--rafraf-primary-hover);
 }
+.precision-footer a:focus-visible {
+  outline: 3px solid var(--rafraf-primary-hover);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+.precision-footer .precision-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+.precision-social-link svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
 
 @media (max-width: 840px) {
   .precision-container {
