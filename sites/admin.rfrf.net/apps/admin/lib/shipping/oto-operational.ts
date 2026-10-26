@@ -149,7 +149,9 @@ function normalizedParty(party: OtoOrderParty): OtoOrderParty {
   };
 }
 
-function orderBody(input: OtoCreateOrderRequest): Record<string, unknown> {
+export function buildOtoOrderDraft(
+  input: OtoCreateOrderRequest,
+): Record<string, unknown> {
   if (
     input.currency !== 'SAR' ||
     input.items.length < 1 ||
@@ -348,7 +350,7 @@ export function createOtoOperationalAdapter(
     key: 'OTO',
     capabilities: ['CREATE_ORDER', 'CREATE_SHIPMENT', 'AWB', 'TRACK'],
     async createOrder(request) {
-      const body = orderBody(request);
+      const body = buildOtoOrderDraft(request);
       const orderId = body.orderId as string;
       const payload = await jsonRequest(OTO_CREATE_ORDER_URL, {
         method: 'POST',
