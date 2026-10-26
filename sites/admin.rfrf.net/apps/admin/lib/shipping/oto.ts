@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { createSupabaseOtoFulfillment } from './oto-supabase.ts';
 import {
   OTO_PROVIDER_KEY,
   hasControlCharacter,
@@ -488,6 +489,8 @@ let runtimeAdapter:
   { fingerprint: string; adapter: OtoFulfillmentAdapter } | undefined;
 
 export function configuredOtoFulfillment(): OtoFulfillmentAdapter | null {
+  if (process.env.OTO_TRANSPORT?.trim().toLowerCase() === 'supabase')
+    return createSupabaseOtoFulfillment(process.env);
   const config = otoFulfillmentConfigFromEnv(process.env);
   if (!config) return null;
   const fingerprint = createHash('sha256')
