@@ -62,6 +62,10 @@ async function checkPublicPage(check) {
  * that production is healthy or that GitHub runners should be whitelisted.
  */
 export function diagnoseReview(checks) {
+  if (checks.length === 0) return {
+    code: 'no_checks',
+    message: 'لم تُنفذ أي فحوص؛ نتيجة المراقبة غير صالحة.',
+  };
   const failed = checks.filter((check) => !check.ok);
   if (failed.length === 0) return {
     code: 'healthy',
@@ -86,7 +90,7 @@ export function diagnoseReview(checks) {
 export async function runPublicReview() {
   const checks = [];
   for (let offset = 0; offset < PUBLIC_CHECKS.length; offset += 3) checks.push(...await Promise.all(PUBLIC_CHECKS.slice(offset, offset + 3).map(checkPublicPage)));
-  const report = { checkedAtUtc: new Date().toISOString(), passed: checks.every((check) => check.ok), diagnosis: diagnoseReview(checks), checks, limits: ['فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين', 'لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون', 'لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT'] };
+  const report = { checkedAtUtc: new Date().toISOString(), passed: checks.length > 0 && checks.every((check) => check.ok), diagnosis: diagnoseReview(checks), checks, limits: ['فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين', 'لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون', 'لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT'] };
   const directory = resolve(process.env.QA_REPORT_DIRECTORY || 'outputs/hourly-review');
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, 'report.json'), JSON.stringify(report, null, 2) + '\n');
