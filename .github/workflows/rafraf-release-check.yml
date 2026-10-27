@@ -1,0 +1,52 @@
+name: Rafraf deployment acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/qa-release-readiness.mjs'
+      - 'scripts/qa-release-readiness.test.mjs'
+      - '.github/workflows/rafraf-release-check.yml'
+  workflow_dispatch:
+    inputs:
+      expected_release:
+        description: 'Optional full Git SHA expected on all four sites'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance-tool-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test scripts/qa-release-readiness.test.mjs
+
+  live-deployment-acceptance:
+    if: github.event_name == 'workflow_dispatch'
+    needs: acceptance-tool-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/qa-release-readiness.mjs
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release }}
+          NODE_USE_ENV_PROXY: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rafraf-deployment-acceptance
+          path: outputs/release-review/
+          retention-days: 7
