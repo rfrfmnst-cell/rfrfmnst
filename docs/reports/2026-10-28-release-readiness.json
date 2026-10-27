@@ -1,0 +1,93 @@
+{
+  "checkedAtUtc": "2026-10-27T23:56:49.916Z",
+  "expectedRelease": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+  "passed": false,
+  "checks": [
+    {
+      "name": "العميل",
+      "url": "https://rfrf.net/api/liveness",
+      "kind": "application",
+      "httpStatus": 200,
+      "passed": false,
+      "issue": "RELEASE_MISMATCH",
+      "release": "795d4d5121f7",
+      "missingSettings": [],
+      "invalidChecks": []
+    },
+    {
+      "name": "الموردون",
+      "url": "https://supplier.rfrf.net/api/liveness",
+      "kind": "application",
+      "httpStatus": 200,
+      "passed": false,
+      "issue": "RELEASE_MISMATCH",
+      "release": "795d4d5121f7",
+      "missingSettings": [],
+      "invalidChecks": []
+    },
+    {
+      "name": "الإدارة",
+      "url": "https://admin.rfrf.net/api/liveness",
+      "kind": "application",
+      "httpStatus": 200,
+      "passed": false,
+      "issue": "RELEASE_MISMATCH",
+      "release": "795d4d5121f7",
+      "missingSettings": [],
+      "invalidChecks": []
+    },
+    {
+      "name": "API",
+      "url": "https://api.rfrf.net/api/liveness",
+      "kind": "application",
+      "httpStatus": 404,
+      "passed": false,
+      "issue": "HTTP_404",
+      "release": null,
+      "missingSettings": [],
+      "invalidChecks": []
+    },
+    {
+      "name": "Tap",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-tap/health",
+      "kind": "integration",
+      "httpStatus": 200,
+      "passed": false,
+      "issue": "INTEGRATION_CONFIGURATION_INCOMPLETE",
+      "release": null,
+      "missingSettings": [
+        "TAP_SECRET_KEY",
+        "TAP_MERCHANT_ID",
+        "TAP_MODE"
+      ],
+      "invalidChecks": [
+        "secretModeMatches",
+        "merchantFormatValid"
+      ]
+    },
+    {
+      "name": "OTO",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-oto/health",
+      "kind": "integration",
+      "httpStatus": 200,
+      "passed": false,
+      "issue": "INTEGRATION_CONFIGURATION_INCOMPLETE",
+      "release": null,
+      "missingSettings": [
+        "OTO_REFRESH_TOKEN",
+        "OTO_ENABLED",
+        "OTO_AUTO_CREATE_SHIPMENT",
+        "SHIPMENT_AUTO_CREATE"
+      ],
+      "invalidChecks": [
+        "configured"
+      ]
+    }
+  ],
+  "limits": [
+    "قراءات GET عامة فقط؛ لا تسجيل دخول أو تعديل بيانات أو دفع أو شحن",
+    "هوية الإصدار معلنة من التطبيق؛ ليست مقارنة تجزئة لجميع ملفات الاستضافة",
+    "اكتمال إعداد المزود لا يثبت نجاح المصادقة أو المعاملة الفعلية",
+    "صحة بيانات العملاء والموردين تتطلب وصول قاعدة البيانات المخول واختبارات ملكية مستقلة"
+  ]
+}
