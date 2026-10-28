@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import process from 'node:process';
 import ts from 'typescript';
 import * as otp from './supplier-otp.ts';
 import * as digits from './auth-input.ts';
@@ -116,17 +117,17 @@ function fixture({
       target: ts.ScriptTarget.ES2022,
     },
   }).outputText;
-  const module = { exports: {} };
+  const moduleRef = { exports: {} };
   new Function('require', 'module', 'exports', 'console', compiled)(
     (name) => {
       assert.ok(name in modules, 'Unexpected real dependency ' + name);
       return modules[name];
     },
-    module,
-    module.exports,
+    moduleRef,
+    moduleRef.exports,
     { error: () => {} },
   );
-  return { actions: module.exports, cookies, options, sends, checks };
+  return { actions: moduleRef.exports, cookies, options, sends, checks };
 }
 function form(input) {
   const f = new FormData();

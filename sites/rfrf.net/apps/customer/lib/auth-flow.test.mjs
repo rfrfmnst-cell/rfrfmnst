@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import process from 'node:process';
 import { readFileSync } from 'node:fs';
+import process from 'node:process';
 import ts from 'typescript';
 import * as otp from './customer-otp.ts';
 import * as digits from './auth-input.ts';
@@ -102,17 +102,17 @@ function fixture({
       target: ts.ScriptTarget.ES2022,
     },
   }).outputText;
-  const commonJsModule = { exports: {} };
+  const moduleRef = { exports: {} };
   new Function('require', 'module', 'exports', 'console', compiled)(
     (name) => {
       assert.ok(name in modules, 'Unexpected real dependency ' + name);
       return modules[name];
     },
-    commonJsModule,
-    commonJsModule.exports,
+    moduleRef,
+    moduleRef.exports,
     { error: () => {} },
   );
-  return { service: commonJsModule.exports, sends, checks, counts };
+  return { service: moduleRef.exports, sends, checks, counts };
 }
 
 test('customer SMS flow uses one canonical phone and normalized Arabic OTP', async () => {

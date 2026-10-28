@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import process from 'node:process';
 import { normalizeSupplierPhone } from './supplier-phone.ts';
 import { normalizeOtpCode } from './auth-input.ts';
 import { authenticationCoreConfigured } from './auth-configuration.ts';
