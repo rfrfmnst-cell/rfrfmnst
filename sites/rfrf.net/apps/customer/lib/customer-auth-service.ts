@@ -154,7 +154,7 @@ export async function requestCustomerOtpFlow(
       return { status: 'rate_limited' };
     }
     console.error('[auth:customer] OTP rate-limit database error', {
-      message: error instanceof Error ? error.message : 'unknown',
+      code: 'OTP_DATABASE_UNAVAILABLE',
     });
     return { status: 'unavailable' };
   }
@@ -256,9 +256,9 @@ export async function verifyCustomerOtpFlow(
       });
       return { status: 'reserved', attempt } as const;
     });
-  } catch (error) {
+  } catch {
     console.error('[auth:customer] OTP verification reservation failed', {
-      message: error instanceof Error ? error.message : 'unknown',
+      code: 'OTP_DATABASE_UNAVAILABLE',
     });
     return { status: 'unavailable' };
   }
@@ -301,6 +301,8 @@ export async function verifyCustomerOtpFlow(
         }),
       ]);
       if (consumed > 0) return { status: 'used' } as const;
+      // Recheck after provider latency and database lock waits.
+      if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
       if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
       if (!valid) {
         const attempts = Math.max(reserved, failed + 1, reservation.attempt);

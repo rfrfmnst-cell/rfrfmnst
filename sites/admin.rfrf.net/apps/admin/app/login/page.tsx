@@ -48,7 +48,7 @@ export default async function LoginPage({
               <input
                 name="code"
                 inputMode="numeric"
-                pattern="[0-9]{6}"
+                pattern="[0-9٠-٩۰-۹]{6}"
                 minLength={6}
                 maxLength={6}
                 required

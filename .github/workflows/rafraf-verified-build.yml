@@ -1,0 +1,47 @@
+name: Rafraf verified applications
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: rafraf-verified-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: node --test scripts/*.test.mjs supabase/tests/*.test.mjs
+  applications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [rfrf.net, supplier.rfrf.net, admin.rfrf.net, api.rfrf.net]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@11.6.0 --ignore-scripts
+      - name: Install locked dependencies
+        working-directory: sites/${{ matrix.site }}
+        run: pnpm install --frozen-lockfile
+      - name: Test types, lint, behavior, packaged build and startup
+        run: node scripts/verify-site.mjs '${{ matrix.site }}'
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: rafraf-verification-${{ matrix.site }}
+          path: outputs/verification/${{ matrix.site }}/
+          retention-days: 7

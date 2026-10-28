@@ -18,3 +18,30 @@
 تجهيزات تكامل Supabase اللاحقة موثقة في [ربط Tap](docs/tap-integration.md)
 و[ربط OTO](docs/oto-integration.md). توضح الوثيقتان ما نُشر في Supabase،
 وما يزال ضمن كود الموقع للمراجعة، ومتطلبات الاختبار والتفعيل المتبقية.
+
+## التحقق من النسخ المستقلة
+
+استخدم Node.js 24 وpnpm 11.6.0، وثبّت تبعيات كل موقع بواسطة
+`pnpm install --frozen-lockfile` داخل مجلده، ثم من جذر المستودع:
+
+```sh
+node scripts/verify-site.mjs rfrf.net
+node scripts/verify-site.mjs supplier.rfrf.net
+node scripts/verify-site.mjs admin.rfrf.net
+node scripts/verify-site.mjs api.rfrf.net
+node --test scripts/*.test.mjs supabase/tests/*.test.mjs
+```
+
+يولّد التحقق عميل Prisma محليًا دون اتصال قاعدة، ويشغّل TypeScript وLint
+واختبارات السلوك وJest وحزمة Hostinger وبناءها وإقلاعها المحلي. تحفظ
+النتائج في `outputs/verification/`، وتوجد مهمة CI للتطبيقات الأربعة على PR.
+شغّله في نسخة نظيفة بلا ملفات بيئة خاصة؛ لا يمرر أسرار الخدمات إلى أبنائه
+ولا ينشر شيئًا. `pnpm verify` داخل كل موقع يستدعي التحقق نفسه.
+
+اختبار مطابقة Figma وحده يُسجل متجاوزًا صراحة عند غياب ملفات التأليف من
+المصدر المنقول؛ اختبار مكون OfferRow الفعلي يبقى فعالًا. نجاح الاختبارات
+المحاكية لا يثبت اتصال قاعدة المنصة أو وصول OTP أو جاهزية مزودي الدفع والشحن.
+بعض أدوات المستودع الأصلي الأوسع غير مرفقة في هذه الحزم؛ لا يُعد غيابها نجاحًا.
+
+خطة الإصدار والنسخ الاحتياطي والرجوع في
+[خطة Hostinger](docs/hostinger-safe-release-2026-10-28.md).

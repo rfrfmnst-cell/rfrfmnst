@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
@@ -10,7 +11,7 @@ const hash = x => createHash('sha256').update(x).digest('hex');
 const record = (key='customer/thread/a.png', bytes=Buffer.from('synthetic-evidence')) => ({ key, base64:bytes.toString('base64'),size:bytes.length,sha256:hash(bytes) });
 const payload = (evidence=[record()], supplier_documents=[]) => JSON.stringify({version:1,evidence,supplier_documents});
 function fixture() {
-  const root=fs.mkdtempSync('/workspace/.deployment/seed-test-');fs.chmodSync(root,0o700);
+  const root=fs.mkdtempSync(path.join(tmpdir(), 'rafraf-seed-test-'));fs.chmodSync(root,0o700);
   fs.mkdirSync(path.join(root,'home'),{mode:0o755});fs.mkdirSync(path.join(root,'home/u374306905'),{mode:0o700});
   const io={...fs,openSync:(p,...args)=>fs.openSync(p==='/'?root:p,...args)};
   const storage=path.join(root,'home/u374306905/.rafraf-storage');

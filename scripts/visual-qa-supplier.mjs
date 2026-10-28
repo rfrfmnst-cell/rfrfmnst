@@ -17,7 +17,7 @@ try {
     await pause(1000);
   }
   check('supplier preview starts', ready);
-  browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+  browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH, headless: true, args: ['--no-sandbox'] });
   for (const [device, viewport] of [['desktop', { width: 1440, height: 1000 }], ['mobile', { width: 390, height: 844 }]]) {
     const context = await browser.newContext({ viewport, locale: 'ar-SA', reducedMotion: 'reduce' });
     const page = await context.newPage();

@@ -1,0 +1,299 @@
+{
+  "capturedAtUtc": "2026-10-28T01:40:07.997156+00:00",
+  "scope": "حفظ عاجل بطلب المالك؛ لا اعتماد جاهزية إنتاج",
+  "sites": {
+    "api.rfrf.net": {
+      "latestRunnerSnapshot": {
+        "site": "api.rfrf.net",
+        "node": "24.19.0",
+        "pnpm": "11.6.0",
+        "productionCredentials": false,
+        "results": [
+          {
+            "name": "types",
+            "startedAt": "2026-10-28T01:32:19.854Z",
+            "finishedAt": "2026-10-28T01:32:36.349Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "lint",
+            "startedAt": "2026-10-28T01:32:36.349Z",
+            "finishedAt": "2026-10-28T01:32:50.331Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "tests",
+            "startedAt": "2026-10-28T01:32:50.331Z",
+            "finishedAt": "2026-10-28T01:32:54.149Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "deployment-tests",
+            "startedAt": "2026-10-28T01:32:54.149Z",
+            "finishedAt": "2026-10-28T01:32:56.849Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "api-e2e",
+            "startedAt": "2026-10-28T01:32:56.849Z",
+            "finishedAt": "2026-10-28T01:33:07.193Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "build",
+            "startedAt": "2026-10-28T01:33:07.193Z",
+            "finishedAt": "2026-10-28T01:34:13.415Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "runtime",
+            "startedAt": "2026-10-28T01:34:13.415Z",
+            "finishedAt": "2026-10-28T01:34:19.133Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          }
+        ]
+      },
+      "testsEvidence": [
+        "api:test: Test Suites: 4 passed, 4 total",
+        "api:test: Tests:       15 passed, 15 total",
+        "Tasks:    2 successful, 2 total"
+      ],
+      "deployment-testsEvidence": [
+        "ℹ tests 57",
+        "ℹ pass 57",
+        "ℹ fail 0",
+        "ℹ skipped 0"
+      ],
+      "api-e2eEvidence": [
+        "Test Suites: 1 passed, 1 total",
+        "Tests:       3 passed, 3 total"
+      ],
+      "buildEvidence": [
+        "Hostinger isolated Nest API runtime is ready."
+      ],
+      "runtimeEvidence": [
+        "{\"site\":\"api.rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":285,\"providerRequests\":false}"
+      ],
+      "caution": "سجل build/runtime قد يعود إلى الدورة المكتملة السابقة؛ latestRunnerSnapshot يحدد ما اكتمل في أحدث دورة. لا اعتبار الدورة غير المكتملة نجاحًا."
+    },
+    "rfrf.net": {
+      "latestRunnerSnapshot": {
+        "site": "rfrf.net",
+        "node": "24.19.0",
+        "pnpm": "11.6.0",
+        "productionCredentials": false,
+        "results": [
+          {
+            "name": "generate",
+            "startedAt": "2026-10-28T01:33:49.541Z",
+            "finishedAt": "2026-10-28T01:34:14.694Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "types",
+            "startedAt": "2026-10-28T01:34:14.695Z",
+            "finishedAt": "2026-10-28T01:34:16.751Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "lint",
+            "startedAt": "2026-10-28T01:34:16.751Z",
+            "finishedAt": "2026-10-28T01:34:37.061Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "tests",
+            "startedAt": "2026-10-28T01:34:37.061Z",
+            "finishedAt": "2026-10-28T01:35:01.701Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "deployment-tests",
+            "startedAt": "2026-10-28T01:35:01.701Z",
+            "finishedAt": "2026-10-28T01:35:03.402Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          }
+        ]
+      },
+      "testsEvidence": [
+        "@rafraf/ui:test: ℹ tests 8",
+        "@rafraf/ui:test: ℹ pass 7",
+        "@rafraf/ui:test: ℹ fail 0",
+        "@rafraf/ui:test: ℹ skipped 1",
+        "customer:test: ℹ tests 25",
+        "customer:test: ℹ pass 25",
+        "customer:test: ℹ fail 0",
+        "customer:test: ℹ skipped 0",
+        "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+        "@rafraf/shared:test: Tests:       331 passed, 331 total",
+        "Tasks:    6 successful, 6 total"
+      ],
+      "deployment-testsEvidence": [
+        "ℹ tests 35",
+        "ℹ pass 35",
+        "ℹ fail 0",
+        "ℹ skipped 0"
+      ],
+      "caution": "سجل build/runtime قد يعود إلى الدورة المكتملة السابقة؛ latestRunnerSnapshot يحدد ما اكتمل في أحدث دورة. لا اعتبار الدورة غير المكتملة نجاحًا."
+    },
+    "supplier.rfrf.net": {
+      "latestRunnerSnapshot": {
+        "site": "supplier.rfrf.net",
+        "node": "24.19.0",
+        "pnpm": "11.6.0",
+        "productionCredentials": false,
+        "results": [
+          {
+            "name": "generate",
+            "startedAt": "2026-10-28T01:39:10.321Z",
+            "finishedAt": "2026-10-28T01:39:20.240Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "types",
+            "startedAt": "2026-10-28T01:39:20.240Z",
+            "finishedAt": "2026-10-28T01:39:59.993Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          }
+        ]
+      },
+      "testsEvidence": [
+        "@rafraf/ui:test: ℹ tests 8",
+        "@rafraf/ui:test: ℹ pass 7",
+        "@rafraf/ui:test: ℹ fail 0",
+        "@rafraf/ui:test: ℹ skipped 1",
+        "supplier:test: ℹ tests 20",
+        "supplier:test: ℹ pass 20",
+        "supplier:test: ℹ fail 0",
+        "supplier:test: ℹ skipped 0",
+        "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+        "@rafraf/shared:test: Tests:       331 passed, 331 total",
+        "Tasks:    6 successful, 6 total"
+      ],
+      "deployment-testsEvidence": [
+        "ℹ tests 35",
+        "ℹ pass 35",
+        "ℹ fail 0",
+        "ℹ skipped 0"
+      ],
+      "buildEvidence": [
+        "Tasks:    4 successful, 4 total",
+        "Hostinger standalone supplier runtime is ready."
+      ],
+      "runtimeEvidence": [
+        "{\"site\":\"supplier.rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":178,\"providerRequests\":false}"
+      ],
+      "caution": "سجل build/runtime قد يعود إلى الدورة المكتملة السابقة؛ latestRunnerSnapshot يحدد ما اكتمل في أحدث دورة. لا اعتبار الدورة غير المكتملة نجاحًا."
+    },
+    "admin.rfrf.net": {
+      "latestRunnerSnapshot": {
+        "site": "admin.rfrf.net",
+        "node": "24.19.0",
+        "pnpm": "11.6.0",
+        "productionCredentials": false,
+        "results": [
+          {
+            "name": "generate",
+            "startedAt": "2026-10-28T01:34:40.455Z",
+            "finishedAt": "2026-10-28T01:34:57.533Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "types",
+            "startedAt": "2026-10-28T01:34:57.533Z",
+            "finishedAt": "2026-10-28T01:35:58.949Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "lint",
+            "startedAt": "2026-10-28T01:35:58.949Z",
+            "finishedAt": "2026-10-28T01:36:26.521Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "tests",
+            "startedAt": "2026-10-28T01:36:26.521Z",
+            "finishedAt": "2026-10-28T01:36:51.420Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          },
+          {
+            "name": "deployment-tests",
+            "startedAt": "2026-10-28T01:36:51.421Z",
+            "finishedAt": "2026-10-28T01:36:52.454Z",
+            "status": "passed",
+            "exitCode": 0,
+            "signal": null
+          }
+        ]
+      },
+      "testsEvidence": [
+        "admin:test: ℹ tests 7",
+        "admin:test: ℹ pass 7",
+        "admin:test: ℹ fail 0",
+        "admin:test: ℹ skipped 0",
+        "@rafraf/ui:test: ℹ tests 8",
+        "@rafraf/ui:test: ℹ pass 7",
+        "@rafraf/ui:test: ℹ fail 0",
+        "@rafraf/ui:test: ℹ skipped 1",
+        "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+        "@rafraf/shared:test: Tests:       331 passed, 331 total",
+        "Tasks:    6 successful, 6 total"
+      ],
+      "deployment-testsEvidence": [
+        "ℹ tests 30",
+        "ℹ pass 30",
+        "ℹ fail 0",
+        "ℹ skipped 0"
+      ],
+      "caution": "سجل build/runtime قد يعود إلى الدورة المكتملة السابقة؛ latestRunnerSnapshot يحدد ما اكتمل في أحدث دورة. لا اعتبار الدورة غير المكتملة نجاحًا."
+    }
+  },
+  "knownEarlierFailures": [
+    "اختبار انتهاء OTP فشل للعملاء والموردين قبل الإصلاح، ثم نجحت حالات auth الإحدى عشرة بعده.",
+    "TypeScript للمورد أخفق بسبب غياب expired من اتحاد نوع reservation؛ عُدّل النوع، وإعادة التحقق قيد التشغيل وقت الحفظ.",
+    "فشلت فحوص TypeScript الأولية قبل توليد Prisma Client؛ نجح التوليد محليًا دون اتصال قاعدة.",
+    "فشلت اختبارات المصدر أولًا بسبب ملفات Figma الغائبة وبنية التطبيقات المستقلة؛ فُصل فحص المكوّن الفعلي عن Figma المتجاوز صراحة، وأصلح فحص المصادر."
+  ],
+  "external": {
+    "supabase": "قراءة فقط: RLS فعال، لا صلاحيات anon/authenticated لجدول Tap. لا تعديل بيانات.",
+    "tap": "health 200، checkout دون اعتماد 401، أسرار المزود غائبة؛ لا تجربة مالية.",
+    "oto": "health 200، rates دون اعتماد 401، الرمز غائب؛ لا شحنة.",
+    "hostinger": "لم ينشر أو يرفع شيء؛ إعداد حساب الاستضافة غير متحقق منه."
+  }
+}

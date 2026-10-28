@@ -1,21 +1,22 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import process from 'node:process';
-import ts from 'typescript';
-import * as otp from './supplier-otp.ts';
-import * as digits from './auth-input.ts';
-import * as phone from './supplier-phone.ts';
-import * as access from './session-access.ts';
-import * as session from './session-token.ts';
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import process from "node:process";
+import ts from "typescript";
+import * as otp from "./supplier-otp.ts";
+import * as digits from "./auth-input.ts";
+import * as phone from "./supplier-phone.ts";
+import * as access from "./session-access.ts";
+import * as session from "./session-token.ts";
 
-process.env.NODE_ENV = 'production';
-process.env.SESSION_SECRET = 'test-only-supplier-auth-flow-signing-key-12345';
+process.env.NODE_ENV = "production";
+process.env.SESSION_SECRET = "test-only-supplier-auth-flow-signing-key-12345";
 
 function fixture({
   auditFailure = false,
   completionFailure = false,
-  status = 'APPROVED',
+  afterVerification = () => {},
+  status = "APPROVED",
 } = {}) {
   const counts = new Map(),
     cookies = new Map(),
@@ -32,44 +33,45 @@ function fixture({
       },
       createMany: async () => {},
     },
-    supplier: { findUnique: async () => ({ id: 'supplier-fixture', status }) },
+    supplier: { findUnique: async () => ({ id: "supplier-fixture", status }) },
   };
   const prisma = {
     $transaction: async (fn) => {
       transactions++;
       if (completionFailure && transactions === 2)
-        throw Error('fixture persistence outage');
+        throw Error("fixture persistence outage");
       return fn(tx);
     },
     auditLog: {
       create: async () => {
-        if (auditFailure) throw Error('fixture audit outage');
+        if (auditFailure) throw Error("fixture audit outage");
       },
     },
   };
   const modules = {
-    '@rafraf/db': { prisma, SupplierStatus: { PENDING: 'PENDING' } },
-    '@rafraf/shared/security/otp-request-quota': {
+    "@rafraf/db": { prisma, SupplierStatus: { PENDING: "PENDING" } },
+    "@rafraf/shared/security/otp-request-quota": {
       OtpQuotaExceededError: class extends Error {},
       reserveOtpRequestQuota: async () => {},
     },
-    '@rafraf/shared/security/request-subject': {
-      requestIpSubject: () => 'fixture-ip',
+    "@rafraf/shared/security/request-subject": {
+      requestIpSubject: () => "fixture-ip",
     },
-    '@rafraf/shared/security/turnstile': {
+    "@rafraf/shared/security/turnstile": {
       verifyTurnstileToken: async () => ({ ok: true }),
     },
-    '@rafraf/shared/twilio-verify': {
+    "@rafraf/shared/twilio-verify": {
       sendTwilioVerification: async (number) => {
         sends.push(number);
         return true;
       },
       checkTwilioVerification: async (number, code) => {
         checks.push({ number, code });
-        return code === '123456' ? 'approved' : 'pending';
+        afterVerification();
+        return code === "123456" ? "approved" : "pending";
       },
     },
-    'next/headers': {
+    "next/headers": {
       headers: async () => new Headers(),
       cookies: async () => ({
         get: (name) =>
@@ -81,35 +83,35 @@ function fixture({
         delete: (name) => cookies.delete(name),
       }),
     },
-    'next/navigation': {
+    "next/navigation": {
       redirect: (path) => {
-        throw Object.assign(new Error('fixture redirect'), {
+        throw Object.assign(new Error("fixture redirect"), {
           destination: path,
         });
       },
     },
-    '../../lib/supplier-otp': otp,
-    '../../lib/auth-input': digits,
-    '../../lib/supplier-phone': phone,
-    '../../lib/session-access.ts': access,
-    '../../lib/session': session,
-    '../../lib/supplier-otp-delivery': {
+    "../../lib/supplier-otp": otp,
+    "../../lib/auth-input": digits,
+    "../../lib/supplier-phone": phone,
+    "../../lib/session-access.ts": access,
+    "../../lib/session": session,
+    "../../lib/supplier-otp-delivery": {
       supplierLocalOtpEnabled: () => false,
-      supplierOtpAuditChannel: () => 'SMS',
+      supplierOtpAuditChannel: () => "SMS",
       supplierOtpSecurityConfigured: () => true,
       supplierOtpSecurityReady: async () => true,
     },
-    '../../lib/supplier-registration-draft': {
-      SUPPLIER_REGISTRATION_COOKIE: 'fixture-registration',
+    "../../lib/supplier-registration-draft": {
+      SUPPLIER_REGISTRATION_COOKIE: "fixture-registration",
       parseSupplierRegistrationDraft: () => null,
     },
-    '../../lib/turnstile-quota': {
-      reserveSupplierTurnstileSiteverify: async () => 'reserved',
+    "../../lib/turnstile-quota": {
+      reserveSupplierTurnstileSiteverify: async () => "reserved",
     },
   };
   const source = readFileSync(
-    new URL('../app/login/actions.ts', import.meta.url),
-    'utf8',
+    new URL("../app/login/actions.ts", import.meta.url),
+    "utf8",
   );
   const compiled = ts.transpileModule(source, {
     compilerOptions: {
@@ -118,9 +120,9 @@ function fixture({
     },
   }).outputText;
   const moduleRef = { exports: {} };
-  new Function('require', 'module', 'exports', 'console', compiled)(
+  new Function("require", "module", "exports", "console", compiled)(
     (name) => {
-      assert.ok(name in modules, 'Unexpected real dependency ' + name);
+      assert.ok(name in modules, "Unexpected real dependency " + name);
       return modules[name];
     },
     moduleRef,
@@ -137,91 +139,109 @@ function form(input) {
 async function destination(operation) {
   try {
     await operation();
-    assert.fail('Expected redirect');
+    assert.fail("Expected redirect");
   } catch (error) {
     assert.ok(error.destination, error.message);
     return error.destination;
   }
 }
 
-test('supplier OTP login accepts Arabic input, creates a secure session and prevents replay', async () => {
+test("supplier OTP login accepts Arabic input, creates a secure session and prevents replay", async () => {
   const f = fixture();
   assert.equal(
     await destination(() =>
-      f.actions.requestOtp(form({ phone: '٠٥١٢٣٤٥٦٧٨' })),
+      f.actions.requestOtp(form({ phone: "٠٥١٢٣٤٥٦٧٨" })),
     ),
-    '/login?mode=phone&step=verify',
+    "/login?mode=phone&step=verify",
   );
-  assert.deepEqual(f.sends, ['+966512345678']);
+  assert.deepEqual(f.sends, ["+966512345678"]);
   const challenge = f.cookies.get(otp.SUPPLIER_OTP_COOKIE);
   assert.equal(
-    await destination(() => f.actions.verifyOtp(form({ code: '١٢٣٤٥٦' }))),
-    '/',
+    await destination(() => f.actions.verifyOtp(form({ code: "١٢٣٤٥٦" }))),
+    "/",
   );
   assert.equal(
-    await session.verifySession(f.cookies.get('sp_auth')),
-    'supplier-fixture',
+    await session.verifySession(f.cookies.get("sp_auth")),
+    "supplier-fixture",
   );
-  assert.equal(f.options.get('sp_auth').httpOnly, true);
-  assert.equal(f.options.get('sp_auth').secure, true);
+  assert.equal(f.options.get("sp_auth").httpOnly, true);
+  assert.equal(f.options.get("sp_auth").secure, true);
   f.cookies.set(otp.SUPPLIER_OTP_COOKIE, challenge);
-  f.cookies.delete('sp_auth');
+  f.cookies.delete("sp_auth");
   assert.equal(
-    await destination(() => f.actions.verifyOtp(form({ code: '123456' }))),
-    '/login?mode=phone&err=used',
+    await destination(() => f.actions.verifyOtp(form({ code: "123456" }))),
+    "/login?mode=phone&err=used",
   );
-  assert.equal(f.cookies.has('sp_auth'), false);
+  assert.equal(f.cookies.has("sp_auth"), false);
 });
 
-test('supplier audit outage redirects to unavailable without a session or unhandled page exception', async () => {
+test("supplier audit outage redirects to unavailable without a session or unhandled page exception", async () => {
   const f = fixture({ auditFailure: true });
   assert.equal(
     await destination(() =>
-      f.actions.requestOtp(form({ phone: '0512345678' })),
+      f.actions.requestOtp(form({ phone: "0512345678" })),
     ),
-    '/login?mode=phone&err=unavailable',
+    "/login?mode=phone&err=unavailable",
   );
   assert.equal(f.cookies.has(otp.SUPPLIER_OTP_COOKIE), false);
-  assert.equal(f.cookies.has('sp_auth'), false);
+  assert.equal(f.cookies.has("sp_auth"), false);
 });
 
-test('supplier completion outage never creates a session', async () => {
+test("supplier completion outage never creates a session", async () => {
   const f = fixture({ completionFailure: true });
   f.cookies.set(
     otp.SUPPLIER_OTP_COOKIE,
-    otp.createSupplierOtpChallenge('+966512345678').cookie,
+    otp.createSupplierOtpChallenge("+966512345678").cookie,
   );
   assert.equal(
-    await destination(() => f.actions.verifyOtp(form({ code: '123456' }))),
-    '/login?mode=phone&err=unavailable',
+    await destination(() => f.actions.verifyOtp(form({ code: "123456" }))),
+    "/login?mode=phone&err=unavailable",
   );
-  assert.equal(f.cookies.has('sp_auth'), false);
+  assert.equal(f.cookies.has("sp_auth"), false);
 });
 
-test('supplier suspension and wrong OTPs preserve eligibility and attempt guards', async () => {
-  const blocked = fixture({ status: 'SUSPENDED' });
+test("supplier suspension and wrong OTPs preserve eligibility and attempt guards", async () => {
+  const blocked = fixture({ status: "SUSPENDED" });
   blocked.cookies.set(
     otp.SUPPLIER_OTP_COOKIE,
-    otp.createSupplierOtpChallenge('+966512345678').cookie,
+    otp.createSupplierOtpChallenge("+966512345678").cookie,
   );
   assert.equal(
     await destination(() =>
-      blocked.actions.verifyOtp(form({ code: '123456' })),
+      blocked.actions.verifyOtp(form({ code: "123456" })),
     ),
-    '/login?mode=phone&err=not_allowed',
+    "/login?mode=phone&err=not_allowed",
   );
-  assert.equal(blocked.cookies.has('sp_auth'), false);
+  assert.equal(blocked.cookies.has("sp_auth"), false);
   const f = fixture();
   f.cookies.set(
     otp.SUPPLIER_OTP_COOKIE,
-    otp.createSupplierOtpChallenge('+966512345678').cookie,
+    otp.createSupplierOtpChallenge("+966512345678").cookie,
   );
   for (let i = 1; i <= 5; i++)
     assert.equal(
-      await destination(() => f.actions.verifyOtp(form({ code: '000000' }))),
+      await destination(() => f.actions.verifyOtp(form({ code: "000000" }))),
       i === 5
-        ? '/login?mode=phone&err=locked'
-        : '/login?mode=phone&step=verify&err=invalid_otp',
+        ? "/login?mode=phone&err=locked"
+        : "/login?mode=phone&step=verify&err=invalid_otp",
     );
-  assert.equal(f.cookies.has('sp_auth'), false);
+  assert.equal(f.cookies.has("sp_auth"), false);
+});
+
+test("supplier cannot create a session when the challenge expires during provider verification", async (t) => {
+  const start = Date.now();
+  t.mock.method(Date, "now", () => start);
+  const f = fixture({
+    afterVerification: () => t.mock.method(Date, "now", () => start + 301_000),
+  });
+  f.cookies.set(
+    otp.SUPPLIER_OTP_COOKIE,
+    otp.createSupplierOtpChallenge("+966512345678").cookie,
+  );
+  assert.equal(
+    await destination(() => f.actions.verifyOtp(form({ code: "123456" }))),
+    "/login?mode=phone&err=expired",
+  );
+  assert.equal(f.cookies.has("sp_auth"), false);
+  assert.equal(f.cookies.has(otp.SUPPLIER_OTP_COOKIE), false);
 });

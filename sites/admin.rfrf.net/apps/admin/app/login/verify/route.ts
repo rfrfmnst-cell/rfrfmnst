@@ -22,6 +22,7 @@ import {
   adminSessionCookieOptions,
   clearAdminMfaCookie,
 } from '../../../lib/admin-cookies';
+import { normalizeOtpCode } from '../../../lib/auth-input';
 import { adminLandingPath } from '../../../lib/admin-landing-path';
 
 const MAX_MFA_ATTEMPTS = 5;
@@ -104,7 +105,7 @@ export async function POST(req: NextRequest) {
   if (!account?.phone || !eligible) return restartLogin(req, 'invalid');
 
   const form = await req.formData();
-  const code = String(form.get('code') ?? '').trim();
+  const code = normalizeOtpCode(String(form.get('code') ?? ''));
   const challengeKey = `admin_mfa:${challenge.nonce}`;
   let reservation: MfaReservation;
   try {
