@@ -1,0 +1,107 @@
+{
+  "site": "api.rfrf.net",
+  "node": "24.19.0",
+  "pnpm": "11.6.0",
+  "productionCredentials": false,
+  "results": [
+    {
+      "name": "types",
+      "startedAt": "2026-10-28T04:31:54.302Z",
+      "finishedAt": "2026-10-28T04:32:01.181Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "lint",
+      "startedAt": "2026-10-28T04:32:01.181Z",
+      "finishedAt": "2026-10-28T04:32:05.582Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "tests",
+      "startedAt": "2026-10-28T04:32:05.582Z",
+      "finishedAt": "2026-10-28T04:32:10.829Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "deployment-tests",
+      "startedAt": "2026-10-28T04:32:10.830Z",
+      "finishedAt": "2026-10-28T04:32:11.439Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "api-e2e",
+      "startedAt": "2026-10-28T04:32:11.439Z",
+      "finishedAt": "2026-10-28T04:32:13.742Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "build",
+      "startedAt": "2026-10-28T04:32:13.742Z",
+      "finishedAt": "2026-10-28T04:32:40.192Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "name": "runtime",
+      "startedAt": "2026-10-28T04:32:40.192Z",
+      "finishedAt": "2026-10-28T04:32:43.875Z",
+      "status": "passed",
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "databaseIntegration": {
+    "passed": true,
+    "checks": [
+      "packaged-liveness",
+      "unauthorized-probe-rejected",
+      "empty-schema-rejected",
+      "read-only-role-core-schema-ready",
+      "probe-role-cannot-insert",
+      "revoked-access-rejected",
+      "recovered-access-ready",
+      "missing-core-table-rejected",
+      "liveness-independent-from-database-readiness"
+    ],
+    "database": "disposable-local-postgresql-17",
+    "productionAccess": false,
+    "providerRequests": false
+  },
+  "preservedIntegrationTests": {
+    "passed": 34,
+    "failed": 0,
+    "providerRequests": false
+  },
+  "frozenInstall": {
+    "passed": true,
+    "existingLockRecordsPreserved": true
+  },
+  "source": {
+    "main": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+    "snapshot": "322f454",
+    "branch": "codex/rafraf-api-readiness-recovery-20261028"
+  },
+  "testCounts": {
+    "jest": 22,
+    "httpE2e": 5,
+    "deployment": 57,
+    "localDatabaseChecks": 9,
+    "tapOtoMocks": 34
+  },
+  "protectedSourcesUnchanged": true,
+  "earlierResolvedHarnessFailures": [
+    "PostgreSQL temporary init server was observed via Unix socket before TCP readiness; fixed wait to pg_isready -h 127.0.0.1.",
+    "A database integration attempt overlapped repackaging of its runtime; the final run executed only after the verified build completed."
+  ]
+}

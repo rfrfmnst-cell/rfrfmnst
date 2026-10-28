@@ -22,13 +22,13 @@ The staged CORS fallback also uses those three client origins.
 
 After a frozen pnpm install, `build:hostinger` compiles the API and builds a
 production-only runtime with `pnpm deploy --legacy --prod`. The runtime is
-independent from the source node_modules and contains no database package.
+independent from the source node_modules. It includes the pg driver for the optional, protected database readiness probe; ordinary startup opens no database connection.
 The default `pnpm run build` now invokes the same runtime packager, including
 when the build command in hPanel cannot be edited.
 
 ## Scope and limits
 
-Only `/` (Hello World) and `/api/liveness` are implemented API controllers.
+`/` (Hello World) and `/api/liveness` remain credential-free. The additive `/api/readiness` endpoint requires server probe authorization and a separately configured read-only database connection; see `API_DATABASE_READINESS.md`.
 Swagger is closed in production unless `API_DOCS_ENABLED=true` is explicitly
 selected. Its OpenAPI document describes these health endpoints; tags and the
 Bearer scheme do not implement marketplace endpoints or authentication.
