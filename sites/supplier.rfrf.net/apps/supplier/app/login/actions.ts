@@ -400,6 +400,7 @@ export async function verifyOtp(formData: FormData) {
       ]);
 
     if (consumedChallenges > 0) return { status: 'used' } as const;
+    if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
     if (failedAttempts >= MAX_SUPPLIER_OTP_ATTEMPTS) {
       return { status: 'locked' } as const;
     }
@@ -516,6 +517,7 @@ export async function verifyOtp(formData: FormData) {
     }
     cookieStore.delete(SUPPLIER_OTP_COOKIE);
     cookieStore.delete(SUPPLIER_REGISTRATION_COOKIE);
+    if (result.status === 'expired') redirect('/login?mode=phone&err=expired');
     if (result.status === 'not_allowed') {
       redirect('/login?mode=phone&err=not_allowed');
     }

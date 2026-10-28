@@ -72,6 +72,22 @@ function fixture({
 }
 
 describe('database readiness is bounded, read-only and separate from liveness', () => {
+  it('rejects duplicate SSL mode parameters instead of accepting a TLS downgrade', async () => {
+    for (const suffix of [
+      'sslmode=verify-full&sslmode=disable',
+      'sslmode=verify-full&%73slmode=disable',
+      'sslmode=verify-full&sslmode=verify-full',
+    ]) {
+      const f = fixture();
+      expect(
+        await f.service.check({
+          NODE_ENV: 'test',
+          API_DATABASE_URL: `postgresql://fixture@db.example/app?${suffix}`,
+        }),
+      ).toEqual({ ready: false, code: 'DATABASE_CONFIGURATION_INVALID' });
+      expect(f.configs).toHaveLength(0);
+    }
+  });
   it('does not create a connection without an explicitly authorized API database URL', async () => {
     const f = fixture();
     expect(

@@ -301,6 +301,7 @@ export async function verifyCustomerOtpFlow(
         }),
       ]);
       if (consumed > 0) return { status: 'used' } as const;
+      if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
       if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
       if (!valid) {
         const attempts = Math.max(reserved, failed + 1, reservation.attempt);

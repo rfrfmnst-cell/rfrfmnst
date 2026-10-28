@@ -1,0 +1,257 @@
+{
+  "status": "local_validation_in_progress_production_not_verified",
+  "main": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+  "reviewedPullRequests": [
+    {
+      "headRefOid": "20c38e78d58c3de59fd2f525815d6b133572a81e",
+      "mergeable": "MERGEABLE",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:18:20Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40631363817/job/122628245238",
+          "name": "build (rfrf.net)",
+          "startedAt": "2026-10-28T04:16:11Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:17:47Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40631363817/job/122628245075",
+          "name": "build (supplier.rfrf.net)",
+          "startedAt": "2026-10-28T04:16:11Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:17:24Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40631363817/job/122628245194",
+          "name": "build (admin.rfrf.net)",
+          "startedAt": "2026-10-28T04:16:11Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:16:44Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40631363817/job/122628245290",
+          "name": "build (api.rfrf.net)",
+          "startedAt": "2026-10-28T04:16:11Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        }
+      ],
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/12"
+    },
+    {
+      "headRefOid": "e925f14cf2243dcfb96a66f924c1fb1bf0a84f8b",
+      "mergeable": "MERGEABLE",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:36:42Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40633117618/job/122633850080",
+          "name": "build (rfrf.net)",
+          "startedAt": "2026-10-28T04:34:50Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:36:14Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40633117741/job/122633850036",
+          "name": "api",
+          "startedAt": "2026-10-28T04:34:49Z",
+          "status": "COMPLETED",
+          "workflowName": "Rafraf API readiness and database tests"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:36:46Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40633117618/job/122633850109",
+          "name": "build (supplier.rfrf.net)",
+          "startedAt": "2026-10-28T04:34:49Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:36:25Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40633117618/job/122633849951",
+          "name": "build (admin.rfrf.net)",
+          "startedAt": "2026-10-28T04:34:50Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-28T04:35:32Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40633117618/job/122633849763",
+          "name": "build (api.rfrf.net)",
+          "startedAt": "2026-10-28T04:34:50Z",
+          "status": "COMPLETED",
+          "workflowName": "Hostinger build and runtime"
+        }
+      ],
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/13"
+    }
+  ],
+  "publicReadOnlyChecks": [
+    {
+      "name": "customer-liveness",
+      "url": "https://rfrf.net/api/liveness",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false
+    },
+    {
+      "name": "supplier-liveness",
+      "url": "https://supplier.rfrf.net/api/liveness",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false
+    },
+    {
+      "name": "admin-liveness",
+      "url": "https://admin.rfrf.net/api/liveness",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false
+    },
+    {
+      "name": "api-liveness",
+      "url": "https://api.rfrf.net/api/liveness",
+      "status": "404",
+      "scope": "public-production-read-only",
+      "loginAttempted": false
+    },
+    {
+      "name": "customer-login",
+      "url": "https://rfrf.net/login",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "unavailableBanner": true
+    },
+    {
+      "name": "supplier-login",
+      "url": "https://supplier.rfrf.net/login?mode=phone",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "unavailableBanner": false
+    },
+    {
+      "name": "admin-login",
+      "url": "https://admin.rfrf.net/login",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "unavailableBanner": false
+    },
+    {
+      "name": "tap-health",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-tap/health",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "health": {
+        "ok": true,
+        "service": "rafraf-tap",
+        "version": 1,
+        "configuration": {
+          "secretPresent": false,
+          "merchantPresent": false,
+          "modeValid": false,
+          "secretModeMatches": false,
+          "merchantFormatValid": false
+        }
+      }
+    },
+    {
+      "name": "oto-health",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-oto/health",
+      "status": "200",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "health": {
+        "ok": true,
+        "service": "rafraf-oto",
+        "configuration": {
+          "tokenPresent": false,
+          "enabled": false,
+          "automaticShipmentDisabled": false,
+          "configured": false
+        },
+        "createsShipments": false
+      }
+    }
+  ],
+  "database": {
+    "supabasePostgresVersion": "17.11",
+    "transactionReadOnly": true,
+    "publicTables": [
+      "tap_payment_attempts"
+    ],
+    "coreApplicationTablesPresent": false,
+    "primaryPrismaDatabaseAccess": "not_available",
+    "tapRls": true,
+    "tapForceRls": true,
+    "anonRead": false,
+    "authenticatedRead": false,
+    "authenticatedWrite": false,
+    "schemaSourceSha256": "6b02a1d8ead44db24660c3b83359aaba505183328ea6201f96ff5a4c3f0a3941",
+    "prismaSourceValidation": "passed_all_three_workspaces"
+  },
+  "staging": {
+    "access": "not_available_to_this_session",
+    "linksProvided": false,
+    "userIndicatedExistingStaging": true,
+    "githubEnvironments": [],
+    "githubDeployments": [],
+    "githubSecretMetadataAccess": "403_resource_not_accessible",
+    "runtimeCredentialsPresent": false,
+    "realOtpSent": false
+  },
+  "provenRegressions": {
+    "tlsDuplicateSslmode": {
+      "before": "accepted_by_validator_and_tls_disabled_by_pg",
+      "after": "rejected_before_connection",
+      "testNetworkRequests": 0
+    },
+    "otpExpiry": {
+      "before": {
+        "passed": 10,
+        "failed": 2
+      },
+      "after": {
+        "passed": 12,
+        "failed": 0
+      },
+      "authorization": "user_explicitly_approved_limited_patch_in_validation_branch",
+      "copilotBranchChanged": false
+    }
+  },
+  "knownOptionalTests": {
+    "figmaAuthoringAssets": "absent_from_captured_source; one explicit skip per UI workspace; runtime component contracts remain active"
+  },
+  "safety": {
+    "productionWrites": false,
+    "payments": false,
+    "shipments": false,
+    "deployments": false,
+    "mainChanged": false,
+    "paidPurchases": false
+  }
+}

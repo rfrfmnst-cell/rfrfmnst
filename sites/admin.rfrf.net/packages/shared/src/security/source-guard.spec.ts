@@ -34,6 +34,22 @@ function repoRoot(): string {
 }
 
 const ROOT = repoRoot();
+// The captured Hostinger workspaces each contain one app. In this repository
+// inspect the corresponding sibling source rather than silently scanning zero files.
+function appDirectory(app: 'customer' | 'supplier'): string {
+  const local = join(ROOT, 'apps', app);
+  try {
+    if (statSync(local).isDirectory()) return local;
+  } catch {
+    /* Try captured sibling. */
+  }
+  const site = app === 'customer' ? 'rfrf.net' : 'supplier.rfrf.net';
+  const sibling = resolve(ROOT, '..', site, 'apps', app);
+  if (!statSync(sibling).isDirectory())
+    throw new Error(`Missing ${app} source for security scan`);
+  return sibling;
+}
+
 const SKIP_DIRS = new Set(['node_modules', '.next', 'dist', 'build', '.git']);
 
 function sourceFiles(dir: string): string[] {
@@ -74,7 +90,10 @@ interface Violation {
 
 function scan(appDir: string, forbidden: readonly string[]): Violation[] {
   const violations: Violation[] = [];
-  const root = join(ROOT, appDir);
+  const root =
+    appDir === 'apps/customer'
+      ? appDirectory('customer')
+      : appDirectory('supplier');
 
   for (const file of sourceFiles(root)) {
     const raw = readFileSync(file, 'utf8');
@@ -192,8 +211,8 @@ function findSupplierQueryScopeViolations(
 
 describe('Rule 2 source guard — internal cost fields must not appear in non-admin apps', () => {
   it('finds app source to scan (guard is not silently vacuous)', () => {
-    expect(sourceFiles(join(ROOT, 'apps/customer')).length).toBeGreaterThan(0);
-    expect(sourceFiles(join(ROOT, 'apps/supplier')).length).toBeGreaterThan(0);
+    expect(sourceFiles(appDirectory('customer')).length).toBeGreaterThan(0);
+    expect(sourceFiles(appDirectory('supplier')).length).toBeGreaterThan(0);
   });
 
   it('apps/customer names no internal cost or supplier-identity field', () => {
@@ -241,7 +260,7 @@ describe('Rule 2 source guard — a supplier query must be scoped to its own row
   it('supplier quote and order reads use own-row scope while RFQ reads use market scope', () => {
     const offenders: string[] = [];
 
-    for (const file of sourceFiles(join(ROOT, 'apps/supplier'))) {
+    for (const file of sourceFiles(appDirectory('supplier'))) {
       offenders.push(
         ...findSupplierQueryScopeViolations(
           readFileSync(file, 'utf8'),

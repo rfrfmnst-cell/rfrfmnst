@@ -82,6 +82,7 @@ describe('AppController (e2e)', () => {
     await request(server)
       .get('/api/readiness')
       .expect(503)
+      .expect('Cache-Control', 'no-store, max-age=0')
       .expect({ ready: false, code: 'READINESS_NOT_CONFIGURED' });
     process.env.READINESS_PROBE_SECRET = randomBytes(32).toString('hex');
     await request(server).get('/api/readiness').expect(401);
