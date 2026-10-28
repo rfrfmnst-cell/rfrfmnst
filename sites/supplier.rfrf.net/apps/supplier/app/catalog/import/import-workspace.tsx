@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   AlertTriangle,
@@ -11,28 +11,36 @@ import {
   ShieldCheck,
   Upload,
   Warehouse,
-} from 'lucide-react';
-import { useActionState, useRef, useState } from 'react';
-import { importSupplierCatalog } from './actions';
+} from "lucide-react";
+import { useActionState, useRef, useState } from "react";
+import { importSupplierCatalog } from "./actions";
 import {
-  CATALOG_HEADERS,
+  type CatalogImportIssue,
   type CatalogImportState,
   type CatalogWarehouseOption,
   INITIAL_CATALOG_IMPORT_STATE,
   MAX_CATALOG_FILE_BYTES,
   MAX_CATALOG_ROWS,
-} from './catalog-import';
+} from "./catalog-import";
+import {
+  parseCatalogUpload,
+  type ParsedCatalogUpload,
+} from "./catalog-import-parser";
+import {
+  buildCatalogTemplate,
+  type CatalogTemplateFormat,
+} from "./catalog-import-template";
 import {
   CatalogImportFeedback,
   CatalogImportGuardrail,
-} from './import-feedback';
-import styles from './import.module.css';
+} from "./import-feedback";
+import styles from "./import.module.css";
 
 const STEPS = [
-  { number: 1, label: 'رفع الملف', detail: 'CSV مشفّر UTF-8' },
-  { number: 2, label: 'التحقق', detail: 'العناوين والأنواع' },
-  { number: 3, label: 'المراجعة', detail: 'الأخطاء والتكرار' },
-  { number: 4, label: 'الاستيراد', detail: 'حفظ ذري ومدقّق' },
+  { number: 1, label: "رفع الملف", detail: "CSV / TSV / TXT · UTF-8" },
+  { number: 2, label: "التحقق", detail: "العناوين والأنواع" },
+  { number: 3, label: "المعاينة", detail: "راجع القيم قبل الحفظ" },
+  { number: 4, label: "الاستيراد", detail: "تحقق وحفظ الدفعة" },
 ] as const;
 
 function formatBytes(bytes: number): string {
@@ -41,37 +49,24 @@ function formatBytes(bytes: number): string {
 }
 
 function newClientToken(): string {
-  return typeof crypto !== 'undefined' && 'randomUUID' in crypto
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
     : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
-function quoteCsv(value: string): string {
-  return `"${value.replaceAll('"', '""')}"`;
-}
-
-function downloadTemplate(warehouses: CatalogWarehouseOption[]) {
-  const defaultWarehouse = warehouses.find((warehouse) => warehouse.isDefault);
-  const example = [
-    '90915-YZZD2',
-    'Toyota',
-    'NEW',
-    '12',
-    '45.50',
-    'SAR',
-    '12',
-    '2',
-    defaultWarehouse?.name ?? '',
-  ];
-  const csv = `\uFEFF${CATALOG_HEADERS.join(',')}\r\n${example
-    .map(quoteCsv)
-    .join(',')}\r\n`;
+function downloadTemplate(
+  warehouses: CatalogWarehouseOption[],
+  format: CatalogTemplateFormat = "csv",
+) {
+  const content = buildCatalogTemplate(warehouses, format);
   const url = URL.createObjectURL(
-    new Blob([csv], { type: 'text/csv;charset=utf-8' }),
+    new Blob([content], {
+      type: `${format === "tsv" ? "text/tab-separated-values" : "text/csv"};charset=utf-8`,
+    }),
   );
-  const anchor = document.createElement('a');
+  const anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = 'rafraf-catalog-template.csv';
+  anchor.download = `rafraf-catalog-template.${format}`;
   anchor.click();
   window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
@@ -80,11 +75,12 @@ function currentPhase(
   file: File | null,
   pending: boolean,
   state: CatalogImportState,
+  ready: boolean,
 ): number {
-  if (pending) return 2;
-  if (state.status === 'success') return 4;
-  if (state.status === 'validation_error' || state.status === 'error') return 3;
-  return file ? 2 : 1;
+  if (pending) return 4;
+  if (state.status === "success") return 4;
+  if (state.status === "validation_error" || state.status === "error") return 3;
+  return ready ? 3 : file ? 2 : 1;
 }
 
 export function CatalogImportWorkspace({
@@ -103,36 +99,51 @@ export function CatalogImportWorkspace({
     INITIAL_CATALOG_IMPORT_STATE,
   );
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [clientToken, setClientToken] = useState('');
+  const [clientToken, setClientToken] = useState("");
   const [clientError, setClientError] = useState<string | null>(null);
+  const [clientIssues, setClientIssues] = useState<CatalogImportIssue[]>([]);
+  const [checkingFile, setCheckingFile] = useState(false);
+  const [preview, setPreview] = useState<Extract<
+    ParsedCatalogUpload,
+    { ok: true }
+  > | null>(null);
+  const selectionRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const stateIsCurrent = Boolean(
     clientToken && state.clientToken === clientToken,
   );
   const visibleState = stateIsCurrent ? state : INITIAL_CATALOG_IMPORT_STATE;
-  const phase = currentPhase(selectedFile, pending, visibleState);
+  const phase = currentPhase(
+    selectedFile,
+    pending,
+    visibleState,
+    Boolean(preview),
+  );
   const maxFileLabel = `${Math.floor(MAX_CATALOG_FILE_BYTES / 1024)} كيلوبايت`;
 
-  const handleFile = (file: File | null) => {
+  const handleFile = async (file: File | null) => {
+    const selection = ++selectionRef.current;
+    const token = newClientToken();
     setSelectedFile(file);
-    setClientToken(newClientToken());
-    if (!file) {
-      setClientError(null);
-      return;
-    }
-    if (!file.name.toLowerCase().endsWith('.csv')) {
-      setClientError('امتداد الملف يجب أن يكون .csv');
-      return;
-    }
-    if (file.size === 0) {
-      setClientError('الملف فارغ.');
-      return;
-    }
-    if (file.size > MAX_CATALOG_FILE_BYTES) {
-      setClientError(`حجم الملف يتجاوز الحد ${maxFileLabel}.`);
-      return;
-    }
+    setClientToken(token);
+    setPreview(null);
+    setClientIssues([]);
     setClientError(null);
+    setCheckingFile(Boolean(file));
+    if (!file) {
+      return;
+    }
+    const parsed = await parseCatalogUpload(file, token, {
+      maxFileBytes: MAX_CATALOG_FILE_BYTES,
+      maxRows: MAX_CATALOG_ROWS,
+    });
+    if (selection !== selectionRef.current) return;
+    setCheckingFile(false);
+    if (parsed.ok) setPreview(parsed);
+    else {
+      setClientError("لم يُحفظ شيء. أصلح الأخطاء التالية ثم أعد اختيار الملف.");
+      setClientIssues(parsed.state.errors);
+    }
   };
 
   return (
@@ -141,19 +152,19 @@ export function CatalogImportWorkspace({
         <article>
           <Database size={19} aria-hidden />
           <span>المخزون الحالي</span>
-          <strong>{currentInventoryCount.toLocaleString('ar-SA')}</strong>
+          <strong>{currentInventoryCount.toLocaleString("ar-SA")}</strong>
           <small>صف نشط للمنشأة</small>
         </article>
         <article className={styles.flaggedMetric}>
           <AlertTriangle size={19} aria-hidden />
           <span>بانتظار المطابقة</span>
-          <strong>{flaggedInventoryCount.toLocaleString('ar-SA')}</strong>
+          <strong>{flaggedInventoryCount.toLocaleString("ar-SA")}</strong>
           <small>صف يحتاج مراجعة كتالوج</small>
         </article>
         <article>
           <Warehouse size={19} aria-hidden />
           <span>المستودعات</span>
-          <strong>{warehouses.length.toLocaleString('ar-SA')}</strong>
+          <strong>{warehouses.length.toLocaleString("ar-SA")}</strong>
           <small>يُستخدم الافتراضي عند ترك الحقل فارغًا</small>
         </article>
       </section>
@@ -165,10 +176,10 @@ export function CatalogImportWorkspace({
         <div className={styles.spectrum} aria-hidden />
         <header className={styles.cardHeader}>
           <div>
-            <p>RAFRAF CATALOG · CONTROLLED IMPORT</p>
+            <p>كتالوج رفرف</p>
             <h1 id="catalog-import-title">استيراد كتالوج {supplierName}</h1>
             <span>
-              ملف واحد، تحقق كامل، ثم حفظ كل الصفوف أو لا شيء داخل معاملة واحدة.
+              ارفع ملف المخزون وراجع المعاينة، ثم أكّد استيراد الدفعة.
             </span>
           </div>
           <ShieldCheck size={28} aria-hidden />
@@ -182,9 +193,9 @@ export function CatalogImportWorkspace({
               <li
                 key={step.number}
                 className={
-                  active ? styles.stepActive : done ? styles.stepDone : ''
+                  active ? styles.stepActive : done ? styles.stepDone : ""
                 }
-                aria-current={active ? 'step' : undefined}
+                aria-current={active ? "step" : undefined}
               >
                 <span>
                   {done ? <CheckCircle2 size={17} aria-hidden /> : step.number}
@@ -201,9 +212,11 @@ export function CatalogImportWorkspace({
         <form action={formAction} className={styles.form}>
           <input type="hidden" name="clientToken" value={clientToken} />
           <fieldset disabled={pending}>
-            <legend className={styles.srOnly}>اختيار ملف كتالوج CSV</legend>
+            <legend className={styles.srOnly}>
+              اختيار ملف كتالوج CSV أو TSV أو TXT
+            </legend>
             <label
-              className={`${styles.dropzone} ${clientError ? styles.dropzoneError : ''}`}
+              className={`${styles.dropzone} ${clientError ? styles.dropzoneError : ""}`}
               htmlFor="catalog-file"
             >
               <input
@@ -211,7 +224,7 @@ export function CatalogImportWorkspace({
                 id="catalog-file"
                 name="catalogFile"
                 type="file"
-                accept=".csv,text/csv"
+                accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"
                 required
                 aria-describedby="catalog-file-help catalog-file-error"
                 aria-invalid={Boolean(clientError)}
@@ -224,7 +237,7 @@ export function CatalogImportWorkspace({
               </span>
               <div>
                 <strong>
-                  {selectedFile ? selectedFile.name : 'اختر ملف CSV للبدء'}
+                  {selectedFile ? selectedFile.name : "اختر ملف المخزون للبدء"}
                 </strong>
                 <p id="catalog-file-help">
                   UTF-8 · بحد أقصى {maxFileLabel} · حتى {MAX_CATALOG_ROWS} صف
@@ -233,13 +246,33 @@ export function CatalogImportWorkspace({
               <span className={styles.chooseButton}>اختيار ملف</span>
             </label>
 
+            <p className={styles.fileInstructions}>
+              يدعم CSV بالفاصلة أو الفاصلة المنقوطة، وTSV أو TXT المفصول بعلامة
+              تبويب. لملفات Excel اختر «حفظ باسم ← CSV UTF-8»؛ XLSX وXLS غير
+              مدعومين حاليًا. اضبط عمود رقم القطعة كنص قبل التصدير للحفاظ على
+              الأصفار الأولى؛ لا يمكن استعادتها إذا حذفها Excel.
+            </p>
+
             <p
               id="catalog-file-error"
               className={styles.clientError}
               role="alert"
             >
-              {clientError ?? ''}
+              {clientError ?? ""}
             </p>
+            {clientIssues.length > 0 ? (
+              <ul className={styles.validationIssues}>
+                {clientIssues.map((issue, index) => (
+                  <li key={`${issue.row}-${issue.field}-${index}`}>
+                    {issue.row ? `الصف ${issue.row}` : "الملف"} ·{" "}
+                    <bdi>{issue.field}</bdi>: {issue.message}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {checkingFile ? (
+              <p role="status">جارٍ قراءة الملف وتجهيز المعاينة…</p>
+            ) : null}
 
             {selectedFile ? (
               <div className={styles.fileSummary} aria-live="polite">
@@ -247,11 +280,11 @@ export function CatalogImportWorkspace({
                 <span>
                   <b>{selectedFile.name}</b>
                   <small>
-                    {formatBytes(selectedFile.size)} ·{' '}
-                    {selectedFile.type || 'text/csv'}
+                    {formatBytes(selectedFile.size)} ·{" "}
+                    {selectedFile.type || "text/csv"}
                   </small>
                 </span>
-                <CheckCircle2 size={19} aria-hidden />
+                {preview ? <CheckCircle2 size={19} aria-hidden /> : null}
               </div>
             ) : null}
 
@@ -259,10 +292,12 @@ export function CatalogImportWorkspace({
               <div>
                 <FileCheck2 size={19} aria-hidden />
                 <span>
-                  <b>عقد الأعمدة</b>
+                  <b>أعمدة الملف</b>
                   <small>
                     الإلزامي: part_number, price, quantity. بقية الأعمدة
-                    اختيارية.
+                    اختيارية. تُقبل أيضًا «رقم القطعة، السعر، الكمية» أو OEM/SKU
+                    وqty. استخدم عمودًا واحدًا لرقم القطعة؛ لا تجمع OEM وSKU
+                    كعمودين مستقلين.
                   </small>
                 </span>
               </div>
@@ -270,9 +305,63 @@ export function CatalogImportWorkspace({
                 type="button"
                 onClick={() => downloadTemplate(warehouses)}
               >
-                <Download size={16} aria-hidden /> تنزيل القالب
+                <Download size={16} aria-hidden /> قالب CSV
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadTemplate(warehouses, "tsv")}
+              >
+                <Download size={16} aria-hidden /> قالب TSV
               </button>
             </div>
+
+            {preview && visibleState.status !== "success" ? (
+              <section
+                className={styles.preview}
+                aria-label="معاينة البيانات قبل الاستيراد"
+              >
+                <h2>
+                  معاينة قبل الحفظ ·{" "}
+                  {preview.rows.length.toLocaleString("ar-SA")} صف
+                </h2>
+                <p>
+                  لم تُحفظ البيانات بعد. يعرض الجدول أول 8 صفوف بعد فحص جميع
+                  صفوف الملف. عند التأكيد يُفحص التكرار والمستودع على الخادم.
+                </p>
+                <div className={styles.previewTable}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>الصف</th>
+                        <th>رقم القطعة</th>
+                        <th>الماركة</th>
+                        <th>الكمية</th>
+                        <th>السعر</th>
+                        <th>العملة</th>
+                        <th>المستودع</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {preview.rows.slice(0, 8).map((row) => (
+                        <tr key={row.row}>
+                          <td>{row.row}</td>
+                          <td>
+                            <bdi>{row.partNumber}</bdi>
+                          </td>
+                          <td>{row.brand ?? "—"}</td>
+                          <td>{row.quantity}</td>
+                          <td>
+                            <bdi>{row.price}</bdi>
+                          </td>
+                          <td>{row.currency}</td>
+                          <td>{row.warehouseRef ?? "الافتراضي"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            ) : null}
 
             <div className={styles.actions}>
               <span>
@@ -282,7 +371,13 @@ export function CatalogImportWorkspace({
               <button
                 className={styles.submit}
                 type="submit"
-                disabled={!selectedFile || Boolean(clientError) || pending}
+                disabled={
+                  !preview ||
+                  Boolean(clientError) ||
+                  checkingFile ||
+                  pending ||
+                  visibleState.status === "success"
+                }
               >
                 {pending ? (
                   <>
@@ -295,7 +390,8 @@ export function CatalogImportWorkspace({
                   </>
                 ) : (
                   <>
-                    <ShieldCheck size={17} aria-hidden /> تحقق ثم استورد
+                    <ShieldCheck size={17} aria-hidden /> تأكيد استيراد{" "}
+                    {preview?.rows.length ?? 0} صف
                   </>
                 )}
               </button>

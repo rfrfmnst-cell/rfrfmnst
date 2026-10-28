@@ -1,0 +1,1412 @@
+{
+  "listenerReproduction": {
+    "syntheticServer": true,
+    "realNetworkOrCredentials": false,
+    "beforeSource": "eaa20cd42e6fca5e6e71618fe317a507f28a5e8d",
+    "before": [
+      "https://supplier.rfrf.net",
+      "http://0.0.0.0:3000"
+    ],
+    "afterSource": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "after": [
+      "https://supplier.rfrf.net",
+      "https://supplier.rfrf.net"
+    ]
+  },
+  "runtimeAttempt": {
+    "source": "eaa20cd42e6fca5e6e71618fe317a507f28a5e8d",
+    "passed": false,
+    "browserCaptureIssue": "CDP lost body of redirect response; capture updated without altering response",
+    "runtimeIssue": {
+      "timestamp": "2026-10-18T21:04:55.959Z",
+      "code": "ACTION_REDIRECT_FETCH_FAILED",
+      "count": 1
+    },
+    "observedStartup": "origin applied between repeated listening events",
+    "nextSource": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef"
+  },
+  "runtime": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "checkedAtUtc": "2026-10-18T21:20:52.867Z",
+    "scope": "Bounded runtime-log window from final deployment through completed live browser QA; not an authenticated delivery test or security guarantee.",
+    "sites": [
+      {
+        "domain": "rfrf.net",
+        "lastDeployedAt": "2026-10-18T21:16:28Z",
+        "totalLines": 49,
+        "originEvents": [
+          {
+            "timestamp": "2026-10-18T21:15:54.369Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:15:54.370Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:29.201Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:29.202Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:30.271Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:30.271Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:17:20.314Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:17:20.315Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://rfrf.net\"}"
+          }
+        ],
+        "errors": [],
+        "tailCheckedAtUtc": "2026-10-18T21:20:52.856Z",
+        "tailFromLine": 50,
+        "tailTotalLines": 49,
+        "newErrors": []
+      },
+      {
+        "domain": "supplier.rfrf.net",
+        "lastDeployedAt": "2026-10-18T21:15:40Z",
+        "totalLines": 49,
+        "originEvents": [
+          {
+            "timestamp": "2026-10-18T21:14:54.518Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:14:54.519Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:15:41.093Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:15:41.094Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:15:42.195Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:15:42.195Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:39.897Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          },
+          {
+            "timestamp": "2026-10-18T21:16:39.898Z",
+            "message": "{\"event\":\"rafraf.managed_action_origin\",\"transport\":\"unix\",\"origin\":\"https://supplier.rfrf.net\"}"
+          }
+        ],
+        "errors": [],
+        "tailCheckedAtUtc": "2026-10-18T21:20:52.867Z",
+        "tailFromLine": 50,
+        "tailTotalLines": 49,
+        "newErrors": []
+      }
+    ],
+    "passed": true
+  },
+  "deployment": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "ci": 39166366106,
+    "state": "published_verified_with_auth_configuration_blocker",
+    "published": true,
+    "environmentChanged": false,
+    "databaseChanged": false,
+    "customerBefore": {
+      "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+      "build": "01a15013-f553-73d4-bfb6-8f74ce34c206",
+      "archive": "rfrf.net-header-offer-f1bdeebb-20261018.zip",
+      "sha256": "096a242a904f5cc4c91474b50381f85e5a8ce309c25d107e8283faad36009982"
+    },
+    "supplierBefore": {
+      "source": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+      "build": "01a14efb-02d9-7284-b4cd-644be319cc51",
+      "archive": "supplier.rfrf.net-interface-0ac1f6d9-20261018.zip",
+      "sha256": "ae253ac5630bba935f690540d3a2491272c7723ca5402a98408b29de576d250f"
+    },
+    "builds": {
+      "rfrf.net": {
+        "uuid": "01a150da-c1bd-7300-8739-278ba57a49c5",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-customer-login-final-5fcb45cf-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T21:11:16Z",
+        "updated_at": "2026-10-18T21:16:28Z"
+      },
+      "supplier.rfrf.net": {
+        "uuid": "01a150da-c33c-7170-a11f-c977259cda94",
+        "state": "completed",
+        "options": {
+          "node_version": 24,
+          "app_type": "express",
+          "root_directory": null,
+          "output_directory": ".",
+          "build_script": "build:hostinger",
+          "entry_file": "hostinger-runtime/bootstrap.cjs",
+          "package_manager": "pnpm",
+          "source_type": "archive",
+          "source_options": {
+            "archive_path": "rafraf-supplier-login-final-5fcb45cf-20261018.zip",
+            "owner": null,
+            "repository": null,
+            "branch": null,
+            "installation_uuid": null,
+            "commit": null
+          }
+        },
+        "created_at": "2026-10-18T21:11:16Z",
+        "updated_at": "2026-10-18T21:15:40Z"
+      }
+    },
+    "ciConclusion": "success",
+    "runtimeErrorObserved": "failed to get redirect response TypeError: fetch failed",
+    "initialRelease": {
+      "source": "8f1c2df4ef0367a0e67c7d2c0e1164528c6e466a",
+      "ci": 39164161124,
+      "state": "published_ui_verified_internal_redirect_fix_required",
+      "published": true,
+      "environmentChanged": false,
+      "databaseChanged": false,
+      "customerBefore": {
+        "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+        "build": "01a15013-f553-73d4-bfb6-8f74ce34c206",
+        "archive": "rfrf.net-header-offer-f1bdeebb-20261018.zip",
+        "sha256": "096a242a904f5cc4c91474b50381f85e5a8ce309c25d107e8283faad36009982"
+      },
+      "supplierBefore": {
+        "source": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+        "build": "01a14efb-02d9-7284-b4cd-644be319cc51",
+        "archive": "supplier.rfrf.net-interface-0ac1f6d9-20261018.zip",
+        "sha256": "ae253ac5630bba935f690540d3a2491272c7723ca5402a98408b29de576d250f"
+      },
+      "builds": {
+        "rfrf.net": {
+          "uuid": "01a150bf-f734-7255-91d3-7374797c0682",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-customer-login-audit-8f1c2df4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:42:00Z",
+          "updated_at": "2026-10-18T20:47:51Z"
+        },
+        "supplier.rfrf.net": {
+          "uuid": "01a150bf-f8ef-7050-9f25-02db4452165d",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-supplier-login-audit-8f1c2df4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:42:00Z",
+          "updated_at": "2026-10-18T20:47:01Z"
+        }
+      },
+      "ciConclusion": "success",
+      "runtimeErrorObserved": "failed to get redirect response TypeError: fetch failed"
+    },
+    "rollback": {
+      "source": "8f1c2df4ef0367a0e67c7d2c0e1164528c6e466a",
+      "builds": {
+        "rfrf.net": {
+          "uuid": "01a150bf-f734-7255-91d3-7374797c0682",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-customer-login-audit-8f1c2df4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:42:00Z",
+          "updated_at": "2026-10-18T20:47:51Z"
+        },
+        "supplier.rfrf.net": {
+          "uuid": "01a150bf-f8ef-7050-9f25-02db4452165d",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-supplier-login-audit-8f1c2df4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:42:00Z",
+          "updated_at": "2026-10-18T20:47:01Z"
+        }
+      },
+      "packages": [
+        {
+          "domain": "rfrf.net",
+          "file": "rfrf.net-login-audit-8f1c2df4-20261018.zip",
+          "sha256": "f8cb3794860426d5a3219a2027d34c4c942216c4ac6e7e3c4b32f203139318e6",
+          "bytes": 2163630
+        },
+        {
+          "domain": "supplier.rfrf.net",
+          "file": "supplier.rfrf.net-login-audit-8f1c2df4-20261018.zip",
+          "sha256": "e9111921a9e9bb3305d953ff1d3cd71ba0fba1d870c15d843d29dd5050c13cf7",
+          "bytes": 1569377
+        }
+      ]
+    },
+    "hostingerEnvironmentChanged": false,
+    "runtimeOriginDerived": true,
+    "previousRuntimeAttempt": {
+      "source": "eaa20cd42e6fca5e6e71618fe317a507f28a5e8d",
+      "builds": {
+        "rfrf.net": {
+          "uuid": "01a150ce-4295-7015-b13c-283368f22101",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-customer-login-runtime-eaa20cd4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:57:37Z",
+          "updated_at": "2026-10-18T21:03:51Z"
+        },
+        "supplier.rfrf.net": {
+          "uuid": "01a150ce-43ff-72d6-bf12-705cf37ceb93",
+          "state": "completed",
+          "options": {
+            "node_version": 24,
+            "app_type": "express",
+            "root_directory": null,
+            "output_directory": ".",
+            "build_script": "build:hostinger",
+            "entry_file": "hostinger-runtime/bootstrap.cjs",
+            "package_manager": "pnpm",
+            "source_type": "archive",
+            "source_options": {
+              "archive_path": "rafraf-supplier-login-runtime-eaa20cd4-20261018.zip",
+              "owner": null,
+              "repository": null,
+              "branch": null,
+              "installation_uuid": null,
+              "commit": null
+            }
+          },
+          "created_at": "2026-10-18T20:57:37Z",
+          "updated_at": "2026-10-18T21:02:57Z"
+        }
+      },
+      "issue": "origin overwritten on repeated listening event; browser capture also lost redirect body"
+    },
+    "verifiedAtUtc": "2026-10-18T21:21:10.847593+00:00",
+    "customerProductionLoginComplete": false,
+    "supplierRealDeliveryAndAccountLoginTested": false
+  },
+  "ci": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "run": 39166366106,
+    "conclusion": "success",
+    "focusedCustomerTests": 24,
+    "focusedSupplierTests": 19,
+    "runtimeAndStartupTests": 22,
+    "totalTests": 65,
+    "authTests": 18,
+    "browserChecks": 148,
+    "successfulBrowserReports": 2,
+    "screenshots": 24,
+    "previewOnly": true,
+    "providerAndDatabaseInAuthTests": "isolated synthetic adapters; no real email or SMS"
+  },
+  "browser": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "checkedAtUtc": "2026-10-18T21:17:36.361Z",
+    "authenticated": false,
+    "realMessagesSent": false,
+    "checks": [
+      {
+        "name": "desktop customer-email page available",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-email RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-email incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-email service availability explained",
+        "ok": true
+      },
+      {
+        "name": "desktop password visibility",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-email light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-email dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone page available",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone service availability explained",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-phone dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register page available",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register service availability explained",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop customer-register dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-email page available",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-email RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-email light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-email dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone page available",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-phone dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register page available",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register RTL",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register light fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop supplier-register dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "desktop no authentication cookie granted",
+        "ok": true
+      },
+      {
+        "name": "desktop action redirect streams RSC",
+        "ok": true
+      },
+      {
+        "name": "desktop invalid supplier phone has controlled error",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email page available",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email service availability explained",
+        "ok": true
+      },
+      {
+        "name": "mobile password visibility",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-email dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone page available",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone service availability explained",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-phone dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register page available",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register incomplete configuration fails closed",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register service availability explained",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile customer-register dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-email page available",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-email RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-email light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-email dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone page available",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-phone dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register page available",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register RTL",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register phone validity ٠٥١٢٣٤٥٦٧٨",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register phone validity ۰۰۹۶۶۵۱۲۳۴۵۶۷۸",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register phone validity 05 123 456 78",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register light fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile supplier-register dark fits screen",
+        "ok": true
+      },
+      {
+        "name": "mobile no authentication cookie granted",
+        "ok": true
+      },
+      {
+        "name": "mobile action redirect streams RSC",
+        "ok": true
+      },
+      {
+        "name": "mobile invalid supplier phone has controlled error",
+        "ok": true
+      },
+      {
+        "name": "no unhandled JavaScript errors",
+        "ok": true
+      }
+    ],
+    "views": [
+      {
+        "device": "desktop",
+        "name": "customer-email",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-email-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "customer-email",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-email-dark.png"
+      },
+      {
+        "device": "desktop",
+        "name": "customer-phone",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-phone-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "customer-phone",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-phone-dark.png"
+      },
+      {
+        "device": "desktop",
+        "name": "customer-register",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-register-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "customer-register",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "desktop-customer-register-dark.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-email",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-email-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-email",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-email-dark.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-phone",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-phone-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-phone",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-phone-dark.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-register",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-register-light.png"
+      },
+      {
+        "device": "desktop",
+        "name": "supplier-register",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "desktop-supplier-register-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-email",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-email-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-email",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-email-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-phone",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-phone-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-phone",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-phone-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-register",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-register-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "customer-register",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": true,
+        "alerts": [
+          "خدمة تسجيل الدخول غير متاحة مؤقتًا. حاول لاحقًا.",
+          ""
+        ],
+        "file": "mobile-customer-register-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-email",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-email-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-email",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-email-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-phone",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-phone-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-phone",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-phone-dark.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-register",
+        "theme": "light",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-register-light.png"
+      },
+      {
+        "device": "mobile",
+        "name": "supplier-register",
+        "theme": "dark",
+        "status": 200,
+        "submitDisabled": false,
+        "alerts": [
+          ""
+        ],
+        "file": "mobile-supplier-register-dark.png"
+      }
+    ],
+    "redirects": [
+      {
+        "device": "desktop",
+        "status": 200,
+        "contentType": "text/x-component",
+        "redirect": "/login?mode=phone&err=invalid_phone;push",
+        "bytes": 12366
+      },
+      {
+        "device": "mobile",
+        "status": 200,
+        "contentType": "text/x-component",
+        "redirect": "/login?mode=phone&err=invalid_phone;push",
+        "bytes": 12366
+      }
+    ],
+    "errors": [],
+    "passed": true,
+    "finishedAtUtc": "2026-10-18T21:18:43.969Z"
+  },
+  "content": {
+    "source": "5fcb45cf221f7bf682a7487dd7df02fde0d7b8ef",
+    "checkedAtUtc": "2026-10-18T21:17:34.737Z",
+    "passed": true,
+    "paths": [
+      {
+        "path": "/companies",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 50,
+        "addedMakesFound": 50,
+        "totalCards": 74
+      },
+      {
+        "path": "/companies?category=cars",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 40,
+        "addedMakesFound": 40,
+        "totalCards": 58
+      },
+      {
+        "path": "/companies?category=trucks",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 9,
+        "addedMakesFound": 9,
+        "totalCards": 17
+      },
+      {
+        "path": "/companies?category=equipment",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 6,
+        "addedMakesFound": 6,
+        "totalCards": 10
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/chat",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/login",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/api/liveness",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/account",
+        "status": 307,
+        "ok": true
+      }
+    ],
+    "assets": [
+      {
+        "path": "/_next/static/css/8ea1621fe9a126a2.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/f0e067a7287f48ea.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/d8d8771d0a13a39f.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/d0c98a282350f9d6.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/a988d9b97cbfe1fd.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/webpack-eca8c31e89550e83.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/91e638e9-d492345875eccd1b.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/1962-c2e2d209f3bc502f.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/main-app-7aabec9de553ade1.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/layout-e95ec0d2567391f6.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/7157-716147be332155a8.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/error-1e4cf9d3d0e42f9e.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/companies/page-ad9c21bd623e1355.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/global-error-fca5cc8f66d9543b.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "limits": [
+      "Anonymous public content and authentication redirects only",
+      "No login, OTP, user data writes, inventory search, photo analysis or payment tested",
+      "Interactive filter, alias search and vehicle flow verified separately in isolated CI browser preview"
+    ],
+    "logo": {
+      "path": "/vehicle-brands/mg.svg",
+      "status": 200,
+      "ok": true
+    },
+    "offerImage": {
+      "path": "/hero/verified-offer-illustration.webp",
+      "status": 200,
+      "bytes": 70624,
+      "sha256": "4e9eb9cff6d5d5e7c7e429f7f7d93d0831f5a82c6eddb498ca244f16e589a176",
+      "ok": true
+    },
+    "homeContent": {
+      "originalHeadline": true,
+      "illustrationLabel": true,
+      "newImage": true,
+      "cancelledBannerAbsent": true
+    }
+  },
+  "public": {
+    "checkedAtUtc": "2026-10-18T21:17:36.989Z",
+    "passed": true,
+    "checks": [
+      {
+        "name": "واجهة العميل",
+        "url": "https://rfrf.net/",
+        "ok": true,
+        "status": 200,
+        "durationMs": 899,
+        "error": null
+      },
+      {
+        "name": "هوية تطبيق العميل",
+        "url": "https://rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 522,
+        "error": null
+      },
+      {
+        "name": "اختيار علامة المركبة",
+        "url": "https://rfrf.net/companies",
+        "ok": true,
+        "status": 200,
+        "durationMs": 638,
+        "error": null
+      },
+      {
+        "name": "دخول العميل",
+        "url": "https://rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 217,
+        "error": null
+      },
+      {
+        "name": "تسجيل المورد",
+        "url": "https://supplier.rfrf.net/login?mode=register",
+        "ok": true,
+        "status": 200,
+        "durationMs": 513,
+        "error": null
+      },
+      {
+        "name": "حماية استيراد المورد",
+        "url": "https://supplier.rfrf.net/catalog/import",
+        "ok": true,
+        "status": 307,
+        "durationMs": 473,
+        "error": null
+      },
+      {
+        "name": "هوية بوابة المورد",
+        "url": "https://supplier.rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 173,
+        "error": null
+      },
+      {
+        "name": "دخول الإدارة",
+        "url": "https://admin.rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 563,
+        "error": null
+      },
+      {
+        "name": "حماية لوحة العميل",
+        "url": "https://rfrf.net/account",
+        "ok": true,
+        "status": 307,
+        "durationMs": 166,
+        "error": null
+      },
+      {
+        "name": "تحقق بيانات المركبة برقم الهيكل",
+        "url": "https://rfrf.net/api/vehicle/vin",
+        "ok": true,
+        "status": 200,
+        "durationMs": 554,
+        "error": null
+      },
+      {
+        "name": "رسالة تعذر دخول المورد",
+        "url": "https://supplier.rfrf.net/login?mode=phone&err=not_allowed",
+        "ok": true,
+        "status": 200,
+        "durationMs": 308,
+        "error": null
+      }
+    ],
+    "limits": [
+      "فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين",
+      "لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون",
+      "لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT"
+    ]
+  },
+  "configuration": {
+    "checkedAtUtc": "2026-10-18T20:45:22.975Z",
+    "customerKeys": [
+      "API_ALLOWED_ORIGINS",
+      "API_DOCS_ENABLED",
+      "NODE_ENV",
+      "RAFRAF_RELEASE_SHA"
+    ],
+    "customerMissing": [
+      "DATABASE_URL",
+      "SESSION_SECRET",
+      "CUSTOMER_PUBLIC_URL",
+      "mail/OTP provider configuration"
+    ],
+    "supplierKeysPresent": [
+      "DATABASE_URL",
+      "SESSION_SECRET",
+      "RESEND_API_KEY",
+      "SUPPLIER_EMAIL_FROM",
+      "TWILIO_ACCOUNT_SID",
+      "TWILIO_API_KEY_SID",
+      "TWILIO_API_KEY_SECRET",
+      "VERIFY_SERVICE_SID"
+    ],
+    "supplierSecretValuesRead": false,
+    "neon": {
+      "found": true,
+      "installed": false,
+      "connected": false,
+      "suggested": true,
+      "scope": "identify original database through provider authorization; no new blank database"
+    },
+    "resendPluginFound": false
+  },
+  "before": {
+    "sourceBefore": "f1bdeebb (customer) / 0ac1f6d9 (supplier)",
+    "syntheticInputsOnly": true,
+    "reproduced": [
+      {
+        "issue": "customer rejects Arabic phone digits",
+        "input": "٠٥١٢٣٤٥٦٧٨",
+        "actual": null,
+        "expected": "+966512345678"
+      },
+      {
+        "issue": "customer rejects 00966 prefix",
+        "input": "00966512345678",
+        "actual": null,
+        "expected": "+966512345678"
+      },
+      {
+        "issue": "supplier accepts truncated Saudi local phone",
+        "input": "051234",
+        "actual": "+96651234",
+        "expected": null
+      },
+      {
+        "issue": "supplier browser rejects supported 00966 phone",
+        "input": "00966512345678",
+        "actualBrowserAccepts": false,
+        "expectedBrowserAccepts": true
+      },
+      {
+        "issue": "supplier browser rejects Arabic phone digits",
+        "input": "٠٥١٢٣٤٥٦٧٨",
+        "actualBrowserAccepts": false,
+        "expectedBrowserAccepts": true
+      }
+    ]
+  },
+  "initialRedirectErrors": {
+    "source": "8f1c2df4ef0367a0e67c7d2c0e1164528c6e466a",
+    "observedErrors": [
+      {
+        "timestamp": "2026-10-18T20:48:31.575Z",
+        "level": "ERROR",
+        "message": "failed to get redirect response TypeError: fetch failed"
+      },
+      {
+        "timestamp": "2026-10-18T20:48:50.067Z",
+        "level": "ERROR",
+        "message": "failed to get redirect response TypeError: fetch failed"
+      }
+    ],
+    "publicBrowserFallbackWorked": true,
+    "fixCandidate": "eaa20cd42e6fca5e6e71618fe317a507f28a5e8d"
+  }
+}

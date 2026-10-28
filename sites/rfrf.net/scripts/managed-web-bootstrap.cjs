@@ -1,3 +1,4 @@
+require('./managed-action-origin.cjs').installManagedActionOrigin('https://rfrf.net');
 // Hostinger may require this entry from its loader. Start the original app immediately.
 require('./apps/customer/server.js');
 // Observation and synthetic diagnostics are scheduled after application startup.

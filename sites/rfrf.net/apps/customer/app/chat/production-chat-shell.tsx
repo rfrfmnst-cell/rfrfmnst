@@ -22,6 +22,7 @@ import { BrandLogo } from '@rafraf/ui/brand-logo';
 import { InputCodeReview } from '@rafraf/ui/input-code-review';
 import type { ChatEntryDraft } from '../../lib/chat-entry-draft';
 import { ChatNavigationControls } from './chat-navigation';
+import { PartSearchMethods } from '../part-search-methods';
 import { VoiceInput } from './voice-input';
 import { appendVoiceTranscript } from './voice-input-text';
 
@@ -72,6 +73,11 @@ export function GuestChat({
     <div className="rf-ai-page rf-production-thread">
       <ChatHeader />
       <main className="rf-ai-main rf-chat-guest-main">
+      <PartSearchMethods onApply={(input) => {
+        if (input.text) setText(current => [current, input.text].filter(Boolean).join('\n'));
+        if (input.attachmentRequested) { setAttachmentRequested(true); onSubmit(text, true); }
+      }} />
+
         <section className="rf-ai-intake">
           <div className="rf-ai-conversation">
             <div className="rf-chat-welcome">

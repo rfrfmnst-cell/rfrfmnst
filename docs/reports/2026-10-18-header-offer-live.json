@@ -1,0 +1,489 @@
+{
+  "content": {
+    "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+    "checkedAtUtc": "2026-10-18T17:40:00.990Z",
+    "passed": true,
+    "paths": [
+      {
+        "path": "/companies",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 50,
+        "addedMakesFound": 50,
+        "totalCards": 74
+      },
+      {
+        "path": "/companies?category=cars",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 40,
+        "addedMakesFound": 40,
+        "totalCards": 58
+      },
+      {
+        "path": "/companies?category=trucks",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 9,
+        "addedMakesFound": 9,
+        "totalCards": 17
+      },
+      {
+        "path": "/companies?category=equipment",
+        "status": 200,
+        "ok": true,
+        "addedMakesExpected": 6,
+        "addedMakesFound": 6,
+        "totalCards": 10
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/chat",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/login",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/api/liveness",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/account",
+        "status": 307,
+        "ok": true
+      }
+    ],
+    "assets": [
+      {
+        "path": "/_next/static/css/8ea1621fe9a126a2.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/f0e067a7287f48ea.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/d8d8771d0a13a39f.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/d0c98a282350f9d6.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/a988d9b97cbfe1fd.css",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/webpack-eca8c31e89550e83.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/91e638e9-d492345875eccd1b.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/1962-c2e2d209f3bc502f.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/main-app-7aabec9de553ade1.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/layout-e95ec0d2567391f6.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/7157-716147be332155a8.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/error-1e4cf9d3d0e42f9e.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/companies/page-ad9c21bd623e1355.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/app/global-error-fca5cc8f66d9543b.js",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "limits": [
+      "Anonymous public content and authentication redirects only",
+      "No login, OTP, user data writes, inventory search, photo analysis or payment tested",
+      "Interactive filter, alias search and vehicle flow verified separately in isolated CI browser preview"
+    ],
+    "logo": {
+      "path": "/vehicle-brands/mg.svg",
+      "status": 200,
+      "ok": true
+    },
+    "offerImage": {
+      "path": "/hero/verified-offer-illustration.webp",
+      "status": 200,
+      "bytes": 70624,
+      "sha256": "4e9eb9cff6d5d5e7c7e429f7f7d93d0831f5a82c6eddb498ca244f16e589a176",
+      "ok": true
+    },
+    "homeContent": {
+      "originalHeadline": true,
+      "illustrationLabel": true,
+      "newImage": true,
+      "cancelledBannerAbsent": true
+    }
+  },
+  "browser": {
+    "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+    "checkedAtUtc": "2026-10-18T17:40:28.564Z",
+    "isolatedFreshProfile": true,
+    "authenticated": false,
+    "views": [
+      {
+        "device": "desktop",
+        "theme": "light",
+        "status": 200,
+        "fits": true,
+        "media": {
+          "loaded": true,
+          "src": "https://rfrf.net/_next/image?url=%2Fhero%2Fverified-offer-illustration.webp&w=256&q=75",
+          "naturalWidth": 220,
+          "naturalHeight": 330
+        },
+        "headerStyle": {
+          "fontFamily": "Alexandria, Alexandria, Tahoma, sans-serif",
+          "fontWeight": "600",
+          "fontSize": "14.56px"
+        },
+        "loginStyle": {
+          "color": "rgb(255, 255, 255)",
+          "background": "linear-gradient(135deg, rgb(103, 74, 215), rgb(82, 53, 184))",
+          "fontWeight": "700"
+        },
+        "links": [
+          {
+            "text": "علامات المركبات",
+            "href": "/companies"
+          },
+          {
+            "text": "كيف تعمل",
+            "href": "#how"
+          },
+          {
+            "text": "تتبع طلبك",
+            "href": "/track"
+          },
+          {
+            "text": "للموردين",
+            "href": "https://supplier.rfrf.net/?register=1"
+          },
+          {
+            "text": "تسجيل الدخول",
+            "href": "/login"
+          }
+        ],
+        "keptHeadline": "قطعتك تبدأ بوصفك.\nوالباقي مع رفرف.",
+        "cancelledBannerAbsent": true
+      },
+      {
+        "device": "desktop",
+        "theme": "dark",
+        "status": 200,
+        "fits": true,
+        "media": {
+          "loaded": true,
+          "src": "https://rfrf.net/_next/image?url=%2Fhero%2Fverified-offer-illustration.webp&w=256&q=75",
+          "naturalWidth": 220,
+          "naturalHeight": 330
+        },
+        "headerStyle": {
+          "fontFamily": "Alexandria, Alexandria, Tahoma, sans-serif",
+          "fontWeight": "600",
+          "fontSize": "14.56px"
+        },
+        "loginStyle": {
+          "color": "rgb(255, 255, 255)",
+          "background": "linear-gradient(135deg, rgb(103, 74, 215), rgb(82, 53, 184))",
+          "fontWeight": "700"
+        },
+        "links": [
+          {
+            "text": "علامات المركبات",
+            "href": "/companies"
+          },
+          {
+            "text": "كيف تعمل",
+            "href": "#how"
+          },
+          {
+            "text": "تتبع طلبك",
+            "href": "/track"
+          },
+          {
+            "text": "للموردين",
+            "href": "https://supplier.rfrf.net/?register=1"
+          },
+          {
+            "text": "تسجيل الدخول",
+            "href": "/login"
+          }
+        ],
+        "keptHeadline": "قطعتك تبدأ بوصفك.\nوالباقي مع رفرف.",
+        "cancelledBannerAbsent": true
+      },
+      {
+        "device": "mobile",
+        "theme": "light",
+        "status": 200,
+        "fits": true,
+        "media": {
+          "loaded": true,
+          "src": "https://rfrf.net/_next/image?url=%2Fhero%2Fverified-offer-illustration.webp&w=256&q=75",
+          "naturalWidth": 116,
+          "naturalHeight": 175
+        },
+        "headerStyle": {
+          "fontFamily": "Alexandria, Alexandria, Tahoma, sans-serif",
+          "fontWeight": "600",
+          "fontSize": "12.48px"
+        },
+        "loginStyle": {
+          "color": "rgb(255, 255, 255)",
+          "background": "linear-gradient(135deg, rgb(103, 74, 215), rgb(82, 53, 184))",
+          "fontWeight": "700"
+        },
+        "links": [
+          {
+            "text": "علامات المركبات",
+            "href": "/companies"
+          },
+          {
+            "text": "كيف تعمل",
+            "href": "#how"
+          },
+          {
+            "text": "تتبع طلبك",
+            "href": "/track"
+          },
+          {
+            "text": "للموردين",
+            "href": "https://supplier.rfrf.net/?register=1"
+          },
+          {
+            "text": "تسجيل الدخول",
+            "href": "/login"
+          }
+        ],
+        "keptHeadline": "قطعتك تبدأ بوصفك.\nوالباقي مع رفرف.",
+        "cancelledBannerAbsent": true
+      },
+      {
+        "device": "mobile",
+        "theme": "dark",
+        "status": 200,
+        "fits": true,
+        "media": {
+          "loaded": true,
+          "src": "https://rfrf.net/_next/image?url=%2Fhero%2Fverified-offer-illustration.webp&w=256&q=75",
+          "naturalWidth": 116,
+          "naturalHeight": 175
+        },
+        "headerStyle": {
+          "fontFamily": "Alexandria, Alexandria, Tahoma, sans-serif",
+          "fontWeight": "600",
+          "fontSize": "12.48px"
+        },
+        "loginStyle": {
+          "color": "rgb(255, 255, 255)",
+          "background": "linear-gradient(135deg, rgb(103, 74, 215), rgb(82, 53, 184))",
+          "fontWeight": "700"
+        },
+        "links": [
+          {
+            "text": "علامات المركبات",
+            "href": "/companies"
+          },
+          {
+            "text": "كيف تعمل",
+            "href": "#how"
+          },
+          {
+            "text": "تتبع طلبك",
+            "href": "/track"
+          },
+          {
+            "text": "للموردين",
+            "href": "https://supplier.rfrf.net/?register=1"
+          },
+          {
+            "text": "تسجيل الدخول",
+            "href": "/login"
+          }
+        ],
+        "keptHeadline": "قطعتك تبدأ بوصفك.\nوالباقي مع رفرف.",
+        "cancelledBannerAbsent": true
+      }
+    ],
+    "errors": [],
+    "passed": true
+  },
+  "public": {
+    "checkedAtUtc": "2026-10-18T17:40:23.837Z",
+    "passed": true,
+    "checks": [
+      {
+        "name": "واجهة العميل",
+        "url": "https://rfrf.net/",
+        "ok": true,
+        "status": 200,
+        "durationMs": 1082,
+        "error": null
+      },
+      {
+        "name": "هوية تطبيق العميل",
+        "url": "https://rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 637,
+        "error": null
+      },
+      {
+        "name": "اختيار علامة المركبة",
+        "url": "https://rfrf.net/companies",
+        "ok": true,
+        "status": 200,
+        "durationMs": 674,
+        "error": null
+      },
+      {
+        "name": "دخول العميل",
+        "url": "https://rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 154,
+        "error": null
+      },
+      {
+        "name": "تسجيل المورد",
+        "url": "https://supplier.rfrf.net/login?mode=register",
+        "ok": true,
+        "status": 200,
+        "durationMs": 403,
+        "error": null
+      },
+      {
+        "name": "حماية استيراد المورد",
+        "url": "https://supplier.rfrf.net/catalog/import",
+        "ok": true,
+        "status": 307,
+        "durationMs": 400,
+        "error": null
+      },
+      {
+        "name": "هوية بوابة المورد",
+        "url": "https://supplier.rfrf.net/api/liveness",
+        "ok": true,
+        "status": 200,
+        "durationMs": 154,
+        "error": null
+      },
+      {
+        "name": "دخول الإدارة",
+        "url": "https://admin.rfrf.net/login",
+        "ok": true,
+        "status": 200,
+        "durationMs": 395,
+        "error": null
+      },
+      {
+        "name": "حماية لوحة العميل",
+        "url": "https://rfrf.net/account",
+        "ok": true,
+        "status": 307,
+        "durationMs": 152,
+        "error": null
+      },
+      {
+        "name": "تحقق بيانات المركبة برقم الهيكل",
+        "url": "https://rfrf.net/api/vehicle/vin",
+        "ok": true,
+        "status": 200,
+        "durationMs": 378,
+        "error": null
+      },
+      {
+        "name": "رسالة تعذر دخول المورد",
+        "url": "https://supplier.rfrf.net/login?mode=phone&err=not_allowed",
+        "ok": true,
+        "status": 200,
+        "durationMs": 173,
+        "error": null
+      }
+    ],
+    "limits": [
+      "فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين",
+      "لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون",
+      "لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT"
+    ]
+  },
+  "ci": {
+    "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+    "run": 39149651932,
+    "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/39149651932",
+    "conclusion": "success",
+    "customerTests": 14,
+    "supplierImportTests": 11,
+    "customerBrowserChecks": 78,
+    "supplierBrowserChecks": 50,
+    "screenshots": 24,
+    "unhandledBrowserErrors": 0,
+    "previewOrigin": "isolated production build; not production accounts",
+    "manuallyViewed": [
+      "rfrf.net/desktop-home.png",
+      "rfrf.net/mobile-home.png"
+    ],
+    "artifact": 12144019343
+  },
+  "cloudAfterPublication": {
+    "id": 39150782958,
+    "job": 117743812926,
+    "createdAtUtc": "2026-10-18T17:41:58Z",
+    "checkedAtUtc": "2026-10-18T17:42:05.306Z",
+    "completedAtUtc": "2026-10-18T17:42:07Z",
+    "conclusion": "success",
+    "passed": true,
+    "checksPassed": 11,
+    "postPublication": true,
+    "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/39150782958"
+  }
+}

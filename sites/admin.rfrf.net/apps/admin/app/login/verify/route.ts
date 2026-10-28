@@ -22,11 +22,12 @@ import {
   adminSessionCookieOptions,
   clearAdminMfaCookie,
 } from '../../../lib/admin-cookies';
+import { adminLandingPath } from '../../../lib/admin-landing-path';
 
 const MAX_MFA_ATTEMPTS = 5;
 
 type MfaOutcome =
-  | { status: 'verified' }
+  | { status: 'verified'; permissions: string[] }
   | { status: 'invalid'; attempts: number }
   | {
       status: 'locked' | 'used' | 'not_allowed' | 'expired' | 'unavailable';
@@ -323,7 +324,7 @@ export async function POST(req: NextRequest) {
           ],
         }),
       ]);
-      return { status: 'verified' };
+      return { status: 'verified', permissions: current.adminPermissions };
     });
   } catch (error) {
     console.error('[auth:admin] MFA finalization database unavailable', {
@@ -348,9 +349,10 @@ export async function POST(req: NextRequest) {
     return restartLogin(req, error);
   }
 
-  const response = NextResponse.redirect(new URL('/', adminOrigin(req)), {
-    status: 303,
-  });
+  const response = NextResponse.redirect(
+    new URL(adminLandingPath(outcome.permissions), adminOrigin(req)),
+    { status: 303 },
+  );
   clearAdminMfaCookie(response);
   response.cookies.set('ops_session', await signAdminSession(account.id), {
     ...adminSessionCookieOptions(),

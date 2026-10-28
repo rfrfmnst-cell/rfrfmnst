@@ -84,6 +84,7 @@ await verifyNativeRuntime(root, 'supplier');
 await cp(join(root, 'scripts/managed-storage-diagnostic.mjs'), join(runtime, 'managed-storage-diagnostic.mjs'));
 await cp(join(root, 'scripts/managed-storage-scheduler.cjs'), join(runtime, 'managed-storage-scheduler.cjs'));
 await cp(join(root, 'scripts/managed-storage-startup-probe.mjs'), join(runtime, 'managed-storage-startup-probe.mjs'));
+await cp(join(root, 'scripts/managed-action-origin.cjs'), join(runtime, 'managed-action-origin.cjs'));
 await cp(join(root, 'scripts/managed-web-bootstrap.cjs'), join(runtime, 'bootstrap.cjs'));
 await stat(join(runtime, 'bootstrap.cjs'));
 await stat(join(runtime, 'managed-storage-scheduler.cjs'));

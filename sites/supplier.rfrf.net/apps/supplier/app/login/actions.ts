@@ -37,6 +37,7 @@ import {
 import { reserveSupplierTurnstileSiteverify } from '../../lib/turnstile-quota';
 import { signSession } from '../../lib/session';
 import { normalizeSupplierPhone } from '../../lib/supplier-phone';
+import { normalizeOtpCode } from '../../lib/auth-input';
 import { supplierSessionStatusAllowed } from '../../lib/session-access.ts';
 
 function challengeCookieOptions(maxAge = SUPPLIER_OTP_TTL_SECONDS) {
@@ -161,11 +162,13 @@ export async function requestOtp(formData: FormData) {
   // Send the same verification flow for every valid, rate-limited number.
   // Supplier eligibility is checked only after the phone owner proves possession.
   const delivered = localDelivery || (await sendTwilioVerification(phone));
-  if (!delivered) {
+  try {
     await prisma.auditLog.create({
       data: {
         actorType: 'SYSTEM',
-        action: 'supplier.otp.delivery_failed',
+        action: delivered
+          ? 'supplier.otp.delivered'
+          : 'supplier.otp.delivery_failed',
         entityType: 'supplier_otp',
         entityId: phoneKey,
         after: {
@@ -174,23 +177,14 @@ export async function requestOtp(formData: FormData) {
         },
       },
     });
-    redirect('/login?mode=phone&err=delivery');
+  } catch {
+    console.error('[auth:supplier] OTP delivery audit failed', {
+      code: 'OTP_DELIVERY_AUDIT_ERROR',
+    });
+    redirect('/login?mode=phone&err=unavailable');
   }
+  if (!delivered) redirect('/login?mode=phone&err=delivery');
 
-  if (delivered) {
-    await prisma.auditLog.create({
-      data: {
-        actorType: 'SYSTEM',
-        action: 'supplier.otp.delivered',
-        entityType: 'supplier_otp',
-        entityId: phoneKey,
-        after: {
-          provider: localDelivery ? 'LOCAL' : 'TWILIO_VERIFY',
-          channel: supplierOtpAuditChannel(),
-        },
-      },
-    });
-  }
   if (!retryingRegistration) cookieStore.delete(SUPPLIER_REGISTRATION_COOKIE);
   cookieStore.set(
     SUPPLIER_OTP_COOKIE,
@@ -239,7 +233,7 @@ export async function verifyOtp(formData: FormData) {
     ? '/login?mode=phone&step=verify&registration=1'
     : '/login?mode=phone&step=verify';
 
-  const code = String(formData.get('code') ?? '').trim();
+  const code = normalizeOtpCode(String(formData.get('code') ?? ''));
   const challengeKey = supplierOtpChallengeKey(challenge.nonce);
   const phoneKey = supplierOtpSubjectKey('phone', challenge.phone);
   let reservation:

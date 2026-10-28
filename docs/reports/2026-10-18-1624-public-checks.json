@@ -1,0 +1,99 @@
+{
+  "checkedAtUtc": "2026-10-18T13:23:54.216Z",
+  "passed": true,
+  "checks": [
+    {
+      "name": "واجهة العميل",
+      "url": "https://rfrf.net/",
+      "ok": true,
+      "status": 200,
+      "durationMs": 909,
+      "error": null
+    },
+    {
+      "name": "هوية تطبيق العميل",
+      "url": "https://rfrf.net/api/liveness",
+      "ok": true,
+      "status": 200,
+      "durationMs": 698,
+      "error": null
+    },
+    {
+      "name": "اختيار علامة المركبة",
+      "url": "https://rfrf.net/companies",
+      "ok": true,
+      "status": 200,
+      "durationMs": 712,
+      "error": null
+    },
+    {
+      "name": "دخول العميل",
+      "url": "https://rfrf.net/login",
+      "ok": true,
+      "status": 200,
+      "durationMs": 168,
+      "error": null
+    },
+    {
+      "name": "تسجيل المورد",
+      "url": "https://supplier.rfrf.net/login?mode=register",
+      "ok": true,
+      "status": 200,
+      "durationMs": 472,
+      "error": null
+    },
+    {
+      "name": "حماية استيراد المورد",
+      "url": "https://supplier.rfrf.net/catalog/import",
+      "ok": true,
+      "status": 307,
+      "durationMs": 409,
+      "error": null
+    },
+    {
+      "name": "هوية بوابة المورد",
+      "url": "https://supplier.rfrf.net/api/liveness",
+      "ok": true,
+      "status": 200,
+      "durationMs": 140,
+      "error": null
+    },
+    {
+      "name": "دخول الإدارة",
+      "url": "https://admin.rfrf.net/login",
+      "ok": true,
+      "status": 200,
+      "durationMs": 520,
+      "error": null
+    },
+    {
+      "name": "حماية لوحة العميل",
+      "url": "https://rfrf.net/account",
+      "ok": true,
+      "status": 307,
+      "durationMs": 136,
+      "error": null
+    },
+    {
+      "name": "تحقق بيانات المركبة برقم الهيكل",
+      "url": "https://rfrf.net/api/vehicle/vin",
+      "ok": true,
+      "status": 200,
+      "durationMs": 397,
+      "error": null
+    },
+    {
+      "name": "رسالة تعذر دخول المورد",
+      "url": "https://supplier.rfrf.net/login?mode=phone&err=not_allowed",
+      "ok": true,
+      "status": 200,
+      "durationMs": 186,
+      "error": null
+    }
+  ],
+  "limits": [
+    "فحوص صفحات عامة وطلب تحقق VIN بقيمة اختبار ثابتة؛ بلا تسجيل دخول أو كتابة بيانات مستخدمين",
+    "لا تشمل الفحص المرئي أو الدفع أو حفظ المخزون",
+    "لا تنشر إصلاحات تلقائية ولا ترسل إشعارًا إلى ChatGPT"
+  ]
+}

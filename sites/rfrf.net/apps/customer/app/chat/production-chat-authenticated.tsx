@@ -1,5 +1,7 @@
 'use client';
 
+import { PartSearchMethods } from '../part-search-methods';
+
 import {
   useCallback,
   useEffect,
@@ -369,6 +371,10 @@ export function AuthenticatedChat({
       <AssistantThreadRoot>
         <ChatHeader headingRef={headingRef} />
         <main className="rf-ai-main">
+          <PartSearchMethods disabled={uploading || runtimeRunning} onPhoto={() => setPhotoDialogOpen(true)} onApply={(input) => {
+            if (uploading || runtime.thread.getState().isRunning) return;
+            if (input.text) runtime.thread.composer.setText([runtime.thread.composer.getState().text, input.text].filter(Boolean).join('\n'));
+          }} />
           <details className="rf-chat-request-details">
             <summary>
               <ClipboardList size={18} aria-hidden="true" />

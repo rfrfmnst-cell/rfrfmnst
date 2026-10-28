@@ -1,0 +1,60 @@
+{
+  "source": "fa04215a3b4df569b66589d6ce3129d0472cc859",
+  "domain": "rfrf.net",
+  "state": "completed",
+  "published": true,
+  "archive": "rafraf-customer-chinese-brands-fa04215a-20261018.zip",
+  "package": {
+    "domain": "rfrf.net",
+    "file": "rfrf.net-chinese-brands-fa04215a-20261018.zip",
+    "sha256": "aa4cce0f752af890d46bc0c2534929fd2898a2f469803442f186e3e3db6568ec",
+    "bytes": 2086866,
+    "fileCount": 506,
+    "tree": "b89142be6f4e220defa311162845980755570cdc",
+    "packageJsonAtRoot": true,
+    "sourceOnly": true,
+    "noEnvFiles": true,
+    "noDependencyOrBuildOutputDirectories": true,
+    "allPathsAndBytesMatchCommit": true,
+    "node": "24.x",
+    "packageManager": "pnpm@11.6.0"
+  },
+  "ci": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/39132767024",
+  "addedBrands": 50,
+  "addedPassengerMakes": 40,
+  "totalMakes": 74,
+  "rollback": {
+    "source": "38b8f81550652b79b16c8268eb7bf3b7d4c0e4ce",
+    "build": "01a14f20-a470-72ce-babe-245038c4976b",
+    "file": "rfrf.net-interface-38b8f815-20261018.zip",
+    "sha256": "d69a2ba7c639345b8a98e7baa4e91917bcc2f943c1b521525e9cb0cf8e6e2899"
+  },
+  "environmentChanged": false,
+  "databaseChanged": false,
+  "build": "01a14f44-96cf-73e1-ac0a-19cd0b652f65",
+  "startedAtUtc": "2026-10-18T13:47:37Z",
+  "ciPassed": true,
+  "browserChecks": 128,
+  "screenshots": 24,
+  "visuallyReviewed": [
+    "desktop-chinese-brands.png",
+    "mobile-chinese-brands.png"
+  ],
+  "completedAtUtc": "2026-10-18T13:52:30Z",
+  "liveVerifiedAtUtc": "2026-10-18T13:52:39.935Z",
+  "liveEvidence": "rafraf-chinese-brands-live-20261018.json",
+  "publicReview": {
+    "passed": true,
+    "checks": 11,
+    "checkedAtUtc": "2026-10-18T13:52:42.529Z"
+  },
+  "latestCloudReview": {
+    "id": 39132824534,
+    "createdAt": "2026-10-18T13:43:53Z",
+    "conclusion": "success",
+    "precededThisDeployment": true
+  },
+  "remainingClientConfigurationBlocker": true,
+  "supplierPublishedSource": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+  "adminPublishedByThisBatch": false
+}

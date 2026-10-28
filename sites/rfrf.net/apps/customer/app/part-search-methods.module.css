@@ -1,0 +1,17 @@
+.methods { width:100%;max-width:900px;margin:16px auto; }
+.buttons { display:flex;flex-wrap:wrap;gap:8px; }
+.buttons button { display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 13px;background:var(--rafraf-surface);border:1px solid var(--rafraf-border);border-radius:11px;color:var(--rafraf-text);font:inherit;font-size:.82rem;cursor:pointer; }
+.buttons button[aria-pressed=true] { border-color:var(--rafraf-primary);color:var(--rafraf-primary-hover);background:var(--rafraf-raised); }
+.methods button:disabled { opacity:.5;cursor:not-allowed; }
+.panel { margin-top:12px;border:1px solid var(--rafraf-border);background:var(--rafraf-surface);color:var(--rafraf-text);border-radius:14px;padding:18px; }
+.panelTitle { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;font-size:.9rem;font-weight:600; }
+.panelTitle button { display:grid;place-items:center;min-height:36px;min-width:36px;background:transparent;border:0;color:inherit;cursor:pointer; }
+.inputRow { display:flex;gap:10px; }
+.inputRow input { min-width:0;flex:1;min-height:48px;border:1px solid var(--rafraf-border);border-radius:9px;padding:10px 12px;background:var(--rafraf-raised);color:var(--rafraf-text);font:inherit;font-size:.9rem; }
+.inputRow>button { display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 16px;background:var(--rafraf-primary);color:white;border:0;border-radius:9px;font:inherit;font-size:.85rem;cursor:pointer; }
+.panel p { color:var(--rafraf-muted);font-size:.78rem;line-height:1.9;margin-top:12px; }
+.panel .error { color:var(--rafraf-danger,#b91c1c); }
+.methods :is(input,button):focus-visible { outline:3px solid var(--rafraf-focus);outline-offset:3px; }
+@media(max-width:680px) { .buttons { display:grid;grid-template-columns:repeat(2,minmax(0,1fr)); }.buttons button { padding-inline:8px; }.inputRow { flex-direction:column; }.panel { padding:15px; } }
+
+.lookup {display:grid;gap:10px;margin-top:14px;}.lookup>button {justify-self:start;min-height:44px;padding:10px 14px;border:1px solid var(--rafraf-primary);border-radius:9px;background:var(--rafraf-raised);color:var(--rafraf-primary-hover);font:inherit;font-size:.82rem;cursor:pointer;}.lookup small {color:var(--rafraf-muted);font-size:.73rem;line-height:1.9;}.lookup p {padding:12px;border:1px solid var(--rafraf-border);border-radius:9px;background:var(--rafraf-raised);color:var(--rafraf-text);}

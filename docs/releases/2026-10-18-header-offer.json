@@ -1,0 +1,31 @@
+{
+  "source": "f1bdeebb096ee53fe9bf71c3a4f808882aa60767",
+  "published": true,
+  "state": "published_verified",
+  "ci": 39149651932,
+  "archive": "rafraf-customer-header-offer-f1bdeebb-20261018.zip",
+  "environmentChanged": false,
+  "databaseChanged": false,
+  "cancelledMainBannerIncluded": false,
+  "rollback": {
+    "source": "fa04215a3b4df569b66589d6ce3129d0472cc859",
+    "build": "01a14f44-96cf-73e1-ac0a-19cd0b652f65",
+    "file": "rfrf.net-chinese-brands-fa04215a-20261018.zip",
+    "sha256": "aa4cce0f752af890d46bc0c2534929fd2898a2f469803442f186e3e3db6568ec"
+  },
+  "ciConclusion": "success",
+  "build": "01a15013-f553-73d4-bfb6-8f74ce34c206",
+  "startedAtUtc": "2026-10-18T17:34:07Z",
+  "visualPreviewInspected": [
+    "desktop-home.png",
+    "mobile-home.png"
+  ],
+  "lastObservedAtUtc": "2026-10-18T17:38:18.064Z",
+  "rollbackVerified": true,
+  "buildState": "completed",
+  "completedAtUtc": "2026-10-18T17:38:49Z",
+  "liveEvidence": "rafraf-header-offer-live-20261018.json",
+  "browserEvidence": "header-offer-live-browser-20261018/report.json",
+  "publicEvidence": "header-offer-public-review-20261018/report.json",
+  "verifiedAtUtc": "2026-10-18T17:40:28.564Z"
+}

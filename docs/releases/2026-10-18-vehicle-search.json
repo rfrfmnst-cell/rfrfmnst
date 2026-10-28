@@ -1,0 +1,73 @@
+{
+  "recordedAt": "2026-10-18T13:05:47.220Z",
+  "source": "38b8f81550652b79b16c8268eb7bf3b7d4c0e4ce",
+  "ciRun": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/39129892806",
+  "buildStarted": true,
+  "archiveUploaded": true,
+  "archive": "rafraf-customer-vehicle-search-38b8f815-20261018.zip",
+  "rollback": {
+    "source": "bcdba4dbbdacdc292e9979d390fd595d4ff91c77",
+    "build": "01a14eef-f2e4-70c7-a016-d1b6ddc52c53",
+    "localArchive": "rfrf.net-interface-bcdba4db-20261018.zip",
+    "sha256": "e026c32db6b278fa409adb9e7954cd717322674cbb2541912ac0f986e6a31c57",
+    "plan": "Upload saved source and rebuild using identical Node24/pnpm/build:hostinger/bootstrap settings if new deployment fails verification."
+  },
+  "unitTests": {
+    "vehicleCatalog": 5,
+    "searchIntake": 3,
+    "vinLookup": 4,
+    "passed": true
+  },
+  "realVinProviderProbe": "rafraf-vin-provider-verification-20261018.json",
+  "environmentChanged": false,
+  "databaseChanged": false,
+  "authenticationEndToEnd": false,
+  "archiveSHA256": "d69a2ba7c639345b8a98e7baa4e91917bcc2f943c1b521525e9cb0cf8e6e2899",
+  "sourceBytes": 2080848,
+  "brandCount": 24,
+  "localBrandIcons": 17,
+  "missingBrandIconsHaveTextFallback": true,
+  "precedingBrowserEvidence": {
+    "source": "93e6f7a2c8cfd04f484783b3c0db1ade94fa1893",
+    "run": "39129411900",
+    "customerChecks": 68,
+    "supplierChecks": 50,
+    "passed": true
+  },
+  "ciPassed": true,
+  "finalBrowserChecks": {
+    "customer": 68,
+    "supplier": 50,
+    "total": 118,
+    "screenshots": 22
+  },
+  "build": {
+    "uuid": "01a14f20-a470-72ce-babe-245038c4976b",
+    "state": "completed",
+    "createdAt": "2026-10-18T13:08:21Z",
+    "completedAt": "2026-10-18T13:12:22Z"
+  },
+  "published": true,
+  "updatedAt": "2026-10-18T13:13:56.162Z",
+  "liveVerifiedAt": "2026-10-18T13:13:19.354Z",
+  "liveVerificationFile": "rafraf-vehicle-search-live-20261018.json",
+  "supplier": {
+    "source": "0ac1f6d940cb74864c792ea34dea51aac0861582",
+    "build": "01a14efb-02d9-7284-b4cd-644be319cc51",
+    "state": "completed",
+    "completedAt": "2026-10-18T12:30:47Z",
+    "liveEvidence": "rafraf-supplier-login-fix-live-20261018.json"
+  },
+  "admin": {
+    "deployedByThisBatch": false,
+    "loginPageAvailable": true,
+    "authenticatedFlowTested": false
+  },
+  "hourlyReview": {
+    "checks": 11,
+    "passed": true,
+    "checkedAt": "2026-10-18T13:14:00.925Z",
+    "source": "main scripts/qa-public-sites.mjs",
+    "scope": "public pages and fixed VIN test; no authenticated writes"
+  }
+}
