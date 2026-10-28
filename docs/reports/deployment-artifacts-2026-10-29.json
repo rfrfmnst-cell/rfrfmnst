@@ -1,0 +1,80 @@
+{
+  "preparedAt": "2026-10-29T00:32:08.518237+03:00",
+  "candidateSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+  "authorization": "Owner requested continuation and deployment; no authorization to merge main or alter production data",
+  "deploymentPerformed": false,
+  "deploymentBlockers": [
+    "Hostinger administration not authenticated",
+    "Hosting tools unavailable in session",
+    "Original business database and runtime secrets not inspected",
+    "Backup and rollback not verified on hosting account"
+  ],
+  "artifacts": [
+    {
+      "site": "rfrf.net",
+      "archive": "rfrf.net_20261029_734051d_source.zip",
+      "sourceSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "files": 522,
+      "bytes": 2179444,
+      "sha256": "e1ea268d6f310274ad641968e0a89b872e7af4cc90491bae6fd63c9301ec3607",
+      "excludedTrackedPaths": [],
+      "zipIntegrity": "passed",
+      "packageAtArchiveRoot": true,
+      "lockfileAtArchiveRoot": true
+    },
+    {
+      "site": "supplier.rfrf.net",
+      "archive": "supplier.rfrf.net_20261029_734051d_source.zip",
+      "sourceSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "files": 341,
+      "bytes": 1573003,
+      "sha256": "2b6344a872671e6ac175a8b5cd1f7698c70b91ebcf5bc97997647ccb037e634b",
+      "excludedTrackedPaths": [],
+      "zipIntegrity": "passed",
+      "packageAtArchiveRoot": true,
+      "lockfileAtArchiveRoot": true
+    },
+    {
+      "site": "admin.rfrf.net",
+      "archive": "admin.rfrf.net_20261029_734051d_source.zip",
+      "sourceSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "files": 375,
+      "bytes": 1658637,
+      "sha256": "2586f75a3059f12f2e6baab6f695191e5b2741ae20cd5d50b4df7171036ae5ed",
+      "excludedTrackedPaths": [],
+      "zipIntegrity": "passed",
+      "packageAtArchiveRoot": true,
+      "lockfileAtArchiveRoot": true
+    },
+    {
+      "site": "api.rfrf.net",
+      "archive": "api.rfrf.net_20261029_734051d_source.zip",
+      "sourceSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "files": 64,
+      "bytes": 184599,
+      "sha256": "8b378a0b1810d5dd1cc116d977d6cea74d32101f8ce398a38baa8fba4b14e355",
+      "excludedTrackedPaths": [],
+      "zipIntegrity": "passed",
+      "packageAtArchiveRoot": true,
+      "lockfileAtArchiveRoot": true
+    }
+  ],
+  "expectedSettings": {
+    "appType": "express",
+    "node": "24",
+    "packageManager": "pnpm@11.6.0",
+    "buildCommand": "pnpm run build",
+    "rootAndOutputDirectoryForSourceArchive": ".",
+    "entry": "hostinger-runtime/bootstrap.cjs",
+    "startCommand": "node hostinger-runtime/bootstrap.cjs",
+    "releaseIdentity": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+    "port": "provided by Hostinger"
+  },
+  "safety": {
+    "environmentFilesIncluded": false,
+    "dependenciesIncluded": false,
+    "compiledOutputIncluded": false,
+    "mainMerged": false,
+    "productionDataChanged": false
+  }
+}

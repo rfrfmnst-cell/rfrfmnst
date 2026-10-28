@@ -1,0 +1,317 @@
+{
+  "candidateSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+  "observedAt": "2026-10-28T12:27:46.104327+00:00",
+  "reportTimezone": "Asia/Riyadh",
+  "publicReadOnlyChecks": [
+    {
+      "domain": "rfrf.net",
+      "path": "/",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "s-maxage=31536000",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "age": "830816",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.099"
+      },
+      "observedAt": "2026-10-28T12:22:18.586662+00:00",
+      "sentCookies": false,
+      "bytes": 81240,
+      "sha256": "4a0ee31f025198b5b98327904c21d383c28eea2964f41d342ca75cd809e72cd3"
+    },
+    {
+      "domain": "rfrf.net",
+      "path": "/api/liveness",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "application/json",
+        "cache-control": "no-store, max-age=0",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.202"
+      },
+      "observedAt": "2026-10-28T12:22:18.614739+00:00",
+      "sentCookies": false,
+      "bytes": 71,
+      "sha256": "8e239d9fcd532b05c1ede8e80ce7c3cd79ee748048b8bf6b07a61d7782ac8569",
+      "response": {
+        "service": "rafraf-customer",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "domain": "supplier.rfrf.net",
+      "path": "/",
+      "status": "401",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/plain;charset=UTF-8",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      },
+      "observedAt": "2026-10-28T12:22:18.639247+00:00",
+      "sentCookies": false,
+      "bytes": 34,
+      "sha256": "4cd050b1b327161189d41f612e65a49181efa9cf8dae09e089adf027cae84045"
+    },
+    {
+      "domain": "supplier.rfrf.net",
+      "path": "/api/liveness",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "application/json",
+        "cache-control": "no-store, max-age=0",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.182"
+      },
+      "observedAt": "2026-10-28T12:22:18.648288+00:00",
+      "sentCookies": false,
+      "bytes": 71,
+      "sha256": "f23ea31442e23d8ac1d95eeaf7eee738fbcd28efab353ce0edeb3c6fc0f7fb40",
+      "response": {
+        "service": "rafraf-supplier",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "domain": "admin.rfrf.net",
+      "path": "/",
+      "status": "401",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/plain;charset=UTF-8",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      },
+      "observedAt": "2026-10-28T12:22:18.615879+00:00",
+      "sentCookies": false,
+      "bytes": 34,
+      "sha256": "4cd050b1b327161189d41f612e65a49181efa9cf8dae09e089adf027cae84045"
+    },
+    {
+      "domain": "admin.rfrf.net",
+      "path": "/api/liveness",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "application/json",
+        "cache-control": "no-store, max-age=0",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.133"
+      },
+      "observedAt": "2026-10-28T12:22:19.064366+00:00",
+      "sentCookies": false,
+      "bytes": 68,
+      "sha256": "3ab30b1f713c5cac64c1458695d9d68c70164d55efffff8048cdacbffb32d4cc",
+      "response": {
+        "service": "rafraf-admin",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "domain": "api.rfrf.net",
+      "path": "/",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html; charset=UTF-8",
+        "x-powered-by": "PHP/8.3.36",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.673"
+      },
+      "observedAt": "2026-10-28T12:22:19.626754+00:00",
+      "sentCookies": false,
+      "bytes": 16369,
+      "sha256": "aba5b5856471c610e4dd52c322c7a72a895fc9bf98ac1d027528d0e7de1f7e45",
+      "bodyKind": "html",
+      "helloWorldMatch": false
+    },
+    {
+      "domain": "api.rfrf.net",
+      "path": "/api/liveness",
+      "status": "404",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      },
+      "observedAt": "2026-10-28T12:22:19.123358+00:00",
+      "sentCookies": false,
+      "bytes": 4511,
+      "sha256": "e7db95c97a5d45787cc3e40cbcb93b748fefc65bc14e162c746e37f979861729",
+      "bodyKind": "html",
+      "helloWorldMatch": false
+    },
+    {
+      "domain": "rfrf.net",
+      "path": "/login",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.173"
+      },
+      "observedAt": "2026-10-28T12:22:19.164756+00:00",
+      "sentCookies": false,
+      "bytes": 25727,
+      "sha256": "f90e0f1a454bef034b65a34469ac8de58844cbebfdf2f41e48270778740227f7",
+      "unavailableBanner": true,
+      "hasDisabledControls": true
+    },
+    {
+      "domain": "supplier.rfrf.net",
+      "path": "/login?mode=phone",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.204"
+      },
+      "observedAt": "2026-10-28T12:22:19.250461+00:00",
+      "sentCookies": false,
+      "bytes": 26105,
+      "sha256": "3a6e76ad1326e20372f62981289584cfd841da3a7d8d47859dc3308a7fed9342"
+    },
+    {
+      "domain": "admin.rfrf.net",
+      "path": "/login",
+      "status": "200",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.147"
+      },
+      "observedAt": "2026-10-28T12:22:19.538053+00:00",
+      "sentCookies": false,
+      "bytes": 17549,
+      "sha256": "eaac3050d318593d1f3cabaf225483b624d90d226c4c674098e7d863fa5bf149"
+    },
+    {
+      "domain": "api.rfrf.net",
+      "path": "/api/readiness",
+      "status": "404",
+      "headers": {
+        "server": "envoy",
+        "content-type": "text/html",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      },
+      "observedAt": "2026-10-28T12:22:19.501066+00:00",
+      "sentCookies": false,
+      "bytes": 4511,
+      "sha256": "e7db95c97a5d45787cc3e40cbcb93b748fefc65bc14e162c746e37f979861729",
+      "bodyKind": "html",
+      "helloWorldMatch": false
+    }
+  ],
+  "providerHealth": [
+    {
+      "service": "rafraf-tap",
+      "reachable": true,
+      "configuration": {
+        "secretPresent": false,
+        "merchantPresent": false,
+        "modeValid": false,
+        "secretModeMatches": false,
+        "merchantFormatValid": false
+      },
+      "createsShipments": null
+    },
+    {
+      "service": "rafraf-oto",
+      "reachable": true,
+      "configuration": {
+        "tokenPresent": false,
+        "enabled": false,
+        "automaticShipmentDisabled": false,
+        "configured": false
+      },
+      "createsShipments": false
+    }
+  ],
+  "nonFixtureDatabaseHostsInTrackedSource": [],
+  "hostingerAccess": {
+    "hostingToolsAvailable": false,
+    "mailToolsAvailable": true,
+    "authenticatedHostingSession": false,
+    "environmentVariableValuesInspected": false,
+    "runtimeLogsInspected": false,
+    "localMcpDefinitionAdded": true,
+    "oauthCompleted": false
+  },
+  "database": {
+    "primaryEndpointIdentified": false,
+    "primaryCredentialsAvailable": false,
+    "primaryConnectivityVerified": false,
+    "prismaDatasourceVariables": [
+      "DATABASE_URL",
+      "DIRECT_URL"
+    ],
+    "apiDiagnosticDatasourceVariable": "API_DATABASE_URL",
+    "supabaseReadOnlyCatalogue": {
+      "project": "gfxnwfjjpxmzvnylushd",
+      "transactionReadOnly": true,
+      "publicTables": [
+        {
+          "name": "tap_payment_attempts",
+          "rls": true,
+          "forceRls": true
+        }
+      ],
+      "businessRowsRead": false
+    }
+  },
+  "customerLoginDiagnosis": {
+    "observedUnavailableWithoutCookies": true,
+    "sourceCondition": "nonempty DATABASE_URL and trimmed SESSION_SECRET length >= 32 and session lookup without exception",
+    "conditionConfirmedInDeployedSource": false,
+    "exactMissingSettingIdentified": false
+  },
+  "apiDiagnosis": {
+    "observedHandler": "Hostinger default PHP page",
+    "rootTitle": "Default page",
+    "rootHeading": "You Are All Set to Go!",
+    "poweredBy": "PHP/8.3.36",
+    "nestControllerHasLivenessRoute": true,
+    "exactHpanelSettingIdentified": false
+  },
+  "safety": {
+    "candidateModified": false,
+    "applicationCodeModified": false,
+    "hostingConfigurationChanged": false,
+    "productionDataChanged": false,
+    "realOtpSent": false,
+    "financialTransactions": false,
+    "shipmentsCreated": false,
+    "secretsSaved": false,
+    "databaseWrites": false
+  }
+}

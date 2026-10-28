@@ -1,0 +1,133 @@
+{
+  "candidateSha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+  "reportDate": "2026-10-29",
+  "timezone": "Asia/Riyadh",
+  "observedAtRiyadh": "2026-10-29T00:28:52.595207+03:00",
+  "publicReadOnlyChecks": [
+    {
+      "url": "https://api.rfrf.net/",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:52.595207+00:00",
+      "sentCookies": false,
+      "hostingerDefaultPage": true
+    },
+    {
+      "url": "https://api.rfrf.net/api/liveness",
+      "httpStatus": "404",
+      "observedAt": "2026-10-28T21:28:52.485339+00:00",
+      "sentCookies": false,
+      "html404": true
+    },
+    {
+      "url": "https://rfrf.net/login",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:52.625316+00:00",
+      "sentCookies": false,
+      "unavailableBanner": true
+    },
+    {
+      "url": "https://rfrf.net/api/liveness",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:52.454242+00:00",
+      "sentCookies": false,
+      "response": {
+        "service": "rafraf-customer",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "url": "https://supplier.rfrf.net/api/liveness",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:53.069391+00:00",
+      "sentCookies": false,
+      "response": {
+        "service": "rafraf-supplier",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "url": "https://admin.rfrf.net/api/liveness",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:53.111076+00:00",
+      "sentCookies": false,
+      "response": {
+        "service": "rafraf-admin",
+        "status": "alive",
+        "release": "795d4d5121f7"
+      }
+    },
+    {
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-tap/health",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:53.015599+00:00",
+      "sentCookies": false,
+      "response": {
+        "ok": true,
+        "service": "rafraf-tap",
+        "version": 1,
+        "configuration": {
+          "secretPresent": false,
+          "merchantPresent": false,
+          "modeValid": false,
+          "secretModeMatches": false,
+          "merchantFormatValid": false
+        }
+      }
+    },
+    {
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-oto/health",
+      "httpStatus": "200",
+      "observedAt": "2026-10-28T21:28:53.008436+00:00",
+      "sentCookies": false,
+      "response": {
+        "ok": true,
+        "service": "rafraf-oto",
+        "configuration": {
+          "tokenPresent": false,
+          "enabled": false,
+          "automaticShipmentDisabled": false,
+          "configured": false
+        },
+        "createsShipments": false
+      }
+    }
+  ],
+  "candidateWorkflows": [
+    {
+      "name": "Hostinger build and runtime",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40686196312"
+    },
+    {
+      "name": "Rafraf API readiness and database tests",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40686196195"
+    },
+    {
+      "name": "Rafraf integrated release checks",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "734051d7d58d3fe0a4678d10ec309af8af19e670",
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40686196209"
+    }
+  ],
+  "hostingerHostingToolsAvailable": false,
+  "mcpAuthenticationStatus": "not_logged_in",
+  "runtimeCredentialBindingsAvailable": false,
+  "userClient": "Codex desktop",
+  "localBrowserToolsAvailable": false,
+  "userAuthenticationPending": true,
+  "codeChanged": false,
+  "productionChanged": false,
+  "realProviderCalls": false,
+  "originalBusinessDatabaseIdentified": false,
+  "documentationReferences": [
+    "https://developers.openai.com/codex/mcp/"
+  ]
+}
