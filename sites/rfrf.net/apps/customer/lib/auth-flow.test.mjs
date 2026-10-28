@@ -16,6 +16,8 @@ function fixture({
   auditFailure = false,
   completionFailure = false,
   allowed = true,
+  providerUnavailable = false,
+  releaseFailure = false,
 } = {}) {
   const counts = new Map();
   let transactions = 0;
@@ -26,6 +28,11 @@ function fixture({
     auditLog: {
       count: async ({ where }) => counts.get(where.action) ?? 0,
       create: async ({ data }) => {
+        if (
+          releaseFailure &&
+          data.action === 'customer.otp.verification_attempt_released'
+        )
+          throw Error('fixture reservation release outage');
         counts.set(data.action, (counts.get(data.action) ?? 0) + 1);
       },
       createMany: async ({ data }) => {
@@ -74,6 +81,7 @@ function fixture({
       },
       checkTwilioVerification: async (number, code) => {
         checks.push({ number, code });
+        if (providerUnavailable) return 'unavailable';
         return code === '123456' ? 'approved' : 'pending';
       },
     },
@@ -112,7 +120,15 @@ function fixture({
     commonJsModule.exports,
     { error: () => {} },
   );
-  return { service: commonJsModule.exports, sends, checks, counts };
+  return {
+    service: commonJsModule.exports,
+    sends,
+    checks,
+    counts,
+    setProviderUnavailable(value) {
+      providerUnavailable = value;
+    },
+  };
 }
 
 test('customer SMS flow uses one canonical phone and normalized Arabic OTP', async () => {
@@ -175,4 +191,56 @@ test('customer wrong OTP attempts still lock on the fifth attempt', async () => 
     assert.equal(result.status, i === 5 ? 'locked' : 'invalid');
     if (result.status === 'invalid') cookie = result.challengeCookie;
   }
+});
+
+test('customer Twilio outages do not consume verification attempts before recovery', async () => {
+  const f = fixture({ providerUnavailable: true });
+  const challenge = otp.createCustomerOtpChallenge('+966512345678');
+  for (let i = 0; i < otp.MAX_OTP_ATTEMPTS; i++) {
+    assert.equal(
+      (await f.service.verifyCustomerOtpFlow(challenge.cookie, '123456'))
+        .status,
+      'unavailable',
+    );
+  }
+  f.setProviderUnavailable(false);
+  assert.equal(
+    (await f.service.verifyCustomerOtpFlow(challenge.cookie, '123456')).status,
+    'verified',
+  );
+  assert.equal(f.counts.get('customer.otp.failed') ?? 0, 0);
+});
+
+test('customer provider recovery preserves genuine failed attempts and the fifth-attempt lock', async () => {
+  const f = fixture();
+  let cookie = otp.createCustomerOtpChallenge('+966512345678').cookie;
+  const first = await f.service.verifyCustomerOtpFlow(cookie, '000000');
+  assert.equal(first.status, 'invalid');
+  cookie = first.challengeCookie;
+  f.setProviderUnavailable(true);
+  for (let i = 0; i < otp.MAX_OTP_ATTEMPTS; i++) {
+    assert.equal(
+      (await f.service.verifyCustomerOtpFlow(cookie, '000000')).status,
+      'unavailable',
+    );
+  }
+  f.setProviderUnavailable(false);
+  for (let i = 2; i <= otp.MAX_OTP_ATTEMPTS; i++) {
+    const result = await f.service.verifyCustomerOtpFlow(cookie, '000000');
+    assert.equal(
+      result.status,
+      i === otp.MAX_OTP_ATTEMPTS ? 'locked' : 'invalid',
+    );
+    if (result.status === 'invalid') cookie = result.challengeCookie;
+  }
+});
+
+test('customer reservation release failure stays unavailable without authorizing an account', async () => {
+  const f = fixture({ providerUnavailable: true, releaseFailure: true });
+  const challenge = otp.createCustomerOtpChallenge('+966512345678');
+  assert.deepEqual(
+    await f.service.verifyCustomerOtpFlow(challenge.cookie, '123456'),
+    { status: 'unavailable' },
+  );
+  assert.equal(f.counts.get('customer.otp.challenge_consumed') ?? 0, 0);
 });

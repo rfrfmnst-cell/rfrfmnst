@@ -213,33 +213,44 @@ export async function verifyCustomerOtpFlow(
   try {
     reservation = await prisma.$transaction(async (tx) => {
       await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${challengeKey}))`;
-      const [reservedAttempts, failedAttempts, consumedChallenges] =
-        await Promise.all([
-          tx.auditLog.count({
-            where: {
-              entityType: 'customer_otp_challenge',
-              entityId: challengeKey,
-              action: 'customer.otp.verification_attempt_reserved',
-            },
-          }),
-          tx.auditLog.count({
-            where: {
-              entityType: 'customer_otp_challenge',
-              entityId: challengeKey,
-              action: 'customer.otp.failed',
-            },
-          }),
-          tx.auditLog.count({
-            where: {
-              entityType: 'customer_otp_challenge',
-              entityId: challengeKey,
-              action: 'customer.otp.challenge_consumed',
-            },
-          }),
-        ]);
+      const [
+        reservedAttempts,
+        releasedAttempts,
+        failedAttempts,
+        consumedChallenges,
+      ] = await Promise.all([
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.verification_attempt_reserved',
+          },
+        }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.verification_attempt_released',
+          },
+        }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.failed',
+          },
+        }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.challenge_consumed',
+          },
+        }),
+      ]);
       if (consumedChallenges > 0) return { status: 'used' } as const;
       const attempts = Math.max(
-        reservedAttempts,
+        reservedAttempts - releasedAttempts,
         failedAttempts,
         challenge.attempts,
       );
@@ -270,14 +281,49 @@ export async function verifyCustomerOtpFlow(
       ? 'approved'
       : 'pending'
     : await checkTwilioVerification(challenge.phone, code.trim());
-  if (verification === 'unavailable') return { status: 'unavailable' };
+  if (verification === 'unavailable') {
+    try {
+      await prisma.$transaction(async (tx) => {
+        await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${challengeKey}))`;
+        const consumed = await tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.challenge_consumed',
+          },
+        });
+        if (consumed === 0) {
+          await tx.auditLog.create({
+            data: {
+              actorType: 'SYSTEM',
+              action: 'customer.otp.verification_attempt_released',
+              entityType: 'customer_otp_challenge',
+              entityId: challengeKey,
+              after: {
+                attempt: reservation.attempt,
+                reason: 'PROVIDER_UNAVAILABLE',
+                phoneSubject: phoneKey,
+              },
+            },
+          });
+        }
+      });
+    } catch {
+      // Keep the reservation conservatively if persistence is unavailable.
+      // Never authorize a customer or expose provider/database details here.
+      console.error('[auth:customer] OTP reservation release failed', {
+        code: 'OTP_VERIFICATION_RESERVATION_RELEASE_ERROR',
+      });
+    }
+    return { status: 'unavailable' };
+  }
   if (verification === 'expired') return { status: 'expired' };
   const valid = verification === 'approved';
   const result = await prisma
     .$transaction(async (tx) => {
       for (const key of [challengeKey, phoneKey].sort())
         await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))`;
-      const [failed, consumed, reserved] = await Promise.all([
+      const [failed, consumed, reserved, released] = await Promise.all([
         tx.auditLog.count({
           where: {
             entityType: 'customer_otp_challenge',
@@ -299,12 +345,23 @@ export async function verifyCustomerOtpFlow(
             action: 'customer.otp.verification_attempt_reserved',
           },
         }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'customer_otp_challenge',
+            entityId: challengeKey,
+            action: 'customer.otp.verification_attempt_released',
+          },
+        }),
       ]);
       if (consumed > 0) return { status: 'used' } as const;
       if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
       if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
       if (!valid) {
-        const attempts = Math.max(reserved, failed + 1, reservation.attempt);
+        const attempts = Math.max(
+          reserved - released,
+          failed + 1,
+          reservation.attempt,
+        );
         await tx.auditLog.create({
           data: {
             actorType: 'SYSTEM',
