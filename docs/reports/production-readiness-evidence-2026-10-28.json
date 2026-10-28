@@ -1,5 +1,5 @@
 {
-  "status": "local_validation_in_progress_production_not_verified",
+  "status": "local_checks_passed_staging_and_production_blocked",
   "main": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
   "reviewedPullRequests": [
     {
@@ -253,5 +253,391 @@
     "deployments": false,
     "mainChanged": false,
     "paidPurchases": false
-  }
+  },
+  "validatedCodeSha": "e733ac50ea98a05a5749a9e37712ccbd728b3ca5",
+  "localApplications": {
+    "api.rfrf.net": {
+      "site": "api.rfrf.net",
+      "node": "24.19.0",
+      "pnpm": "11.6.0",
+      "productionCredentials": false,
+      "results": [
+        {
+          "name": "types",
+          "startedAt": "2026-10-28T04:43:49.961Z",
+          "finishedAt": "2026-10-28T04:43:57.965Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "lint",
+          "startedAt": "2026-10-28T04:43:57.965Z",
+          "finishedAt": "2026-10-28T04:44:20.545Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "tests",
+          "startedAt": "2026-10-28T04:44:20.545Z",
+          "finishedAt": "2026-10-28T04:44:29.941Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "deployment-tests",
+          "startedAt": "2026-10-28T04:44:29.941Z",
+          "finishedAt": "2026-10-28T04:44:31.156Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "api-e2e",
+          "startedAt": "2026-10-28T04:44:31.156Z",
+          "finishedAt": "2026-10-28T04:44:35.310Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "build",
+          "startedAt": "2026-10-28T04:44:35.310Z",
+          "finishedAt": "2026-10-28T04:45:15.857Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "runtime",
+          "startedAt": "2026-10-28T04:45:15.857Z",
+          "finishedAt": "2026-10-28T04:45:20.065Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        }
+      ],
+      "testSummaries": {
+        "tests": [
+          "api:test: Test Suites: 5 passed, 5 total",
+          "api:test: Tests:       23 passed, 23 total"
+        ],
+        "deployment-tests": [
+          "ℹ tests 57",
+          "ℹ pass 57",
+          "ℹ fail 0",
+          "ℹ skipped 0"
+        ],
+        "api-e2e": [
+          "Test Suites: 1 passed, 1 total",
+          "Tests:       5 passed, 5 total"
+        ],
+        "runtime": [
+          "{\"site\":\"api.rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":314,\"providerRequests\":false}"
+        ]
+      }
+    },
+    "rfrf.net": {
+      "site": "rfrf.net",
+      "node": "24.19.0",
+      "pnpm": "11.6.0",
+      "productionCredentials": false,
+      "results": [
+        {
+          "name": "generate",
+          "startedAt": "2026-10-28T04:53:30.233Z",
+          "finishedAt": "2026-10-28T04:53:35.327Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "types",
+          "startedAt": "2026-10-28T04:53:35.327Z",
+          "finishedAt": "2026-10-28T04:53:57.636Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "lint",
+          "startedAt": "2026-10-28T04:53:57.636Z",
+          "finishedAt": "2026-10-28T04:54:07.687Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "tests",
+          "startedAt": "2026-10-28T04:54:07.688Z",
+          "finishedAt": "2026-10-28T04:54:12.030Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "deployment-tests",
+          "startedAt": "2026-10-28T04:54:12.030Z",
+          "finishedAt": "2026-10-28T04:54:13.635Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "build",
+          "startedAt": "2026-10-28T04:54:13.635Z",
+          "finishedAt": "2026-10-28T04:55:50.108Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "runtime",
+          "startedAt": "2026-10-28T04:55:50.108Z",
+          "finishedAt": "2026-10-28T04:55:54.733Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        }
+      ],
+      "testSummaries": {
+        "tests": [
+          "@rafraf/ui:test: ℹ tests 8",
+          "@rafraf/ui:test: ℹ pass 7",
+          "@rafraf/ui:test: ℹ fail 0",
+          "@rafraf/ui:test: ℹ skipped 1",
+          "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+          "@rafraf/shared:test: Tests:       331 passed, 331 total",
+          "customer:test: ℹ tests 24",
+          "customer:test: ℹ pass 24",
+          "customer:test: ℹ fail 0",
+          "customer:test: ℹ skipped 0"
+        ],
+        "deployment-tests": [
+          "ℹ tests 35",
+          "ℹ pass 35",
+          "ℹ fail 0",
+          "ℹ skipped 0"
+        ],
+        "runtime": [
+          "{\"site\":\"rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":113,\"providerRequests\":false}"
+        ]
+      }
+    },
+    "supplier.rfrf.net": {
+      "site": "supplier.rfrf.net",
+      "node": "24.19.0",
+      "pnpm": "11.6.0",
+      "productionCredentials": false,
+      "results": [
+        {
+          "name": "generate",
+          "startedAt": "2026-10-28T04:52:08.063Z",
+          "finishedAt": "2026-10-28T04:52:13.157Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "types",
+          "startedAt": "2026-10-28T04:52:13.159Z",
+          "finishedAt": "2026-10-28T04:52:30.704Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "lint",
+          "startedAt": "2026-10-28T04:52:30.705Z",
+          "finishedAt": "2026-10-28T04:52:41.614Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "tests",
+          "startedAt": "2026-10-28T04:52:41.614Z",
+          "finishedAt": "2026-10-28T04:52:44.486Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "deployment-tests",
+          "startedAt": "2026-10-28T04:52:44.486Z",
+          "finishedAt": "2026-10-28T04:52:45.477Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "build",
+          "startedAt": "2026-10-28T04:52:45.477Z",
+          "finishedAt": "2026-10-28T04:54:14.763Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "runtime",
+          "startedAt": "2026-10-28T04:54:14.764Z",
+          "finishedAt": "2026-10-28T04:54:19.849Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        }
+      ],
+      "testSummaries": {
+        "tests": [
+          "@rafraf/ui:test: ℹ tests 8",
+          "@rafraf/ui:test: ℹ pass 7",
+          "@rafraf/ui:test: ℹ fail 0",
+          "@rafraf/ui:test: ℹ skipped 1",
+          "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+          "@rafraf/shared:test: Tests:       331 passed, 331 total",
+          "supplier:test: ℹ tests 20",
+          "supplier:test: ℹ pass 20",
+          "supplier:test: ℹ fail 0",
+          "supplier:test: ℹ skipped 0"
+        ],
+        "deployment-tests": [
+          "ℹ tests 35",
+          "ℹ pass 35",
+          "ℹ fail 0",
+          "ℹ skipped 0"
+        ],
+        "runtime": [
+          "{\"site\":\"supplier.rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":178,\"providerRequests\":false}"
+        ]
+      }
+    },
+    "admin.rfrf.net": {
+      "site": "admin.rfrf.net",
+      "node": "24.19.0",
+      "pnpm": "11.6.0",
+      "productionCredentials": false,
+      "results": [
+        {
+          "name": "generate",
+          "startedAt": "2026-10-28T04:46:06.838Z",
+          "finishedAt": "2026-10-28T04:46:24.249Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "types",
+          "startedAt": "2026-10-28T04:46:24.249Z",
+          "finishedAt": "2026-10-28T04:47:58.709Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "lint",
+          "startedAt": "2026-10-28T04:47:58.709Z",
+          "finishedAt": "2026-10-28T04:48:40.249Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "tests",
+          "startedAt": "2026-10-28T04:48:40.249Z",
+          "finishedAt": "2026-10-28T04:49:01.523Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "deployment-tests",
+          "startedAt": "2026-10-28T04:49:01.523Z",
+          "finishedAt": "2026-10-28T04:49:02.604Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "build",
+          "startedAt": "2026-10-28T04:49:02.726Z",
+          "finishedAt": "2026-10-28T04:51:37.445Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        },
+        {
+          "name": "runtime",
+          "startedAt": "2026-10-28T04:51:37.446Z",
+          "finishedAt": "2026-10-28T04:51:41.957Z",
+          "status": "passed",
+          "exitCode": 0,
+          "signal": null
+        }
+      ],
+      "testSummaries": {
+        "tests": [
+          "admin:test: ℹ tests 5",
+          "admin:test: ℹ pass 5",
+          "admin:test: ℹ fail 0",
+          "admin:test: ℹ skipped 0",
+          "@rafraf/ui:test: ℹ tests 8",
+          "@rafraf/ui:test: ℹ pass 7",
+          "@rafraf/ui:test: ℹ fail 0",
+          "@rafraf/ui:test: ℹ skipped 1",
+          "@rafraf/shared:test: Test Suites: 11 passed, 11 total",
+          "@rafraf/shared:test: Tests:       331 passed, 331 total"
+        ],
+        "deployment-tests": [
+          "ℹ tests 30",
+          "ℹ pass 30",
+          "ℹ fail 0",
+          "ℹ skipped 0"
+        ],
+        "runtime": [
+          "{\"site\":\"admin.rfrf.net\",\"runtimeVerified\":true,\"linksChecked\":181,\"providerRequests\":false}"
+        ]
+      }
+    }
+  },
+  "rootTests": [
+    "ℹ tests 46",
+    "ℹ pass 46",
+    "ℹ fail 0",
+    "ℹ skipped 0"
+  ],
+  "otpDeadlineTests": [
+    "ℹ tests 12",
+    "ℹ pass 12",
+    "ℹ fail 0",
+    "ℹ skipped 0",
+    "{\"gate\":\"otp-expiry\",\"sites\":[\"rfrf.net\",\"supplier.rfrf.net\"],\"passed\":true,\"realProviderCalls\":false,\"applicationSourceChanged\":false}"
+  ],
+  "localDatabaseIntegration": {
+    "passed": true,
+    "checks": [
+      "packaged-liveness",
+      "unauthorized-probe-rejected",
+      "empty-schema-rejected",
+      "read-only-role-core-schema-ready",
+      "probe-role-cannot-insert",
+      "revoked-access-rejected",
+      "recovered-access-ready",
+      "missing-core-table-rejected",
+      "liveness-independent-from-database-readiness"
+    ],
+    "database": "disposable-local-postgresql-17",
+    "productionAccess": false,
+    "providerRequests": false
+  },
+  "blockedAcceptance": [
+    "Primary application PostgreSQL connection through the API has not been exercised against an authorized staging DSN.",
+    "Real customer/supplier/admin staging OTP, email, sessions and permissions cannot be verified without an accessible staging target and approved test accounts.",
+    "Production customer login page shows unavailable notice.",
+    "Production API liveness returns HTTP 404.",
+    "Connected Tap and OTO Edge Functions report missing provider configuration.",
+    "One optional Figma authoring alignment test per UI workspace is skipped because the captured source lacks authoring assets."
+  ],
+  "providerSourceUnchanged": true
 }
