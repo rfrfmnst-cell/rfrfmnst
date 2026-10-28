@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import type { PoolConfig } from 'pg';
+import { Client, type PoolConfig } from 'pg';
 import {
   CORE_SCHEMA_SQL,
   CORE_TABLES,
@@ -88,6 +88,26 @@ describe('database readiness is bounded, read-only and separate from liveness', 
       expect(f.configs).toHaveLength(0);
     }
   });
+  it('rejects query host overrides before they can bypass loopback TLS rules', async () => {
+    for (const suffix of [
+      'host=db.example&sslmode=disable',
+      '%68ost=db.example&sslmode=disable',
+      'host=127.0.0.1&host=db.example&sslmode=disable',
+      'host=db.example&sslmode=verify-full',
+    ]) {
+      const value = `postgresql://fixture@127.0.0.1/app?${suffix}`;
+      // Instantiate only: no network or credentials. Exercise the actual driver's
+      // interpretation, which gives the query host precedence over URL authority.
+      const client = new Client({ connectionString: value });
+      expect(client.host).toBe('db.example');
+      const f = fixture();
+      expect(
+        await f.service.check({ NODE_ENV: 'test', API_DATABASE_URL: value }),
+      ).toEqual({ ready: false, code: 'DATABASE_CONFIGURATION_INVALID' });
+      expect(f.configs).toHaveLength(0);
+    }
+  });
+
   it('does not create a connection without an explicitly authorized API database URL', async () => {
     const f = fixture();
     expect(

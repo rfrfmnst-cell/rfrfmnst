@@ -66,6 +66,9 @@ export function validDatabaseConfiguration(value: string): boolean {
     // URLSearchParams.get() reads the first value; pg uses the last one.
     // Reject ambiguity before the connection string can disable TLS.
     if (url.searchParams.getAll('sslmode').length > 1) return false;
+    // pg lets a query host override the URL authority. A loopback authority
+    // must never authorize an unencrypted connection to a different host.
+    if (url.searchParams.has('host')) return false;
     const local = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
     // Never disable certificate verification for a remote database. CA trust
     // may be supplied through the platform's normal Node TLS configuration.
