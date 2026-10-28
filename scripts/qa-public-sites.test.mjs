@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { assessResponse, diagnoseReview } from './qa-public-sites.mjs';
+import { assessResponse, checkPublicPage, diagnoseReview } from './qa-public-sites.mjs';
 
 test('HTTP200 from the API on the customer domain is a failure', () => {
   assert.ok(assessResponse({ url: 'https://rfrf.net/api/liveness', kind: 'identity', service: 'rafraf-customer' }, { status: 200, body: '{"service":"rafraf-api","status":"alive"}' }));
@@ -60,4 +60,21 @@ test('partial 403s and ordinary failures preserve distinct diagnoses', () => {
 
 test('no checks cannot produce a healthy monitoring diagnosis', () => {
   assert.equal(diagnoseReview([]).code, 'no_checks');
+});
+
+test('response validation errors are surfaced instead of reported as connection failures', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response('Hello', {
+    status: 200,
+    headers: { 'content-type': 'text/html' },
+  });
+
+  try {
+    await assert.rejects(
+      checkPublicPage({ name: 'invalid check', url: 'https://rfrf.net/', kind: 'html', markers: null }),
+      TypeError,
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

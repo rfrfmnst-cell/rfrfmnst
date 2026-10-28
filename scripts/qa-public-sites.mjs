@@ -44,16 +44,20 @@ export function assessResponse(check, response) {
   return check.markers.every((marker) => response.body.includes(marker)) ? null : 'المحتوى المتوقع غير ظاهر';
 }
 
-async function checkPublicPage(check) {
+export async function checkPublicPage(check) {
   const started = Date.now();
+  let response;
+  let body;
   try {
-    const response = await fetch(check.url, { method: check.method || 'GET', body: check.method === 'POST' ? JSON.stringify(check.body) : undefined, redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { ...(check.method === 'POST' ? { 'Content-Type': 'application/json' } : {}), Accept: 'text/html,application/json', 'Cache-Control': 'no-cache' } });
-    const body = await response.text();
-    const error = assessResponse(check, { status: response.status, body, contentType: response.headers.get('content-type') ?? '', location: response.headers.get('location') });
-    return { name: check.name, url: check.url, ok: !error, status: response.status, durationMs: Date.now() - started, error };
+    response = await fetch(check.url, { method: check.method || 'GET', body: check.method === 'POST' ? JSON.stringify(check.body) : undefined, redirect: 'manual', signal: AbortSignal.timeout(20000), headers: { ...(check.method === 'POST' ? { 'Content-Type': 'application/json' } : {}), Accept: 'text/html,application/json', 'Cache-Control': 'no-cache' } });
+    body = await response.text();
   } catch (error) {
-    return { name: check.name, url: check.url, ok: false, durationMs: Date.now() - started, error: error.name === 'TimeoutError' ? 'انتهت مهلة الاتصال' : 'تعذر الاتصال الآمن بالموقع' };
+    const isTimeout = error instanceof Error && error.name === 'TimeoutError';
+    if (!isTimeout && !(error instanceof TypeError)) throw error;
+    return { name: check.name, url: check.url, ok: false, durationMs: Date.now() - started, error: isTimeout ? 'انتهت مهلة الاتصال' : 'تعذر الاتصال الآمن بالموقع' };
   }
+  const error = assessResponse(check, { status: response.status, body, contentType: response.headers.get('content-type') ?? '', location: response.headers.get('location') });
+  return { name: check.name, url: check.url, ok: !error, status: response.status, durationMs: Date.now() - started, error };
 }
 
 /**
