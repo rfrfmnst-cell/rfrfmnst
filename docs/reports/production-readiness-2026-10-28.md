@@ -160,3 +160,90 @@ Figma الاختيارية متجاوزة صراحة.
 
 لا يجوز وصف المرشح بأنه جاهز للإنتاج قبل إغلاق البنود السابقة بأدلة فعلية.
 مسودة PR #14 تحفظ الإصلاحات والفحوص وتبقى للمراجعة فقط.
+
+## تسليم عاجل وحماية العمل
+
+أُوقف التوسع بطلب المالك. ملفات الإصلاحات والتوثيق محفوظة على GitHub،
+وحالة العمل المحلية نظيفة وقت التحقق. طُوبقت بصمات Git blob للملفات المعدلة
+مع شجرة GitHub الفعلية، ولم يُكتفَ بنجاح الأمر المحلي.
+
+- [فرع المرشح وPR #14](https://github.com/rfrfmnst-cell/rfrfmnst/pull/14).
+- التزام الشيفرة: `e733ac50ea98a05a5749a9e37712ccbd728b3ca5`. نجحت
+  workflows الثلاثة لهذا الرأس: بناء Hostinger، فحوص API، والتحقق الشامل.
+- التزام التقرير قبل هذا الملحق: `37a59324fdb5a22090cdffd40ae1516ddd5e0f43`،
+  لا يغير شيفرة الإصلاحات. نتائج Actions النهائية لكل رأس تُراجع من تبويب Checks؛
+  لا تُنسب نتيجة التزام إلى التزام أحدث تلقائيًا.
+- [نسخة استرجاع العمل السابق](https://github.com/rfrfmnst-cell/rfrfmnst/tree/codex/rafraf-recovered-snapshot-20261028)
+  عند `322f454` محفوظة أيضًا؛ لا تستبدل بها main أو عمل Copilot الأحدث.
+- [إصلاح المورد السابق #12](https://github.com/rfrfmnst-cell/rfrfmnst/pull/12)
+  و[إصلاح API السابق #13](https://github.com/rfrfmnst-cell/rfrfmnst/pull/13)
+  محفوظان دون تعديل فرعيهما. تصحيح مهلة OTP في المرشح أجيز صراحة من المالك.
+
+قاعدة الأعمال الأصلية مستخدمة عبر Prisma و`DATABASE_URL` في تطبيقات
+العميل والمورد والإدارة. لا يتوفر عنوانها أو اعتمادها في هذه الجلسة، فلا
+يمكن الجزم باسم المضيف أو فحص بياناتها. مشروع Supabase المتصل للتكاملات
+فقط وليس قاعدة بديلة. لا تنشئ قاعدة أو جداول لتعويض غياب الاعتماد.
+
+للاستكمال: افتح فرع PR #14، اقرأ ملف الأدلة ونتائج Checks للرأس الحالي،
+ثم جهّز اتصالًا آمنًا بقاعدة الأعمال بدور قراءة فقط وTLS موثق وهدف Staging
+معتمد. لا ترسل الأسرار في المحادثة. نفّذ بوابات التحقق المسجلة أعلاه،
+واختبر الجلسات وOTP والحقوق في Staging فقط قبل طلب اعتماد الإنتاج.
+لا توجد تغييرات شيفرة غير مكتملة تحتاج النقل من ملفات مؤقتة؛ السجلات
+المولدة الكاملة محلية في `outputs/verification/`، والنتائج اللازمة للتسليم
+محفوظة في JSON داخل GitHub. لا دمج أو نشر أو تعديل إنتاج في هذه الجلسة.
+
+### الملفات المعدلة في المرشح مقارنةً بـmain
+
+- `.github/workflows/rafraf-api-readiness.yml`
+- `.github/workflows/rafraf-release-gates.yml`
+- `docs/release-gates/otp-expiry-fix.patch`
+- `docs/reports/api-recovery-handoff-2026-10-28.md`
+- `docs/reports/api-recovery-validation-2026-10-28.json`
+- `docs/reports/production-readiness-2026-10-28.md`
+- `docs/reports/production-readiness-evidence-2026-10-28.json`
+- `scripts/audit-otp-expiry.mjs`
+- `scripts/auth-boundaries.test.mjs`
+- `scripts/verify-site.mjs`
+- `sites/admin.rfrf.net/apps/admin/package.json`
+- `sites/admin.rfrf.net/package.json`
+- `sites/admin.rfrf.net/packages/jest-config/src/nest.ts`
+- `sites/admin.rfrf.net/packages/shared/eslint.config.mjs`
+- `sites/admin.rfrf.net/packages/shared/jest.config.ts`
+- `sites/admin.rfrf.net/packages/shared/src/security/source-guard.spec.ts`
+- `sites/admin.rfrf.net/packages/shared/tsconfig.eslint.json`
+- `sites/admin.rfrf.net/packages/ui/test/offer-row-code-connect-contract.test.mjs`
+- `sites/api.rfrf.net/API_DATABASE_READINESS.md`
+- `sites/api.rfrf.net/MANAGED_HOSTINGER.md`
+- `sites/api.rfrf.net/apps/api/jest.config.ts`
+- `sites/api.rfrf.net/apps/api/package.json`
+- `sites/api.rfrf.net/apps/api/src/app.module.ts`
+- `sites/api.rfrf.net/apps/api/src/database-readiness.spec.ts`
+- `sites/api.rfrf.net/apps/api/src/database-readiness.ts`
+- `sites/api.rfrf.net/apps/api/src/readiness.controller.ts`
+- `sites/api.rfrf.net/apps/api/test/app.e2e-spec.ts`
+- `sites/api.rfrf.net/apps/api/test/jest-e2e.json`
+- `sites/api.rfrf.net/package.json`
+- `sites/api.rfrf.net/packages/jest-config/src/nest.ts`
+- `sites/api.rfrf.net/pnpm-lock.yaml`
+- `sites/api.rfrf.net/scripts/managed-storage-seed.test.mjs`
+- `sites/api.rfrf.net/scripts/test-api-database.mjs`
+- `sites/rfrf.net/apps/customer/lib/customer-auth-service.ts`
+- `sites/rfrf.net/apps/customer/package.json`
+- `sites/rfrf.net/package.json`
+- `sites/rfrf.net/packages/jest-config/src/nest.ts`
+- `sites/rfrf.net/packages/shared/eslint.config.mjs`
+- `sites/rfrf.net/packages/shared/jest.config.ts`
+- `sites/rfrf.net/packages/shared/src/security/source-guard.spec.ts`
+- `sites/rfrf.net/packages/shared/tsconfig.eslint.json`
+- `sites/rfrf.net/packages/ui/test/offer-row-code-connect-contract.test.mjs`
+- `sites/supplier.rfrf.net/apps/supplier/app/login/actions.ts`
+- `sites/supplier.rfrf.net/apps/supplier/eslint.config.mjs`
+- `sites/supplier.rfrf.net/apps/supplier/lib/auth-flow.test.mjs`
+- `sites/supplier.rfrf.net/apps/supplier/package.json`
+- `sites/supplier.rfrf.net/package.json`
+- `sites/supplier.rfrf.net/packages/jest-config/src/nest.ts`
+- `sites/supplier.rfrf.net/packages/shared/eslint.config.mjs`
+- `sites/supplier.rfrf.net/packages/shared/jest.config.ts`
+- `sites/supplier.rfrf.net/packages/shared/src/security/source-guard.spec.ts`
+- `sites/supplier.rfrf.net/packages/shared/tsconfig.eslint.json`
+- `sites/supplier.rfrf.net/packages/ui/test/offer-row-code-connect-contract.test.mjs`
