@@ -241,13 +241,25 @@ export async function verifyOtp(formData: FormData) {
   try {
     reservation = await prisma.$transaction(async (tx) => {
       await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${challengeKey}))`;
-      const [reservedAttempts, failedAttempts, consumedChallenges] =
+      const [
+        reservedAttempts,
+        releasedAttempts,
+        failedAttempts,
+        consumedChallenges,
+      ] =
         await Promise.all([
           tx.auditLog.count({
             where: {
               entityType: 'supplier_otp_challenge',
               entityId: challengeKey,
               action: 'supplier.otp.verification_attempt_reserved',
+            },
+          }),
+          tx.auditLog.count({
+            where: {
+              entityType: 'supplier_otp_challenge',
+              entityId: challengeKey,
+              action: 'supplier.otp.verification_attempt_released',
             },
           }),
           tx.auditLog.count({
@@ -267,7 +279,7 @@ export async function verifyOtp(formData: FormData) {
         ]);
       if (consumedChallenges > 0) return { status: 'used' } as const;
       const attempts = Math.max(
-        reservedAttempts,
+        reservedAttempts - releasedAttempts,
         failedAttempts,
         challenge.attempts,
       );
@@ -305,6 +317,38 @@ export async function verifyOtp(formData: FormData) {
       : 'pending'
     : await checkTwilioVerification(challenge.phone, code);
   if (verification === 'unavailable') {
+    try {
+      await prisma.$transaction(async (tx) => {
+        await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${challengeKey}))`;
+        const consumed = await tx.auditLog.count({
+          where: {
+            entityType: 'supplier_otp_challenge',
+            entityId: challengeKey,
+            action: 'supplier.otp.challenge_consumed',
+          },
+        });
+        if (consumed === 0) {
+          await tx.auditLog.create({
+            data: {
+              actorType: 'SYSTEM',
+              action: 'supplier.otp.verification_attempt_released',
+              entityType: 'supplier_otp_challenge',
+              entityId: challengeKey,
+              after: {
+                attempt: reservation.attempt,
+                reason: 'PROVIDER_UNAVAILABLE',
+                phoneSubject: phoneKey,
+              },
+            },
+          });
+        }
+      });
+    } catch (error) {
+      console.error('[auth:supplier] OTP verification reservation release failed', {
+        code: 'OTP_VERIFICATION_RESERVATION_RELEASE_ERROR',
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
     redirect(`${verificationPath}&err=unavailable`);
   }
   if (verification === 'expired') {
@@ -318,7 +362,12 @@ export async function verifyOtp(formData: FormData) {
       await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${lockKey}))`;
     }
 
-    const [failedAttempts, consumedChallenges, reservedAttempts] =
+    const [
+      failedAttempts,
+      consumedChallenges,
+      reservedAttempts,
+      releasedAttempts,
+    ] =
       await Promise.all([
         tx.auditLog.count({
           where: {
@@ -341,15 +390,23 @@ export async function verifyOtp(formData: FormData) {
             action: 'supplier.otp.verification_attempt_reserved',
           },
         }),
+        tx.auditLog.count({
+          where: {
+            entityType: 'supplier_otp_challenge',
+            entityId: challengeKey,
+            action: 'supplier.otp.verification_attempt_released',
+          },
+        }),
       ]);
 
     if (consumedChallenges > 0) return { status: 'used' } as const;
+    if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
     if (failedAttempts >= MAX_SUPPLIER_OTP_ATTEMPTS) {
       return { status: 'locked' } as const;
     }
     if (!codeIsValid) {
       const attempts = Math.max(
-        reservedAttempts,
+        reservedAttempts - releasedAttempts,
         failedAttempts + 1,
         reservation.attempt,
       );
@@ -460,6 +517,7 @@ export async function verifyOtp(formData: FormData) {
     }
     cookieStore.delete(SUPPLIER_OTP_COOKIE);
     cookieStore.delete(SUPPLIER_REGISTRATION_COOKIE);
+    if (result.status === 'expired') redirect('/login?mode=phone&err=expired');
     if (result.status === 'not_allowed') {
       redirect('/login?mode=phone&err=not_allowed');
     }

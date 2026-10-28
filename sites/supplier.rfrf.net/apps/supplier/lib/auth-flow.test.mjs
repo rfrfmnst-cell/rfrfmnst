@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import process from 'node:process';
 import ts from 'typescript';
 import * as otp from './supplier-otp.ts';
 import * as digits from './auth-input.ts';
@@ -14,6 +15,7 @@ process.env.SESSION_SECRET = 'test-only-supplier-auth-flow-signing-key-12345';
 function fixture({
   auditFailure = false,
   completionFailure = false,
+  providerUnavailable = false,
   status = 'APPROVED',
 } = {}) {
   const counts = new Map(),
@@ -65,6 +67,7 @@ function fixture({
       },
       checkTwilioVerification: async (number, code) => {
         checks.push({ number, code });
+        if (providerUnavailable) return 'unavailable';
         return code === '123456' ? 'approved' : 'pending';
       },
     },
@@ -116,17 +119,26 @@ function fixture({
       target: ts.ScriptTarget.ES2022,
     },
   }).outputText;
-  const module = { exports: {} };
+  const moduleRef = { exports: {} };
   new Function('require', 'module', 'exports', 'console', compiled)(
     (name) => {
       assert.ok(name in modules, 'Unexpected real dependency ' + name);
       return modules[name];
     },
-    module,
-    module.exports,
+    moduleRef,
+    moduleRef.exports,
     { error: () => {} },
   );
-  return { actions: module.exports, cookies, options, sends, checks };
+  return {
+    actions: moduleRef.exports,
+    cookies,
+    options,
+    sends,
+    checks,
+    setProviderUnavailable: (value) => {
+      providerUnavailable = value;
+    },
+  };
 }
 function form(input) {
   const f = new FormData();
@@ -195,6 +207,30 @@ test('supplier completion outage never creates a session', async () => {
     '/login?mode=phone&err=unavailable',
   );
   assert.equal(f.cookies.has('sp_auth'), false);
+});
+
+test('temporary Twilio outages release reservations and do not lock a valid OTP', async () => {
+  const f = fixture({ providerUnavailable: true });
+  f.cookies.set(
+    otp.SUPPLIER_OTP_COOKIE,
+    otp.createSupplierOtpChallenge('+966512345678').cookie,
+  );
+  for (let attempt = 0; attempt < otp.MAX_SUPPLIER_OTP_ATTEMPTS; attempt++) {
+    assert.equal(
+      await destination(() => f.actions.verifyOtp(form({ code: '123456' }))),
+      '/login?mode=phone&step=verify&err=unavailable',
+    );
+  }
+
+  f.setProviderUnavailable(false);
+  assert.equal(
+    await destination(() => f.actions.verifyOtp(form({ code: '123456' }))),
+    '/',
+  );
+  assert.equal(
+    await session.verifySession(f.cookies.get('sp_auth')),
+    'supplier-fixture',
+  );
 });
 
 test('supplier suspension and wrong OTPs preserve eligibility and attempt guards', async () => {

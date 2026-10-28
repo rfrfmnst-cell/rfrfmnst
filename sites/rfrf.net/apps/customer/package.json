@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint app lib proxy.ts --max-warnings 0",
     "check-types": "tsc --noEmit",
-    "storage:provision": "node scripts/provision-rfq-evidence-bucket.mjs"
+    "storage:provision": "node scripts/provision-rfq-evidence-bucket.mjs",
+    "test": "node --test lib/*.test.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.36",

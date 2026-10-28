@@ -1,0 +1,62 @@
+name: Rafraf integrated release checks
+on:
+  pull_request:
+    paths:
+      - 'sites/**'
+      - 'scripts/**'
+      - '.github/workflows/rafraf-release-gates.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: rafraf-release-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  auth-and-integrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: node --test scripts/*.test.mjs supabase/tests/*.test.mjs
+  applications:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [rfrf.net, supplier.rfrf.net, admin.rfrf.net, api.rfrf.net]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@11.6.0 --ignore-scripts
+      - run: pnpm install --frozen-lockfile
+        working-directory: sites/${{ matrix.site }}
+      - run: node scripts/verify-site.mjs '${{ matrix.site }}'
+      - name: Reject delayed OTP approvals after the local deadline
+        if: matrix.site == 'rfrf.net' || matrix.site == 'supplier.rfrf.net'
+        run: node scripts/audit-otp-expiry.mjs '${{ matrix.site }}'
+      - name: Validate Prisma source without a database connection
+        if: matrix.site != 'api.rfrf.net'
+        working-directory: sites/${{ matrix.site }}
+        env:
+          DATABASE_URL: postgresql://fixture@127.0.0.1:1/rafraf_schema_test
+          DIRECT_URL: postgresql://fixture@127.0.0.1:1/rafraf_schema_test
+        run: pnpm --filter @rafraf/db exec prisma validate
+      - name: Exercise the packaged API against disposable PostgreSQL
+        if: matrix.site == 'api.rfrf.net'
+        working-directory: sites/api.rfrf.net
+        run: pnpm test:database
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: rafraf-release-checks-${{ matrix.site }}
+          path: outputs/verification/${{ matrix.site }}/
+          retention-days: 7

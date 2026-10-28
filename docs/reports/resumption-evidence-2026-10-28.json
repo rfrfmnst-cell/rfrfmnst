@@ -1,0 +1,402 @@
+{
+  "observedAt": "2026-10-28T12:11:08.813690+00:00",
+  "reviewedPullRequests": [
+    {
+      "number": 9,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/9",
+      "head": "7abecf5ba273d02a1d7eadb3e6d7459e339d8979",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": false,
+      "mergeable": false
+    },
+    {
+      "number": 10,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/10",
+      "head": "4adb9e3a958db52252d5e5d6294cb1657e6b7f4d",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": true,
+      "mergeable": true
+    },
+    {
+      "number": 11,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/11",
+      "head": "74e87241e9f60f52ae03bc4bc81f2b4fca7db037",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": true,
+      "mergeable": true
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/12",
+      "head": "20c38e78d58c3de59fd2f525815d6b133572a81e",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": true,
+      "mergeable": true
+    },
+    {
+      "number": 13,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/13",
+      "head": "e925f14cf2243dcfb96a66f924c1fb1bf0a84f8b",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": true,
+      "mergeable": true
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/rfrfmnst-cell/rfrfmnst/pull/14",
+      "head": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+      "base": "b9ea7f63156934b34cc53fa4f82c7fdc077fc266",
+      "draft": true,
+      "mergeable": true
+    }
+  ],
+  "tlsCodeSha": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+  "githubActionsForTlsCommit": [
+    {
+      "id": 40685246645,
+      "name": "Rafraf integrated release checks",
+      "head_sha": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685246645"
+    },
+    {
+      "id": 40685246662,
+      "name": "Rafraf API readiness and database tests",
+      "head_sha": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685246662"
+    },
+    {
+      "id": 40685246627,
+      "name": "Hostinger build and runtime",
+      "head_sha": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685246627"
+    }
+  ],
+  "localApiVerification": {
+    "site": "api.rfrf.net",
+    "node": "24.19.0",
+    "pnpm": "11.6.0",
+    "productionCredentials": false,
+    "results": [
+      {
+        "name": "types",
+        "startedAt": "2026-10-28T12:05:54.780Z",
+        "finishedAt": "2026-10-28T12:06:02.083Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "lint",
+        "startedAt": "2026-10-28T12:06:02.083Z",
+        "finishedAt": "2026-10-28T12:06:12.035Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "tests",
+        "startedAt": "2026-10-28T12:06:12.035Z",
+        "finishedAt": "2026-10-28T12:06:22.889Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "deployment-tests",
+        "startedAt": "2026-10-28T12:06:22.889Z",
+        "finishedAt": "2026-10-28T12:06:23.566Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "api-e2e",
+        "startedAt": "2026-10-28T12:06:23.567Z",
+        "finishedAt": "2026-10-28T12:06:26.423Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "build",
+        "startedAt": "2026-10-28T12:06:26.424Z",
+        "finishedAt": "2026-10-28T12:06:51.098Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "runtime",
+        "startedAt": "2026-10-28T12:06:51.098Z",
+        "finishedAt": "2026-10-28T12:06:55.100Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      }
+    ]
+  },
+  "publicReadOnlyChecks": [
+    {
+      "name": "customer-liveness",
+      "url": "https://rfrf.net/api/liveness",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:34.479178+00:00"
+    },
+    {
+      "name": "supplier-liveness",
+      "url": "https://supplier.rfrf.net/api/liveness",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:34.531775+00:00"
+    },
+    {
+      "name": "admin-liveness",
+      "url": "https://admin.rfrf.net/api/liveness",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:34.587054+00:00"
+    },
+    {
+      "name": "api-liveness",
+      "url": "https://api.rfrf.net/api/liveness",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "404",
+      "observedAt": "2026-10-28T12:07:34.516648+00:00"
+    },
+    {
+      "name": "customer-login",
+      "url": "https://rfrf.net/login",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:34.664169+00:00",
+      "unavailableBanner": true
+    },
+    {
+      "name": "supplier-login",
+      "url": "https://supplier.rfrf.net/login?mode=phone",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:35.150263+00:00"
+    },
+    {
+      "name": "admin-login",
+      "url": "https://admin.rfrf.net/login",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:35.148134+00:00"
+    },
+    {
+      "name": "tap-health",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-tap/health",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:35.003798+00:00",
+      "health": {
+        "ok": true,
+        "service": "rafraf-tap",
+        "version": 1,
+        "configuration": {
+          "secretPresent": false,
+          "merchantPresent": false,
+          "modeValid": false,
+          "secretModeMatches": false,
+          "merchantFormatValid": false
+        }
+      }
+    },
+    {
+      "name": "oto-health",
+      "url": "https://gfxnwfjjpxmzvnylushd.supabase.co/functions/v1/rafraf-oto/health",
+      "scope": "public-production-read-only",
+      "loginAttempted": false,
+      "status": "200",
+      "observedAt": "2026-10-28T12:07:35.000730+00:00",
+      "health": {
+        "ok": true,
+        "service": "rafraf-oto",
+        "createsShipments": false,
+        "configuration": {
+          "tokenPresent": false,
+          "enabled": false,
+          "automaticShipmentDisabled": false,
+          "configured": false
+        }
+      }
+    }
+  ],
+  "remoteVerification": {
+    "sha": "90efbf15bee04fb302b96a6c8d49af30cb7fdc70",
+    "filesVerified": 53,
+    "allMatched": true
+  },
+  "regressions": {
+    "hostOverride": {
+      "before": {
+        "passed": 23,
+        "failed": 1
+      },
+      "after": {
+        "passed": 24,
+        "failed": 0
+      }
+    },
+    "customerProviderOutage": {
+      "before": {
+        "passed": 6,
+        "failed": 2
+      },
+      "after": {
+        "passed": 8,
+        "failed": 0
+      }
+    }
+  },
+  "rootTests": {
+    "passed": 46,
+    "failed": 0,
+    "providerRequests": false
+  },
+  "otpDeadlineAudit": {
+    "passed": 15,
+    "failed": 0,
+    "providerRequests": false
+  },
+  "localDatabaseIntegration": {
+    "passed": 9,
+    "failed": 0,
+    "database": "disposable-local-postgresql-17",
+    "productionAccess": false
+  },
+  "databaseAccess": {
+    "configuredRuntimeSecrets": false,
+    "originalBusinessEndpointKnown": false,
+    "primaryDatabaseConnected": false,
+    "supabase": {
+      "projectId": "gfxnwfjjpxmzvnylushd",
+      "transactionReadOnly": true,
+      "publicTables": [
+        "tap_payment_attempts"
+      ],
+      "rls": true,
+      "forceRls": true,
+      "anonSelect": false,
+      "authenticatedSelect": false,
+      "securityAdvisor": "INFO: RLS enabled, no client policy"
+    }
+  },
+  "safety": {
+    "productionWrites": false,
+    "deployments": false,
+    "mainMerged": false,
+    "realPayments": false,
+    "realShipments": false,
+    "providerFilesChanged": false,
+    "supplierSourceChangedThisSession": false
+  },
+  "localCustomerVerification": {
+    "site": "rfrf.net",
+    "node": "24.19.0",
+    "pnpm": "11.6.0",
+    "productionCredentials": false,
+    "results": [
+      {
+        "name": "generate",
+        "startedAt": "2026-10-28T12:10:23.792Z",
+        "finishedAt": "2026-10-28T12:10:31.476Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "types",
+        "startedAt": "2026-10-28T12:10:31.476Z",
+        "finishedAt": "2026-10-28T12:10:51.518Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "lint",
+        "startedAt": "2026-10-28T12:10:51.518Z",
+        "finishedAt": "2026-10-28T12:11:06.011Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "tests",
+        "startedAt": "2026-10-28T12:11:06.011Z",
+        "finishedAt": "2026-10-28T12:11:08.762Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "deployment-tests",
+        "startedAt": "2026-10-28T12:11:08.762Z",
+        "finishedAt": "2026-10-28T12:11:09.213Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "build",
+        "startedAt": "2026-10-28T12:11:09.213Z",
+        "finishedAt": "2026-10-28T12:12:56.644Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "name": "runtime",
+        "startedAt": "2026-10-28T12:12:56.644Z",
+        "finishedAt": "2026-10-28T12:13:01.234Z",
+        "status": "passed",
+        "exitCode": 0,
+        "signal": null
+      }
+    ]
+  },
+  "customerCodeSha": "23dc7f701bca02a2c81ee6027ecd8d53b128e146",
+  "githubActionsForCustomerCommit": [
+    {
+      "id": 40685854824,
+      "name": "Rafraf integrated release checks",
+      "head_sha": "23dc7f701bca02a2c81ee6027ecd8d53b128e146",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685854824"
+    },
+    {
+      "id": 40685854835,
+      "name": "Rafraf API readiness and database tests",
+      "head_sha": "23dc7f701bca02a2c81ee6027ecd8d53b128e146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685854835"
+    },
+    {
+      "id": 40685854799,
+      "name": "Hostinger build and runtime",
+      "head_sha": "23dc7f701bca02a2c81ee6027ecd8d53b128e146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/rfrfmnst-cell/rfrfmnst/actions/runs/40685854799"
+    }
+  ]
+}

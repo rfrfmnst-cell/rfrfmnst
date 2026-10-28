@@ -1,0 +1,28 @@
+--- a/sites/rfrf.net/apps/customer/lib/customer-auth-service.ts
++++ b/sites/rfrf.net/apps/customer/lib/customer-auth-service.ts
+@@ -301,6 +301,7 @@
+         }),
+       ]);
+       if (consumed > 0) return { status: 'used' } as const;
++      if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
+       if (failed >= MAX_OTP_ATTEMPTS) return { status: 'locked' } as const;
+       if (!valid) {
+         const attempts = Math.max(reserved, failed + 1, reservation.attempt);
+--- a/sites/supplier.rfrf.net/apps/supplier/app/login/actions.ts
++++ b/sites/supplier.rfrf.net/apps/supplier/app/login/actions.ts
+@@ -400,6 +400,7 @@
+       ]);
+ 
+     if (consumedChallenges > 0) return { status: 'used' } as const;
++    if (challenge.expiresAt <= Date.now()) return { status: 'expired' } as const;
+     if (failedAttempts >= MAX_SUPPLIER_OTP_ATTEMPTS) {
+       return { status: 'locked' } as const;
+     }
+@@ -516,6 +517,7 @@
+     }
+     cookieStore.delete(SUPPLIER_OTP_COOKIE);
+     cookieStore.delete(SUPPLIER_REGISTRATION_COOKIE);
++    if (result.status === 'expired') redirect('/login?mode=phone&err=expired');
+     if (result.status === 'not_allowed') {
+       redirect('/login?mode=phone&err=not_allowed');
+     }

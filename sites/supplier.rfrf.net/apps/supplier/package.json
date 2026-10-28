@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint app lib proxy.ts --max-warnings 0",
     "check-types": "tsc --noEmit",
-    "storage:provision": "node scripts/provision-supplier-documents-bucket.mjs"
+    "storage:provision": "node scripts/provision-supplier-documents-bucket.mjs",
+    "test": "node --test lib/*.test.mjs app/catalog/import/*.test.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1117.0",
